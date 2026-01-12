@@ -1,6 +1,6 @@
 # AI as a PM Thinking Partner: A Framework for Rigorous Collaboration
 
-*How I use Claude to think more clearly, not to write for me*
+_How I use Claude to think more clearly, not to write for me_
 
 ---
 
@@ -35,6 +35,7 @@ Here's what I realized: **the codebase doesn't lie.**
 Strategy documents can be aspirational. Roadmaps can be optimistic. But the code shows what actually exists. If you want to understand what a platform team truly owns, look at what's implemented.
 
 This became my approach:
+
 1. Audit the codebase systematically
 2. Map capabilities to actual code
 3. Identify gaps between claims and reality
@@ -44,71 +45,89 @@ But auditing 50,000+ lines of code across multiple repositories? That's where AI
 
 ---
 
-## The Framework: Knowledge Mixing
+## The Framework: Four Sources of Truth
 
-I developed a mental model I call **Knowledge Mixing**. Every PM decision involves combining four types of knowledge:
+I developed a mental model I call **Four Sources of Truth**. PM work is fundamentally about reconciling different types of truth:
 
 ```
-┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
-│    OPINION      │   │     FACTS       │   │   KNOWLEDGE     │
-│   (Judgment)    │   │   (Codebase)    │   │     (Docs)      │
-└────────┬────────┘   └────────┬────────┘   └────────┬────────┘
-         │                     │                     │
-         └─────────────────────┼─────────────────────┘
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
+│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
+│             │  │             │  │             │  │             │
+│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
+│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 ▼
+                    ┌─────────────────────┐
+                    │    RECONCILIATION   │
+                    │     (AI + Human)    │
+                    └──────────┬──────────┘
                                ▼
-                      ┌─────────────────┐
-                      │  AI SYNTHESIS   │
-                      │    (Claude)     │
-                      └────────┬────────┘
-                               ▼
-                      ┌─────────────────┐
-                      │    ARTIFACT     │
-                      │  (Doc, PRD)     │
-                      └─────────────────┘
+                    ┌─────────────────────┐
+                    │      DECISION       │
+                    └─────────────────────┘
 ```
 
-**Opinion** is your judgment — intuition, values, experience, taste, priorities. This is human-only.
+| Source       | Question Answered     | AI Role                     |
+| ------------ | --------------------- | --------------------------- |
+| **Code**     | "What CAN happen?"    | Explore, map capabilities   |
+| **Docs**     | "What's EXPECTED?"    | Synthesize, cross-reference |
+| **Data**     | "What IS happening?"  | Analyze, find patterns      |
+| **Judgment** | "What SHOULD happen?" | Challenge, structure        |
 
-**Facts** are what the code actually does — APIs, contracts, implementations. AI can help you explore and understand these faster.
+These sources often **conflict** — which is where PM work gets interesting:
 
-**Knowledge** is existing documentation — strategy docs, RFCs, handovers, context. AI can help synthesize and cross-reference.
-
-**AI Synthesis** is where Claude helps — pattern recognition, structuring, completeness checks, articulation. AI turns your messy inputs into structured outputs.
+- Code ≠ Docs: "We claim to do X but code shows Y"
+- Data ≠ Strategy: "Strategy says X matters, metrics show Y"
+- Judgment ≠ Data: "I think X, but data shows Y"
 
 The key principle:
 
-> **I provide direction, constraints, and judgment. AI provides structure, completeness, and articulation.**
+> **PM work is reconciling four sources of truth. AI helps you explore each source faster and spot conflicts between them. Judgment about what SHOULD happen stays human.**
 
 ---
 
-## The System: Five Agent Modes
+## The System: Six Agent Modes
 
-I realized different tasks need different AI "personalities." I mentally switch between five modes:
+I realized different tasks need different AI "personalities." I mentally switch between six modes:
 
-### 1. Analyst Agent
+### 1. Technical Analyst Agent
+
 For codebase exploration and capability audits. Rigorous, systematic, skeptical.
 
-*"Act as a rigorous analyst. Examine this code and build a systematic assessment of what capabilities exist. Question my assumptions."*
+_"Act as a rigorous analyst. Examine this code and build a systematic assessment of what capabilities exist. Question my assumptions."_
 
 ### 2. Writer Agent
+
 For strategy docs and narratives. Clear, structured, audience-aware.
 
-*"Help me write a clear team charter for leadership. The key message is [X]. Here are my rough notes..."*
+_"Help me write a clear team charter for leadership. The key message is [X]. Here are my rough notes..."_
 
 ### 3. Devil's Advocate Agent
+
 For stress-testing ideas before presenting them. Constructively critical.
 
-*"Role-play as a skeptical director. What are the strongest objections to this strategy? What questions would you ask?"*
+_"Role-play as a skeptical director. What are the strongest objections to this strategy? What questions would you ask?"_
 
 ### 4. Builder Agent
+
 For creating tools and prototypes. Technical, iterative, practical.
 
-*"I want to build [X]. Here's the spec. Generate the scaffold, then we'll iterate."*
+_"I want to build [X]. Here's the spec. Generate the scaffold, then we'll iterate."_
 
 ### 5. Thought Partner Agent
+
 For brainstorming and exploration. Open-ended, generative.
 
-*"Help me explore this space. What are different ways to think about this problem? What am I not considering?"*
+_"Help me explore this space. What are different ways to think about this problem? What am I not considering?"_
+
+### 6. Data Analyst Agent
+
+For metrics exploration and insight generation. Pattern-finding.
+
+_"I have this data: [metrics/results]. Help me identify patterns, generate hypotheses for what's happening, and suggest what to investigate next."_
 
 ---
 
@@ -117,24 +136,28 @@ For brainstorming and exploration. Open-ended, generative.
 Here's the specific workflow I used to define my team's identity:
 
 ### Phase 1: Absorb (Week 1)
+
 Read everything — handovers, history, existing docs. Use AI to synthesize themes.
 
-*"I've inherited this team. Here's what I've learned. Help me identify key themes and tensions."*
+_"I've inherited this team. Here's what I've learned. Help me identify key themes and tensions."_
 
 ### Phase 2: Audit (Week 2)
+
 Systematic codebase review. Use AI to map capabilities to code.
 
-*"I'm a PM trying to understand this code's product meaning, not implementation. What capability does this represent?"*
+_"I'm a PM trying to understand this code's product meaning, not implementation. What capability does this represent?"_
 
 ### Phase 3: Articulate (Week 3)
+
 Draft identity, boundaries, value proposition. Use AI to structure.
 
-*"Based on my audit, here's what we own vs. don't own. Help me draft a clear mission statement."*
+_"Based on my audit, here's what we own vs. don't own. Help me draft a clear mission statement."_
 
 ### Phase 4: Align (Week 4)
+
 Socialize with stakeholders. Use AI to prepare for pushback.
 
-*"I'm presenting this charter to [stakeholder]. Role-play as them. What would you push back on?"*
+_"I'm presenting this charter to [stakeholder]. Role-play as them. What would you push back on?"_
 
 ---
 
@@ -155,13 +178,13 @@ More importantly, the team now has **clarity**. We can articulate what we own, w
 
 What doesn't work:
 
-| ❌ Don't | Why It Fails |
-|----------|--------------|
-| "Write me a strategy doc" | No direction = generic output |
-| Accept first draft | Always needs human refinement |
-| Skip codebase grounding | Strategy disconnected from reality |
+| ❌ Don't                  | Why It Fails                           |
+| ------------------------- | -------------------------------------- |
+| "Write me a strategy doc" | No direction = generic output          |
+| Accept first draft        | Always needs human refinement          |
+| Skip codebase grounding   | Strategy disconnected from reality     |
 | Use AI for judgment calls | Can't know your organizational context |
-| One mega-prompt | Iterative works better |
+| One mega-prompt           | Iterative works better                 |
 
 The key mistakes are expecting AI to replace your judgment or accepting outputs without critical review. AI amplifies your preparation — garbage in, garbage out.
 
@@ -169,11 +192,12 @@ The key mistakes are expecting AI to replace your judgment or accepting outputs 
 
 ## The Takeaway
 
-AI hasn't changed *what* PMs do. It's changed *how fast* we can think rigorously about complex problems.
+AI hasn't changed _what_ PMs do. It's changed _how fast_ we can think rigorously about complex problems.
 
 The framework I've described isn't magic. It's a system for:
+
 - Providing clear direction to AI
-- Iterating quickly on outputs  
+- Iterating quickly on outputs
 - Grounding strategy in implementation reality
 - Preparing for conversations systematically
 
@@ -191,15 +215,15 @@ The goal isn't to have AI write your documents. It's to think more rigorously, c
 ## Resources
 
 I've open-sourced the full framework:
+
 - **GitHub:** [PM-AI-Partner-Framework](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
 - **Quick Reference:** One-page cheat sheet
 - **Workflow Templates:** Step-by-step guides for common scenarios
 
 ---
 
-*Ahmed Khaled is a Product Manager at Spotify, working on messaging infrastructure that serves 700M+ users. He writes about platform product management and AI-augmented workflows.*
+_Ahmed Khaled is a Product Manager at Spotify, working on messaging infrastructure that serves 700M+ users. He writes about platform product management and AI-augmented workflows._
 
 ---
 
 **Tags:** #ProductManagement #AI #Claude #PlatformPM #Productivity #Framework
-
