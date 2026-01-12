@@ -50,39 +50,41 @@
 
 ## Part 2: The Framework (10 min)
 
-### The Knowledge Mixing Model
+### Four Sources of Truth
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   OPINION    │    │    FACTS     │    │  KNOWLEDGE   │
-│  (Judgment)  │    │  (Codebase)  │    │    (Docs)    │
-└──────┬───────┘    └──────┬───────┘    └──────┬───────┘
-       │                   │                   │
-       └───────────────────┼───────────────────┘
-                           ▼
-                  ┌──────────────────┐
-                  │   AI SYNTHESIS   │
-                  │    (Claude)      │
-                  └────────┬─────────┘
-                           ▼
-                  ┌──────────────────┐
-                  │    ARTIFACT      │
-                  └──────────────────┘
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
+│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
+│             │  │             │  │             │  │             │
+│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
+│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 ▼
+                    ┌─────────────────────┐
+                    │    RECONCILIATION   │
+                    │     (AI + Human)    │
+                    └──────────┬──────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │      DECISION       │
+                    └─────────────────────┘
 ```
 
 ### The Principle
 
-> "I provide direction, constraints, and judgment. AI provides structure, completeness, and articulation."
+> "PM work is reconciling four sources of truth. AI helps you explore each faster and spot conflicts. Judgment stays human."
 
-### What AI Does Well
+### What AI Does Well (By Source)
 
-| Strength | Application |
-|----------|-------------|
-| Pattern recognition | Find gaps, spot inconsistencies |
-| Structuring | Turn messy notes into frameworks |
-| Exhaustiveness | "What am I missing?" |
-| Articulation | Implicit → explicit knowledge |
-| Speed | Rapid iteration |
+| Source | AI Capability | Example |
+| ------ | ------------- | ------- |
+| **Code** | Explore, map | "What capability does this represent?" |
+| **Docs** | Synthesize | "What themes emerge from these docs?" |
+| **Data** | Analyze, pattern-find | "What's anomalous in these metrics?" |
+| **Judgment** | Challenge, structure | "What are the strongest objections?" |
 
 ### What AI Doesn't Do
 
@@ -99,15 +101,16 @@
 
 ### Agent Modes
 
-**Show the five modes:**
+**Show the six modes:**
 
-1. **Analyst** — Audits, systematic assessment
-2. **Writer** — Strategy docs, narratives
-3. **Devil's Advocate** — Challenge ideas
+1. **Analyst** — Audits, systematic assessment (Code)
+2. **Writer** — Strategy docs, narratives (Docs)
+3. **Devil's Advocate** — Challenge ideas (Judgment)
 4. **Builder** — Create tools, prototypes
 5. **Thought Partner** — Explore options
+6. **Data Analyst** — Metrics, insights, patterns (Data)
 
-**Key insight:** Same AI, different prompts = different collaboration
+**Key insight:** Same AI, different prompts = different collaboration. Each mode excels at exploring different sources of truth.
 
 ### Workflow Patterns
 

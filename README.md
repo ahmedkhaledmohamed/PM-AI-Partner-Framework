@@ -27,7 +27,7 @@ This is not about having AI write your work — it's about **thinking more rigor
 
 ## The Core Principle
 
-> **I provide direction, constraints, and judgment. AI provides structure, completeness, and articulation.**
+> **PM work is reconciling four sources of truth. AI helps you explore each faster and spot conflicts. Judgment stays human.**
 
 ---
 
@@ -60,39 +60,45 @@ PM-AI-Partner-Framework/
 
 ---
 
-## The Knowledge Mixing Model
+## Four Sources of Truth
 
-Every PM decision mixes four knowledge types:
+Every PM decision reconciles different types of truth:
 
 ```
-┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
-│    OPINION      │   │     FACTS       │   │   KNOWLEDGE     │
-│   (Judgment)    │   │   (Codebase)    │   │     (Docs)      │
-└────────┬────────┘   └────────┬────────┘   └────────┬────────┘
-         │                     │                     │
-         └─────────────────────┼─────────────────────┘
-                               ▼
-                      ┌─────────────────┐
-                      │  AI SYNTHESIS   │
-                      │    (Claude)     │
-                      └────────┬────────┘
-                               ▼
-                      ┌─────────────────┐
-                      │    ARTIFACT     │
-                      └─────────────────┘
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
+│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
+│             │  │             │  │             │  │             │
+│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
+│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 ▼
+                    ┌─────────────────────┐
+                    │    RECONCILIATION   │
+                    └─────────────────────┘
 ```
+
+| Source | Question Answered |
+|--------|-------------------|
+| **Code** | "What CAN happen?" |
+| **Docs** | "What's EXPECTED?" |
+| **Data** | "What IS happening?" |
+| **Judgment** | "What SHOULD happen?" |
 
 ---
 
-## Five Agent Modes
+## Six Agent Modes
 
 | Mode | When to Use | Prompt Prefix |
 |------|-------------|---------------|
-| **Analyst** | Audits, gap analysis | "Act as a rigorous analyst..." |
-| **Writer** | Strategy docs, narratives | "Help me write a clear..." |
-| **Devil's Advocate** | Stress-testing ideas | "Challenge this. Role-play as..." |
+| **Analyst** | Codebase exploration | "Act as a rigorous analyst..." |
+| **Writer** | Strategy docs | "Help me write a clear..." |
+| **Devil's Advocate** | Stress-testing | "Challenge this. Role-play as..." |
 | **Builder** | Tools, prototypes | "Build [X] with this spec..." |
 | **Thought Partner** | Brainstorming | "Help me explore the space..." |
+| **Data Analyst** | Metrics, insights | "Here's [data]. What patterns?" |
 
 ---
 

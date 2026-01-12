@@ -24,64 +24,80 @@ This is not about replacing PM work — it's about **augmenting depth, speed, an
 
 ## Part 1: The Philosophy
 
-### The Knowledge Mixing Model
+### Four Sources of Truth
 
-Every PM decision involves mixing four types of knowledge:
+PM work is fundamentally about **reconciling different sources of truth**. Each source answers a different question:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                        PM DECISION SPACE                             │
+│                    FOUR SOURCES OF TRUTH                            │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                      │
-│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐          │
-│   │   OPINION    │    │    FACTS     │    │  KNOWLEDGE   │          │
-│   │  (Judgment)  │    │  (Codebase)  │    │    (Docs)    │          │
-│   │              │    │              │    │              │          │
-│   │ • Intuition  │    │ • What code  │    │ • Strategy   │          │
-│   │ • Values     │    │   actually   │    │   docs       │          │
-│   │ • Experience │    │   does       │    │ • RFCs       │          │
-│   │ • Taste      │    │ • APIs       │    │ • Handovers  │          │
-│   │ • Priorities │    │ • Contracts  │    │ • Context    │          │
-│   └──────┬───────┘    └──────┬───────┘    └──────┬───────┘          │
-│          │                   │                   │                   │
-│          └───────────────────┼───────────────────┘                   │
-│                              │                                       │
-│                              ▼                                       │
-│                    ┌──────────────────┐                              │
-│                    │   AI SYNTHESIS   │                              │
-│                    │   (Claude)       │                              │
-│                    │                  │                              │
-│                    │ • Pattern recog. │                              │
-│                    │ • Structuring    │                              │
-│                    │ • Completeness   │                              │
-│                    │ • Articulation   │                              │
-│                    │ • Iteration      │                              │
-│                    └────────┬─────────┘                              │
-│                             │                                        │
-│                             ▼                                        │
-│                    ┌──────────────────┐                              │
-│                    │    ARTIFACT      │                              │
-│                    │ (Doc, PRD, Plan) │                              │
-│                    └──────────────────┘                              │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐   │
+│  │    CODE     │ │    DOCS     │ │    DATA     │ │  JUDGMENT   │   │
+│  │  Technical  │ │ Contextual  │ │  Empirical  │ │    Human    │   │
+│  │             │ │             │ │             │ │             │   │
+│  │ What CAN    │ │ What's      │ │ What IS     │ │ What        │   │
+│  │ happen?     │ │ expected?   │ │ happening?  │ │ SHOULD?     │   │
+│  │             │ │             │ │             │ │             │   │
+│  │ • APIs      │ │ • Strategy  │ │ • Metrics   │ │ • Intuition │   │
+│  │ • Contracts │ │ • RFCs      │ │ • Analytics │ │ • Values    │   │
+│  │ • Implement │ │ • Handovers │ │ • A/B tests │ │ • Experience│   │
+│  │ • Patterns  │ │ • Context   │ │ • Research  │ │ • Priorities│   │
+│  └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘   │
+│         │               │               │               │          │
+│         └───────────────┴───────┬───────┴───────────────┘          │
+│                                 │                                   │
+│                    ┌────────────▼────────────┐                      │
+│                    │     RECONCILIATION      │                      │
+│                    │      (AI + Human)       │                      │
+│                    │                         │                      │
+│                    │  AI: Explore, analyze,  │                      │
+│                    │       spot conflicts    │                      │
+│                    │  Human: Judge, decide,  │                      │
+│                    │         prioritize      │                      │
+│                    └────────────┬────────────┘                      │
+│                                 │                                   │
+│                    ┌────────────▼────────────┐                      │
+│                    │        DECISION         │                      │
+│                    │    (Doc, PRD, Plan)     │                      │
+│                    └─────────────────────────┘                      │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-### What AI Does Well (Leverage Points)
+| Source | Type of Truth | Question Answered | AI Role |
+| ------ | ------------- | ----------------- | ------- |
+| **Code** | Technical | "What CAN happen?" | Explore, map capabilities |
+| **Docs** | Contextual | "What's EXPECTED?" | Synthesize, cross-reference |
+| **Data** | Empirical | "What IS happening?" | Analyze, find patterns |
+| **Judgment** | Human | "What SHOULD happen?" | Challenge, structure |
 
-| AI Strength | PM Application |
-|-------------|----------------|
-| **Pattern recognition** | Find gaps in capability audits, spot inconsistencies |
-| **Structuring** | Turn messy notes into frameworks |
-| **Exhaustiveness** | "What am I missing?" checks |
-| **Articulation** | Turn implicit knowledge into shareable docs |
-| **Iteration speed** | Rapid refinement of narratives and frameworks |
-| **Code understanding** | Extract product meaning from implementations |
-| **Cross-referencing** | Connect strategy to code to metrics |
+### Where Conflicts Happen (The Interesting Part)
+
+These sources often **conflict** — which is where PM work gets interesting:
+
+| Conflict | Example | PM Question |
+| -------- | ------- | ----------- |
+| Code ≠ Docs | "We claim to do X but code shows Y" | Which is true? |
+| Data ≠ Docs | "Strategy says X matters, metrics show Y" | Are we measuring right? |
+| Code ≠ Data | "Feature exists but isn't being used" | Why the gap? |
+| Judgment ≠ Data | "I think X, but data shows Y" | Am I wrong? |
+
+**This is where PMs add value** — reconciling these conflicts and making decisions.
+
+### What AI Does Well (By Source)
+
+| Source | AI Capability | Example |
+| ------ | ------------- | ------- |
+| **Code** | Explore, map, explain | "What capability does this represent?" |
+| **Docs** | Synthesize, cross-reference | "What themes emerge from these docs?" |
+| **Data** | Query, analyze, find patterns | "What's anomalous in these metrics?" |
+| **Judgment** | Challenge, structure, articulate | "What are the strongest objections?" |
 
 ### What AI Doesn't Do (Human-Only)
 
 | Human Judgment | Why AI Can't |
-|----------------|--------------|
+| -------------- | ------------ |
 | **Organizational politics** | Doesn't know the people |
 | **Taste / Values** | Can suggest, can't decide |
 | **Prioritization** | Needs your constraints |
@@ -91,9 +107,9 @@ Every PM decision involves mixing four types of knowledge:
 
 ### The Collaboration Principle
 
-> **I provide direction, constraints, and judgment. AI provides structure, completeness, and articulation.**
+> **PM work is reconciling four sources of truth. AI helps you explore each source faster and spot conflicts between them. Judgment about what SHOULD happen stays human.**
 
-This isn't "AI writes my docs" — it's "AI helps me think more rigorously and communicate more clearly."
+This isn't "AI writes my docs" — it's "AI helps me think more rigorously by surfacing what I might miss."
 
 ---
 
@@ -412,6 +428,36 @@ Different tasks need different Claude "personalities." I mentally switch between
 
 **Sample prompt prefix:**
 > "I'm thinking about [X]. Help me explore the space. What are the different ways to think about this? What am I not considering?"
+
+---
+
+### Mode 6: Data Analyst Agent
+
+**Purpose:** Metrics exploration, insight generation, hypothesis testing
+
+**Characteristics:**
+- Quantitative focus
+- Pattern-finding
+- Hypothesis generation
+- Connects data to decisions
+
+**Sample prompt prefix:**
+> "I have this data: [metrics/results]. Help me identify patterns, generate hypotheses for what's happening, and suggest what to investigate next."
+
+**Data-specific prompts:**
+```
+# Writing queries
+"I need to understand [X]. Help me write a SQL query 
+to get [specific metrics]."
+
+# Interpreting results
+"Here are the results: [data]. What patterns do you see? 
+What's surprising? What questions does this raise?"
+
+# Connecting to strategy
+"This data shows [finding]. How does this relate to our 
+strategy of [X]? What should we do differently?"
+```
 
 ---
 

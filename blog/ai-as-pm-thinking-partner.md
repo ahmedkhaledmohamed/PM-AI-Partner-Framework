@@ -44,46 +44,53 @@ But auditing 50,000+ lines of code across multiple repositories? That's where AI
 
 ---
 
-## The Framework: Knowledge Mixing
+## The Framework: Four Sources of Truth
 
-I developed a mental model I call **Knowledge Mixing**. Every PM decision involves combining four types of knowledge:
+I developed a mental model I call **Four Sources of Truth**. PM work is fundamentally about reconciling different types of truth:
 
 ```
-┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
-│    OPINION      │   │     FACTS       │   │   KNOWLEDGE     │
-│   (Judgment)    │   │   (Codebase)    │   │     (Docs)      │
-└────────┬────────┘   └────────┬────────┘   └────────┬────────┘
-         │                     │                     │
-         └─────────────────────┼─────────────────────┘
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
+│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
+│             │  │             │  │             │  │             │
+│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
+│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 ▼
+                    ┌─────────────────────┐
+                    │    RECONCILIATION   │
+                    │     (AI + Human)    │
+                    └──────────┬──────────┘
                                ▼
-                      ┌─────────────────┐
-                      │  AI SYNTHESIS   │
-                      │    (Claude)     │
-                      └────────┬────────┘
-                               ▼
-                      ┌─────────────────┐
-                      │    ARTIFACT     │
-                      │  (Doc, PRD)     │
-                      └─────────────────┘
+                    ┌─────────────────────┐
+                    │      DECISION       │
+                    └─────────────────────┘
 ```
 
-**Opinion** is your judgment — intuition, values, experience, taste, priorities. This is human-only.
+| Source | Question Answered | AI Role |
+| ------ | ----------------- | ------- |
+| **Code** | "What CAN happen?" | Explore, map capabilities |
+| **Docs** | "What's EXPECTED?" | Synthesize, cross-reference |
+| **Data** | "What IS happening?" | Analyze, find patterns |
+| **Judgment** | "What SHOULD happen?" | Challenge, structure |
 
-**Facts** are what the code actually does — APIs, contracts, implementations. AI can help you explore and understand these faster.
+These sources often **conflict** — which is where PM work gets interesting:
 
-**Knowledge** is existing documentation — strategy docs, RFCs, handovers, context. AI can help synthesize and cross-reference.
-
-**AI Synthesis** is where Claude helps — pattern recognition, structuring, completeness checks, articulation. AI turns your messy inputs into structured outputs.
+- Code ≠ Docs: "We claim to do X but code shows Y"
+- Data ≠ Strategy: "Strategy says X matters, metrics show Y"
+- Judgment ≠ Data: "I think X, but data shows Y"
 
 The key principle:
 
-> **I provide direction, constraints, and judgment. AI provides structure, completeness, and articulation.**
+> **PM work is reconciling four sources of truth. AI helps you explore each source faster and spot conflicts between them. Judgment about what SHOULD happen stays human.**
 
 ---
 
-## The System: Five Agent Modes
+## The System: Six Agent Modes
 
-I realized different tasks need different AI "personalities." I mentally switch between five modes:
+I realized different tasks need different AI "personalities." I mentally switch between six modes:
 
 ### 1. Analyst Agent
 For codebase exploration and capability audits. Rigorous, systematic, skeptical.
@@ -109,6 +116,11 @@ For creating tools and prototypes. Technical, iterative, practical.
 For brainstorming and exploration. Open-ended, generative.
 
 *"Help me explore this space. What are different ways to think about this problem? What am I not considering?"*
+
+### 6. Data Analyst Agent
+For metrics exploration and insight generation. Pattern-finding.
+
+*"I have this data: [metrics/results]. Help me identify patterns, generate hypotheses for what's happening, and suggest what to investigate next."*
 
 ---
 
