@@ -24,14 +24,14 @@ One-page cheat sheet for daily use.
 
 ## Agent Modes
 
-| Need            | Mode                 | Start With                                                    |
-| --------------- | -------------------- | ------------------------------------------------------------- |
+| Need            | Mode                  | Start With                                                    |
+| --------------- | --------------------- | ------------------------------------------------------------- |
 | Understand code | **Technical Analyst** | "Examine [X] systematically. Build a capability table."       |
-| Write docs      | **Writer**           | "Help me write a [doc type] for [audience]. Key message: [X]" |
-| Test ideas      | **Devil's Advocate** | "Challenge this. Role-play as a skeptical [person]."          |
-| Build tools     | **Builder**          | "Build [X] with this spec: [requirements]"                    |
-| Explore         | **Thought Partner**  | "Help me explore [space]. What am I not considering?"         |
-| Analyze data    | **Data Analyst**     | "Here's [data]. What patterns? What hypotheses? What next?"   |
+| Write docs      | **Writer**            | "Help me write a [doc type] for [audience]. Key message: [X]" |
+| Test ideas      | **Devil's Advocate**  | "Challenge this. Role-play as a skeptical [person]."          |
+| Build tools     | **Builder**           | "Build [X] with this spec: [requirements]"                    |
+| Explore         | **Thought Partner**   | "Help me explore [space]. What am I not considering?"         |
+| Analyze data    | **Data Analyst**      | "Here's [data]. What patterns? What hypotheses? What next?"   |
 
 ---
 

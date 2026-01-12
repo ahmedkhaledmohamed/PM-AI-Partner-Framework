@@ -91,14 +91,14 @@ Every PM decision reconciles different types of truth:
 
 ## Six Agent Modes
 
-| Mode                 | When to Use          | Prompt Prefix                     |
-| -------------------- | -------------------- | --------------------------------- |
+| Mode                  | When to Use          | Prompt Prefix                     |
+| --------------------- | -------------------- | --------------------------------- |
 | **Technical Analyst** | Codebase exploration | "Act as a rigorous analyst..."    |
-| **Writer**           | Strategy docs        | "Help me write a clear..."        |
-| **Devil's Advocate** | Stress-testing       | "Challenge this. Role-play as..." |
-| **Builder**          | Tools, prototypes    | "Build [X] with this spec..."     |
-| **Thought Partner**  | Brainstorming        | "Help me explore the space..."    |
-| **Data Analyst**     | Metrics, insights    | "Here's [data]. What patterns?"   |
+| **Writer**            | Strategy docs        | "Help me write a clear..."        |
+| **Devil's Advocate**  | Stress-testing       | "Challenge this. Role-play as..." |
+| **Builder**           | Tools, prototypes    | "Build [X] with this spec..."     |
+| **Thought Partner**   | Brainstorming        | "Help me explore the space..."    |
+| **Data Analyst**      | Metrics, insights    | "Here's [data]. What patterns?"   |
 
 ---
 
