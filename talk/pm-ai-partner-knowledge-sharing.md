@@ -79,21 +79,21 @@
 
 ### What AI Does Well (By Source)
 
-| Source | AI Capability | Example |
-| ------ | ------------- | ------- |
-| **Code** | Explore, map | "What capability does this represent?" |
-| **Docs** | Synthesize | "What themes emerge from these docs?" |
-| **Data** | Analyze, pattern-find | "What's anomalous in these metrics?" |
-| **Judgment** | Challenge, structure | "What are the strongest objections?" |
+| Source       | AI Capability         | Example                                |
+| ------------ | --------------------- | -------------------------------------- |
+| **Code**     | Explore, map          | "What capability does this represent?" |
+| **Docs**     | Synthesize            | "What themes emerge from these docs?"  |
+| **Data**     | Analyze, pattern-find | "What's anomalous in these metrics?"   |
+| **Judgment** | Challenge, structure  | "What are the strongest objections?"   |
 
 ### What AI Doesn't Do
 
-| Human-only | Why |
-|------------|-----|
-| Organizational politics | Doesn't know the people |
-| Prioritization | Needs your constraints |
-| Taste / Values | Can suggest, can't decide |
-| "This feels wrong" | Experience-based intuition |
+| Human-only              | Why                        |
+| ----------------------- | -------------------------- |
+| Organizational politics | Doesn't know the people    |
+| Prioritization          | Needs your constraints     |
+| Taste / Values          | Can suggest, can't decide  |
+| "This feels wrong"      | Experience-based intuition |
 
 ---
 
@@ -103,7 +103,7 @@
 
 **Show the six modes:**
 
-1. **Analyst** — Audits, systematic assessment (Code)
+1. **Technical Analyst** — Audits, systematic assessment (Code)
 2. **Writer** — Strategy docs, narratives (Docs)
 3. **Devil's Advocate** — Challenge ideas (Judgment)
 4. **Builder** — Create tools, prototypes
@@ -192,13 +192,13 @@ workspace/
 
 ### What Doesn't Work
 
-| ❌ Anti-Pattern | Why It Fails |
-|----------------|--------------|
-| "Write me a strategy" | No direction = generic output |
-| Accept first draft | Always needs human refinement |
+| ❌ Anti-Pattern         | Why It Fails                       |
+| ----------------------- | ---------------------------------- |
+| "Write me a strategy"   | No direction = generic output      |
+| Accept first draft      | Always needs human refinement      |
 | Skip codebase grounding | Strategy disconnected from reality |
-| Use AI for judgment | Can't know your context |
-| One mega-prompt | Iterative works better |
+| Use AI for judgment     | Can't know your context            |
+| One mega-prompt         | Iterative works better             |
 
 ### What I Learned
 
@@ -275,30 +275,29 @@ workspace/
 
 ## Slide Suggestions
 
-| Slide | Content |
-|-------|---------|
-| 1 | Title + hook |
-| 2 | Knowledge mixing diagram |
-| 3 | "I provide direction, AI provides structure" |
-| 4 | Agent modes table |
-| 5 | Workflow phases (one example) |
-| 6 | Before: messy notes |
-| 7 | After: structured document |
-| 8 | Key prompt example |
-| 9 | Anti-patterns table |
-| 10 | "Try one workflow" CTA |
+| Slide | Content                                      |
+| ----- | -------------------------------------------- |
+| 1     | Title + hook                                 |
+| 2     | Knowledge mixing diagram                     |
+| 3     | "I provide direction, AI provides structure" |
+| 4     | Agent modes table                            |
+| 5     | Workflow phases (one example)                |
+| 6     | Before: messy notes                          |
+| 7     | After: structured document                   |
+| 8     | Key prompt example                           |
+| 9     | Anti-patterns table                          |
+| 10    | "Try one workflow" CTA                       |
 
 ---
 
 ## Resources
 
-| Resource | Link |
-|----------|------|
-| Full framework | [GitHub](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) |
-| Quick reference | `framework/quick-reference.md` |
-| Workflow templates | `workflows/` |
+| Resource           | Link                                                                    |
+| ------------------ | ----------------------------------------------------------------------- |
+| Full framework     | [GitHub](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) |
+| Quick reference    | `framework/quick-reference.md`                                          |
+| Workflow templates | `workflows/`                                                            |
 
 ---
 
 _Last updated: January 2026_
-

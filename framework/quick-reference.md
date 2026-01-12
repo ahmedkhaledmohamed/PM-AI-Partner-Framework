@@ -13,49 +13,49 @@ One-page cheat sheet for daily use.
 
 ## Four Sources of Truth
 
-| Source | Question | AI Role |
-|--------|----------|---------|
-| **Code** | "What CAN happen?" | Explore, map |
-| **Docs** | "What's EXPECTED?" | Synthesize |
-| **Data** | "What IS happening?" | Analyze |
-| **Judgment** | "What SHOULD happen?" | Challenge |
+| Source       | Question              | AI Role      |
+| ------------ | --------------------- | ------------ |
+| **Code**     | "What CAN happen?"    | Explore, map |
+| **Docs**     | "What's EXPECTED?"    | Synthesize   |
+| **Data**     | "What IS happening?"  | Analyze      |
+| **Judgment** | "What SHOULD happen?" | Challenge    |
 
 ---
 
 ## Agent Modes
 
-| Need | Mode | Start With |
-|------|------|------------|
-| Understand code | **Analyst** | "Examine [X] systematically. Build a capability table." |
-| Write docs | **Writer** | "Help me write a [doc type] for [audience]. Key message: [X]" |
-| Test ideas | **Devil's Advocate** | "Challenge this. Role-play as a skeptical [person]." |
-| Build tools | **Builder** | "Build [X] with this spec: [requirements]" |
-| Explore | **Thought Partner** | "Help me explore [space]. What am I not considering?" |
-| Analyze data | **Data Analyst** | "Here's [data]. What patterns? What hypotheses? What next?" |
+| Need            | Mode                 | Start With                                                    |
+| --------------- | -------------------- | ------------------------------------------------------------- |
+| Understand code | **Technical Analyst** | "Examine [X] systematically. Build a capability table."       |
+| Write docs      | **Writer**           | "Help me write a [doc type] for [audience]. Key message: [X]" |
+| Test ideas      | **Devil's Advocate** | "Challenge this. Role-play as a skeptical [person]."          |
+| Build tools     | **Builder**          | "Build [X] with this spec: [requirements]"                    |
+| Explore         | **Thought Partner**  | "Help me explore [space]. What am I not considering?"         |
+| Analyze data    | **Data Analyst**     | "Here's [data]. What patterns? What hypotheses? What next?"   |
 
 ---
 
 ## Workflow Triggers
 
-| Situation | Workflow | Output |
-|-----------|----------|--------|
-| "What does this team do?" | Strategic Clarity | Charter, Value Narrative |
-| "What should we build?" | Planning Cycle | Roadmap, Operating Guide |
-| "What actually exists?" | Codebase Deep-Dive | Capability Audit |
-| "I need a tool for X" | Tool Building | Working prototype |
-| "I have a big meeting" | Communication Prep | Talk structure, Q&A prep |
-| "Engineers keep asking about X" | PM-Eng Bridge | Engineering Questions doc |
+| Situation                       | Workflow           | Output                    |
+| ------------------------------- | ------------------ | ------------------------- |
+| "What does this team do?"       | Strategic Clarity  | Charter, Value Narrative  |
+| "What should we build?"         | Planning Cycle     | Roadmap, Operating Guide  |
+| "What actually exists?"         | Codebase Deep-Dive | Capability Audit          |
+| "I need a tool for X"           | Tool Building      | Working prototype         |
+| "I have a big meeting"          | Communication Prep | Talk structure, Q&A prep  |
+| "Engineers keep asking about X" | PM-Eng Bridge      | Engineering Questions doc |
 
 ---
 
 ## Document Tiers
 
-| Tier | Folder | What Goes Here | Update Frequency |
-|------|--------|----------------|------------------|
-| 1 | `strategy/` | Mission, charter, value | Quarterly |
-| 2 | `planning/` | Roadmaps, priorities | Monthly |
-| 3 | `analysis/` | Audits, research | As needed |
-| 4 | `context/` | History, handovers | Rarely |
+| Tier | Folder      | What Goes Here          | Update Frequency |
+| ---- | ----------- | ----------------------- | ---------------- |
+| 1    | `strategy/` | Mission, charter, value | Quarterly        |
+| 2    | `planning/` | Roadmaps, priorities    | Monthly          |
+| 3    | `analysis/` | Audits, research        | As needed        |
+| 4    | `context/`  | History, handovers      | Rarely           |
 
 ---
 
@@ -134,13 +134,13 @@ Before sharing any AI-assisted doc, verify:
 
 ## Anti-Patterns to Avoid
 
-| ❌ Don't | ✅ Do Instead |
-|----------|---------------|
+| ❌ Don't                  | ✅ Do Instead                       |
+| ------------------------- | ----------------------------------- |
 | "Write me a strategy doc" | Provide direction, let AI structure |
-| Accept first draft | Iterate at least once |
-| Skip human review | Own every word you share |
-| Use AI for judgment calls | AI suggests, you decide |
-| Let AI make up facts | Ground in codebase/docs |
+| Accept first draft        | Iterate at least once               |
+| Skip human review         | Own every word you share            |
+| Use AI for judgment calls | AI suggests, you decide             |
+| Let AI make up facts      | Ground in codebase/docs             |
 
 ---
 
@@ -166,4 +166,3 @@ End of day:
 ---
 
 _Full framework: [`ai-augmented-pm-framework.md`](ai-augmented-pm-framework.md)_
-

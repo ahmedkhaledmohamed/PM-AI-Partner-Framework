@@ -65,45 +65,45 @@ PM work is fundamentally about **reconciling different sources of truth**. Each 
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-| Source | Type of Truth | Question Answered | AI Role |
-| ------ | ------------- | ----------------- | ------- |
-| **Code** | Technical | "What CAN happen?" | Explore, map capabilities |
-| **Docs** | Contextual | "What's EXPECTED?" | Synthesize, cross-reference |
-| **Data** | Empirical | "What IS happening?" | Analyze, find patterns |
-| **Judgment** | Human | "What SHOULD happen?" | Challenge, structure |
+| Source       | Type of Truth | Question Answered     | AI Role                     |
+| ------------ | ------------- | --------------------- | --------------------------- |
+| **Code**     | Technical     | "What CAN happen?"    | Explore, map capabilities   |
+| **Docs**     | Contextual    | "What's EXPECTED?"    | Synthesize, cross-reference |
+| **Data**     | Empirical     | "What IS happening?"  | Analyze, find patterns      |
+| **Judgment** | Human         | "What SHOULD happen?" | Challenge, structure        |
 
 ### Where Conflicts Happen (The Interesting Part)
 
 These sources often **conflict** — which is where PM work gets interesting:
 
-| Conflict | Example | PM Question |
-| -------- | ------- | ----------- |
-| Code ≠ Docs | "We claim to do X but code shows Y" | Which is true? |
-| Data ≠ Docs | "Strategy says X matters, metrics show Y" | Are we measuring right? |
-| Code ≠ Data | "Feature exists but isn't being used" | Why the gap? |
-| Judgment ≠ Data | "I think X, but data shows Y" | Am I wrong? |
+| Conflict        | Example                                   | PM Question             |
+| --------------- | ----------------------------------------- | ----------------------- |
+| Code ≠ Docs     | "We claim to do X but code shows Y"       | Which is true?          |
+| Data ≠ Docs     | "Strategy says X matters, metrics show Y" | Are we measuring right? |
+| Code ≠ Data     | "Feature exists but isn't being used"     | Why the gap?            |
+| Judgment ≠ Data | "I think X, but data shows Y"             | Am I wrong?             |
 
 **This is where PMs add value** — reconciling these conflicts and making decisions.
 
 ### What AI Does Well (By Source)
 
-| Source | AI Capability | Example |
-| ------ | ------------- | ------- |
-| **Code** | Explore, map, explain | "What capability does this represent?" |
-| **Docs** | Synthesize, cross-reference | "What themes emerge from these docs?" |
-| **Data** | Query, analyze, find patterns | "What's anomalous in these metrics?" |
-| **Judgment** | Challenge, structure, articulate | "What are the strongest objections?" |
+| Source       | AI Capability                    | Example                                |
+| ------------ | -------------------------------- | -------------------------------------- |
+| **Code**     | Explore, map, explain            | "What capability does this represent?" |
+| **Docs**     | Synthesize, cross-reference      | "What themes emerge from these docs?"  |
+| **Data**     | Query, analyze, find patterns    | "What's anomalous in these metrics?"   |
+| **Judgment** | Challenge, structure, articulate | "What are the strongest objections?"   |
 
 ### What AI Doesn't Do (Human-Only)
 
-| Human Judgment | Why AI Can't |
-| -------------- | ------------ |
-| **Organizational politics** | Doesn't know the people |
-| **Taste / Values** | Can suggest, can't decide |
-| **Prioritization** | Needs your constraints |
-| **Stakeholder relationships** | Trust is earned, not computed |
-| **Risk appetite** | Only you know what you're willing to bet |
-| **"This feels wrong"** | Intuition from experience |
+| Human Judgment                | Why AI Can't                             |
+| ----------------------------- | ---------------------------------------- |
+| **Organizational politics**   | Doesn't know the people                  |
+| **Taste / Values**            | Can suggest, can't decide                |
+| **Prioritization**            | Needs your constraints                   |
+| **Stakeholder relationships** | Trust is earned, not computed            |
+| **Risk appetite**             | Only you know what you're willing to bet |
+| **"This feels wrong"**        | Intuition from experience                |
 
 ### The Collaboration Principle
 
@@ -139,10 +139,10 @@ workspace/
 
 ### Two Documentation Spaces
 
-| Space | Purpose | Audience | State |
-|-------|---------|----------|-------|
-| `working/` | Working drafts, analysis, iteration | Personal | In progress |
-| `published/` | Polished, shareable artifacts | Team, leadership, external | Ready to share |
+| Space        | Purpose                             | Audience                   | State          |
+| ------------ | ----------------------------------- | -------------------------- | -------------- |
+| `working/`   | Working drafts, analysis, iteration | Personal                   | In progress    |
+| `published/` | Polished, shareable artifacts       | Team, leadership, external | Ready to share |
 
 **The Graduation Flow:**
 
@@ -154,12 +154,12 @@ Ideas start rough in `working/`, get refined with AI assistance, then graduate t
 
 ### Document Tiers (Read Order)
 
-| Tier | Folder | Purpose | Audience | Update Frequency |
-|------|--------|---------|----------|------------------|
-| **1** | `strategy/` | Mission, identity, value | Leadership, reviews | Quarterly |
-| **2** | `planning/` | Roadmaps, priorities | Team, manager | Monthly |
-| **3** | `analysis/` | Audits, stakeholder maps, metrics | Self, team | As needed |
-| **4** | `context/` | History, handovers, background | Onboarding | Rarely |
+| Tier  | Folder      | Purpose                           | Audience            | Update Frequency |
+| ----- | ----------- | --------------------------------- | ------------------- | ---------------- |
+| **1** | `strategy/` | Mission, identity, value          | Leadership, reviews | Quarterly        |
+| **2** | `planning/` | Roadmaps, priorities              | Team, manager       | Monthly          |
+| **3** | `analysis/` | Audits, stakeholder maps, metrics | Self, team          | As needed        |
+| **4** | `context/`  | History, handovers, background    | Onboarding          | Rarely           |
 
 ### The CLAUDE.md Pattern
 
@@ -204,6 +204,7 @@ This creates **scoped AI contexts** — different levels of the workspace have d
 ```
 
 **Documents produced:**
+
 - Capability Audit
 - Team Charter
 - Value Narrative
@@ -356,17 +357,19 @@ This creates **scoped AI contexts** — different levels of the workspace have d
 
 Different tasks need different Claude "personalities." I mentally switch between:
 
-### Mode 1: Analyst Agent
+### Mode 1: Technical Analyst Agent
 
 **Purpose:** Codebase exploration, capability audits, gap analysis
 
 **Characteristics:**
+
 - Rigorous, systematic
 - Asks "what evidence supports this?"
 - Builds tables and mappings
 - Skeptical of assumptions
 
 **Sample prompt prefix:**
+
 > "Act as a rigorous analyst. I need you to examine [X] and build a systematic assessment. Question my assumptions."
 
 ---
@@ -376,12 +379,14 @@ Different tasks need different Claude "personalities." I mentally switch between
 **Purpose:** Strategy docs, narratives, communication
 
 **Characteristics:**
+
 - Clear, structured prose
 - Audience-aware framing
 - Connects ideas to evidence
 - Iterates on drafts
 
 **Sample prompt prefix:**
+
 > "Help me write a clear [document type] for [audience]. The key message is [X]. I'll provide rough notes and you'll help structure them."
 
 ---
@@ -391,12 +396,14 @@ Different tasks need different Claude "personalities." I mentally switch between
 **Purpose:** Stress-testing ideas, preparing for pushback
 
 **Characteristics:**
+
 - Constructively critical
 - Finds weaknesses
 - Role-plays skeptics
 - Suggests counter-arguments
 
 **Sample prompt prefix:**
+
 > "I want you to challenge this idea. Role-play as a skeptical [director/engineer/PM]. What are the strongest objections?"
 
 ---
@@ -406,12 +413,14 @@ Different tasks need different Claude "personalities." I mentally switch between
 **Purpose:** Creating tools, prototypes, code
 
 **Characteristics:**
+
 - Technical, practical
 - Iterative (build → refine → extend)
 - Focuses on working software
 - Understands constraints
 
 **Sample prompt prefix:**
+
 > "I want to build [X]. Here's the spec: [detailed requirements]. Generate the scaffold, then we'll iterate."
 
 ---
@@ -421,12 +430,14 @@ Different tasks need different Claude "personalities." I mentally switch between
 **Purpose:** Brainstorming, ideation, exploration
 
 **Characteristics:**
+
 - Open-ended
 - Generates options
 - Explores implications
 - Doesn't judge prematurely
 
 **Sample prompt prefix:**
+
 > "I'm thinking about [X]. Help me explore the space. What are the different ways to think about this? What am I not considering?"
 
 ---
@@ -436,26 +447,29 @@ Different tasks need different Claude "personalities." I mentally switch between
 **Purpose:** Metrics exploration, insight generation, hypothesis testing
 
 **Characteristics:**
+
 - Quantitative focus
 - Pattern-finding
 - Hypothesis generation
 - Connects data to decisions
 
 **Sample prompt prefix:**
+
 > "I have this data: [metrics/results]. Help me identify patterns, generate hypotheses for what's happening, and suggest what to investigate next."
 
 **Data-specific prompts:**
+
 ```
 # Writing queries
-"I need to understand [X]. Help me write a SQL query 
+"I need to understand [X]. Help me write a SQL query
 to get [specific metrics]."
 
 # Interpreting results
-"Here are the results: [data]. What patterns do you see? 
+"Here are the results: [data]. What patterns do you see?
 What's surprising? What questions does this raise?"
 
 # Connecting to strategy
-"This data shows [finding]. How does this relate to our 
+"This data shows [finding]. How does this relate to our
 strategy of [X]? What should we do differently?"
 ```
 
@@ -465,18 +479,19 @@ strategy of [X]? What should we do differently?"
 
 ### Two Ways to Work with Claude
 
-| Aspect | **Cursor/IDE Agent** | **Claude Code CLI** |
-|--------|----------------------|---------------------|
-| **Best for** | Interactive, iterative work | Autonomous, multi-step tasks |
-| **Context** | Sees open files, cursor, workspace | You define context explicitly |
-| **Workflow** | "Let's figure this out together" | "Go do this thing" |
-| **Scope** | Best within one workspace | Can span multiple repos |
-| **Feedback** | Real-time back-and-forth | Runs to completion, then review |
-| **IDE integration** | Full (edits, lints, navigation) | None (pure terminal) |
+| Aspect              | **Cursor/IDE Agent**               | **Claude Code CLI**             |
+| ------------------- | ---------------------------------- | ------------------------------- |
+| **Best for**        | Interactive, iterative work        | Autonomous, multi-step tasks    |
+| **Context**         | Sees open files, cursor, workspace | You define context explicitly   |
+| **Workflow**        | "Let's figure this out together"   | "Go do this thing"              |
+| **Scope**           | Best within one workspace          | Can span multiple repos         |
+| **Feedback**        | Real-time back-and-forth           | Runs to completion, then review |
+| **IDE integration** | Full (edits, lints, navigation)    | None (pure terminal)            |
 
 ### When to Use Each
 
 **Use IDE Agent when:**
+
 - Iterating on ideas, exploring options
 - Working with open files in context
 - Need real-time feedback and steering
@@ -484,6 +499,7 @@ strategy of [X]? What should we do differently?"
 - Want to approve each change
 
 **Use Claude Code CLI when:**
+
 - Task is well-defined and autonomous
 - Spanning multiple repos or directories
 - Batch operations (rename, format, migrate)
@@ -494,13 +510,13 @@ strategy of [X]? What should we do differently?"
 
 IDE Agent should suggest CLI when:
 
-| Trigger | Example | CLI Command |
-|---------|---------|-------------|
-| **Bulk file operations** | "Rename across 20 files" | `claude "rename X to Y in src/"` |
-| **Cross-repo work** | "Find all uses of API in 3 repos" | `claude "search for X in ~/projects/*"` |
-| **Well-defined refactor** | "Update all imports to new path" | `claude "migrate imports from A to B"` |
+| Trigger                   | Example                           | CLI Command                             |
+| ------------------------- | --------------------------------- | --------------------------------------- |
+| **Bulk file operations**  | "Rename across 20 files"          | `claude "rename X to Y in src/"`        |
+| **Cross-repo work**       | "Find all uses of API in 3 repos" | `claude "search for X in ~/projects/*"` |
+| **Well-defined refactor** | "Update all imports to new path"  | `claude "migrate imports from A to B"`  |
 | **Autonomous generation** | "Generate docs for all endpoints" | `claude "create API docs for backend/"` |
-| **Batch formatting** | "Fix all markdown tables" | `claude "format tables in docs/"` |
+| **Batch formatting**      | "Fix all markdown tables"         | `claude "format tables in docs/"`       |
 
 ---
 
@@ -510,27 +526,36 @@ IDE Agent should suggest CLI when:
 
 ```markdown
 ## Context
+
 - Current priorities: [link to planning doc]
 - Open questions: [list]
 
 ## This Week
+
 ### What I accomplished
+
 - [list]
 
 ### What's blocked
+
 - [list]
 
 ### What I learned
+
 - [list]
 
 ## Next Week
+
 ### Must do
+
 - [list]
 
 ### Should do
+
 - [list]
 
 ## Questions for AI
+
 - [specific questions to explore]
 ```
 
@@ -544,18 +569,22 @@ IDE Agent should suggest CLI when:
 **Pillar:** [which responsibility pillar]
 
 ### Status
+
 - [ ] ✅ Exists — [evidence]
 - [ ] ⚠️ Partial — [what's missing]
 - [ ] ❌ Missing — [why it matters]
 
 ### Evidence
+
 - File: `[path]`
 - Key code: `[snippet]`
 
 ### Gap Description
+
 [What's missing, why it matters]
 
 ### Effort Estimate
+
 [T-shirt size + rationale]
 ```
 
@@ -567,24 +596,30 @@ IDE Agent should suggest CLI when:
 ## [Feature/Initiative Name]
 
 ### Problem Statement
+
 > One sentence: what problem does this solve?
 
 ### Context
+
 - Links to strategy docs
 - Why now?
 
 ### Proposed Solution
+
 [Description]
 
 ### Success Metrics
+
 | Metric | Baseline | Target |
-|--------|----------|--------|
+| ------ | -------- | ------ |
 
 ### Risks & Mitigations
+
 | Risk | Mitigation |
-|------|------------|
+| ---- | ---------- |
 
 ### Open Questions
+
 - [ ] [question]
 ```
 
@@ -596,26 +631,32 @@ IDE Agent should suggest CLI when:
 ## Meeting: [Person], [Date]
 
 ### Their Context
+
 - Role: [X]
 - What they care about: [Y]
 - Recent interactions: [Z]
 
 ### My Goals
+
 1. [outcome I want]
 2. [outcome I want]
 
 ### Key Messages
+
 1. [message]
 2. [message]
 
 ### Questions to Ask
+
 1. [question]
 
 ### Anticipated Pushback
+
 | They might say | My response |
-|----------------|-------------|
+| -------------- | ----------- |
 
 ### Post-Meeting Notes
+
 [fill after meeting]
 ```
 
@@ -677,11 +718,10 @@ AI helps accelerate each stage, but I still own the judgment calls.
 
 ## Document Governance
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2026-01-12 | Initial public release |
+| Version | Date       | Changes                |
+| ------- | ---------- | ---------------------- |
+| 1.0     | 2026-01-12 | Initial public release |
 
 ---
 
 _This document describes how I work. It will evolve as I learn what's effective._
-

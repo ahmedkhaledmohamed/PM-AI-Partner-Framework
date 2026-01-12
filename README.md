@@ -51,12 +51,12 @@ PM-AI-Partner-Framework/
 
 ## Quick Start
 
-| Need | Start Here |
-|------|------------|
+| Need                         | Start Here                               |
+| ---------------------------- | ---------------------------------------- |
 | Full framework understanding | `framework/ai-augmented-pm-framework.md` |
-| Quick daily reference | `framework/quick-reference.md` |
-| Specific workflow | `workflows/` folder |
-| Presentation materials | `talk/` folder |
+| Quick daily reference        | `framework/quick-reference.md`           |
+| Specific workflow            | `workflows/` folder                      |
+| Presentation materials       | `talk/` folder                           |
 
 ---
 
@@ -80,25 +80,25 @@ Every PM decision reconciles different types of truth:
                     └─────────────────────┘
 ```
 
-| Source | Question Answered |
-|--------|-------------------|
-| **Code** | "What CAN happen?" |
-| **Docs** | "What's EXPECTED?" |
-| **Data** | "What IS happening?" |
+| Source       | Question Answered     |
+| ------------ | --------------------- |
+| **Code**     | "What CAN happen?"    |
+| **Docs**     | "What's EXPECTED?"    |
+| **Data**     | "What IS happening?"  |
 | **Judgment** | "What SHOULD happen?" |
 
 ---
 
 ## Six Agent Modes
 
-| Mode | When to Use | Prompt Prefix |
-|------|-------------|---------------|
-| **Analyst** | Codebase exploration | "Act as a rigorous analyst..." |
-| **Writer** | Strategy docs | "Help me write a clear..." |
-| **Devil's Advocate** | Stress-testing | "Challenge this. Role-play as..." |
-| **Builder** | Tools, prototypes | "Build [X] with this spec..." |
-| **Thought Partner** | Brainstorming | "Help me explore the space..." |
-| **Data Analyst** | Metrics, insights | "Here's [data]. What patterns?" |
+| Mode                 | When to Use          | Prompt Prefix                     |
+| -------------------- | -------------------- | --------------------------------- |
+| **Technical Analyst** | Codebase exploration | "Act as a rigorous analyst..."    |
+| **Writer**           | Strategy docs        | "Help me write a clear..."        |
+| **Devil's Advocate** | Stress-testing       | "Challenge this. Role-play as..." |
+| **Builder**          | Tools, prototypes    | "Build [X] with this spec..."     |
+| **Thought Partner**  | Brainstorming        | "Help me explore the space..."    |
+| **Data Analyst**     | Metrics, insights    | "Here's [data]. What patterns?"   |
 
 ---
 
