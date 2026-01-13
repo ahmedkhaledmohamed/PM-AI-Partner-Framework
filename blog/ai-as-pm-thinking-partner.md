@@ -69,12 +69,12 @@ The strategic decision. What we decide to prioritize.
 
 **The PM's job is reconciliation:** These sources conflict, and that's where the work gets interesting.
 
-| Source       | Question Answered     | AI Role                     |
-| ------------ | --------------------- | --------------------------- |
-| **Code**     | "What CAN happen?"    | Explore, map capabilities   |
-| **Docs**     | "What's EXPECTED?"    | Synthesize, cross-reference |
-| **Data**     | "What IS happening?"  | Analyze, find patterns      |
-| **Judgment** | "What SHOULD happen?" | Challenge, structure        |
+**How AI helps with each source:**
+
+• **Code** ("What CAN happen?") → AI explores and maps capabilities
+• **Docs** ("What's EXPECTED?") → AI synthesizes and cross-references
+• **Data** ("What IS happening?") → AI analyzes and finds patterns
+• **Judgment** ("What SHOULD happen?") → AI challenges and structures thinking
 
 These sources often **conflict** — which is where PM work gets interesting:
 
@@ -177,13 +177,20 @@ More importantly, the team now has **clarity**. We can articulate what we own, w
 
 What doesn't work:
 
-| ❌ Don't                  | Why It Fails                           |
-| ------------------------- | -------------------------------------- |
-| "Write me a strategy doc" | No direction = generic output          |
-| Accept first draft        | Always needs human refinement          |
-| Skip codebase grounding   | Strategy disconnected from reality     |
-| Use AI for judgment calls | Can't know your organizational context |
-| One mega-prompt           | Iterative works better                 |
+**❌ "Write me a strategy doc"**
+→ No direction = generic output
+
+**❌ Accept first draft**
+→ Always needs human refinement
+
+**❌ Skip codebase grounding**
+→ Strategy disconnected from reality
+
+**❌ Use AI for judgment calls**
+→ Can't know your organizational context
+
+**❌ One mega-prompt**
+→ Iterative works better
 
 The key mistakes are expecting AI to replace your judgment or accepting outputs without critical review. AI amplifies your preparation — garbage in, garbage out.
 
