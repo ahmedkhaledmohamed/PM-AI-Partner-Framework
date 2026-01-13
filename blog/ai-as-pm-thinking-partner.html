@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI as a PM Thinking Partner: A Framework for Rigorous Collaboration</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+            background: #fff;
+        }
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 0.3em;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.3em;
+        }
+        h3 {
+            font-size: 1.3em;
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin: 1em 0;
+        }
+        em {
+            font-style: italic;
+        }
+        strong {
+            font-weight: 600;
+        }
+        ul, ol {
+            margin: 1em 0;
+            padding-left: 2em;
+        }
+        li {
+            margin: 0.5em 0;
+        }
+        blockquote {
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            background: #f9f9f9;
+            border-left: 4px solid #0066cc;
+            font-style: italic;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 2em 0;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2em;
+        }
+        .diagram {
+            background: #f5f5f5;
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+            line-height: 1.3;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            background: #e8e8e8;
+            padding: 0.3em 0.6em;
+            border-radius: 3px;
+            margin-right: 0.5em;
+            font-size: 0.9em;
+        }
+        .author {
+            font-style: italic;
+            color: #666;
+            margin: 2em 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI as a PM Thinking Partner: A Framework for Rigorous Collaboration</h1>
+
+    <p class="subtitle">How I use Claude to think more clearly, not to write for me</p>
+
+    <hr>
+
+    <p>Four months ago, I inherited a platform team navigating an identity crisis. The engineering was strong — systems were production-grade, serving hundreds of millions of users. But when I asked "what makes us different from the three adjacent teams?" nobody had a crisp answer.</p>
+
+    <p>I needed to build clarity fast while also shipping a roadmap. I couldn't do it alone.</p>
+
+    <p>This is the story of how I built a system for thinking with AI that helped me audit 50,000+ lines of code, produce 15+ strategy documents, and build an internal tool — all while delivering on commitments.</p>
+
+    <p><strong>This isn't about having AI write your work. It's about thinking more rigorously.</strong></p>
+
+    <hr>
+
+    <h2>The Problem: Platform PM Clarity</h2>
+
+    <p>Platform teams have a unique challenge. Unlike product teams with clear user-facing features, platform teams provide infrastructure that others build on. The value is often invisible:</p>
+
+    <ul>
+        <li>When things work, the teams you enable get credit</li>
+        <li>When things break, you get the questions</li>
+        <li>Your "customers" are other engineers and PMs, not end users</li>
+    </ul>
+
+    <p>I joined a team where the previous PM had identified the core issue: the team had been "mis-sold" internally. People thought we did one thing when we actually did another. This caused misunderstanding, false starts, and loss of trust.</p>
+
+    <p>My job was to create clarity. But how do you define what a platform team "really does" when even the people on the team aren't sure?</p>
+
+    <hr>
+
+    <h2>The Insight: Ground Strategy in Code</h2>
+
+    <p>Here's what I realized: <strong>the codebase doesn't lie.</strong></p>
+
+    <p>Strategy documents can be aspirational. Roadmaps can be optimistic. But the code shows what actually exists. If you want to understand what a platform team truly owns, look at what's implemented.</p>
+
+    <p>This became my approach:</p>
+
+    <ol>
+        <li>Audit the codebase systematically</li>
+        <li>Map capabilities to actual code</li>
+        <li>Identify gaps between claims and reality</li>
+        <li>Build strategy grounded in implementation truth</li>
+    </ol>
+
+    <p>But auditing 50,000+ lines of code across multiple repositories? That's where AI became essential.</p>
+
+    <hr>
+
+    <h2>The Framework: Four Sources of Truth</h2>
+
+    <p>I developed a mental model I call <strong>Four Sources of Truth</strong>. PM work is fundamentally about reconciling different types of truth:</p>
+
+    <div class="diagram">
+        <pre>┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
+│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
+│             │  │             │  │             │  │             │
+│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
+│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 ▼
+                    ┌─────────────────────┐
+                    │    RECONCILIATION   │
+                    │     (AI + Human)    │
+                    └──────────┬──────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │      DECISION       │
+                    └─────────────────────┘</pre>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Source</th>
+                <th>Question Answered</th>
+                <th>AI Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Code</strong></td>
+                <td>"What CAN happen?"</td>
+                <td>Explore, map capabilities</td>
+            </tr>
+            <tr>
+                <td><strong>Docs</strong></td>
+                <td>"What's EXPECTED?"</td>
+                <td>Synthesize, cross-reference</td>
+            </tr>
+            <tr>
+                <td><strong>Data</strong></td>
+                <td>"What IS happening?"</td>
+                <td>Analyze, find patterns</td>
+            </tr>
+            <tr>
+                <td><strong>Judgment</strong></td>
+                <td>"What SHOULD happen?"</td>
+                <td>Challenge, structure</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>These sources often <strong>conflict</strong> — which is where PM work gets interesting:</p>
+
+    <ul>
+        <li>Code ≠ Docs: "We claim to do X but code shows Y"</li>
+        <li>Data ≠ Strategy: "Strategy says X matters, metrics show Y"</li>
+        <li>Judgment ≠ Data: "I think X, but data shows Y"</li>
+    </ul>
+
+    <p>The key principle:</p>
+
+    <blockquote>
+        <strong>PM work is reconciling four sources of truth. AI helps you explore each source faster and spot conflicts between them. Judgment about what SHOULD happen stays human.</strong>
+    </blockquote>
+
+    <hr>
+
+    <h2>The System: Six Agent Modes</h2>
+
+    <p>I realized different tasks need different AI "personalities." I mentally switch between six modes:</p>
+
+    <h3>1. Technical Analyst Agent</h3>
+
+    <p>For codebase exploration and capability audits. Rigorous, systematic, skeptical.</p>
+
+    <p><em>"Act as a rigorous analyst. Examine this code and build a systematic assessment of what capabilities exist. Question my assumptions."</em></p>
+
+    <h3>2. Writer Agent</h3>
+
+    <p>For strategy docs and narratives. Clear, structured, audience-aware.</p>
+
+    <p><em>"Help me write a clear team charter for leadership. The key message is [X]. Here are my rough notes..."</em></p>
+
+    <h3>3. Devil's Advocate Agent</h3>
+
+    <p>For stress-testing ideas before presenting them. Constructively critical.</p>
+
+    <p><em>"Role-play as a skeptical director. What are the strongest objections to this strategy? What questions would you ask?"</em></p>
+
+    <h3>4. Builder Agent</h3>
+
+    <p>For creating tools and prototypes. Technical, iterative, practical.</p>
+
+    <p><em>"I want to build [X]. Here's the spec. Generate the scaffold, then we'll iterate."</em></p>
+
+    <h3>5. Thought Partner Agent</h3>
+
+    <p>For brainstorming and exploration. Open-ended, generative.</p>
+
+    <p><em>"Help me explore this space. What are different ways to think about this problem? What am I not considering?"</em></p>
+
+    <h3>6. Data Analyst Agent</h3>
+
+    <p>For metrics exploration and insight generation. Pattern-finding.</p>
+
+    <p><em>"I have this data: [metrics/results]. Help me identify patterns, generate hypotheses for what's happening, and suggest what to investigate next."</em></p>
+
+    <hr>
+
+    <h2>The Workflow: Strategic Clarity</h2>
+
+    <p>Here's the specific workflow I used to define my team's identity:</p>
+
+    <h3>Phase 1: Absorb (Week 1)</h3>
+
+    <p>Read everything — handovers, history, existing docs. Use AI to synthesize themes.</p>
+
+    <p><em>"I've inherited this team. Here's what I've learned. Help me identify key themes and tensions."</em></p>
+
+    <h3>Phase 2: Audit (Week 2)</h3>
+
+    <p>Systematic codebase review. Use AI to map capabilities to code.</p>
+
+    <p><em>"I'm a PM trying to understand this code's product meaning, not implementation. What capability does this represent?"</em></p>
+
+    <h3>Phase 3: Articulate (Week 3)</h3>
+
+    <p>Draft identity, boundaries, value proposition. Use AI to structure.</p>
+
+    <p><em>"Based on my audit, here's what we own vs. don't own. Help me draft a clear mission statement."</em></p>
+
+    <h3>Phase 4: Align (Week 4)</h3>
+
+    <p>Socialize with stakeholders. Use AI to prepare for pushback.</p>
+
+    <p><em>"I'm presenting this charter to [stakeholder]. Role-play as them. What would you push back on?"</em></p>
+
+    <hr>
+
+    <h2>The Results</h2>
+
+    <p>Using this system over four months, I:</p>
+
+    <ul>
+        <li><strong>Audited 5 major codebases</strong> — Created a 240-line capability audit with evidence links to specific files</li>
+        <li><strong>Produced 15+ strategy documents</strong> — Team charter, value narrative, operating guide, master plan</li>
+        <li><strong>Built an internal tool</strong> — A catalog builder using iterative AI prompts (7 steps, days instead of weeks)</li>
+        <li><strong>Prepared for key conversations</strong> — 290-line dev talk preparation document</li>
+    </ul>
+
+    <p>More importantly, the team now has <strong>clarity</strong>. We can articulate what we own, what we don't, and why it matters. When stakeholders ask "what do you do?" we have a crisp answer grounded in reality.</p>
+
+    <hr>
+
+    <h2>The Anti-Patterns</h2>
+
+    <p>What doesn't work:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>❌ Don't</th>
+                <th>Why It Fails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>"Write me a strategy doc"</td>
+                <td>No direction = generic output</td>
+            </tr>
+            <tr>
+                <td>Accept first draft</td>
+                <td>Always needs human refinement</td>
+            </tr>
+            <tr>
+                <td>Skip codebase grounding</td>
+                <td>Strategy disconnected from reality</td>
+            </tr>
+            <tr>
+                <td>Use AI for judgment calls</td>
+                <td>Can't know your organizational context</td>
+            </tr>
+            <tr>
+                <td>One mega-prompt</td>
+                <td>Iterative works better</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>The key mistakes are expecting AI to replace your judgment or accepting outputs without critical review. AI amplifies your preparation — garbage in, garbage out.</p>
+
+    <hr>
+
+    <h2>The Takeaway</h2>
+
+    <p>AI hasn't changed <em>what</em> PMs do. It's changed <em>how fast</em> we can think rigorously about complex problems.</p>
+
+    <p>The framework I've described isn't magic. It's a system for:</p>
+
+    <ul>
+        <li>Providing clear direction to AI</li>
+        <li>Iterating quickly on outputs</li>
+        <li>Grounding strategy in implementation reality</li>
+        <li>Preparing for conversations systematically</li>
+    </ul>
+
+    <p>If you're a PM dealing with ambiguity — whether that's a new role, an unclear team scope, or a complex technical domain — try this approach:</p>
+
+    <ol>
+        <li><strong>Pick one messy problem</strong></li>
+        <li><strong>Choose an agent mode</strong></li>
+        <li><strong>Iterate with AI</strong></li>
+        <li><strong>Own the output</strong></li>
+    </ol>
+
+    <p>The goal isn't to have AI write your documents. It's to think more rigorously, communicate more clearly, and move faster — while keeping judgment human.</p>
+
+    <hr>
+
+    <h2>Resources</h2>
+
+    <p>I've open-sourced the full framework:</p>
+
+    <ul>
+        <li><strong>GitHub:</strong> <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework">PM-AI-Partner-Framework</a></li>
+        <li><strong>Quick Reference:</strong> One-page cheat sheet</li>
+        <li><strong>Workflow Templates:</strong> Step-by-step guides for common scenarios</li>
+    </ul>
+
+    <hr>
+
+    <p class="author">Ahmed Khaled is a Product Manager at Spotify, working on messaging infrastructure that serves 700M+ users. He writes about platform product management and AI-augmented workflows.</p>
+
+    <hr>
+
+    <p>
+        <span class="tag">#ProductManagement</span>
+        <span class="tag">#AI</span>
+        <span class="tag">#Claude</span>
+        <span class="tag">#PlatformPM</span>
+        <span class="tag">#Productivity</span>
+        <span class="tag">#Framework</span>
+    </p>
+
+</body>
+</html>
