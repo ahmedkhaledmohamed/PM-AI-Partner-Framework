@@ -49,26 +49,25 @@ But auditing 50,000+ lines of code across multiple repositories? That's where AI
 
 I developed a mental model I call **Four Sources of Truth**. PM work is fundamentally about reconciling different types of truth:
 
-```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
-│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
-│             │  │             │  │             │  │             │
-│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
-│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                │                │                │
-       └────────────────┴────────┬───────┴────────────────┘
-                                 ▼
-                    ┌─────────────────────┐
-                    │    RECONCILIATION   │
-                    │     (AI + Human)    │
-                    └──────────┬──────────┘
-                               ▼
-                    ┌─────────────────────┐
-                    │      DECISION       │
-                    └─────────────────────┘
-```
+### **CODE** → Technical Truth
+_"What CAN happen?"_
+The implementation reality. What the system is actually capable of doing.
+
+### **DOCS** → Contextual Truth
+_"What's EXPECTED?"_
+The documented intent. What the system is supposed to do.
+
+### **DATA** → Empirical Truth
+_"What IS happening?"_
+The usage reality. What users are actually doing.
+
+### **JUDGMENT** → Human Truth
+_"What SHOULD happen?"_
+The strategic decision. What we decide to prioritize.
+
+---
+
+**The PM's job is reconciliation:** These sources conflict, and that's where the work gets interesting.
 
 | Source       | Question Answered     | AI Role                     |
 | ------------ | --------------------- | --------------------------- |
