@@ -47,8 +47,8 @@ PM-AI-Partner-Framework/
 │   └── ai-as-pm-thinking-partner.md    # Blog post (Substack/LinkedIn)
 ├── talk/
 │   └── pm-ai-partner-knowledge-sharing.md  # Presentation outline
-└── site/
-    └── index.html                      # Interactive landing page
+└── docs/
+    └── index.html                      # Interactive landing page (GitHub Pages)
 ```
 
 ---
@@ -57,7 +57,7 @@ PM-AI-Partner-Framework/
 
 | Need                         | Start Here                               |
 | ---------------------------- | ---------------------------------------- |
-| Interactive overview         | `site/index.html`                        |
+| Interactive overview         | `docs/index.html`                        |
 | Full framework understanding | `framework/ai-augmented-pm-framework.md` |
 | Quick daily reference        | `framework/quick-reference.md`           |
 | Specific workflow            | `workflows/` folder                      |
