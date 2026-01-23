@@ -492,6 +492,7 @@
     <a href="#workflows">Workflows</a>
     <a href="#tools">Tools</a>
     <a href="#principles">Principles</a>
+    <a href="#setup">Setup</a>
     <a href="#resources">Resources</a>
   </nav>
 
@@ -793,6 +794,103 @@
           <h4>Review the Diff</h4>
           <p>Before sharing AI-assisted work, look at what actually changed. The diff is your ownership tool.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setup -->
+  <section id="setup">
+    <div class="container">
+      <h2>My Setup</h2>
+      <p class="section-subtitle">The actual tools and workspace structure I use.</p>
+      
+      <h3 style="margin-bottom: 16px;">Tools</h3>
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Purpose</th>
+            <th>Required?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cursor IDE</td>
+            <td>Primary interface — code exploration, doc writing, iteration</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Claude in Cursor</td>
+            <td>AI partner for all workflows</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>MCP: BigQuery / SQL</td>
+            <td>Query metrics directly from chat</td>
+            <td>Recommended</td>
+          </tr>
+          <tr>
+            <td>MCP: Google Drive</td>
+            <td>Pull context from team docs</td>
+            <td>Recommended</td>
+          </tr>
+          <tr>
+            <td>MCP: Code Search</td>
+            <td>Search across repos</td>
+            <td>Recommended</td>
+          </tr>
+          <tr>
+            <td>Claude CLI</td>
+            <td>Autonomous multi-step tasks</td>
+            <td>Optional</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Workspace Structure</h3>
+      <div class="code-block">
+        <span class="comment"># Local repos for Cursor indexing</span><br><br>
+        ~/Developer/my-project/<br>
+        ├── backend/          <span class="comment"># Codebase — Cursor indexes for semantic search</span><br>
+        ├── client/           <span class="comment"># Codebase</span><br>
+        ├── documentation/    <span class="comment"># Team docs</span><br>
+        ├── sandbox/          <span class="comment"># My working space (drafts, analysis, planning)</span><br>
+        └── product-catalog/  <span class="comment"># Polished artifacts for team sharing</span>
+      </div>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Why Local Repos?</h3>
+      <div class="principles-grid">
+        <div class="principle-card">
+          <h4>Cursor Indexing</h4>
+          <p>Semantic search across code and docs — ask questions, get relevant results.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Direct Editing</h4>
+          <p>AI can create and update files in place, not just suggest changes.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Git Tracking</h4>
+          <p>Version history of AI-assisted work. Rollback when needed.</p>
+        </div>
+        <div class="principle-card">
+          <h4>CLAUDE.md Context</h4>
+          <p>Scoped AI guidance per folder — different contexts for different work.</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 24px; color: var(--text-secondary); font-size: 14px;">
+        You don't <em>need</em> local repos — Code Search MCP can find code remotely. But local checkout enables the full edit-and-version workflow.
+      </p>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">How It Connects</h3>
+      <div class="code-block">
+        <span class="highlight">CURSOR IDE</span><br>
+        ├── Local Workspace (codebase, docs, sandbox, CLAUDE.md)<br>
+        └── MCP Tools (BigQuery, Google Drive, Code Search)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
+        <span class="highlight">Claude (AI)</span><br>
+        Sees code + docs + can query data + search repos
       </div>
     </div>
   </section>
