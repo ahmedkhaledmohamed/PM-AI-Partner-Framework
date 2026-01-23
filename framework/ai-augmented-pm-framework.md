@@ -782,11 +782,74 @@ AI helps accelerate each stage, but I still own the judgment calls.
 
 ---
 
+## Appendix: My Setup
+
+### Tools
+
+| Tool | Purpose | Required? |
+|------|---------|-----------|
+| **Cursor IDE** | Primary interface — code exploration, doc writing, iteration | Yes |
+| **Claude in Cursor** | AI partner for all workflows | Yes |
+| **MCP: BigQuery / SQL** | Query metrics directly from chat | Recommended |
+| **MCP: Google Drive** | Pull context from team docs | Recommended |
+| **MCP: Code Search** | Search across repos | Recommended |
+| **Claude CLI** | Autonomous multi-step tasks | Optional |
+
+### Workspace Structure
+
+I keep relevant repos checked out locally so Cursor can index and search them:
+
+```
+~/Developer/my-project/
+├── backend/          # Codebase — Cursor indexes for semantic search
+├── client/           # Codebase
+├── documentation/    # Team docs
+├── sandbox/          # My working space (drafts, analysis, planning)
+└── product-catalog/  # Polished artifacts for team sharing
+```
+
+### Why Local Repos?
+
+| Benefit | How It Helps |
+|---------|--------------|
+| **Cursor indexing** | Semantic search across code and docs |
+| **Direct editing** | AI can create/update files in place |
+| **Git tracking** | Version history of AI-assisted work |
+| **CLAUDE.md context** | Scoped AI guidance per folder |
+
+You don't *need* local repos — Code Search MCP can find code remotely. But local checkout enables the full edit-and-version workflow.
+
+### How It Connects
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CURSOR IDE                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│   Local Workspace          MCP Tools (External)              │
+│   ┌─────────────┐         ┌─────────────────────┐           │
+│   │ Codebase    │         │ BigQuery / SQL      │           │
+│   │ Docs        │         │ Google Drive        │           │
+│   │ sandbox/    │         │ Code Search         │           │
+│   │ CLAUDE.md   │         │                     │           │
+│   └─────────────┘         └─────────────────────┘           │
+│         │                          │                         │
+│         └──────────┬───────────────┘                         │
+│                    ▼                                         │
+│              Claude (AI)                                     │
+│     Sees code + docs + can query data + search repos         │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## Document Governance
 
 | Version | Date       | Changes                |
 | ------- | ---------- | ---------------------- |
 | 1.0     | 2026-01-12 | Initial public release |
+| 1.5     | 2026-01-23 | Added Problem section, Git as AI Memory, Setup appendix |
 
 ---
 
