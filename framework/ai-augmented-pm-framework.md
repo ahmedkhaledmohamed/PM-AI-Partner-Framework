@@ -4,7 +4,7 @@
 
 **Author:** Ahmed Khaled  
 **Role:** Product Manager, Client Messaging @ Spotify  
-**Version:** 1.0 (January 2026)
+**Version:** 1.5 (January 2026)
 
 ---
 
@@ -19,6 +19,44 @@ This document describes a **personal operating system** for using AI (specifical
 5. **The Tool Selection** — When to use interactive AI vs CLI
 
 This is not about replacing PM work — it's about **augmenting depth, speed, and rigor**.
+
+---
+
+## The Problem
+
+Platform PMs face a unique challenge: **the truth lives in code, but strategy lives in docs, and the two rarely match.**
+
+### What Goes Wrong
+
+- You inherit a team and nobody can articulate what makes it different from adjacent teams
+- Strategy documents claim capabilities that don't exist (or miss ones that do)
+- The same questions get asked repeatedly by different stakeholders
+- Deep codebase understanding takes months — time you don't have
+- Writing rigorous docs competes with operational demands
+- Data exists but isn't connected to decisions
+
+### Traditional Approaches Don't Scale
+
+```
+Read docs → Form opinions → Write more docs → Hope you didn't miss something
+                              ↓
+              Iterate slowly through review cycles
+                              ↓
+              Context lives in people's heads, not systems
+```
+
+### The Opportunity
+
+**AI changes what's possible** — but only if you know how to collaborate with it effectively.
+
+| Without System | With System |
+|----------------|-------------|
+| AI writes generic docs | AI explores, you decide |
+| Context lost between sessions | Structured workspace compounds knowledge |
+| Ad-hoc prompting | Repeatable workflows |
+| "Write me a strategy" | "Help me reconcile these sources" |
+
+This framework is the system I built to bridge the gap.
 
 ---
 
@@ -171,6 +209,34 @@ Every significant folder gets a `CLAUDE.md` that tells AI:
 4. **Key constraints and rules**
 
 This creates **scoped AI contexts** — different levels of the workspace have different AI "personalities."
+
+### Git as AI Memory
+
+Your repo is the persistent layer; chat is ephemeral. **Every meaningful AI session should produce a commit.**
+
+**Why this matters:**
+
+| Benefit | How It Helps |
+|---------|--------------|
+| **Diffs** | See exactly what AI changed vs. what you wrote |
+| **Branches** | Experiment freely without risk |
+| **History** | Audit trail of how docs evolved |
+| **Rollback** | Revert if AI made things worse |
+| **Compound** | Each commit builds on the last; chat disappears |
+
+**The Pattern:**
+
+```
+1. Start a branch for exploratory work
+2. Commit after each meaningful iteration
+3. Use descriptive messages: "Add metrics per AI suggestion"
+4. Review the diff before sharing
+5. Merge when satisfied, discard if not
+```
+
+**Anti-pattern:** Long AI sessions with no commits = lost context, no rollback, invisible changes.
+
+**Pro tip:** The diff is your review tool. Before sharing any AI-assisted doc, look at what actually changed. This is how you maintain ownership.
 
 ---
 
