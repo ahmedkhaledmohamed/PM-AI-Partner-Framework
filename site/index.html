@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Augmented PM Framework</title>
+  <!-- Favicon: Purple/Blue gradient brain icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23a855f7'/%3E%3Cstop offset='50%25' stop-color='%233b82f6'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='12' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-gradient: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #06b6d4 100%);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #2d2d3a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-purple);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 28px;
+      font-size: 15px;
+      color: var(--text-primary);
+    }
+
+    .hero-tagline em {
+      color: var(--accent-cyan);
+      font-style: normal;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 20px 0;
+      background: var(--bg-primary);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+      background: var(--bg-card);
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    /* Four Sources Grid */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .sources-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .source-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .source-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-4px);
+    }
+
+    .source-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .source-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .source-card .question {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+
+    .source-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Agent Modes */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .agent-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .agent-card:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .agent-card .emoji {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .agent-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .agent-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Workflow List */
+    .workflow-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .workflow-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      transition: all 0.2s ease;
+    }
+
+    .workflow-item:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .workflow-number {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .workflow-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .workflow-content p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Principles */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .principle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .principle-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent-purple);
+    }
+
+    .principle-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Tools Comparison */
+    .tools-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .tools-table th,
+    .tools-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tools-table th {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .tools-table td {
+      color: var(--text-secondary);
+    }
+
+    .tools-table tr:hover td {
+      background: var(--bg-card);
+    }
+
+    .tool-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tool-cursor {
+      background: rgba(168, 85, 247, 0.2);
+      color: var(--accent-purple);
+    }
+
+    .tool-cli {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--accent-cyan);
+    }
+
+    /* Links */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .link-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: block;
+    }
+
+    .link-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-2px);
+    }
+
+    .link-card h4 {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .link-card p {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      overflow-x: auto;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 24px 0;
+    }
+
+    .code-block .comment {
+      color: var(--text-muted);
+    }
+
+    .code-block .highlight {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content container">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span>Personal Operating System</span>
+      </div>
+      <h1>AI-Augmented PM</h1>
+      <p class="hero-subtitle">A system for structured thinking with LLMs — augmenting depth, speed, and rigor in product management.</p>
+      <div class="hero-tagline">
+        Not about replacing PM work — it's about <em>augmenting</em> it.
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#problem">The Problem</a>
+    <a href="#philosophy">Philosophy</a>
+    <a href="#agents">Agent Modes</a>
+    <a href="#workflows">Workflows</a>
+    <a href="#tools">Tools</a>
+    <a href="#principles">Principles</a>
+    <a href="#resources">Resources</a>
+  </nav>
+
+  <!-- The Problem -->
+  <section id="problem">
+    <div class="container">
+      <h2>The Problem</h2>
+      <p class="section-subtitle">Platform PMs face a unique challenge: the truth lives in code, but strategy lives in docs.</p>
+      
+      <div class="principles-grid" style="margin-bottom: 32px;">
+        <div class="principle-card">
+          <h4>What Goes Wrong</h4>
+          <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
+            <li>Inherited teams with unclear identity</li>
+            <li>Strategy claims capabilities that don't exist</li>
+            <li>Same questions asked repeatedly</li>
+            <li>Codebase understanding takes months</li>
+            <li>Docs compete with operations</li>
+          </ul>
+        </div>
+        <div class="principle-card">
+          <h4>Traditional Approaches</h4>
+          <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8;">
+            Read docs → Form opinions → Write more docs → Hope you didn't miss something → Iterate slowly → Context lives in people's heads
+          </p>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <span class="comment">// The Opportunity: AI changes what's possible</span><br><br>
+        <span class="highlight">Without System</span> → AI writes generic docs, context lost, ad-hoc prompting<br>
+        <span class="highlight">With System</span>    → AI explores you decide, knowledge compounds, repeatable workflows
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Sources of Truth -->
+  <section id="philosophy">
+    <div class="container">
+      <h2>Four Sources of Truth</h2>
+      <p class="section-subtitle">PM work is about reconciling different sources — AI helps explore, humans decide.</p>
+      
+      <div class="sources-grid">
+        <div class="source-card">
+          <div class="source-icon">💻</div>
+          <h3>Code</h3>
+          <div class="question">"What CAN happen?"</div>
+          <p>APIs, contracts, implementations, patterns</p>
+        </div>
+        <div class="source-card">
+          <div class="source-icon">📄</div>
+          <h3>Docs</h3>
+          <div class="question">"What's EXPECTED?"</div>
+          <p>Strategy, RFCs, handovers, context</p>
+        </div>
+        <div class="source-card">
+          <div class="source-icon">📊</div>
+          <h3>Data</h3>
+          <div class="question">"What IS happening?"</div>
+          <p>Metrics, analytics, A/B tests, research</p>
+        </div>
+        <div class="source-card">
+          <div class="source-icon">🧠</div>
+          <h3>Judgment</h3>
+          <div class="question">"What SHOULD happen?"</div>
+          <p>Intuition, values, experience, priorities</p>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <span class="comment">// Where conflicts happen — the interesting part</span><br><br>
+        <span class="highlight">Code ≠ Docs</span>    → "We claim to do X but code shows Y"<br>
+        <span class="highlight">Data ≠ Docs</span>    → "Strategy says X matters, metrics show Y"<br>
+        <span class="highlight">Code ≠ Data</span>    → "Feature exists but isn't being used"<br>
+        <span class="highlight">Judgment ≠ Data</span> → "I think X, but data shows Y"
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Modes -->
+  <section id="agents">
+    <div class="container">
+      <h2>Agent Modes</h2>
+      <p class="section-subtitle">Different Claude "personalities" for different jobs — invoke by name.</p>
+      
+      <div class="agents-grid">
+        <div class="agent-card">
+          <div class="emoji">🔍</div>
+          <h4>Technical Analyst</h4>
+          <p>Explore code, find patterns, map capabilities</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">✍️</div>
+          <h4>Writer</h4>
+          <p>Draft docs, structure arguments, format output</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">😈</div>
+          <h4>Devil's Advocate</h4>
+          <p>Challenge assumptions, find weak points</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">🛠️</div>
+          <h4>Builder</h4>
+          <p>Create tools, scripts, automations</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">🤝</div>
+          <h4>Thought Partner</h4>
+          <p>Strategic dialogue, decision framing</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">📊</div>
+          <h4>Data Analyst</h4>
+          <p>Query metrics, find patterns, generate insights</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow Patterns -->
+  <section id="workflows">
+    <div class="container">
+      <h2>Workflow Patterns</h2>
+      <p class="section-subtitle">Repeatable processes for common PM tasks.</p>
+      
+      <div class="workflow-list">
+        <div class="workflow-item">
+          <div class="workflow-number">1</div>
+          <div class="workflow-content">
+            <h4>Strategic Clarity</h4>
+            <p>Define charter, value proposition, and improvement hypotheses</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">2</div>
+          <div class="workflow-content">
+            <h4>Codebase Discovery</h4>
+            <p>Map capabilities, find ownership, understand contracts</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">3</div>
+          <div class="workflow-content">
+            <h4>Architecture Analysis</h4>
+            <p>Understand systems, propose changes, evaluate tradeoffs</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">4</div>
+          <div class="workflow-content">
+            <h4>Document Production</h4>
+            <p>Create PRDs, briefs, stakeholder docs with iteration</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">5</div>
+          <div class="workflow-content">
+            <h4>Tool Building</h4>
+            <p>Create scripts, dashboards, HTML artifacts</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">6</div>
+          <div class="workflow-content">
+            <h4>Meeting Preparation</h4>
+            <p>Structure agendas, anticipate questions, draft talking points</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">7</div>
+          <div class="workflow-content">
+            <h4>Data Investigation</h4>
+            <p>Question → SQL query → analyze results → connect to strategy</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">8</div>
+          <div class="workflow-content">
+            <h4>Doc Restructuring</h4>
+            <p>Diagnose confusion, separate concerns, add structure, sync references</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools">
+    <div class="container">
+      <h2>Tool Selection</h2>
+      <p class="section-subtitle">Cursor vs Claude CLI — different tools for different jobs.</p>
+      
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Tool</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Code exploration</td>
+            <td><span class="tool-badge tool-cursor">Cursor</span></td>
+            <td>Codebase indexing, semantic search</td>
+          </tr>
+          <tr>
+            <td>Doc writing</td>
+            <td><span class="tool-badge tool-cursor">Cursor</span></td>
+            <td>File editing, preview, context</td>
+          </tr>
+          <tr>
+            <td>Strategic thinking</td>
+            <td><span class="tool-badge tool-cli">Claude CLI</span></td>
+            <td>Long conversations, no file overhead</td>
+          </tr>
+          <tr>
+            <td>Multi-step tasks</td>
+            <td><span class="tool-badge tool-cli">Claude CLI</span></td>
+            <td>Agentic mode with git, terminal access</td>
+          </tr>
+          <tr>
+            <td>Quick edits</td>
+            <td><span class="tool-badge tool-cursor">Cursor</span></td>
+            <td>Inline editing, immediate feedback</td>
+          </tr>
+          <tr>
+            <td>Tool building</td>
+            <td><span class="tool-badge tool-cursor">Cursor</span></td>
+            <td>HTML/CSS preview, iteration</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">MCP Tools (Extended Capabilities)</h3>
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Purpose</th>
+            <th>PM Use Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BigQuery / SQL</td>
+            <td>Run SQL queries</td>
+            <td>Metrics, analysis, hypothesis validation</td>
+          </tr>
+          <tr>
+            <td>text2sql</td>
+            <td>Questions → SQL</td>
+            <td>"How many users did X?" → working query</td>
+          </tr>
+          <tr>
+            <td>Google Drive</td>
+            <td>Read team docs</td>
+            <td>Pull context from shared docs/sheets</td>
+          </tr>
+          <tr>
+            <td>Code Search</td>
+            <td>Search all repos</td>
+            <td>Find patterns, usage, ownership</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section id="principles">
+    <div class="container">
+      <h2>Core Principles</h2>
+      <p class="section-subtitle">What makes this framework work.</p>
+      
+      <div class="principles-grid">
+        <div class="principle-card">
+          <h4>Human Judgment is Final</h4>
+          <p>AI explores and proposes; humans decide and prioritize. Never delegate decisions that require context or values.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Structured Knowledge Beats Chat</h4>
+          <p>Persistent documents compound value. Every conversation should produce or update an artifact.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Context is Everything</h4>
+          <p>Well-organized workspace context makes AI 10x more useful. Invest in structure upfront.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Explicit Agent Modes</h4>
+          <p>Telling AI what role to play produces better output than generic requests.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Git as AI Memory</h4>
+          <p>Your repo is persistent; chat disappears. Commit after each AI session. Diffs show what changed; branches let you experiment.</p>
+        </div>
+        <div class="principle-card">
+          <h4>Review the Diff</h4>
+          <p>Before sharing AI-assisted work, look at what actually changed. The diff is your ownership tool.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section id="resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <p class="section-subtitle">Documentation and related materials.</p>
+      
+      <div class="links-grid">
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/ai-augmented-pm-framework.md" class="link-card">
+          <h4>📖 Full Framework</h4>
+          <p>Complete documentation (~800 lines)</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/quick-reference.md" class="link-card">
+          <h4>⚡ Quick Reference</h4>
+          <p>One-page cheat sheet</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/workflows" class="link-card">
+          <h4>🔄 Workflow Guides</h4>
+          <p>Detailed workflow documentation</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" class="link-card">
+          <h4>📁 GitHub Repo</h4>
+          <p>Full source repository</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>AI-Augmented PM Framework · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · January 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -37,14 +37,16 @@ One-page cheat sheet for daily use.
 
 ## Workflow Triggers
 
-| Situation                       | Workflow           | Output                    |
-| ------------------------------- | ------------------ | ------------------------- |
-| "What does this team do?"       | Strategic Clarity  | Charter, Value Narrative  |
-| "What should we build?"         | Planning Cycle     | Roadmap, Operating Guide  |
-| "What actually exists?"         | Codebase Deep-Dive | Capability Audit          |
-| "I need a tool for X"           | Tool Building      | Working prototype         |
-| "I have a big meeting"          | Communication Prep | Talk structure, Q&A prep  |
-| "Engineers keep asking about X" | PM-Eng Bridge      | Engineering Questions doc |
+| Situation                       | Workflow            | Output                      |
+| ------------------------------- | ------------------- | --------------------------- |
+| "What does this team do?"       | Strategic Clarity   | Charter, Value Proposition  |
+| "What should we build?"         | Planning Cycle      | Roadmap, Operating Guide    |
+| "What actually exists?"         | Codebase Deep-Dive  | Capability Audit            |
+| "I need a tool for X"           | Tool Building       | Working prototype           |
+| "I have a big meeting"          | Communication Prep  | Talk structure, Q&A prep    |
+| "Engineers keep asking about X" | PM-Eng Bridge       | Engineering Questions doc   |
+| "What does the data show?"      | Data Investigation  | Metrics analysis, insights  |
+| "This doc is confusing"         | Doc Restructuring   | Cleaner doc structure       |
 
 ---
 
@@ -117,6 +119,21 @@ Help me:
 2. Anticipate their questions
 3. Prepare responses to pushback
 ```
+
+---
+
+## Git as AI Memory
+
+Your repo is persistent; chat disappears.
+
+| Practice | Why |
+| -------- | --- |
+| Commit after each session | Preserve context |
+| Use branches for exploration | Safe experimentation |
+| Review diffs before sharing | Maintain ownership |
+| Write descriptive messages | Future you will thank you |
+
+**Anti-pattern:** Long AI sessions with no commits = lost context, no rollback.
 
 ---
 

@@ -43,8 +43,12 @@ PM-AI-Partner-Framework/
 │   ├── strategic-clarity.md            # New role / team identity
 │   ├── codebase-deep-dive.md           # Reality audit
 │   └── tool-building.md                # Prototyping with AI
-└── talk/
-    └── pm-ai-partner-knowledge-sharing.md  # Presentation outline
+├── blog/
+│   └── ai-as-pm-thinking-partner.md    # Blog post (Substack/LinkedIn)
+├── talk/
+│   └── pm-ai-partner-knowledge-sharing.md  # Presentation outline
+└── site/
+    └── index.html                      # Interactive landing page
 ```
 
 ---
@@ -53,9 +57,11 @@ PM-AI-Partner-Framework/
 
 | Need                         | Start Here                               |
 | ---------------------------- | ---------------------------------------- |
+| Interactive overview         | `site/index.html`                        |
 | Full framework understanding | `framework/ai-augmented-pm-framework.md` |
 | Quick daily reference        | `framework/quick-reference.md`           |
 | Specific workflow            | `workflows/` folder                      |
+| Blog post / external sharing | `blog/` folder                           |
 | Presentation materials       | `talk/` folder                           |
 
 ---
@@ -99,6 +105,21 @@ Every PM decision reconciles different types of truth:
 | **Builder**           | Tools, prototypes    | "Build [X] with this spec..."     |
 | **Thought Partner**   | Brainstorming        | "Help me explore the space..."    |
 | **Data Analyst**      | Metrics, insights    | "Here's [data]. What patterns?"   |
+
+---
+
+## Git as AI Memory
+
+Your repo is the persistent layer; chat is ephemeral. Every meaningful AI session should produce a commit.
+
+| Practice | Why |
+| -------- | --- |
+| Commit after each session | Preserve context |
+| Use branches for exploration | Safe experimentation |
+| Review diffs before sharing | Maintain ownership |
+| Write descriptive messages | Future you will thank you |
+
+**Anti-pattern:** Long AI sessions with no commits = lost context, no rollback.
 
 ---
 

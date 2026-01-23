@@ -185,6 +185,19 @@ What doesn't work:
 | Skip codebase grounding   | Strategy disconnected from reality     |
 | Use AI for judgment calls | Can't know your organizational context |
 | One mega-prompt           | Iterative works better                 |
+| Long sessions, no commits | Lost context, no rollback, invisible changes |
+
+### Git as AI Memory
+
+One practice that's become essential: **treat git as your AI memory.**
+
+Chat sessions disappear. But if you commit after each meaningful AI interaction, you get:
+- **Diffs** showing exactly what AI changed vs. what you wrote
+- **Branches** for safe experimentation
+- **History** as an audit trail
+- **Rollback** when AI makes things worse
+
+The pattern: branch for exploration, commit after each iteration, review the diff before sharing.
 
 The key mistakes are expecting AI to replace your judgment or accepting outputs without critical review. AI amplifies your preparation — garbage in, garbage out.
 
