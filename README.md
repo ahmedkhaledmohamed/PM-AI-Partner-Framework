@@ -38,6 +38,7 @@ This is not about having AI write your work — it's about **thinking more rigor
 ```
 PM-AI-Partner-Framework/
 ├── README.md                           # You are here
+├── getting-started.md                  # Setup guide (start here!)
 ├── framework/
 │   ├── ai-augmented-pm-framework.md    # Complete framework (main doc)
 │   └── quick-reference.md              # One-page cheat sheet
@@ -59,7 +60,8 @@ PM-AI-Partner-Framework/
 
 | Need                         | Start Here                               |
 | ---------------------------- | ---------------------------------------- |
-| Interactive overview         | `docs/index.html`                        |
+| **Set up on your machine**   | [`getting-started.md`](getting-started.md) ⬅️ Start here |
+| Interactive overview         | [`docs/index.html`](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/) |
 | Full framework understanding | `framework/ai-augmented-pm-framework.md` |
 | Quick daily reference        | `framework/quick-reference.md`           |
 | Specific workflow            | `workflows/` folder                      |
