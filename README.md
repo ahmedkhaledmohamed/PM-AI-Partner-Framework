@@ -2,6 +2,8 @@
 
 A framework for using AI (Claude) as a Product Management thinking partner.
 
+![AI-Augmented PM Framework](docs/images/framework-diagram.png)
+
 ---
 
 ## Author
