@@ -242,7 +242,78 @@ claude auth
 
 ---
 
-## Step 8: Test Your Setup
+## Step 8: Learn the Agent Modes
+
+The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
+
+| Mode | When to Use | How to Invoke |
+|------|-------------|---------------|
+| **Technical Analyst** | Exploring code, mapping capabilities | "Act as a Technical Analyst. Examine [X] systematically." |
+| **Writer** | Drafting docs, structuring arguments | "Help me write a clear [doc type] for [audience]." |
+| **Devil's Advocate** | Stress-testing ideas, finding gaps | "Challenge this. Role-play as a skeptical [stakeholder]." |
+| **Builder** | Creating tools, scripts, prototypes | "Build [X] with this spec: [requirements]" |
+| **Thought Partner** | Brainstorming, exploring options | "Help me explore [space]. What am I not considering?" |
+| **Data Analyst** | Analyzing metrics, finding patterns | "Here's [data]. What patterns? What hypotheses?" |
+
+### Try Each Mode
+```
+# Technical Analyst
+"Act as a Technical Analyst. Map all the API endpoints in the backend/ folder."
+
+# Writer  
+"Help me write a one-page charter for my team. Audience: leadership."
+
+# Devil's Advocate
+"I want to propose we rebuild the auth system. Challenge this decision."
+
+# Builder
+"Build me a simple HTML dashboard that displays [metrics]."
+
+# Thought Partner
+"I'm trying to decide between option A and B. Help me think through tradeoffs."
+
+# Data Analyst
+"Here's our monthly active users by platform. What trends do you see?"
+```
+
+---
+
+## Step 9: Learn the Workflow Patterns
+
+The framework includes eight repeatable workflows for common PM tasks:
+
+| # | Workflow | When to Use | Key Output |
+|---|----------|-------------|------------|
+| 1 | **Strategic Clarity** | New role, unclear team identity | Charter, Value Proposition |
+| 2 | **Planning Cycle** | Quarterly/sprint planning | Roadmap, Priorities |
+| 3 | **Codebase Discovery** | Understanding what exists | Capability Audit |
+| 4 | **Tool Building** | Need internal tools | Working Prototype |
+| 5 | **Communication Prep** | Big meetings, presentations | Talk Structure, Q&A Prep |
+| 6 | **PM-Eng Bridge** | Translating code ↔ product | Engineering Questions Doc |
+| 7 | **Data Investigation** | Metrics analysis | Insights, Hypotheses |
+| 8 | **Doc Restructuring** | Confusing documentation | Cleaner Structure |
+
+### Try a Workflow
+
+**Example: Strategic Clarity Workflow**
+```
+1. Start with: "I need to define what my team does. Help me create a charter."
+
+2. AI will ask clarifying questions about:
+   - What systems you own
+   - Who your users are
+   - What makes you different from adjacent teams
+
+3. Iterate through drafts until you have a clear one-pager.
+
+4. Save to: sandbox/strategy/team-charter.md
+```
+
+See detailed workflow guides in [`workflows/`](workflows/).
+
+---
+
+## Step 10: Test Your Setup
 
 ### Test 1: Codebase Search
 In Cursor chat:
@@ -253,6 +324,9 @@ In Cursor chat:
 
 ### Test 3: Agent Mode
 > "Act as a Devil's Advocate. Challenge my assumption that [X]."
+
+### Test 4: Workflow
+> "I'm new to this team. Help me run the Strategic Clarity workflow to define our charter."
 
 ---
 
