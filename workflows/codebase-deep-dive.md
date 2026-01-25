@@ -331,5 +331,5 @@ Help me create a phased approach:
 
 ---
 
-_Related: [Full Framework](../framework/ai-augmented-pm-framework.md)_
+_Related: [Full Framework](../framework/pm-ai-partner-framework.md)_
 
