@@ -1,4 +1,4 @@
-# AI-Augmented Product Management Framework
+# PM AI Partner Framework
 
 ## A System for Structured Thinking with LLMs
 

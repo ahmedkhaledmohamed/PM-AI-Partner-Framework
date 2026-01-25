@@ -1,6 +1,6 @@
 # Talk Materials
 
-Resources for presenting the AI-Augmented PM Framework.
+Resources for presenting the PM AI Partner Framework.
 
 ---
 
@@ -40,5 +40,5 @@ Resources for presenting the AI-Augmented PM Framework.
 
 ---
 
-_Back to: [Framework](../framework/ai-augmented-pm-framework.md)_
+_Back to: [Framework](../framework/pm-ai-partner-framework.md)_
 

@@ -1,4 +1,4 @@
-# Quick Reference: AI-Augmented PM
+# Quick Reference: PM AI Partner
 
 One-page cheat sheet for daily use.
 
@@ -182,4 +182,4 @@ End of day:
 
 ---
 
-_Full framework: [`ai-augmented-pm-framework.md`](ai-augmented-pm-framework.md)_
+_Full framework: [`pm-ai-partner-framework.md`](pm-ai-partner-framework.md)_

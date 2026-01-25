@@ -2,7 +2,7 @@
 
 A framework for using AI (Claude) as a Product Management thinking partner.
 
-![AI-Augmented PM Framework](docs/images/framework-diagram.png)
+![PM AI Partner Framework](docs/images/framework-diagram.png)
 
 ---
 
@@ -40,7 +40,7 @@ PM-AI-Partner-Framework/
 ├── README.md                           # You are here
 ├── getting-started.md                  # Setup guide (start here!)
 ├── framework/
-│   ├── ai-augmented-pm-framework.md    # Complete framework (main doc)
+│   ├── pm-ai-partner-framework.md      # Complete framework (main doc)
 │   └── quick-reference.md              # One-page cheat sheet
 ├── workflows/
 │   ├── strategic-clarity.md            # New role / team identity
@@ -62,7 +62,7 @@ PM-AI-Partner-Framework/
 | ---------------------------- | ---------------------------------------- |
 | **Set up on your machine**   | [`getting-started.md`](getting-started.md) ⬅️ Start here |
 | Interactive overview         | [`docs/index.html`](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/) |
-| Full framework understanding | `framework/ai-augmented-pm-framework.md` |
+| Full framework understanding | `framework/pm-ai-partner-framework.md`   |
 | Quick daily reference        | `framework/quick-reference.md`           |
 | Specific workflow            | `workflows/` folder                      |
 | Blog post / external sharing | `blog/` folder                           |
