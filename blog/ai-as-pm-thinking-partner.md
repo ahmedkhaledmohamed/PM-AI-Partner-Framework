@@ -229,9 +229,11 @@ The goal isn't to have AI write your documents. It's to think more rigorously, c
 
 I've open-sourced the full framework:
 
-- **GitHub:** [PM-AI-Partner-Framework](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
-- **Quick Reference:** One-page cheat sheet
-- **Workflow Templates:** Step-by-step guides for common scenarios
+- 🌐 **Website:** [PM AI Partner Framework](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/)
+- 💻 **GitHub:** [PM-AI-Partner-Framework](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
+- 🎤 **Presentation:** [Slide deck for sharing](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/presentations/pm-ai-partner-framework.html)
+- ⚡ **Quick Reference:** One-page cheat sheet
+- 🚀 **Getting Started:** 30-minute setup guide
 
 ---
 
