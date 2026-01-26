@@ -101,6 +101,8 @@ Every PM decision reconciles different types of truth:
 
 ## Six Agent Modes
 
+![Six Agent Modes Diagram](docs/images/agent-modes-diagram.png)
+
 | Mode                  | When to Use          | Prompt Prefix                     |
 | --------------------- | -------------------- | --------------------------------- |
 | **Technical Analyst** | Codebase exploration | "Act as a rigorous analyst..."    |
