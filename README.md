@@ -9,7 +9,7 @@ A framework for using AI (Claude) as a Product Management thinking partner.
 ## Author
 
 **Ahmed Khaled**  
-Product Manager, Client Messaging @ Spotify  
+Product Manager, Messaging Platform @ Spotify  
 Building messaging infrastructure serving 700M+ MAU
 
 ---

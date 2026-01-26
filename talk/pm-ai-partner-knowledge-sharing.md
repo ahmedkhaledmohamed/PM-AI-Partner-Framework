@@ -3,7 +3,7 @@
 ## How I Use Claude to Think More Rigorously
 
 **Author:** Ahmed Khaled  
-**Role:** Product Manager, Client Messaging @ Spotify  
+**Role:** Product Manager, Messaging Platform @ Spotify  
 **Format:** 30-45 minute talk + Q&A  
 **Audience:** PMs, tech leads, anyone interested in AI-augmented workflows
 
