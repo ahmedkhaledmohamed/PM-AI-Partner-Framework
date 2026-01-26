@@ -272,6 +272,8 @@ claude auth
 
 The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
 
+![Six Agent Modes Diagram](docs/images/agent-modes-diagram.png)
+
 | Mode                  | When to Use                          | How to Invoke                                             |
 | --------------------- | ------------------------------------ | --------------------------------------------------------- |
 | **Technical Analyst** | Exploring code, mapping capabilities | "Act as a Technical Analyst. Examine [X] systematically." |
