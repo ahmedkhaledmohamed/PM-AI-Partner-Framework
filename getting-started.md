@@ -7,13 +7,36 @@ A step-by-step guide to set up AI-augmented PM workflows on your machine.
 
 ---
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Install Cursor IDE](#step-1-install-cursor-ide)
+3. [Configure Claude](#step-2-configure-claude-in-cursor)
+4. [Install MCP Tools](#step-3-install-mcp-tools-optional-but-recommended)
+5. [Set Up Your Workspace](#step-4-set-up-your-workspace)
+6. [Create CLAUDE.md Files](#step-5-create-claudemd-files)
+7. [Bootstrap the AI](#step-6-bootstrap-the-ai-with-framework-context)
+8. [Learn the Agent Modes](#step-7-learn-the-agent-modes)
+9. [Learn the Workflow Patterns](#step-8-learn-the-workflow-patterns)
+10. [Test Your Setup](#step-9-test-your-setup)
+
+---
+
 ## Prerequisites
 
 Before you start, ensure you have:
 
 - [ ] macOS (this guide is Mac-focused; adapt for Linux/Windows)
 - [ ] Basic familiarity with terminal/command line
-- [ ] Git installed
+- [ ] Git installed (`git --version` to check)
+
+### Already Have These?
+
+| Tool | Check Command | Skip To |
+|------|---------------|---------|
+| Git | `git --version` | Step 1 |
+| Cursor | `cursor --version` | Step 2 |
+| MCP configured | Check `~/.cursor/mcp.json` | Step 4 |
 
 ---
 
@@ -28,7 +51,6 @@ Cursor is VS Code with built-in AI capabilities.
 ### Verify Installation
 
 ```bash
-# Cursor should be accessible from terminal
 cursor --version
 ```
 
@@ -106,45 +128,75 @@ In Cursor chat, ask: "What MCP tools do you have access to?"
 
 ## Step 4: Set Up Your Workspace
 
-### 4.1 Create a Workspace Directory
+The recommended setup uses **three core repos** plus any dependencies you need.
 
-```bash
-mkdir -p ~/Developer/MyProject
-cd ~/Developer/MyProject
+### 4.1 The Three Core Repos
+
+| Repo | Purpose | Visibility |
+|------|---------|------------|
+| **Sandbox** | Personal working space — drafts, analysis, planning | **Private** |
+| **Product-catalog** | Team artifacts — polished specs, docs, presentations | Team/Public |
+| **Framework** | Fork of PM AI Partner Framework — methodology reference | Private/Public |
+
+### 4.2 Recommended Directory Structure
+
+```
+~/Developer/
+├── my-sandbox/                  # Private: your personal drafts, analysis, planning
+│   ├── strategy/
+│   ├── analysis/
+│   ├── planning/
+│   └── context/
+├── team-product-catalog/        # Team: polished artifacts for sharing
+├── pm-ai-partner-framework/     # Forked: methodology, agent modes, workflows
+└── [dependencies]/              # Cloned as needed for your work
+    ├── frontend/
+    ├── backend/
+    └── docs/
 ```
 
-### 4.2 Clone Relevant Repos
-
-Clone the repos you work with:
+### 4.3 Create Your Workspace
 
 ```bash
-# Example: clone your team's repos
+# Create the base directory
+mkdir -p ~/Developer
+cd ~/Developer
+
+# Create your sandbox
+mkdir -p my-sandbox/{strategy,analysis,planning,context}
+cd my-sandbox
+git init
+echo "# My Sandbox" > README.md
+git add . && git commit -m "Initial structure"
+
+# Create your product catalog
+cd ~/Developer
+mkdir -p team-product-catalog
+cd team-product-catalog
+git init
+echo "# Product Catalog" > README.md
+git add . && git commit -m "Initial commit"
+
+# Fork and clone this framework
+# 1. Fork this repo on GitHub: https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
+# 2. Clone your fork:
+cd ~/Developer
+git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git pm-ai-partner-framework
+
+# Clone dependencies as needed
 git clone git@github.com:your-org/backend.git
 git clone git@github.com:your-org/frontend.git
-git clone git@github.com:your-org/docs.git
 ```
 
-### 4.3 Create Your Working Folders
+### 4.4 Why Three Repos?
 
-```bash
-mkdir -p sandbox/{strategy,analysis,planning,context}
-mkdir -p product-catalog
-```
+| Repo | Why Separate? |
+|------|---------------|
+| **Sandbox** | Private space for messy drafts — you control visibility |
+| **Product-catalog** | Team ownership — others can contribute and review |
+| **Framework** | Fork lets you customize while pulling updates from upstream |
 
-### Your workspace should look like:
-
-```
-~/Developer/MyProject/
-├── backend/          # Codebase
-├── frontend/         # Codebase
-├── docs/             # Team docs
-├── sandbox/          # Your working space
-│   ├── strategy/     # Strategy docs
-│   ├── analysis/     # Deep dives
-│   ├── planning/     # Roadmaps, priorities
-│   └── context/      # Historical docs, handovers
-└── product-catalog/  # Polished artifacts for sharing
-```
+> **Tip:** Keep your Sandbox private. Move polished artifacts to Product-catalog when ready to share.
 
 ---
 
@@ -155,7 +207,7 @@ CLAUDE.md files give AI context about your workspace. Create one at the root:
 ### Root CLAUDE.md
 
 ```bash
-touch ~/Developer/MyProject/CLAUDE.md
+touch ~/Developer/my-sandbox/CLAUDE.md
 ```
 
 Add this content:
@@ -164,62 +216,39 @@ Add this content:
 # Project Context
 
 ## What This Is
-
 [Brief description of your team/project]
 
 ## Directory Structure
-
-- `backend/` — Backend services
-- `frontend/` — Frontend code
-- `docs/` — Team docs
-- `sandbox/` — My working space for drafts and analysis
-- `product-catalog/` — Polished artifacts for team sharing
+- `strategy/` — Team mission, charter, value narrative
+- `analysis/` — Codebase audits, capability assessments
+- `planning/` — Roadmaps, priorities, planning docs
+- `context/` — Handovers, historical decisions
 
 ## Key Contacts
-
 - PM: [you]
 - EM: [name]
 - Tech Lead: [name]
 
 ## Current Focus
-
 [What you're working on this quarter]
 
 ## How to Help
-
 When I ask about:
-
-- Code questions → Look in backend/ and frontend/
-- Strategy → Look in sandbox/strategy/
-- Historical context → Look in sandbox/context/
+- Strategy → Look in strategy/
+- Historical context → Look in context/
 ```
 
 ### Sandbox CLAUDE.md
-
-Create a more specific context file for your sandbox:
-
-```bash
-touch ~/Developer/MyProject/sandbox/CLAUDE.md
-```
 
 ```markdown
 # Sandbox: Working Space
 
 This folder contains my drafts, analysis, and planning docs.
 
-## Subfolders
-
-- `strategy/` — Team mission, charter, value narrative
-- `analysis/` — Codebase audits, capability assessments
-- `planning/` — Roadmaps, priorities, planning docs
-- `context/` — Handovers, historical decisions
-
 ## Document Status
-
 Files here are drafts unless marked [FINAL].
 
 ## When Editing
-
 - Preserve existing structure
 - Add to existing docs rather than creating new ones
 - Use markdown tables for comparisons
@@ -227,48 +256,60 @@ Files here are drafts unless marked [FINAL].
 
 ---
 
-## Step 6: Open in Cursor
+## Step 6: Bootstrap the AI with Framework Context
 
-```bash
-cursor ~/Developer/MyProject
+Before using the agent modes and workflows, introduce the framework to your AI assistant. This helps Claude understand the methodology and provide better responses.
+
+### 6.1 Why Bootstrap?
+
+The AI doesn't automatically know about the PM AI Partner Framework. By pointing it at the framework docs, you help it:
+- Understand the six agent modes
+- Know the eight workflow patterns
+- Apply the "Four Sources of Truth" philosophy
+- Use consistent terminology and approaches
+
+### 6.2 How to Bootstrap
+
+Open your forked `pm-ai-partner-framework/` folder in Cursor, then in the AI chat:
+
+**Option 1: Full onboarding**
+```
+Read through the framework/ folder. Understand the agent modes, 
+workflow patterns, and philosophy. Summarize what you learned.
 ```
 
-### Let Cursor Index Your Codebase
+**Option 2: Quick intro**
+```
+I'm using the PM AI Partner Framework. Before we start, 
+familiarize yourself with the workflows/ folder and the 
+six agent modes in framework/pm-ai-partner-framework.md.
+```
 
-1. Cursor will automatically start indexing
-2. Wait for indexing to complete (check status bar)
-3. Once done, you can use semantic search across all files
+**Option 3: Session reminder**
+```
+I work with the PM AI Partner Framework. Key concepts:
+- Four Sources of Truth: Code, Docs, Data, Judgment
+- Six Agent Modes: Technical Analyst, Writer, Devil's Advocate, Builder, Thought Partner, Data Analyst
+- Judgment stays human — you help explore, I decide.
+
+Let's begin.
+```
+
+### 6.3 Verify Understanding
+
+Ask Claude to confirm:
+```
+What are the six agent modes in the PM AI Partner Framework? 
+When would I use each one?
+```
+
+Claude should list all six modes with their purposes. If not, point it at the framework docs again.
+
+> **Tip:** You don't need to bootstrap every session. Once Claude has read the framework in a workspace, it retains context within that session. For new sessions, a quick reminder (Option 3) is often enough.
 
 ---
 
-## Step 7: Install Claude CLI (Optional)
-
-For autonomous multi-step tasks:
-
-```bash
-# Install via npm
-npm install -g @anthropic-ai/claude-cli
-
-# Or via Homebrew
-brew install claude-cli
-
-# Authenticate
-claude auth
-```
-
-### When to Use CLI vs Cursor
-
-| Task                         | Tool       |
-| ---------------------------- | ---------- |
-| Interactive exploration      | Cursor     |
-| Doc writing with preview     | Cursor     |
-| Multi-file refactoring       | Claude CLI |
-| Long strategic conversations | Claude CLI |
-| Autonomous tasks             | Claude CLI |
-
----
-
-## Step 8: Learn the Agent Modes
+## Step 7: Learn the Agent Modes
 
 The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
 
@@ -307,7 +348,7 @@ The framework uses six "agent modes" — different AI personalities for differen
 
 ---
 
-## Step 9: Learn the Workflow Patterns
+## Step 8: Learn the Workflow Patterns
 
 The framework includes eight repeatable workflows for common PM tasks:
 
@@ -343,7 +384,7 @@ See detailed workflow guides in [`workflows/`](workflows/).
 
 ---
 
-## Step 10: Test Your Setup
+## Step 9: Test Your Setup
 
 ### Test 1: Codebase Search
 
@@ -362,6 +403,33 @@ In Cursor chat:
 ### Test 4: Workflow
 
 > "I'm new to this team. Help me run the Strategic Clarity workflow to define our charter."
+
+---
+
+## Optional: Install Claude CLI
+
+For autonomous multi-step tasks:
+
+```bash
+# Install via npm
+npm install -g @anthropic-ai/claude-cli
+
+# Or via Homebrew
+brew install claude-cli
+
+# Authenticate
+claude auth
+```
+
+### When to Use CLI vs Cursor
+
+| Task                         | Tool       |
+| ---------------------------- | ---------- |
+| Interactive exploration      | Cursor     |
+| Doc writing with preview     | Cursor     |
+| Multi-file refactoring       | Claude CLI |
+| Long strategic conversations | Claude CLI |
+| Autonomous tasks             | Claude CLI |
 
 ---
 
