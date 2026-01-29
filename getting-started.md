@@ -433,6 +433,58 @@ claude auth
 
 ---
 
+## Optional: Deploy Static Sites
+
+As a PM, you'll often build dashboards, documentation sites, or presentation pages. Here's how to deploy them for free.
+
+### Option 1: GitHub Pages (Recommended)
+
+Deploy directly from your repo — perfect for documentation and simple sites.
+
+1. **Create a `docs/` folder** in your repo with your site files
+2. **Go to repo Settings** → **Pages**
+3. **Set Source** to "Deploy from a branch" → select `main` → `/docs`
+4. Your site will be at: `https://username.github.io/repo-name/`
+
+```bash
+# Example: Deploy your framework site
+mkdir -p docs
+cp -r site/* docs/
+git add docs && git commit -m "Add site for GitHub Pages"
+git push
+```
+
+### Option 2: Netlify (One-Click Deploy)
+
+Best for SPAs and sites with build steps.
+
+1. Go to [netlify.com](https://netlify.com) and sign in with GitHub
+2. Click **"Add new site"** → **"Import an existing project"**
+3. Select your repo
+4. Set build command (e.g., `npm run build`) and publish directory (e.g., `build/`)
+5. Click **Deploy**
+
+Your site gets a URL like: `https://your-site.netlify.app`
+
+### Option 3: Vercel (Great for React/Next.js)
+
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click **"Add New Project"**
+3. Import your repo
+4. Vercel auto-detects framework and deploys
+
+Your site gets a URL like: `https://your-site.vercel.app`
+
+### Quick Comparison
+
+| Platform | Best For | Build Support | Custom Domain |
+|----------|----------|---------------|---------------|
+| **GitHub Pages** | Static HTML, docs | Limited | Yes (free) |
+| **Netlify** | SPAs, JAMstack | Yes | Yes (free) |
+| **Vercel** | React, Next.js | Yes | Yes (free) |
+
+---
+
 ## Troubleshooting
 
 ### MCP Tools Not Showing
