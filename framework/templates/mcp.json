@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "bigquery-mcp": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/bigquery-mcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/your/credentials.json"
+      },
+      "disabled": true
+    },
+    "text2sql-mcp": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/text2sql-mcp"],
+      "disabled": true
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/google-drive-mcp"],
+      "disabled": true
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allowed/directory"],
+      "disabled": true
+    }
+  }
+}

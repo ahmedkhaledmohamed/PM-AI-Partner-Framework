@@ -31,5 +31,5 @@ Specific, step-by-step guides for common PM tasks with AI assistance.
 
 ---
 
-_Back to: [Framework Overview](../framework/pm-ai-partner-framework.md) | [Quick Reference](../framework/quick-reference.md)_
+_Back to: [Framework Overview](../pm-ai-partner-framework.md) | [Quick Reference](../quick-reference.md)_
 

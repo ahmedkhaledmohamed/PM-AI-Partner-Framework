@@ -1,0 +1,18 @@
+# Ignore sensitive or personal files
+*.private.md
+*-private.md
+private/
+secrets/
+
+# Ignore large data files
+*.csv
+*.json
+!_examples/*.json
+
+# Ignore temp files
+*.tmp
+*.bak
+.DS_Store
+
+# Keep example files
+!_examples/
