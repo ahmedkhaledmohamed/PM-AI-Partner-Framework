@@ -2,12 +2,42 @@
 
 A step-by-step guide to set up AI-augmented PM workflows on your machine.
 
-**Time required:** ~30-60 minutes  
+**Time required:** ~30-60 minutes
 **Difficulty:** Beginner-friendly
 
 ---
 
-## Table of Contents
+## Quick Start (15 minutes)
+
+Already familiar with the concepts? Here's the fast path:
+
+```bash
+# 1. Fork and clone
+git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git
+cd PM-AI-Partner-Framework
+
+# 2. Copy templates to your workspace
+mkdir -p ~/your-workspace/sandbox ~/your-workspace/product-catalog
+cp framework/templates/CLAUDE.md ~/your-workspace/
+cp framework/templates/CLAUDE-sandbox.md ~/your-workspace/sandbox/CLAUDE.md
+cp framework/templates/CLAUDE-product-catalog.md ~/your-workspace/product-catalog/CLAUDE.md
+
+# 3. (Optional) Set up MCP
+mkdir -p ~/.cursor
+cp framework/templates/mcp.json ~/.cursor/
+# Edit ~/.cursor/mcp.json with your credentials
+
+# 4. Open in Cursor and start working
+cursor ~/your-workspace
+```
+
+Then try: "I'm using the PM AI Partner Framework. Help me create a team charter."
+
+---
+
+## Full Setup Guide
+
+### Table of Contents
 
 1. [Prerequisites](#prerequisites)
 2. [Install Cursor IDE](#step-1-install-cursor-ide)
@@ -280,9 +310,9 @@ workflow patterns, and philosophy. Summarize what you learned.
 
 **Option 2: Quick intro**
 ```
-I'm using the PM AI Partner Framework. Before we start, 
-familiarize yourself with the workflows/ folder and the 
-six agent modes in framework/pm-ai-partner-framework.md.
+I'm using the PM AI Partner Framework. Before we start,
+familiarize yourself with framework/core/workflows/ and the
+six agent modes in framework/core/pm-ai-partner-framework.md.
 ```
 
 **Option 3: Session reminder**
@@ -380,7 +410,7 @@ The framework includes eight repeatable workflows for common PM tasks:
 4. Save to: sandbox/strategy/team-charter.md
 ```
 
-See detailed workflow guides in [`workflows/`](workflows/).
+See detailed workflow guides in [`framework/core/workflows/`](framework/core/workflows/).
 
 ---
 
@@ -507,10 +537,11 @@ Your site gets a URL like: `https://your-site.vercel.app`
 
 ## Next Steps
 
-1. **Read the full framework:** [`framework/pm-ai-partner-framework.md`](framework/pm-ai-partner-framework.md)
-2. **Try a workflow:** Start with [Strategic Clarity](workflows/strategic-clarity.md)
-3. **Customize your CLAUDE.md:** Add team-specific context
-4. **Commit your setup:** Use git to track your sandbox
+1. **Read the full framework:** [`framework/core/pm-ai-partner-framework.md`](framework/core/pm-ai-partner-framework.md)
+2. **Try a workflow:** Start with [Strategic Clarity](framework/core/workflows/strategic-clarity.md)
+3. **Copy starter prompts:** [`framework/core/starter-prompts.md`](framework/core/starter-prompts.md)
+4. **Customize your CLAUDE.md:** Add team-specific context
+5. **Commit your setup:** Use git to track your sandbox
 
 ---
 

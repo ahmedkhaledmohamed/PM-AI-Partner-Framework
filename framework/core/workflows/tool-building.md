@@ -343,5 +343,5 @@ Add the necessary configuration for [deployment target].
 
 ---
 
-_Related: [Full Framework](../framework/pm-ai-partner-framework.md)_
+_Related: [Full Framework](../pm-ai-partner-framework.md)_
 

@@ -1,29 +1,67 @@
-# PM-AI-Partner-Framework
+# PM AI Partner Framework
 
 A framework for using AI (Claude) as a Product Management thinking partner.
+
+**Fork this repo. Customize it. Start working.**
 
 ![PM AI Partner Framework](docs/images/framework-diagram.png)
 
 ---
 
-## Author
+## Quick Start
 
-**Ahmed Khaled**  
-Product Manager, Messaging Platform @ Spotify  
-Building messaging infrastructure serving 700M+ MAU
+```bash
+# 1. Fork this repo on GitHub
+# 2. Clone your fork
+git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git
+cd PM-AI-Partner-Framework
+
+# 3. Copy templates to your workspace
+cp framework/templates/CLAUDE.md ~/your-workspace/
+cp framework/templates/CLAUDE-sandbox.md ~/your-workspace/sandbox/CLAUDE.md
+
+# 4. Start using the framework
+# Open in Cursor/VS Code and start iterating with AI
+```
 
 ---
 
 ## What This Is
 
-This is my **personal operating system** for AI-augmented product management. It documents:
+This is a **template repository** for AI-augmented product management. It provides:
 
-- **How I think with AI** — The collaboration model
-- **Workflow patterns** — Repeatable processes for common PM tasks
-- **Agent modes** — Different AI "personalities" for different jobs
-- **Templates** — Starting points for common artifacts
+- **Structured workspace** - sandbox for drafts, product-catalog for polished work
+- **Agent modes** - Six AI "personalities" for different tasks
+- **Workflow patterns** - Step-by-step guides for common PM scenarios
+- **Config templates** - CLAUDE.md files, MCP configs, Cursor rules
 
-This is not about having AI write your work — it's about **thinking more rigorously** with AI assistance.
+**This is not about having AI write your work. It's about thinking more rigorously.**
+
+---
+
+## Repository Structure
+
+```
+pm-ai-partner-framework/
+├── CLAUDE.md                    # Root workspace context
+├── sandbox/                     # Personal drafts & exploration
+│   ├── CLAUDE.md
+│   └── _examples/
+├── product-catalog/             # Polished, shareable work
+│   ├── CLAUDE.md
+│   └── _examples/
+├── framework/
+│   ├── core/                    # Methodology
+│   │   ├── pm-ai-partner-framework.md   # Full framework doc
+│   │   ├── quick-reference.md           # One-page cheat sheet
+│   │   ├── starter-prompts.md           # Copy-paste prompts
+│   │   └── workflows/                   # Step-by-step guides
+│   └── templates/               # Config files to copy
+│       ├── CLAUDE.md            # Workspace template
+│       ├── mcp.json             # MCP configuration
+│       └── cursorrules.txt      # Cursor IDE rules
+└── docs/                        # GitHub Pages site
+```
 
 ---
 
@@ -31,71 +69,12 @@ This is not about having AI write your work — it's about **thinking more rigor
 
 > **PM work is reconciling four sources of truth. AI helps you explore each faster and spot conflicts. Judgment stays human.**
 
----
-
-## What's Here
-
-```
-PM-AI-Partner-Framework/
-├── README.md                           # You are here
-├── getting-started.md                  # Setup guide (start here!)
-├── framework/
-│   ├── pm-ai-partner-framework.md      # Complete framework (main doc)
-│   └── quick-reference.md              # One-page cheat sheet
-├── workflows/
-│   ├── strategic-clarity.md            # New role / team identity
-│   ├── codebase-deep-dive.md           # Reality audit
-│   └── tool-building.md                # Prototyping with AI
-├── blog/
-│   └── ai-as-pm-thinking-partner.md    # Blog post (Substack/LinkedIn)
-├── talk/
-│   └── pm-ai-partner-knowledge-sharing.md  # Presentation outline
-└── docs/
-    └── index.html                      # Interactive landing page (GitHub Pages)
-```
-
----
-
-## Quick Start
-
-| Need                         | Start Here                               |
-| ---------------------------- | ---------------------------------------- |
-| **Set up on your machine**   | [`getting-started.md`](getting-started.md) ⬅️ Start here |
-| Interactive overview         | [`docs/index.html`](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/) |
-| Full framework understanding | `framework/pm-ai-partner-framework.md`   |
-| Quick daily reference        | `framework/quick-reference.md`           |
-| Specific workflow            | `workflows/` folder                      |
-| Blog post / external sharing | `blog/` folder                           |
-| Presentation materials       | `talk/` folder                           |
-
----
-
-## Four Sources of Truth
-
-Every PM decision reconciles different types of truth:
-
-```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
-│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
-│             │  │             │  │             │  │             │
-│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
-│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                │                │                │
-       └────────────────┴────────┬───────┴────────────────┘
-                                 ▼
-                    ┌─────────────────────┐
-                    │    RECONCILIATION   │
-                    └─────────────────────┘
-```
-
-| Source       | Question Answered     |
-| ------------ | --------------------- |
-| **Code**     | "What CAN happen?"    |
-| **Docs**     | "What's EXPECTED?"    |
-| **Data**     | "What IS happening?"  |
-| **Judgment** | "What SHOULD happen?" |
+| Source | Question | AI Role |
+|--------|----------|---------|
+| **Code** | "What CAN happen?" | Explore, map |
+| **Docs** | "What's EXPECTED?" | Synthesize |
+| **Data** | "What IS happening?" | Analyze |
+| **Judgment** | "What SHOULD happen?" | Challenge |
 
 ---
 
@@ -103,14 +82,39 @@ Every PM decision reconciles different types of truth:
 
 ![Six Agent Modes Diagram](docs/images/agent-modes-diagram.png)
 
-| Mode                  | When to Use          | Prompt Prefix                     |
-| --------------------- | -------------------- | --------------------------------- |
-| **Technical Analyst** | Codebase exploration | "Act as a rigorous analyst..."    |
-| **Writer**            | Strategy docs        | "Help me write a clear..."        |
-| **Devil's Advocate**  | Stress-testing       | "Challenge this. Role-play as..." |
-| **Builder**           | Tools, prototypes    | "Build [X] with this spec..."     |
-| **Thought Partner**   | Brainstorming        | "Help me explore the space..."    |
-| **Data Analyst**      | Metrics, insights    | "Here's [data]. What patterns?"   |
+| Mode | When to Use | Prompt Prefix |
+|------|-------------|---------------|
+| **Technical Analyst** | Codebase exploration | "Act as a rigorous analyst..." |
+| **Writer** | Strategy docs | "Help me write a clear..." |
+| **Devil's Advocate** | Stress-testing | "Challenge this. Role-play as..." |
+| **Builder** | Tools, prototypes | "Build [X] with this spec..." |
+| **Thought Partner** | Brainstorming | "Help me explore the space..." |
+| **Data Analyst** | Metrics, insights | "Here's [data]. What patterns?" |
+
+See [starter-prompts.md](framework/core/starter-prompts.md) for copy-paste prompts.
+
+---
+
+## Workflows
+
+| Scenario | Workflow | Output |
+|----------|----------|--------|
+| New role, unclear identity | [Strategic Clarity](framework/core/workflows/strategic-clarity.md) | Charter, Value Proposition |
+| Understanding what exists | [Codebase Deep-Dive](framework/core/workflows/codebase-deep-dive.md) | Capability Audit |
+| Building internal tools | [Tool Building](framework/core/workflows/tool-building.md) | Working Prototype |
+
+---
+
+## Getting Started
+
+| Need | Go Here |
+|------|---------|
+| **Set up on your machine** | [getting-started.md](getting-started.md) |
+| **Full framework understanding** | [framework/core/pm-ai-partner-framework.md](framework/core/pm-ai-partner-framework.md) |
+| **Quick daily reference** | [framework/core/quick-reference.md](framework/core/quick-reference.md) |
+| **Copy-paste prompts** | [framework/core/starter-prompts.md](framework/core/starter-prompts.md) |
+| **Config templates** | [framework/templates/](framework/templates/) |
+| **Interactive overview** | [docs/index.html](https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/) |
 
 ---
 
@@ -119,36 +123,23 @@ Every PM decision reconciles different types of truth:
 Your repo is the persistent layer; chat is ephemeral. Every meaningful AI session should produce a commit.
 
 | Practice | Why |
-| -------- | --- |
+|----------|-----|
 | Commit after each session | Preserve context |
 | Use branches for exploration | Safe experimentation |
 | Review diffs before sharing | Maintain ownership |
 | Write descriptive messages | Future you will thank you |
 
-**Anti-pattern:** Long AI sessions with no commits = lost context, no rollback.
-
 ---
 
-## Background
+## Author
 
-I developed this framework while building clarity for a platform team at Spotify. The team had strong engineering but lacked a clear product identity. Over 4 months, I used AI assistance to:
-
-- Audit 50,000+ lines of code to understand capabilities
-- Produce 15+ strategy documents
-- Build internal tools
-- Prepare for stakeholder conversations
-
-The framework emerged from what actually worked.
+**Ahmed Khaled Mohamed**
+- GitHub: [@ahmedkhaledmohamed](https://github.com/ahmedkhaledmohamed)
+- Email: ahmed.khaled.a.mohamed@gmail.com
+- LinkedIn: [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
 
 ---
 
 ## License
 
-MIT — Use freely, attribution appreciated.
-
----
-
-## Contact
-
-- GitHub: [@ahmedkhaledmohamed](https://github.com/ahmedkhaledmohamed)
-- LinkedIn: [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
+MIT - Use freely, attribution appreciated.

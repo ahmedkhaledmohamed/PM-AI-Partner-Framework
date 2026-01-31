@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push https://ahmedkhaledmohamed@github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework.git ahmed/unify-framework-name)",
+      "Bash(git push origin ahmed/unify-framework-name)",
+      "Bash(gh auth status)",
+      "Bash(git checkout -b ahmed/restructure-framework)"
+    ]
+  }
+}
