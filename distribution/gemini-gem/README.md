@@ -270,7 +270,7 @@ When writing PRDs, use this structure:
 | **Instruction length** | ~8K chars | ~32K+ chars |
 | **Web access** | Optional | Built-in |
 | **Code execution** | Yes (Code Interpreter) | Yes (via Colab) |
-| **Mobile app** | ✅ iOS & Android | ✅ Android only (as of Jan 2026) |
+| **Mobile app** | ✅ iOS & Android | ✅ iOS & Android |
 | **Organization sharing** | Enterprise only | Google Workspace |
 | **Cost** | ChatGPT Plus ($20/mo) | Gemini Advanced ($20/mo) or Free tier |
 

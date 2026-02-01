@@ -6,7 +6,8 @@ This folder contains ready-to-use configurations for distributing the PM AI Part
 
 | Platform | Folder | Status | Best For |
 |----------|--------|--------|----------|
-| **Custom GPT** (OpenAI) | [`custom-gpt/`](custom-gpt/) | ✅ Ready | ChatGPT Plus users, file uploads, mobile access |
+| **Custom GPT** (OpenAI) | [`custom-gpt/`](custom-gpt/) | ✅ Ready | ChatGPT Plus users, file uploads, widest reach |
+| **Claude Projects** (Anthropic) | [`claude-projects/`](claude-projects/) | ✅ Ready | Best reasoning, deep analysis, native framework |
 | **Gemini Gem** (Google) | [`gemini-gem/`](gemini-gem/) | ✅ Ready | Google Workspace users, web integration |
 
 ---
@@ -17,12 +18,25 @@ This folder contains ready-to-use configurations for distributing the PM AI Part
 - ✅ Already use ChatGPT Plus or Enterprise
 - ✅ Want to upload knowledge files directly (up to 10 files)
 - ✅ Prefer ChatGPT's interface and tools
-- ✅ Need iOS app access (Gemini is Android-only)
+- ✅ Want widest platform reach (most PMs have ChatGPT)
 - ✅ Want granular file-based context management
 
 **Setup time:** 10-15 minutes
 **Cost:** ChatGPT Plus ($20/month) or Enterprise
 **Guide:** [`custom-gpt/README.md`](custom-gpt/README.md)
+
+---
+
+### Choose Claude Projects if you:
+- ✅ Want the best reasoning for complex PM analysis
+- ✅ Need to work with long documents (200K context)
+- ✅ Prefer native framework experience (built for Claude)
+- ✅ Want persistent knowledge across conversations
+- ✅ Are on Claude Pro or Team plan
+
+**Setup time:** 5-10 minutes
+**Cost:** Claude Pro ($20/month) or Team
+**Guide:** [`claude-projects/README.md`](claude-projects/README.md)
 
 ---
 
@@ -51,17 +65,17 @@ You can set up both! They complement each other:
 
 ## Quick Comparison
 
-| Feature | Custom GPT | Gemini Gem |
-|---------|------------|------------|
-| **Knowledge files** | ✅ Upload up to 10 files | ❌ Paste or link only |
-| **Instructions length** | ~8K characters | ~32K+ characters |
-| **Web browsing** | Optional | Built-in |
-| **Code execution** | ✅ Code Interpreter | ✅ Via Colab |
-| **Mobile app** | ✅ iOS & Android | ⚠️ Android only |
-| **Cost (advanced)** | $20/month | $20/month |
-| **Free tier** | ❌ | ✅ Limited |
-| **File context** | Rich (direct uploads) | Limited (paste/link) |
-| **Setup time** | 10-15 min | 5-10 min |
+| Feature | Custom GPT | Claude Projects | Gemini Gem |
+|---------|------------|-----------------|------------|
+| **Knowledge files** | ✅ Up to 10 files | ✅ Up to 200K tokens | ❌ Paste or link only |
+| **Context window** | ~128K tokens | 200K tokens | ~32K tokens |
+| **Web browsing** | Optional | ❌ | Built-in |
+| **Code execution** | ✅ Code Interpreter | ✅ Artifacts | ✅ Via Colab |
+| **Mobile app** | ✅ iOS & Android | ✅ iOS & Android | ✅ iOS & Android |
+| **Cost (advanced)** | $20/month | $20/month | $20/month |
+| **Free tier** | ❌ | ❌ | ✅ Limited |
+| **Reasoning depth** | Good | Excellent | Good |
+| **Setup time** | 10-15 min | 5-10 min | 5-10 min |
 
 ---
 
@@ -71,6 +85,10 @@ You can set up both! They complement each other:
 - **`instructions.md`** — Complete system prompt for the GPT
 - **`README.md`** — Step-by-step setup guide
 - **`knowledge-files.md`** — List of framework files to upload
+
+### For Claude Projects (`claude-projects/`)
+- **`instructions.md`** — Project instructions optimized for Claude
+- **`README.md`** — Setup guide with team sharing instructions
 
 ### For Gemini Gem (`gemini-gem/`)
 - **`instructions.md`** — Complete instructions for the Gem
@@ -88,6 +106,14 @@ You can set up both! They complement each other:
 3. Upload framework files (see [`custom-gpt/knowledge-files.md`](custom-gpt/knowledge-files.md))
 4. Test: "What are the six agent modes?"
 5. Done! Full guide: [`custom-gpt/README.md`](custom-gpt/README.md)
+
+### Claude Projects (5 minutes)
+
+1. Go to [Claude](https://claude.ai) → **Projects** → **Create Project**
+2. Add instructions from [`claude-projects/instructions.md`](claude-projects/instructions.md)
+3. Upload framework files from `framework/core/`
+4. Test: "What are the six agent modes?"
+5. Done! Full guide: [`claude-projects/README.md`](claude-projects/README.md)
 
 ### Gemini Gem (5 minutes)
 
@@ -194,12 +220,46 @@ When writing PRDs, use this structure:
 
 ---
 
+## Other Distribution Options
+
+Beyond the main three platforms, you can also use:
+
+### Poe Bots
+Create a shareable bot on [Poe](https://poe.com):
+1. Go to poe.com/create_bot
+2. Choose Claude or GPT-4 as base model
+3. Use instructions from any platform above
+4. Share via link
+
+**Pros:** Free tier, multiple model options, easy sharing
+**Cons:** Smaller audience than main platforms
+
+### GitHub Gist
+Share the framework as a linkable reference:
+1. Create a public Gist with quick-reference content
+2. Users paste into any AI chat to set context
+3. Works with any AI platform
+
+### API Integration
+For custom tools or internal platforms:
+- Use Claude API with framework as system prompt
+- See `claude-projects/instructions.md` for the prompt
+- Embed in Slack bots, internal tools, etc.
+
+### Notion Template
+For teams using Notion with Notion AI:
+- Import framework content as Notion pages
+- Use as Notion AI custom instructions
+- Integrate with team workspace
+
+---
+
 ## Coming Soon
 
-### Planned Distributions
-- **Claude Projects Template** — Pre-configured Claude Project setup
-- **Poe Bot** — Shareable bot on Poe platform
-- **Notion Template** — Framework as Notion workspace
+### Planned Additions
+- **Raycast AI Command** — Mac keyboard shortcut access
+- **Slack Bot Template** — Team channel integration
+- **VS Code Extension** — IDE-integrated PM partner
 
 Want to contribute a distribution? Open an issue or PR on GitHub!
 
