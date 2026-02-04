@@ -461,6 +461,86 @@ claude auth
 | Long strategic conversations | Claude CLI |
 | Autonomous tasks             | Claude CLI |
 
+### Claude Code Best Practices (from Boris Cherny)
+
+_Tips from the Claude Code creator and team for maximum productivity._
+
+#### 1. Do More in Parallel (Worktrees)
+
+The #1 productivity tip: run 3-5 git worktrees, each with its own Claude session.
+
+```bash
+# Add these aliases to ~/.zshrc or ~/.bashrc
+wt() {
+  local branch="$1"
+  local repo_name=$(basename $(git rev-parse --show-toplevel))
+  local worktree_name="${repo_name}-${branch//\//-}"
+  local parent_dir=$(dirname $(git rev-parse --show-toplevel))
+  git worktree add "${parent_dir}/${worktree_name}" "$branch" && cd "${parent_dir}/${worktree_name}"
+}
+
+wtn() {
+  local branch="$1"
+  local repo_name=$(basename $(git rev-parse --show-toplevel))
+  local worktree_name="${repo_name}-${branch//\//-}"
+  local parent_dir=$(dirname $(git rev-parse --show-toplevel))
+  git worktree add -b "$branch" "${parent_dir}/${worktree_name}" && cd "${parent_dir}/${worktree_name}"
+}
+
+alias wtl="git worktree list"
+wtr() { git worktree remove "$1"; }
+```
+
+Usage:
+```bash
+wtn feature/my-task    # Create new branch + worktree
+cd ../repo-feature-my-task && claude   # New Claude session
+```
+
+#### 2. Plan Mode for Complex Tasks
+
+Press `shift+Tab` to toggle plan mode. For complex tasks:
+1. Pour energy into getting the plan right
+2. Have Claude write the plan, then review it critically
+3. Once solid, Claude can 1-shot the implementation
+
+#### 3. Invest in CLAUDE.md
+
+After every correction, say: "Update CLAUDE.md so you don't make that mistake again."
+
+Claude is eerily good at writing rules for itself. Ruthlessly edit your CLAUDE.md over time.
+
+#### 4. Advanced Prompting
+
+**Challenge Claude:**
+```
+Grill me on these changes and don't make a PR until I pass your test.
+```
+
+**After mediocre solutions:**
+```
+Knowing everything you know now, scrap this and implement the elegant solution.
+```
+
+**Verify behavior:**
+```
+Prove to me this works - diff behavior between main and this branch.
+```
+
+#### 5. Use Subagents
+
+Append "use subagents" to throw more compute at problems:
+```
+Explore this codebase and explain the architecture. Use subagents.
+```
+
+#### 6. Two-Claude Pattern
+
+For important work:
+1. Claude A writes the plan/code
+2. Claude B reviews it as a Staff Engineer
+3. Iterate until Claude B approves
+
 ---
 
 ## Optional: Deploy Static Sites

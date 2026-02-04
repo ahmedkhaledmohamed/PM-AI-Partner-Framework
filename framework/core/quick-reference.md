@@ -149,6 +149,37 @@ Before sharing any AI-assisted doc, verify:
 
 ---
 
+## Claude Code Power Prompts
+
+_Quick shortcuts from the Claude Code team._
+
+| Shorthand | What It Does |
+| --------- | ------------ |
+| "plan first" | Create a detailed plan before implementing |
+| "grill me" | Review critically as a Staff Engineer |
+| "elegant solution" | Scrap mediocre code, rebuild cleanly |
+| "prove it works" | Show test output or behavioral diff |
+| "use subagents" | Parallelize exploration across the codebase |
+| "update CLAUDE.md" | Add rules to prevent repeating mistakes |
+
+### Plan Mode (Claude Code CLI)
+
+Press `shift+Tab` to toggle. For complex tasks:
+1. Get the plan right first
+2. Review critically before implementing
+3. Claude can then 1-shot the implementation
+
+### Worktree Parallelism
+
+```bash
+git worktree add ../repo-feature feature-branch
+cd ../repo-feature && claude   # Separate Claude session
+```
+
+No stashing, no context pollution. Run 3-5 parallel Claude sessions.
+
+---
+
 ## Anti-Patterns to Avoid
 
 | ❌ Don't                  | ✅ Do Instead                       |
@@ -158,6 +189,8 @@ Before sharing any AI-assisted doc, verify:
 | Skip human review         | Own every word you share            |
 | Use AI for judgment calls | AI suggests, you decide             |
 | Let AI make up facts      | Ground in codebase/docs             |
+| Over-engineer solutions   | Keep it simple, focused             |
+| Micromanage Claude        | Give goals, not step-by-step        |
 
 ---
 

@@ -287,4 +287,95 @@ Help me:
 
 ---
 
+## Advanced Prompting (Claude Code Tips)
+
+_From Boris Cherny (Claude Code creator) and the Claude Code team._
+
+### Plan First, Execute Second
+```
+Before implementing anything, create a detailed plan with:
+1. What you'll change and why
+2. Files you'll modify
+3. Potential risks or edge cases
+
+I'll review the plan before you proceed.
+```
+
+### Challenge Mode (Staff Engineer Review)
+```
+Grill me on these changes. Don't make a PR until I pass your test.
+
+Look for:
+- Edge cases I might have missed
+- Performance implications
+- Simpler alternatives
+- Potential bugs
+
+Be harsh - I want to ship quality.
+```
+
+### Prove It Works
+```
+Prove to me this works. Show me:
+- The behavioral diff between main and this branch
+- Test output demonstrating the fix
+- Before/after comparison
+```
+
+### Elegant Solution Prompt
+```
+Knowing everything you know now, scrap this implementation 
+and build the elegant solution from scratch.
+```
+
+### Fix Bugs Autonomously
+```
+# With failing CI
+Go fix the failing CI tests. Don't micromanage how.
+
+# With error logs
+Here are the error logs. Debug and fix: [paste logs]
+```
+
+### Subagent Power Mode
+```
+Explore this codebase and create a comprehensive architecture document.
+Use subagents to parallelize - one for each major component.
+```
+
+### Learning Mode
+```
+Explain every change you make with the "why", not just the "what".
+I'm trying to learn from this, not just get it done.
+```
+
+### Self-Documenting Prompt
+```
+After this task, update CLAUDE.md with any new context or rules 
+that would help future sessions. What did you learn about this codebase?
+```
+
+---
+
+## Workflow Accelerators
+
+### Two-Claude Pattern
+Use two Claude sessions for complex tasks:
+1. **Claude A**: Write the plan/proposal
+2. **Claude B**: Review it as a Staff Engineer
+3. Iterate until Claude B approves, then implement
+
+### Worktree Parallelism
+For multi-track work:
+```bash
+# Create isolated worktrees
+git worktree add ../repo-feature-a feature-a
+git worktree add ../repo-feature-b feature-b
+
+# Run separate Claude sessions in each
+# No stashing, no context pollution
+```
+
+---
+
 _See [Quick Reference](quick-reference.md) for the full framework cheat sheet._

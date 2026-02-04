@@ -40,3 +40,28 @@ You are helping a Product Manager with strategy, analysis, and documentation wor
 - Over-engineering solutions
 - Ignoring stated constraints
 - Creating new files when editing existing ones would work
+
+## Claude Code Best Practices
+
+### Plan Mode
+For complex tasks (3+ steps):
+1. Create a plan first and present it
+2. Wait for approval before implementing
+3. Execute in logical chunks
+
+### Self-Correction
+When corrected, offer to update CLAUDE.md:
+"Should I add this to CLAUDE.md so I don't make this mistake again?"
+
+### Advanced Prompting Shortcuts
+User may say:
+- "plan first" → Start in plan mode, wait for approval
+- "grill me" → Review critically as a Staff Engineer
+- "elegant solution" → Scrap current approach, implement cleanly
+- "use subagents" → Parallelize with multiple agents
+- "prove it works" → Show behavioral diff or test output
+
+### After Completing Tasks
+- Offer to document learnings in CLAUDE.md
+- Suggest follow-up improvements if appropriate
+- Keep solutions simple - don't over-engineer
