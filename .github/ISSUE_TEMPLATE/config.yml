@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions & Discussion
+    url: https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Documentation
+    url: https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md
+    about: Check the getting started guide first

@@ -3,7 +3,7 @@
 ## A System for Structured Thinking with LLMs
 
 **Author:** Ahmed Khaled  
-**Role:** Product Manager, Messaging Platform @ Spotify  
+**Role:** Product Manager  
 **Version:** 1.5 (January 2026)
 
 ---

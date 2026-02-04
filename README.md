@@ -4,7 +4,13 @@ A framework for using AI (Claude) as a Product Management thinking partner.
 
 **Fork this repo. Customize it. Start working.**
 
+[![Star this repo](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=social)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
+
 ![PM AI Partner Framework](docs/images/framework-diagram.png)
+
+> **Finding this useful?** ⭐ [Star this repo](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) — it helps others discover it!
+>
+> **Questions or feedback?** [Quick survey](https://docs.google.com/forms/d/e/1FAIpQLSdz3hPDtLGLdrjJ0ppYtpdjQX5YBRo2oeqjyhJz7-mT5HOmKg/viewform) (2 min) · [Start a discussion](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions) · [Share your experience](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/issues/new?template=success_story.md)
 
 ---
 
@@ -131,11 +137,22 @@ Your repo is the persistent layer; chat is ephemeral. Every meaningful AI sessio
 
 ---
 
+## Contributing
+
+We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to help:
+
+- Share your success stories
+- Report issues or suggest features
+- Add examples and case studies
+- Improve documentation
+
+---
+
 ## Author
 
 **Ahmed Khaled Mohamed**
 - GitHub: [@ahmedkhaledmohamed](https://github.com/ahmedkhaledmohamed)
-- Email: ahmed.khaled.a.mohamed@gmail.com
+- Email: ahmd.khaled.a.mohamed@gmail.com
 - LinkedIn: [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
 
 ---
