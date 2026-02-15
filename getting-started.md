@@ -378,6 +378,88 @@ The framework uses six "agent modes" — different AI personalities for differen
 
 ---
 
+## Step 7.5: Install Skills (Optional)
+
+Skills are reusable AI behaviors you can invoke with slash commands like `/thought-partner` or `/product-brief`. The framework includes 10 pre-built skills that work with **both Cursor and Claude CLI**.
+
+### Why Skills?
+
+| Benefit | Description |
+|---------|-------------|
+| **Consistency** | Same behavior every time you invoke a mode |
+| **Speed** | One slash command vs. writing a prompt |
+| **Auto-trigger** | Skills activate based on conversation context |
+| **Cross-tool** | Same skills work in Cursor AND Claude CLI |
+
+### Install Skills
+
+**For Cursor:**
+```bash
+# Copy all skills to your personal Cursor skills folder
+mkdir -p ~/.cursor/skills
+cp -r framework/templates/skills/*/ ~/.cursor/skills/
+```
+
+**For Claude CLI:**
+```bash
+# Copy all skills to your Claude skills folder
+mkdir -p ~/.claude/skills
+cp -r framework/templates/skills/*/ ~/.claude/skills/
+```
+
+Or install specific skills only:
+```bash
+cp -r framework/templates/skills/thought-partner ~/.cursor/skills/
+cp -r framework/templates/skills/writer ~/.cursor/skills/
+```
+
+### Available Skills
+
+**Agent Modes (6):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| thought-partner | `/thought-partner` | Explore ideas, brainstorm, think through problems |
+| technical-analyst | `/technical-analyst` | Understand systems, code, technical concepts |
+| writer | `/writer` | Draft documents, briefs, communications |
+| devil-advocate | `/devil-advocate` | Challenge ideas, stress-test proposals |
+| builder | `/builder` | Create tools, scripts, prototypes |
+| data-analyst | `/data-analyst` | Query data, analyze metrics |
+
+**Scenarios (3):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| product-brief | `/product-brief` | Write PRDs and feature specs |
+| meeting-prep | `/meeting-prep` | Prepare talking points, anticipate questions |
+| stakeholder-update | `/stakeholder-update` | Write status reports, executive summaries |
+
+**Workflows (1):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| strategic-clarity | `/strategic-clarity` | Guided workflow for team identity |
+
+### Using Skills
+
+**Option 1: Slash commands**
+```
+/thought-partner
+I need to think through our Q2 priorities
+```
+
+**Option 2: Auto-triggering**
+
+Skills activate automatically based on context. Saying "help me brainstorm" triggers `thought-partner`, saying "write a product brief" triggers `product-brief`.
+
+### Verify Installation
+
+In Cursor, type `/` and you should see your installed skills in the autocomplete.
+
+See [`framework/templates/skills/README.md`](framework/templates/skills/README.md) for full documentation.
+
+---
+
 ## Step 8: Learn the Workflow Patterns
 
 The framework includes eight repeatable workflows for common PM tasks:

@@ -10,14 +10,15 @@ Configuration and context templates for your workspace.
 
 ## Files
 
-| File | Purpose | Copy To |
-|------|---------|---------|
+| File/Folder | Purpose | Copy To |
+|-------------|---------|---------|
 | `CLAUDE.md` | Root workspace context | Project root |
 | `CLAUDE-sandbox.md` | Sandbox folder context | `sandbox/CLAUDE.md` |
 | `CLAUDE-product-catalog.md` | Product catalog context | `product-catalog/CLAUDE.md` |
 | `settings.local.json` | Claude Code settings | `.claude/settings.local.json` |
 | `mcp.json` | MCP server configuration | `~/.cursor/mcp.json` |
 | `cursorrules.txt` | Cursor IDE rules | `.cursorrules` |
+| `skills/` | AI skills (slash commands) | `~/.cursor/skills/` or `~/.claude/skills/` |
 
 ## Setup Steps
 
@@ -55,6 +56,24 @@ mkdir -p ~/.cursor
 cp framework/templates/mcp.json ~/.cursor/
 # Edit to add your credentials and enable desired servers
 ```
+
+### 5. Install Skills (Recommended)
+
+Skills enable slash commands like `/thought-partner` and `/product-brief`. They work with both **Cursor** and **Claude CLI**.
+
+**For Cursor:**
+```bash
+mkdir -p ~/.cursor/skills
+cp -r framework/templates/skills/*/ ~/.cursor/skills/
+```
+
+**For Claude CLI:**
+```bash
+mkdir -p ~/.claude/skills
+cp -r framework/templates/skills/*/ ~/.claude/skills/
+```
+
+See [`skills/README.md`](skills/README.md) for full documentation and available skills.
 
 ## Customization
 

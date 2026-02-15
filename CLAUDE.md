@@ -45,16 +45,31 @@ When working in this repo:
 
 ## Agent Modes
 
-Switch between these AI "personalities" based on your task:
+Switch between these AI "personalities" based on your task. If skills are installed, you can invoke them via slash commands.
 
-| Mode | When to Use |
-|------|-------------|
-| Technical Analyst | Codebase exploration, capability audits |
-| Writer | Strategy docs, narratives, communication |
-| Devil's Advocate | Stress-testing ideas, preparing for pushback |
-| Builder | Creating tools, prototypes, scripts |
-| Thought Partner | Brainstorming, exploring options |
-| Data Analyst | Metrics analysis, finding patterns |
+| Mode | Command | When to Use |
+|------|---------|-------------|
+| Technical Analyst | `/technical-analyst` | Codebase exploration, capability audits |
+| Writer | `/writer` | Strategy docs, narratives, communication |
+| Devil's Advocate | `/devil-advocate` | Stress-testing ideas, preparing for pushback |
+| Builder | `/builder` | Creating tools, prototypes, scripts |
+| Thought Partner | `/thought-partner` | Brainstorming, exploring options |
+| Data Analyst | `/data-analyst` | Metrics analysis, finding patterns |
+
+## Skills (Slash Commands)
+
+Additional skills for common PM scenarios (install from `framework/templates/skills/`):
+
+| Command | Description |
+|---------|-------------|
+| `/product-brief` | Structured PRD and feature spec creation |
+| `/meeting-prep` | Meeting preparation with talking points |
+| `/stakeholder-update` | Status reports and executive summaries |
+| `/strategic-clarity` | Guided workflow for team identity and boundaries |
+
+**Installation:**
+- Cursor: `cp -r framework/templates/skills/*/ ~/.cursor/skills/`
+- Claude CLI: `cp -r framework/templates/skills/*/ ~/.claude/skills/`
 
 ## Links
 
