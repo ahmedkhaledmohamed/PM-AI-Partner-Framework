@@ -436,6 +436,82 @@ In Cursor chat:
 
 ---
 
+## Step 9.5: Install Cursor Skills (Optional)
+
+Skills are reusable AI behaviors you can invoke with slash commands like `/thought-partner` or `/product-brief`. The framework includes 10 pre-built skills.
+
+### Why Skills?
+
+| Benefit | Description |
+|---------|-------------|
+| **Consistency** | Same behavior every time you invoke a mode |
+| **Speed** | One slash command vs. writing a prompt |
+| **Auto-trigger** | Skills activate based on conversation context |
+
+### Install Skills
+
+```bash
+cd framework/templates/skills
+
+mkdir -p ~/.cursor/skills
+cp -r */ ~/.cursor/skills/
+```
+
+Or install specific skills only:
+```bash
+mkdir -p ~/.cursor/skills
+cp -r thought-partner ~/.cursor/skills/
+cp -r writer ~/.cursor/skills/
+cp -r product-brief ~/.cursor/skills/
+```
+
+### Available Skills
+
+**Agent Modes (6):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| thought-partner | `/thought-partner` | Explore ideas, brainstorm, think through problems |
+| technical-analyst | `/technical-analyst` | Understand systems, code, technical concepts |
+| writer | `/writer` | Draft documents, briefs, communications |
+| devil-advocate | `/devil-advocate` | Challenge ideas, stress-test proposals |
+| builder | `/builder` | Create tools, scripts, prototypes |
+| data-analyst | `/data-analyst` | Query data, analyze metrics |
+
+**Scenarios (3):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| product-brief | `/product-brief` | Write PRDs and feature specs |
+| meeting-prep | `/meeting-prep` | Prepare talking points, anticipate questions |
+| stakeholder-update | `/stakeholder-update` | Write status reports, executive summaries |
+
+**Workflows (1):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| strategic-clarity | `/strategic-clarity` | Guided workflow for team identity |
+
+### Using Skills
+
+**Option 1: Slash commands**
+```
+/thought-partner
+I need to think through our Q2 priorities
+```
+
+**Option 2: Auto-triggering**
+
+Skills activate automatically based on context. Saying "help me brainstorm" triggers `thought-partner`, saying "write a product brief" triggers `product-brief`.
+
+### Verify Installation
+
+In Cursor, type `/` and you should see your installed skills in the autocomplete.
+
+See [`framework/templates/skills/README.md`](framework/templates/skills/README.md) for full documentation.
+
+---
+
 ## Optional: Install Claude CLI
 
 For autonomous multi-step tasks:

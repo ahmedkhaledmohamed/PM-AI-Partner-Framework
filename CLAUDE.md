@@ -45,16 +45,31 @@ When working in this repo:
 
 ## Agent Modes
 
-Switch between these AI "personalities" based on your task:
+Switch between these AI "personalities" based on your task. You can invoke these via slash commands (e.g., `/thought-partner`) if skills are installed.
 
-| Mode | When to Use |
-|------|-------------|
-| Technical Analyst | Codebase exploration, capability audits |
-| Writer | Strategy docs, narratives, communication |
-| Devil's Advocate | Stress-testing ideas, preparing for pushback |
-| Builder | Creating tools, prototypes, scripts |
-| Thought Partner | Brainstorming, exploring options |
-| Data Analyst | Metrics analysis, finding patterns |
+| Mode | Command | When to Use |
+|------|---------|-------------|
+| Thought Partner | `/thought-partner` | Brainstorming, exploring options |
+| Technical Analyst | `/technical-analyst` | Codebase exploration, capability audits |
+| Writer | `/writer` | Strategy docs, narratives, communication |
+| Devil's Advocate | `/devil-advocate` | Stress-testing ideas, preparing for pushback |
+| Builder | `/builder` | Creating tools, prototypes, scripts |
+| Data Analyst | `/data-analyst` | Metrics analysis, finding patterns |
+
+---
+
+## Skills (Slash Commands)
+
+If you've installed the framework skills, these additional commands are available:
+
+| Command | Description |
+|---------|-------------|
+| `/product-brief` | Structured PRD and feature spec creation |
+| `/meeting-prep` | Meeting preparation with talking points |
+| `/stakeholder-update` | Status reports and executive summaries |
+| `/strategic-clarity` | Guided workflow for team identity and boundaries |
+
+Skills are installed from `framework/templates/skills/`. See `getting-started.md` for installation instructions.
 
 ## Links
 

@@ -11,13 +11,13 @@ Specific, step-by-step guides for common PM tasks with AI assistance.
 | [Strategic Clarity](strategic-clarity.md) | New role, team lacks identity | 2-4 weeks |
 | [Codebase Deep-Dive](codebase-deep-dive.md) | Understand what exists | 1-2 weeks |
 | [Tool Building](tool-building.md) | Create prototypes, tools | Hours to days |
+| [Analysis Pipeline](analysis-pipeline.md) | Data question to shareable presentation | Hours to days |
 
 ---
 
 ## Coming Soon
 
 - **Planning Cycle** — Quarterly roadmap workflow
-- **Communication Prep** — Preparing for talks and presentations
 - **Engineering Questions** — Building PM-Eng knowledge bridge
 
 ---
@@ -32,4 +32,3 @@ Specific, step-by-step guides for common PM tasks with AI assistance.
 ---
 
 _Back to: [Framework Overview](../pm-ai-partner-framework.md) | [Quick Reference](../quick-reference.md)_
-
