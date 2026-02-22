@@ -1,7 +1,71 @@
 # PM AI Partner Framework
 
-**Latest Version:** v1.2 (February 2026)  
+**Latest Version:** v1.3 (February 2026)
 **Repo:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
+
+---
+
+## What's New in v1.3
+
+### Claude Code Skills
+
+Added Claude Code versions of all 10 PM skills, alongside the existing Cursor skills. Claude Code skills use the same `SKILL.md` format but take advantage of Claude Code-specific frontmatter fields.
+
+| Addition | Location |
+|----------|----------|
+| **10 Claude Code skills** | `framework/templates/claude-code-skills/` |
+| **Claude Code skills README** | `framework/templates/claude-code-skills/README.md` |
+
+### Skills Included
+
+**Agent modes (6):**
+
+| Skill | Command | Claude Code Feature |
+|-------|---------|-------------------|
+| thought-partner | `/thought-partner` | `argument-hint` |
+| technical-analyst | `/technical-analyst` | `allowed-tools: Read, Grep, Glob, Bash(git *)` |
+| writer | `/writer` | `argument-hint` |
+| devil-advocate | `/devil-advocate` | `argument-hint` |
+| builder | `/builder` | `allowed-tools: Read, Write, Edit, Bash, Grep, Glob` |
+| data-analyst | `/data-analyst` | `allowed-tools: Read, Grep, Glob, Bash` |
+
+**Scenarios (3):** product-brief, meeting-prep, stakeholder-update
+**Workflows (1):** strategic-clarity
+
+### Claude Code-Specific Frontmatter
+
+These fields are available in Claude Code but not Cursor:
+
+| Field | Purpose |
+|-------|---------|
+| `allowed-tools` | Grant tool access without asking — key for technical-analyst, builder, data-analyst |
+| `argument-hint` | Show usage hint in autocomplete (e.g., `[topic or question]`) |
+| `context: fork` | Run skill in an isolated subagent |
+| `agent` | Choose subagent type (Explore, Plan, etc.) |
+| `disable-model-invocation` | Prevent auto-triggering for dangerous operations |
+
+### Installation
+
+```bash
+# Install all skills (personal, all projects)
+mkdir -p ~/.claude/skills
+cp -R framework/templates/claude-code-skills/*/ ~/.claude/skills/
+
+# Or install specific skills
+cp -R framework/templates/claude-code-skills/thought-partner ~/.claude/skills/
+```
+
+### Multi-Editor Support
+
+The framework now supports both editors side by side:
+
+```
+framework/templates/
+├── skills/                  # Cursor skills (existing)
+└── claude-code-skills/      # Claude Code skills (new)
+```
+
+Same 10 skills, same content, optimized for each editor's capabilities.
 
 ---
 
