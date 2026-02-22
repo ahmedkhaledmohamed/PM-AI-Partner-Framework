@@ -18,6 +18,7 @@ Configuration and context templates for your workspace.
 | `settings.local.json` | Claude Code settings | `.claude/settings.local.json` |
 | `mcp.json` | MCP server configuration | `~/.cursor/mcp.json` |
 | `cursorrules.txt` | Cursor IDE rules | `.cursorrules` |
+| `skills/` | Cursor Skills (slash commands) | `~/.cursor/skills/` |
 
 ## Setup Steps
 
@@ -55,6 +56,21 @@ mkdir -p ~/.cursor
 cp framework/templates/mcp.json ~/.cursor/
 # Edit to add your credentials and enable desired servers
 ```
+
+### 5. Install Skills (Recommended)
+
+```bash
+mkdir -p ~/.cursor/skills
+cp -r framework/templates/skills/*/ ~/.cursor/skills/
+```
+
+Or install specific skills:
+```bash
+cp -r framework/templates/skills/thought-partner ~/.cursor/skills/
+cp -r framework/templates/skills/writer ~/.cursor/skills/
+```
+
+See [`skills/README.md`](skills/README.md) for full documentation.
 
 ## Customization
 
