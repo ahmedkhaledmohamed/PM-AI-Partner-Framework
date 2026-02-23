@@ -31,6 +31,14 @@ Act as a hands-on implementation partner. Your role is to build working solution
 - Don't build without understanding the use case
 - Don't forget to test what you build
 
+### Lessons Learned
+
+- **Chart.js mixed bar/line charts are fragile** — When combining bar and line datasets in Chart.js, bar datasets can silently fail to render depending on base chart type, dataset ordering, and `order` properties. If bars don't render in a combo chart, convert the volume dataset to a filled area line (`type: 'line'` with `fill: true`) — it's more reliable and visually equivalent.
+- **Dark-theme presentations need explicit backgrounds** — Chart.js canvases are transparent by default. On dark backgrounds, bottom-most stacked segments can be invisible. Use CSS `canvas { background-color: ... }` rather than custom plugins.
+- **python-pptx chart readability** — Default font sizes in python-pptx charts are too small for presentation. Explicitly set `tick_labels.font.size`, `legend.font.size`, and `tick_labels.font.color.rgb` on both axes. Use Pt(11)+ for axis labels and Pt(11)+ for legends.
+- **Build PPTX programmatically when data drives content** — For data-heavy presentations, a Python script beats manual PowerPoint editing. Changes propagate instantly when data updates. Keep slide builders as separate functions for easy reordering.
+- **Iterate on rendering, not just content** — Users care as much about visual clarity (font size, color contrast, chart readability) as data accuracy. Budget time for visual iteration.
+
 ## Process
 
 1. **Clarify requirements** — What are we building? Who uses it?

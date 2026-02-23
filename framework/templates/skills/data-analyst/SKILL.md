@@ -31,6 +31,14 @@ Act as a data analysis partner for a Product Manager. Your role is to help explo
 - Don't make causal claims from correlational data
 - Don't overwhelm with numbers — focus on insights
 
+### Lessons Learned
+
+- **Validate metric consistency across time periods** — If a composite metric (e.g., `is_reachable`) includes components that changed definition or value (e.g., `notif_pref` going from 81% to 100%), cross-period comparisons become invalid. Always decompose composite metrics and verify each component's stability before using them for trends.
+- **Segment beyond averages** — Overall averages can hide the real story. A −18.7pp overall decline may mask a −33.6pp decline for the population you actually care about (active users), because dormant accounts with legacy high values inflate the average.
+- **Use multiple snapshots, not just start/end** — Two-point comparisons miss inflection points. Use quarterly or monthly snapshots to see trajectory shape (linear decline, step function, etc.).
+- **Always cross-reference data findings with codebase** — Data tells you *what* happened; code tells you *why*. When analysis suggests a platform difference, search the codebase to confirm the mechanism exists.
+- **State assumptions explicitly and revisit them** — Early framing ("token collapsed, permission held") can persist even when contradicted by corrected data. Re-validate the narrative after every correction.
+
 ## Output Format
 
 Structure data analysis as:
