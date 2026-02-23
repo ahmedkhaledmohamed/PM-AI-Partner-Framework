@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PM AI Partner Framework — Presentation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23a855f7'/%3E%3Cstop offset='50%25' stop-color='%233b82f6'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='12' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #22c55e;
+      --accent-gradient: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #06b6d4 100%);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #2d2d3a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+
+    code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .slides-container { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: none; flex-direction: column; justify-content: center; align-items: center;
+      padding: 60px 80px;
+    }
+
+    .slide.active { display: flex; }
+
+    .slide-content { max-width: 1000px; width: 100%; text-align: center; }
+
+    .slide-title h1 {
+      font-size: 72px; font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .slide-title .subtitle { font-size: 28px; color: var(--text-secondary); margin-bottom: 48px; }
+    .slide-title .author { font-size: 20px; color: var(--text-muted); }
+    .slide-title .author a { color: var(--accent-cyan); text-decoration: none; }
+
+    .section-number { font-size: 14px; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
+
+    h2 { font-size: 56px; font-weight: 700; margin-bottom: 32px; line-height: 1.2; }
+    h2 .highlight { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    h3 { font-size: 36px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }
+    p { font-size: 24px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+    p.large { font-size: 28px; }
+
+    ul { text-align: left; display: inline-block; margin: 24px 0; }
+    li { font-size: 24px; color: var(--text-secondary); margin-bottom: 16px; padding-left: 32px; position: relative; }
+    li::before { content: '→'; position: absolute; left: 0; color: var(--accent-purple); }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; text-align: left; }
+    .cards-grid.four { grid-template-columns: repeat(4, 1fr); }
+    .cards-grid.three { grid-template-columns: repeat(3, 1fr); }
+
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+    .card h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); }
+    .card p { font-size: 16px; margin-bottom: 0; }
+    .card .emoji { font-size: 32px; margin-bottom: 12px; }
+
+    .source-card { text-align: center; padding: 32px 24px; }
+    .source-card .icon { font-size: 48px; margin-bottom: 16px; }
+    .source-card h4 { color: var(--accent-cyan); margin-bottom: 4px; }
+    .source-card .question { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+    .quote { font-size: 32px; font-style: italic; color: var(--text-primary); border-left: 4px solid var(--accent-purple); padding-left: 32px; text-align: left; max-width: 800px; margin: 0 auto; }
+
+    .diagram { margin: 32px 0; padding: 32px; background: var(--bg-secondary); border-radius: 16px; border: 1px solid var(--border-color); }
+    .diagram pre { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--text-secondary); white-space: pre; text-align: left; }
+
+    .table-container { margin: 24px 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: var(--bg-card); padding: 16px 20px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
+    td { padding: 16px 20px; font-size: 18px; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) { background: var(--bg-secondary); }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+    .result-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; text-align: center; }
+    .result-card .number { font-size: 56px; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .result-card .label { font-size: 18px; color: var(--text-secondary); margin-top: 8px; }
+
+    .cta-links { display: flex; gap: 24px; justify-content: center; margin-top: 32px; }
+    .cta-link { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); text-decoration: none; font-size: 18px; transition: all 0.2s ease; }
+    .cta-link:hover { border-color: var(--accent-purple); transform: translateY(-2px); }
+    .cta-link.primary { background: var(--accent-gradient); border: none; }
+
+    .nav { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; gap: 16px; z-index: 100; }
+    .nav button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-size: 20px; cursor: pointer; transition: all 0.2s ease; }
+    .nav button:hover { background: var(--accent-purple); border-color: var(--accent-purple); }
+    .nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .slide-counter { position: fixed; bottom: 40px; right: 40px; font-size: 14px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+    .keyboard-hint { position: fixed; bottom: 40px; left: 40px; font-size: 12px; color: var(--text-muted); }
+    .keyboard-hint kbd { display: inline-block; padding: 4px 8px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 4px; font-family: 'JetBrains Mono', monospace; margin: 0 4px; }
+
+    .framework-image { max-width: 600px; border-radius: 16px; margin: 24px auto; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+  </style>
+</head>
+<body>
+
+<div class="slides-container">
+
+  <!-- Slide 1: Title -->
+  <div class="slide slide-title active" data-slide="1">
+    <div class="slide-content">
+      <h1>PM AI Partner</h1>
+      <p class="subtitle">A framework for using AI as a thinking partner,<br>not a writing assistant</p>
+      <p class="author">Ahmed Khaled<br>
+        <a href="https://github.com/ahmedkhaledmohamed">github.com/ahmedkhaledmohamed</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 2: The Problem -->
+  <div class="slide" data-slide="2">
+    <div class="slide-content">
+      <p class="section-number">The Problem</p>
+      <h2>Platform PMs face a <span class="highlight">unique challenge</span></h2>
+      <ul>
+        <li>The truth lives in <strong>code</strong>, but strategy lives in <strong>docs</strong></li>
+        <li>Nobody can articulate what makes your team different</li>
+        <li>Strategy claims capabilities that don't exist (or miss ones that do)</li>
+        <li>Deep codebase understanding takes months — time you don't have</li>
+        <li>The same questions get asked repeatedly by stakeholders</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 3: Traditional Approach -->
+  <div class="slide" data-slide="3">
+    <div class="slide-content">
+      <p class="section-number">The Problem</p>
+      <h2>Traditional approaches <span class="highlight">don't scale</span></h2>
+      <div class="diagram">
+        <pre>
+   TRADITIONAL PM
+
+   Read Docs → Form Opinions → Write More Docs → Hope
+
+   ❌ Slow iteration
+   ❌ Context lost between sessions  
+   ❌ Tribal knowledge
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: The Core Principle -->
+  <div class="slide" data-slide="4">
+    <div class="slide-content">
+      <p class="section-number">The Framework</p>
+      <h2>The Core Principle</h2>
+      <div class="quote">
+        "PM work is reconciling <strong>four sources of truth</strong>. AI helps you explore each faster and spot conflicts. <strong>Judgment stays human.</strong>"
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Four Sources of Truth -->
+  <div class="slide" data-slide="5">
+    <div class="slide-content">
+      <p class="section-number">The Framework</p>
+      <h2>Four Sources of Truth</h2>
+      <div class="cards-grid four">
+        <div class="card source-card">
+          <div class="icon">💻</div>
+          <h4>CODE</h4>
+          <p>Technical</p>
+          <p class="question">"What CAN happen?"</p>
+        </div>
+        <div class="card source-card">
+          <div class="icon">📄</div>
+          <h4>DOCS</h4>
+          <p>Contextual</p>
+          <p class="question">"What's EXPECTED?"</p>
+        </div>
+        <div class="card source-card">
+          <div class="icon">📊</div>
+          <h4>DATA</h4>
+          <p>Empirical</p>
+          <p class="question">"What IS happening?"</p>
+        </div>
+        <div class="card source-card">
+          <div class="icon">🧠</div>
+          <h4>JUDGMENT</h4>
+          <p>Human</p>
+          <p class="question">"What SHOULD happen?"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Conflicts -->
+  <div class="slide" data-slide="6">
+    <div class="slide-content">
+      <p class="section-number">The Framework</p>
+      <h2>Sources often <span class="highlight">conflict</span></h2>
+      <div class="cards-grid three">
+        <div class="card">
+          <p class="emoji">💻 ≠ 📄</p>
+          <h4>Code ≠ Docs</h4>
+          <p>"We claim X but code shows Y"</p>
+        </div>
+        <div class="card">
+          <p class="emoji">📊 ≠ 📝</p>
+          <h4>Data ≠ Strategy</h4>
+          <p>"Strategy says X matters, metrics show Y"</p>
+        </div>
+        <div class="card">
+          <p class="emoji">🧠 ≠ 📊</p>
+          <h4>Judgment ≠ Data</h4>
+          <p>"I think X, but data shows Y"</p>
+        </div>
+      </div>
+      <p style="margin-top: 32px; font-size: 20px; color: var(--accent-cyan);">
+        AI helps you <strong>find</strong> these conflicts. <strong>You</strong> decide how to resolve them.
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 7: Agent Modes Visual -->
+  <div class="slide" data-slide="7">
+    <div class="slide-content">
+      <p class="section-number">How It Works</p>
+      <h2>Six <span class="highlight">Agent Modes</span></h2>
+      <p>Different AI "personalities" for different tasks</p>
+      <img src="../images/agent-modes-diagram.png" alt="Six Agent Modes for AI-PM Partnership" class="framework-image" style="max-width: 800px;">
+    </div>
+  </div>
+
+  <!-- Slide 8: Agent Modes Table -->
+  <div class="slide" data-slide="8">
+    <div class="slide-content">
+      <p class="section-number">How It Works</p>
+      <h2>Agent Modes — <span class="highlight">How to Invoke</span></h2>
+      <div class="table-container">
+        <table>
+          <tr><th>Mode</th><th>When to Use</th><th>Prompt Pattern</th></tr>
+          <tr><td>🔍 Technical Analyst</td><td>Codebase exploration</td><td><code>"Act as a rigorous analyst..."</code></td></tr>
+          <tr><td>✍️ Writer</td><td>Strategy docs</td><td><code>"Help me write a clear..."</code></td></tr>
+          <tr><td>👹 Devil's Advocate</td><td>Stress-testing ideas</td><td><code>"Challenge this. Role-play as..."</code></td></tr>
+          <tr><td>🛠️ Builder</td><td>Tools, prototypes</td><td><code>"Build [X] with this spec..."</code></td></tr>
+          <tr><td>💭 Thought Partner</td><td>Brainstorming</td><td><code>"Help me explore the space..."</code></td></tr>
+          <tr><td>📊 Data Analyst</td><td>Metrics, insights</td><td><code>"Here's [data]. What patterns?"</code></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Workflow Patterns -->
+  <div class="slide" data-slide="9">
+    <div class="slide-content">
+      <p class="section-number">How It Works</p>
+      <h2>Eight <span class="highlight">Workflow Patterns</span></h2>
+      <div class="cards-grid">
+        <div class="card"><h4>1. Strategic Clarity</h4><p>New role, unclear team identity → Charter, Value Prop</p></div>
+        <div class="card"><h4>2. Planning Cycle</h4><p>Quarterly planning → Roadmap, Priorities</p></div>
+        <div class="card"><h4>3. Codebase Discovery</h4><p>Understanding what exists → Capability Audit</p></div>
+        <div class="card"><h4>4. Tool Building</h4><p>Need internal tools → Working Prototype</p></div>
+        <div class="card"><h4>5. Communication Prep</h4><p>Big meetings → Talk Structure, Q&A Prep</p></div>
+        <div class="card"><h4>6. PM-Eng Bridge</h4><p>Translating code ↔ product → Engineering Questions</p></div>
+        <div class="card"><h4>7. Data Investigation</h4><p>Metrics analysis → Insights, Hypotheses</p></div>
+        <div class="card"><h4>8. Doc Restructuring</h4><p>Confusing docs → Cleaner Structure</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Demo Intro -->
+  <div class="slide" data-slide="10">
+    <div class="slide-content">
+      <p class="section-number">Live Demo</p>
+      <h2>Let me show you</h2>
+      <p class="large">Cursor + Claude in action</p>
+      <div class="cards-grid three" style="margin-top: 48px;">
+        <div class="card" style="text-align: center;"><p class="emoji">🔍</p><h4>Explore Code</h4><p>Semantic search across repos</p></div>
+        <div class="card" style="text-align: center;"><p class="emoji">📊</p><h4>Query Data</h4><p>Analyze metrics from chat</p></div>
+        <div class="card" style="text-align: center;"><p class="emoji">✍️</p><h4>Write Docs</h4><p>Grounded in reality</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 11: Results -->
+  <div class="slide" data-slide="11">
+    <div class="slide-content">
+      <p class="section-number">Results</p>
+      <h2>What I produced with this system</h2>
+      <p>4 months building clarity for a platform team</p>
+      <div class="results-grid">
+        <div class="result-card"><div class="number">50K+</div><div class="label">Lines of code audited</div></div>
+        <div class="result-card"><div class="number">15+</div><div class="label">Strategy documents</div></div>
+        <div class="result-card"><div class="number">5</div><div class="label">Internal tools built</div></div>
+      </div>
+      <p style="margin-top: 32px;">Team now has <strong>clarity</strong> — crisp answers to "what do you do?" grounded in implementation reality.</p>
+    </div>
+  </div>
+
+  <!-- Slide 12: Anti-Patterns -->
+  <div class="slide" data-slide="12">
+    <div class="slide-content">
+      <p class="section-number">Pitfalls</p>
+      <h2>What <span class="highlight">doesn't</span> work</h2>
+      <div class="table-container">
+        <table>
+          <tr><th>❌ Don't</th><th>Why It Fails</th></tr>
+          <tr><td>"Write me a strategy doc"</td><td>No direction = generic output</td></tr>
+          <tr><td>Accept first draft</td><td>Always needs human refinement</td></tr>
+          <tr><td>Skip codebase grounding</td><td>Strategy disconnected from reality</td></tr>
+          <tr><td>Use AI for judgment calls</td><td>Can't know your organizational context</td></tr>
+          <tr><td>Long sessions, no commits</td><td>Lost context, no rollback</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 13: Git as Memory -->
+  <div class="slide" data-slide="13">
+    <div class="slide-content">
+      <p class="section-number">Key Practice</p>
+      <h2>Git as <span class="highlight">AI Memory</span></h2>
+      <p>Your repo is the persistent layer; chat is ephemeral.</p>
+      <div class="cards-grid">
+        <div class="card"><h4>✅ Commit after each session</h4><p>Preserve context</p></div>
+        <div class="card"><h4>✅ Use branches for exploration</h4><p>Safe experimentation</p></div>
+        <div class="card"><h4>✅ Review diffs before sharing</h4><p>Maintain ownership</p></div>
+        <div class="card"><h4>✅ Write descriptive messages</h4><p>Future you will thank you</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 14: Get Started -->
+  <div class="slide" data-slide="14">
+    <div class="slide-content">
+      <p class="section-number">Get Started</p>
+      <h2>Try it <span class="highlight">today</span></h2>
+      <p>~30 minutes to set up</p>
+      <div class="cta-links">
+        <a href="https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/" class="cta-link primary">🌐 Framework Website</a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md" class="cta-link">🚀 Getting Started</a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" class="cta-link">📁 GitHub Repo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 15: Thank You -->
+  <div class="slide slide-title" data-slide="15">
+    <div class="slide-content">
+      <h1>Questions?</h1>
+      <p class="subtitle">AI helps you explore. You decide.</p>
+      <p class="author" style="margin-top: 48px;">
+        Ahmed Khaled<br>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework">github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="prev-btn" disabled>←</button>
+  <button id="fullscreen-btn" title="Fullscreen (F)">⛶</button>
+  <button id="next-btn">→</button>
+</div>
+
+<div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">15</span></div>
+
+<div class="keyboard-hint"><kbd>F</kbd> fullscreen · <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd> to navigate</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const currentSlideEl = document.getElementById('current-slide');
+  const totalSlidesEl = document.getElementById('total-slides');
+  
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  
+  totalSlidesEl.textContent = totalSlides;
+  
+  function showSlide(index) {
+    slides.forEach((slide, i) => { slide.classList.toggle('active', i === index); });
+    currentSlideEl.textContent = index + 1;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === totalSlides - 1;
+  }
+  
+  function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(currentSlide); } }
+  function prevSlide() { if (currentSlide > 0) { currentSlide--; showSlide(currentSlide); } }
+  
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+  fullscreenBtn.addEventListener('click', toggleFullscreen);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+    else if (e.key === 'ArrowLeft') { prevSlide(); }
+    else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+    else if (e.key === 'Escape' && document.fullscreenElement) { document.exitFullscreen(); }
+    else if (e.key === 'Home') { currentSlide = 0; showSlide(currentSlide); }
+    else if (e.key === 'End') { currentSlide = totalSlides - 1; showSlide(currentSlide); }
+    else if (e.key >= '1' && e.key <= '9') { const n = parseInt(e.key) - 1; if (n < totalSlides) { currentSlide = n; showSlide(currentSlide); } }
+  });
+  
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) { document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen error:', err)); }
+    else { document.exitFullscreen(); }
+  }
+  
+  document.addEventListener('fullscreenchange', () => {
+    const hint = document.querySelector('.keyboard-hint');
+    hint.innerHTML = document.fullscreenElement 
+      ? '<kbd>Esc</kbd> exit fullscreen · <kbd>←</kbd> <kbd>→</kbd> navigate'
+      : '<kbd>F</kbd> fullscreen · <kbd>←</kbd> <kbd>→</kbd> or <kbd>Space</kbd> to navigate';
+  });
+  
+  showSlide(0);
+</script>
+
+</body>
+</html>

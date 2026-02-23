@@ -182,7 +182,7 @@ The recommended setup uses **three core repos** plus any dependencies you need.
 └── [dependencies]/              # Cloned as needed for your work
     ├── frontend/
     ├── backend/
-    └── site/
+    └── docs/
 ```
 
 ### 4.3 Create Your Workspace
@@ -627,16 +627,15 @@ As a PM, you'll often build dashboards, documentation sites, or presentation pag
 
 Deploy directly from your repo — perfect for documentation and simple sites.
 
-1. **Put your site files in `site/`** in your repo
+1. **Keep your site files in `site/`** and copy to `docs/` for deployment
 2. **Go to repo Settings** → **Pages**
-3. **Set Source** to "GitHub Actions"
-4. **Add the workflow** from `.github/workflows/pages.yml` (included in this repo)
-5. Your site will be at: `https://username.github.io/repo-name/`
+3. **Set Source** to "Deploy from a branch" → select `main` → `/docs`
+4. Your site will be at: `https://username.github.io/repo-name/`
 
 ```bash
-# Just commit your site/ changes — the GitHub Action deploys automatically
-git add site/ .github/workflows/pages.yml
-git commit -m "Update site"
+# Copy site content to docs/ for GitHub Pages
+cp -r site/* docs/
+git add docs/ && git commit -m "Update site"
 git push
 ```
 

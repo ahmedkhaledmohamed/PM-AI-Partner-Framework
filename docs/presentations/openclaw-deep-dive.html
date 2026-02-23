@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw Deep Dive — PM AI Partner Framework Case Study</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e0e0e0;overflow:hidden;height:100vh}
+.slide{display:none;width:100vw;height:100vh;padding:60px 80px;flex-direction:column;justify-content:center}
+.slide.active{display:flex}
+h1{font-size:2.8rem;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.15}
+h2{font-size:2rem;font-weight:600;color:#fff;margin-bottom:12px}
+h3{font-size:1.3rem;font-weight:600;color:#b3b3b3;margin-bottom:20px}
+.subtitle{font-size:1.2rem;color:#a0a0a0;margin-bottom:30px;line-height:1.5}
+.stat-hero{font-size:5rem;font-weight:800;background:linear-gradient(135deg,#4EA8DE,#1ED760);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat-label{font-size:1.1rem;color:#727272;margin-top:8px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:40px;flex:1;align-items:center}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:20px}
+.card{background:#1a1a1a;border:1px solid #303030;border-radius:12px;padding:24px}
+.card h4{font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px}
+.card p{font-size:0.9rem;color:#a0a0a0;line-height:1.5}
+.card .icon{font-size:1.6rem;margin-bottom:10px}
+.accent-blue{color:#4EA8DE}
+.accent-green{color:#1ED760}
+.accent-red{color:#EF4444}
+.accent-orange{color:#F59E0B}
+.accent-purple{color:#A855F7}
+table{width:100%;border-collapse:collapse;margin-top:16px}
+th{text-align:left;padding:10px 14px;font-size:0.85rem;color:#727272;border-bottom:1px solid #303030;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:10px 14px;font-size:0.95rem;border-bottom:1px solid #1a1a1a}
+tr:hover td{background:#1a1a1a}
+.chart-container{position:relative;width:100%;max-height:400px}
+.timeline{display:flex;flex-direction:column;gap:16px;margin-top:16px}
+.timeline-item{display:flex;align-items:flex-start;gap:16px}
+.timeline-dot{width:12px;height:12px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.timeline-content{flex:1}
+.timeline-date{font-size:0.85rem;color:#727272;margin-bottom:2px}
+.timeline-text{font-size:1rem;color:#e0e0e0}
+.arch-box{background:#1a1a1a;border:1px solid #303030;border-radius:12px;padding:20px;text-align:center}
+.arch-box .label{font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.arch-box .desc{font-size:0.8rem;color:#a0a0a0}
+.arch-flow{display:flex;flex-direction:column;gap:12px;align-items:center}
+.arch-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.arrow-down{color:#303030;font-size:1.4rem}
+.nav{position:fixed;bottom:24px;right:40px;display:flex;gap:8px;z-index:100}
+.nav button{background:#1a1a1a;border:1px solid #303030;color:#e0e0e0;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.9rem}
+.nav button:hover{background:#303030}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#4EA8DE,#1ED760);transition:width 0.3s;z-index:100}
+.slide-num{position:fixed;bottom:28px;left:40px;font-size:0.85rem;color:#505050;z-index:100}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.tag-critical{background:#EF444420;color:#EF4444;border:1px solid #EF444440}
+.tag-high{background:#F59E0B20;color:#F59E0B;border:1px solid #F59E0B40}
+.tag-medium{background:#4EA8DE20;color:#4EA8DE;border:1px solid #4EA8DE40}
+.insight-num{font-size:3rem;font-weight:800;color:#303030;margin-bottom:8px}
+.skill-tag{display:inline-block;padding:4px 12px;border-radius:6px;font-size:0.8rem;font-weight:600;font-family:'SF Mono',monospace;margin-bottom:8px}
+.skill-tech{background:#4EA8DE20;color:#4EA8DE;border:1px solid #4EA8DE40}
+.skill-data{background:#1ED76020;color:#1ED760;border:1px solid #1ED76040}
+.skill-devil{background:#EF444420;color:#EF4444;border:1px solid #EF444440}
+.skill-builder{background:#A855F720;color:#A855F7;border:1px solid #A855F740}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="slide-num" id="slideNum"></div>
+
+<!-- Slide 1: Title -->
+<div class="slide active" id="slide-0">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div class="stat-hero">220,651</div>
+    <div class="stat-label" style="margin-bottom:30px">GitHub stars in 84 days</div>
+    <h1>OpenClaw Deep Dive</h1>
+    <h3>How the fastest-growing open-source project in history actually works</h3>
+    <p class="subtitle">A case study built with the PM AI Partner Framework</p>
+    <p style="color:#505050;font-size:0.9rem;margin-top:auto">Ahmed Khaled Mohamed &middot; February 2026 &middot; Use arrow keys to navigate</p>
+  </div>
+</div>
+
+<!-- Slide 2: What Is OpenClaw -->
+<div class="slide" id="slide-1">
+  <h2>What Is OpenClaw?</h2>
+  <h3>A self-hosted AI agent that runs on your machine and acts through your messaging apps</h3>
+  <div class="grid-2" style="margin-top:20px">
+    <div>
+      <p style="font-size:1.05rem;line-height:1.7;margin-bottom:20px">Unlike ChatGPT or Claude, OpenClaw doesn't just answer questions — it <strong style="color:#fff">executes actions</strong>. Book flights. Manage email. Run terminal commands. Browse the web. Control smart home devices.</p>
+      <p style="font-size:1.05rem;line-height:1.7;margin-bottom:20px">It connects through <strong style="color:#fff">WhatsApp, Telegram, Slack, Discord, Signal, and iMessage</strong> — no new app to install. Your data stays local. No subscription, no cloud.</p>
+      <p style="font-size:1.05rem;line-height:1.7">Created by <strong style="color:#fff">Peter Steinberger</strong> (founder of PSPDFKit). Launched November 2025. MIT licensed.</p>
+    </div>
+    <div class="grid-3" style="grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card"><div class="icon">💬</div><h4>6 messaging platforms</h4><p>WhatsApp, Telegram, Slack, Discord, Signal, iMessage</p></div>
+      <div class="card"><div class="icon">🏠</div><h4>100% local</h4><p>Runs on your machine, data never leaves</p></div>
+      <div class="card"><div class="icon">🔧</div><h4>3,000+ skills</h4><p>ClawHub marketplace, community-built</p></div>
+      <div class="card"><div class="icon">🤖</div><h4>Autonomous</h4><p>Heartbeat acts while you're away</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 3: Architecture -->
+<div class="slide" id="slide-2">
+  <h2>Architecture</h2>
+  <h3>Four components, one control plane</h3>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center">
+    <div class="arch-flow" style="width:100%;max-width:900px">
+      <div class="arch-row">
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">WhatsApp</div></div>
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">Telegram</div></div>
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">Slack</div></div>
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">Discord</div></div>
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">Signal</div></div>
+        <div class="arch-box" style="border-color:#4EA8DE40"><div class="label accent-blue">iMessage</div></div>
+      </div>
+      <div class="arrow-down">▼</div>
+      <div class="arch-box" style="border-color:#1ED76060;width:70%;padding:24px">
+        <div class="label accent-green" style="font-size:1rem">⚡ Gateway</div>
+        <div class="desc">Node.js WebSocket hub on 127.0.0.1:18789 — routes messages, manages sessions, enforces security, loads plugins</div>
+      </div>
+      <div class="arrow-down">▼</div>
+      <div class="arch-row" style="width:70%">
+        <div class="arch-box" style="flex:1;border-color:#A855F740">
+          <div class="label accent-purple">🧠 Brain</div>
+          <div class="desc">LLM reasoning (Claude, GPT, Grok, Ollama)</div>
+        </div>
+        <div class="arch-box" style="flex:1;border-color:#F59E0B40">
+          <div class="label accent-orange">🤲 Hands</div>
+          <div class="desc">Shell, Files, Browser, HTTP</div>
+        </div>
+        <div class="arch-box" style="flex:1;border-color:#4EA8DE40">
+          <div class="label accent-blue">💾 Memory</div>
+          <div class="desc">Local Markdown in ~/.openclaw/memory/</div>
+        </div>
+      </div>
+      <div class="arrow-down">▼</div>
+      <div class="arch-box" style="border-color:#EF444440;width:40%">
+        <div class="label accent-red">💗 Heartbeat</div>
+        <div class="desc">Every 30 min: checks tasks, acts autonomously</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 4: Star Growth -->
+<div class="slide" id="slide-3">
+  <h2>Star Growth: 0 → 220K in 84 Days</h2>
+  <h3>The fastest-growing software repository in GitHub history</h3>
+  <div style="flex:1;display:flex;align-items:center">
+    <div class="grid-2" style="width:100%">
+      <div class="chart-container" style="max-height:380px">
+        <canvas id="starChart"></canvas>
+      </div>
+      <div>
+        <table>
+          <tr><td style="color:#727272">Nov 24</td><td>0 stars</td><td style="color:#727272">Repo created</td></tr>
+          <tr><td style="color:#727272">Jan 24</td><td>~1,000</td><td style="color:#727272">Organic growth</td></tr>
+          <tr><td style="color:#F59E0B">Jan 26</td><td><strong style="color:#fff">+25,310</strong></td><td style="color:#F59E0B">Single-day record</td></tr>
+          <tr><td style="color:#727272">Jan 27</td><td>~40,000</td><td style="color:#727272">Anthropic trademark</td></tr>
+          <tr><td style="color:#727272">Jan 30</td><td>~60,000</td><td style="color:#727272">OpenClaw rebrand</td></tr>
+          <tr><td style="color:#727272">Feb 8</td><td>~145,000</td><td style="color:#727272">1,000+/day average</td></tr>
+          <tr><td style="color:#1ED760">Feb 17</td><td><strong style="color:#fff">200,000</strong></td><td style="color:#1ED760">84-day milestone</td></tr>
+          <tr><td style="color:#4EA8DE">Feb 23</td><td><strong style="color:#fff">220,651</strong></td><td style="color:#4EA8DE">Current</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 5: Ecosystem & Composition -->
+<div class="slide" id="slide-4">
+  <h2>Ecosystem & Composition</h2>
+  <h3>370 contributors, 42K forks, 50 releases, 5 language reimplementations</h3>
+  <div class="grid-2" style="flex:1;align-items:center">
+    <div>
+      <div class="chart-container" style="max-height:320px">
+        <canvas id="langChart"></canvas>
+      </div>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>Project</th><th>Language</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:#fff">OpenClaw</strong></td><td class="accent-blue">TypeScript</td><td>Original</td></tr>
+          <tr><td>ZeroClaw</td><td class="accent-orange">Rust</td><td>Performance</td></tr>
+          <tr><td>PicoClaw</td><td class="accent-green">Go</td><td>Lightweight</td></tr>
+          <tr><td>NanoClaw</td><td class="accent-purple">Python</td><td>ML integration</td></tr>
+          <tr><td>TinyClaw</td><td style="color:#e0e0e0">Shell</td><td>Minimal</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:24px">
+        <div class="card">
+          <h4>ClawHub Marketplace</h4>
+          <p>3,000+ community skills &middot; 341 confirmed malicious (~11%)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 6: Rebranding Timeline -->
+<div class="slide" id="slide-5">
+  <h2>The Wildest Week in Open Source</h2>
+  <h3>Three names, one crypto scam, $16M in fake tokens</h3>
+  <div style="flex:1;display:flex;align-items:center">
+    <div class="grid-2" style="width:100%">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#4EA8DE"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">November 2025</div>
+            <div class="timeline-text"><strong style="color:#fff">Clawdbot</strong> launches — a play on Anthropic's "Claude"</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#F59E0B"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">January 27, 2026</div>
+            <div class="timeline-text">Anthropic sends trademark request. Renames to <strong style="color:#fff">Moltbot</strong> — "same lobster soul, new shell"</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#EF4444"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">January 28, 2026</div>
+            <div class="timeline-text">Scammers grab abandoned accounts <strong style="color:#EF4444">within 10 seconds</strong>. Launch $CLAWD token on Solana.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#EF4444"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">Hours later</div>
+            <div class="timeline-text">$CLAWD hits <strong style="color:#EF4444">$16M market cap</strong>. Crashes 90% when Steinberger denies involvement.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:#1ED760"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">January 29, 2026</div>
+            <div class="timeline-text">Final rebrand to <strong style="color:#1ED760">OpenClaw</strong>. No abandoned accounts this time.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="border-color:#EF444440;margin-bottom:20px">
+          <h4 class="accent-red">The Lesson</h4>
+          <p style="font-size:1rem;line-height:1.6">In 2026, a naming decision on an open-source project can trigger a $16M financial event in under 24 hours. The intersection of open source, crypto speculation, and social media impersonation created a new category of risk.</p>
+        </div>
+        <div class="card">
+          <h4>By the Numbers</h4>
+          <table style="margin-top:8px">
+            <tr><td>Name changes</td><td style="color:#fff"><strong>3</strong></td></tr>
+            <tr><td>Time to hijack accounts</td><td style="color:#EF4444"><strong>~10 seconds</strong></td></tr>
+            <tr><td>Fake token market cap</td><td style="color:#F59E0B"><strong>$16M</strong></td></tr>
+            <tr><td>Token crash</td><td style="color:#EF4444"><strong>-90%</strong></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 7: Security -->
+<div class="slide" id="slide-6">
+  <h2>The Security Wake-Up Call</h2>
+  <h3>6 CVEs, 900 malicious skills, 40,000 exposed instances</h3>
+  <div style="flex:1;display:flex;align-items:center">
+    <div class="grid-2" style="width:100%">
+      <div>
+        <table>
+          <thead><tr><th>CVE</th><th>Severity</th><th>Risk</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-25593</td><td><span class="tag tag-critical">Critical</span></td><td>Unauthenticated command execution</td></tr>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-25253</td><td><span class="tag tag-high">High 8.8</span></td><td>One-click RCE via malicious URLs</td></tr>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-26323</td><td><span class="tag tag-high">High</span></td><td>CI/supply-chain injection</td></tr>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-26327</td><td><span class="tag tag-medium">Medium</span></td><td>Gateway impersonation (mDNS)</td></tr>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-26317</td><td><span class="tag tag-medium">Medium</span></td><td>Privilege escalation</td></tr>
+            <tr><td style="font-family:monospace;font-size:0.8rem">CVE-2026-26329</td><td><span class="tag tag-medium">Medium</span></td><td>Token replay attacks</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="card" style="border-color:#EF444440;margin-bottom:16px">
+          <h4>The "Lethal Trifecta"</h4>
+          <p style="line-height:1.6">1. Access to private data (files, emails, messages)<br>2. Exposure to untrusted content (web browsing)<br>3. External communication (send messages, API calls)</p>
+          <p style="margin-top:10px;color:#EF4444;font-weight:600">A compromised agent can exfiltrate data through channels you'd never check.</p>
+        </div>
+        <div class="grid-3" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:0">
+          <div class="card" style="text-align:center"><div style="font-size:2rem;font-weight:700;color:#EF4444">~900</div><div style="font-size:0.8rem;color:#727272">Malicious skills (20% of ClawHub)</div></div>
+          <div class="card" style="text-align:center"><div style="font-size:2rem;font-weight:700;color:#F59E0B">40,000+</div><div style="font-size:0.8rem;color:#727272">Exposed instances (35% vulnerable)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8: Product Insights -->
+<div class="slide" id="slide-7">
+  <h2>Why OpenClaw Exploded: 3 Product Insights</h2>
+  <h3>The innovation isn't the AI model — it's the interaction model</h3>
+  <div class="grid-3" style="flex:1;align-items:center">
+    <div class="card" style="height:100%;display:flex;flex-direction:column">
+      <div class="insight-num">01</div>
+      <h4 style="font-size:1.15rem;margin-bottom:12px">Local-First Is the Killer Feature</h4>
+      <p style="flex:1;line-height:1.6">In an era of subscription fatigue, "runs on your machine, data never leaves" is a powerful proposition. Users bought so many Mac Minis as dedicated agent machines that Apple stores sold out.</p>
+      <p style="margin-top:12px;font-size:0.85rem;color:#1ED760;font-weight:600">Removing cloud dependency is a feature, not a limitation.</p>
+    </div>
+    <div class="card" style="height:100%;display:flex;flex-direction:column">
+      <div class="insight-num">02</div>
+      <h4 style="font-size:1.15rem;margin-bottom:12px">Messaging-as-Interface</h4>
+      <p style="flex:1;line-height:1.6">OpenClaw meets you in WhatsApp, Telegram, Slack — apps already open on your phone. No new UI to learn. Distribution through existing channels beats purpose-built interfaces.</p>
+      <p style="margin-top:12px;font-size:0.85rem;color:#4EA8DE;font-weight:600">The best interface is the one you already use.</p>
+    </div>
+    <div class="card" style="height:100%;display:flex;flex-direction:column">
+      <div class="insight-num">03</div>
+      <h4 style="font-size:1.15rem;margin-bottom:12px">The Heartbeat Creates Attachment</h4>
+      <p style="flex:1;line-height:1.6">Every 30 minutes, the agent checks for tasks and acts autonomously. This transforms OpenClaw from a tool you use into an assistant that works for you. Chatbots respond. Agents initiate.</p>
+      <p style="margin-top:12px;font-size:0.85rem;color:#A855F7;font-weight:600">The smallest feature that creates the largest behavioral shift.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 9: Framework in Action -->
+<div class="slide" id="slide-8">
+  <h2>How This Was Built: The Framework in Action</h2>
+  <h3>4 skills, ~3 hours, from zero knowledge to complete analysis</h3>
+  <div style="flex:1;display:flex;align-items:center">
+    <div class="grid-2" style="width:100%">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <span class="skill-tag skill-tech">/technical-analyst</span>
+          <h4>Map the Architecture</h4>
+          <p>"Trace a WhatsApp message through to an executed action. Map every component."</p>
+          <p style="color:#4EA8DE;font-size:0.85rem;margin-top:8px">Output: Architecture diagram, component breakdown, message flow</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag skill-data">/data-analyst</span>
+          <h4>Collect the Numbers</h4>
+          <p>"Get star history, contributor stats, language breakdown, ecosystem projects."</p>
+          <p style="color:#1ED760;font-size:0.85rem;margin-top:8px">Output: Chart-ready datasets, growth milestones, comparison benchmarks</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag skill-devil">/devil-advocate</span>
+          <h4>Challenge the Narrative</h4>
+          <p>"What are the real risks? Where does this fall apart at scale?"</p>
+          <p style="color:#EF4444;font-size:0.85rem;margin-top:8px">Output: CVE analysis, permission model critique, malicious skills data</p>
+        </div>
+        <div class="card">
+          <span class="skill-tag skill-builder">/builder</span>
+          <h4>Build the Deliverables</h4>
+          <p>"Create an interactive presentation with charts, plus a PPTX deck."</p>
+          <p style="color:#A855F7;font-size:0.85rem;margin-top:8px">Output: This presentation, PowerPoint deck, Substack article</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="border-color:#1ED76040">
+          <h4 style="font-size:1.15rem">The Compounding Effect</h4>
+          <p style="line-height:1.7;font-size:1rem;margin-top:12px">Each step builds on the previous one:</p>
+          <p style="line-height:1.7;font-size:0.95rem;margin-top:12px"><span class="accent-blue">Technical analysis</span> told us what to measure.</p>
+          <p style="line-height:1.7;font-size:0.95rem"><span class="accent-green">Data collection</span> revealed the growth inflection points.</p>
+          <p style="line-height:1.7;font-size:0.95rem"><span class="accent-red">Devil's advocate</span> found the security counter-narrative.</p>
+          <p style="line-height:1.7;font-size:0.95rem"><span class="accent-purple">Builder mode</span> turned all of it into shareable formats.</p>
+          <p style="line-height:1.7;font-size:1rem;margin-top:16px;color:#fff;font-weight:600">Structured thinking compounds. Each mode contributes something the others can't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 10: Takeaways -->
+<div class="slide" id="slide-9">
+  <h2>Key Takeaways</h2>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;max-width:900px">
+    <div style="display:flex;align-items:flex-start;gap:20px">
+      <div style="font-size:1.6rem;font-weight:800;color:#4EA8DE;flex-shrink:0;width:36px">01</div>
+      <div>
+        <p style="font-size:1.1rem;line-height:1.5"><strong style="color:#fff">You don't need to be a developer to understand complex technical projects.</strong> You need a structured approach — architecture, data, risks, communication.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px">
+      <div style="font-size:1.6rem;font-weight:800;color:#1ED760;flex-shrink:0;width:36px">02</div>
+      <div>
+        <p style="font-size:1.1rem;line-height:1.5"><strong style="color:#fff">OpenClaw's innovation is the distribution, not the AI.</strong> Messaging-as-interface, local-first, autonomous heartbeat. The model is swappable; the interaction model is the moat.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px">
+      <div style="font-size:1.6rem;font-weight:800;color:#EF4444;flex-shrink:0;width:36px">03</div>
+      <div>
+        <p style="font-size:1.1rem;line-height:1.5"><strong style="color:#fff">Speed and security are inversely correlated at scale.</strong> 220K stars = 900 malicious plugins + 6 CVEs + 40K exposed instances.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px">
+      <div style="font-size:1.6rem;font-weight:800;color:#F59E0B;flex-shrink:0;width:36px">04</div>
+      <div>
+        <p style="font-size:1.1rem;line-height:1.5"><strong style="color:#fff">The open-source AI agent era has new risk categories.</strong> When an agent has your full system permissions, the blast radius is your entire digital life.</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:20px">
+      <div style="font-size:1.6rem;font-weight:800;color:#A855F7;flex-shrink:0;width:36px">05</div>
+      <div>
+        <p style="font-size:1.1rem;line-height:1.5"><strong style="color:#fff">AI works best as a thinking partner when you give it structure.</strong> Agent modes aren't magic — they're forcing functions that ensure multiple angles.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:#505050;font-size:0.9rem">Framework: <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" style="color:#4EA8DE">github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework</a></p>
+  </div>
+</div>
+
+<div class="nav">
+  <button onclick="prev()">← Prev</button>
+  <button onclick="next()">Next →</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+
+function show(i) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(i, total - 1));
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  document.getElementById('slideNum').textContent = (current + 1) + ' / ' + total;
+  if (current === 3 && !window._starChartDone) initStarChart();
+  if (current === 4 && !window._langChartDone) initLangChart();
+}
+
+function next() { show(current + 1); }
+function prev() { show(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+});
+
+function initStarChart() {
+  window._starChartDone = true;
+  const ctx = document.getElementById('starChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Nov 24','Dec 15','Jan 1','Jan 15','Jan 24','Jan 26','Jan 27','Jan 30','Feb 8','Feb 17','Feb 23'],
+      datasets: [{
+        label: 'GitHub Stars',
+        data: [0, 200, 500, 800, 1000, 26000, 40000, 60000, 145000, 200000, 220651],
+        borderColor: '#4EA8DE',
+        backgroundColor: 'rgba(78,168,222,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointBackgroundColor: '#4EA8DE',
+        pointBorderColor: '#4EA8DE',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.parsed.y.toLocaleString() + ' stars'
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#727272', font: { size: 11 } }, grid: { color: '#1a1a1a' } },
+        y: {
+          ticks: {
+            color: '#727272',
+            font: { size: 11 },
+            callback: v => v >= 1000 ? (v/1000) + 'K' : v
+          },
+          grid: { color: '#1a1a1a' }
+        }
+      }
+    }
+  });
+}
+
+function initLangChart() {
+  window._langChartDone = true;
+  const ctx = document.getElementById('langChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['TypeScript', 'Swift', 'Other'],
+      datasets: [{
+        data: [85.2, 11.0, 3.8],
+        backgroundColor: ['#4EA8DE', '#F59E0B', '#303030'],
+        borderColor: '#0a0a0a',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: '#b3b3b3', font: { size: 13 }, padding: 20 }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ctx.label + ': ' + ctx.parsed + '%'
+          }
+        }
+      }
+    }
+  });
+}
+
+show(0);
+</script>
+</body>
+</html>
