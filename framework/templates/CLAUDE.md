@@ -46,6 +46,7 @@ When I ask about:
 
 ## Constraints
 
+- **Use Mermaid diagrams rather than ASCII art** — When producing architecture diagrams, flowcharts, or sequence diagrams in Markdown, use Mermaid (`\`\`\`mermaid`) format. Mermaid renders natively on GitHub and is easier to maintain.
 - [Any important rules or constraints to follow]
 - [Things to avoid or be careful about]
 

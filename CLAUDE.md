@@ -32,6 +32,10 @@ When working in this repo:
 - **Copy** prompts from `framework/core/starter-prompts.md`
 - **Follow** workflows in `framework/core/workflows/` for specific scenarios
 
+## Formatting Rules
+
+- **Use Mermaid diagrams rather than ASCII art** — When producing architecture diagrams, flowcharts, sequence diagrams, or any visual in Markdown files, use Mermaid (`\`\`\`mermaid`) format. Mermaid renders natively on GitHub and is easier to maintain than ASCII box drawings.
+
 ## The Core Principle
 
 > **PM work is reconciling four sources of truth. AI helps you explore each faster and spot conflicts. Judgment stays human.**
