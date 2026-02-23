@@ -44,12 +44,10 @@ Critically, **the Brain never directly touches the filesystem or network**. It c
 
 Four capabilities that execute the Brain's decisions:
 
-| Capability | What It Does |
-|-----------|-------------|
-| **Shell** | Runs terminal commands |
-| **Filesystem** | Reads and writes files |
-| **Browser** | Chromium automation for web tasks |
-| **HTTP** | Makes API requests |
+- **Shell** — Runs terminal commands
+- **Filesystem** — Reads and writes files
+- **Browser** — Chromium automation for web tasks
+- **HTTP** — Makes API requests
 
 The Hands run with *your* user permissions. Whatever you can do on your computer, OpenClaw can do. This is both the superpower and the risk.
 
@@ -88,42 +86,36 @@ graph TD
 
 ### Star Growth: 0 to 220K in 84 Days
 
-| Date | Stars | Event |
-|------|-------|-------|
-| Nov 24, 2025 | 0 | Repository created |
-| Jan 24, 2026 | ~1,000 | 2 months of organic growth |
-| Jan 26, 2026 | ~26,000 | **+25,310 in one day** (GitHub record) |
-| Jan 27, 2026 | ~40,000 | Anthropic trademark request / Moltbot rebrand |
-| Jan 30, 2026 | ~60,000 | Final rebrand to OpenClaw |
-| Feb 8, 2026 | ~145,000 | Averaging 1,000+ stars/day |
-| Feb 17, 2026 | 200,000 | 84-day milestone |
-| Feb 23, 2026 | 220,651 | Current |
+- **Nov 24, 2025** — 0 stars. Repository created.
+- **Jan 24, 2026** — ~1,000 stars. 2 months of organic growth.
+- **Jan 26, 2026** — ~26,000 stars. **+25,310 in one day** (GitHub record).
+- **Jan 27, 2026** — ~40,000 stars. Anthropic trademark request / Moltbot rebrand.
+- **Jan 30, 2026** — ~60,000 stars. Final rebrand to OpenClaw.
+- **Feb 8, 2026** — ~145,000 stars. Averaging 1,000+ stars/day.
+- **Feb 17, 2026** — 200,000 stars. 84-day milestone.
+- **Feb 23, 2026** — 220,651 stars. Current.
 
 For context: React took over a *decade* to reach 243K stars. Linux sits at 217K. OpenClaw will likely pass both within weeks.
 
 ### Repository Stats
 
-| Metric | Value |
-|--------|-------|
-| Stars | 220,651 |
-| Forks | 42,036 |
-| Contributors | 370 |
-| Releases | 50 |
-| Primary language | TypeScript (85.2%) |
-| Secondary | Swift (11.0%) |
-| Open issues | 8,176 |
+- **Stars:** 220,651
+- **Forks:** 42,036
+- **Contributors:** 370
+- **Releases:** 50
+- **Primary language:** TypeScript (85.2%)
+- **Secondary:** Swift (11.0%)
+- **Open issues:** 8,176
 
 ### The Ecosystem
 
 OpenClaw spawned an entire ecosystem of language-specific reimplementations:
 
-| Project | Language | Purpose |
-|---------|----------|---------|
-| OpenClaw | TypeScript | Original |
-| ZeroClaw | Rust | Performance-focused |
-| PicoClaw | Go | Lightweight |
-| NanoClaw | Python | ML integration |
-| TinyClaw | Shell | Minimal, script-based |
+- **OpenClaw** (TypeScript) — Original
+- **ZeroClaw** (Rust) — Performance-focused
+- **PicoClaw** (Go) — Lightweight
+- **NanoClaw** (Python) — ML integration
+- **TinyClaw** (Shell) — Minimal, script-based
 
 Plus **ClawHub** — a marketplace with 3,000+ community-built skills. And **Moltbook** — an AI-only social network with 1.5 million autonomous agents interacting with each other.
 
@@ -153,14 +145,12 @@ OpenClaw's explosive growth exposed a fundamental tension: **an agent that can d
 
 Six critical vulnerabilities were disclosed in January–February 2026:
 
-| CVE | Severity | What It Allows |
-|-----|----------|---------------|
-| CVE-2026-25593 | Critical | Arbitrary command execution via unauthenticated Gateway WebSocket |
-| CVE-2026-25253 | High (8.8) | One-click RCE when visiting attacker-controlled URLs |
-| CVE-2026-26323 | High | Command injection via malicious commit metadata |
-| CVE-2026-26327 | Medium | Gateway impersonation via mDNS spoofing |
-| CVE-2026-26317 | Medium | Privilege escalation via metadata validation failures |
-| CVE-2026-26329 | Medium | Token replay attacks |
+- **CVE-2026-25593** (Critical) — Arbitrary command execution via unauthenticated Gateway WebSocket
+- **CVE-2026-25253** (High, 8.8) — One-click RCE when visiting attacker-controlled URLs
+- **CVE-2026-26323** (High) — Command injection via malicious commit metadata
+- **CVE-2026-26327** (Medium) — Gateway impersonation via mDNS spoofing
+- **CVE-2026-26317** (Medium) — Privilege escalation via metadata validation failures
+- **CVE-2026-26329** (Medium) — Token replay attacks
 
 ### The Malicious Skills Problem
 
