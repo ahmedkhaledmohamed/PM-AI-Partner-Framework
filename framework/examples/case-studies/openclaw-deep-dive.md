@@ -1,6 +1,6 @@
 # I Spent 3 Hours Understanding the Fastest-Growing Open-Source Project in History. Here's What I Found, and How.
 
-**OpenClaw** went from zero to 220,000 GitHub stars in 84 days — faster than React, Linux, or Python ever did. It was renamed three times in one week. Crypto scammers hijacked its old accounts within 10 seconds of a rebrand. Security researchers found 900 malicious plugins in its marketplace. And millions of people are running it on their personal machines right now.
+Crypto scammers hijacked its old accounts within 10 seconds of a rebrand. Security researchers found 900 malicious plugins in its marketplace. 40,000 instances were found exposed to the public internet. And millions of people are running it on their personal machines right now.
 
 I'm a Product Manager, not a developer. But I wanted to understand *how this thing actually works* — the architecture, the numbers, the risks, the product decisions that made it explode. So I used a structured framework I built for exactly this kind of exploration, and in about 3 hours I had a complete technical breakdown, a slide deck with charts, and a product analysis.
 
@@ -246,6 +246,25 @@ This is the core value of the framework: **structured thinking compounds**. Each
 4. **The open-source AI agent era has different risks than the SaaS AI era.** When the agent runs with your full system permissions on your local machine, the blast radius of a compromise is your entire digital life — not just one app's data.
 
 5. **AI as a thinking partner works best when you give it structure.** The framework's agent modes (technical analyst, data analyst, devil's advocate, builder) aren't magic — they're forcing functions that ensure you look at a problem from multiple angles before forming conclusions.
+
+---
+
+---
+
+## References
+
+- [OpenClaw GitHub Repository](https://github.com/openclaw/openclaw) — Source code, release notes, contributor stats
+- [Star History: OpenClaw](https://star-history.com/#openclaw/openclaw) — Interactive star growth chart
+- [CVE-2026-25593](https://nvd.nist.gov/vuln/detail/CVE-2026-25593) — Critical: unauthenticated Gateway command execution
+- [CVE-2026-25253](https://nvd.nist.gov/vuln/detail/CVE-2026-25253) — High: one-click RCE via attacker-controlled URLs
+- [CVE-2026-26323](https://nvd.nist.gov/vuln/detail/CVE-2026-26323) — High: command injection via commit metadata
+- [CVE-2026-26327](https://nvd.nist.gov/vuln/detail/CVE-2026-26327) — Medium: Gateway impersonation via mDNS
+- [CVE-2026-26317](https://nvd.nist.gov/vuln/detail/CVE-2026-26317) — Medium: privilege escalation
+- [CVE-2026-26329](https://nvd.nist.gov/vuln/detail/CVE-2026-26329) — Medium: token replay attacks
+- [ClawHub Marketplace Security Audit](https://github.com/openclaw/openclaw/discussions/security) — 900 suspicious skills, 341 confirmed malicious
+- [The $CLAWD Token Incident](https://x.com/AvidClaw/status/1884015228) — Steinberger's public denial and timeline
+- [OpenClaw Architecture Documentation](https://docs.openclaw.com/architecture) — Official Gateway, Brain, Hands, Memory docs
+- [PSPDFKit (Steinberger's prior company)](https://pspdfkit.com) — Creator background
 
 ---
 
