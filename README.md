@@ -72,25 +72,21 @@ pm-ai-partner-framework/
 
 > **PM work is reconciling four sources of truth. AI helps you explore each faster. Judgment stays human.**
 
-```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│    CODE     │  │    DOCS     │  │    DATA     │  │  JUDGMENT   │
-│  Technical  │  │ Contextual  │  │  Empirical  │  │    Human    │
-│             │  │             │  │             │  │             │
-│ What CAN    │  │ What's      │  │ What IS     │  │ What        │
-│ happen?     │  │ expected?   │  │ happening?  │  │ SHOULD?     │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                │                │                │
-       └────────────────┴────────┬───────┴────────────────┘
-                                 ▼
-                    ┌─────────────────────┐
-                    │    RECONCILIATION   │
-                    │     (AI + Human)    │
-                    └──────────┬──────────┘
-                               ▼
-                    ┌─────────────────────┐
-                    │      DECISION       │
-                    └─────────────────────┘
+```mermaid
+graph TD
+    CODE["**CODE**<br/>Technical<br/><i>What CAN happen?</i>"] --> R
+    DOCS["**DOCS**<br/>Contextual<br/><i>What's expected?</i>"] --> R
+    DATA["**DATA**<br/>Empirical<br/><i>What IS happening?</i>"] --> R
+    JUDGMENT["**JUDGMENT**<br/>Human<br/><i>What SHOULD happen?</i>"] --> R
+
+    R["**RECONCILIATION**<br/>(AI + Human)"] --> D["**DECISION**"]
+
+    style CODE fill:#1e3a5f,stroke:#3b82f6,color:#f8fafc
+    style DOCS fill:#1a3a2a,stroke:#22c55e,color:#f8fafc
+    style DATA fill:#3a2a1a,stroke:#f59e0b,color:#f8fafc
+    style JUDGMENT fill:#3b1f5e,stroke:#a855f7,color:#f8fafc
+    style R fill:#1a1a2e,stroke:#6366f1,color:#f8fafc
+    style D fill:#1a2e1a,stroke:#22c55e,color:#f8fafc
 ```
 
 ---
