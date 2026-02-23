@@ -14,7 +14,7 @@ pm-ai-partner-framework/
 ├── framework/
 │   ├── core/              # Methodology: agent modes, workflows, philosophy
 │   └── templates/         # Config files to copy into your workspace
-└── docs/                  # GitHub Pages website
+└── site/                  # GitHub Pages website (index, images, presentations)
 ```
 
 ## Quick Start

@@ -182,7 +182,7 @@ The recommended setup uses **three core repos** plus any dependencies you need.
 └── [dependencies]/              # Cloned as needed for your work
     ├── frontend/
     ├── backend/
-    └── docs/
+    └── site/
 ```
 
 ### 4.3 Create Your Workspace
@@ -343,7 +343,7 @@ Claude should list all six modes with their purposes. If not, point it at the fr
 
 The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
 
-![Six Agent Modes Diagram](docs/images/agent-modes-diagram.png)
+![Six Agent Modes Diagram](site/images/agent-modes-diagram.png)
 
 | Mode                  | When to Use                          | How to Invoke                                             |
 | --------------------- | ------------------------------------ | --------------------------------------------------------- |
@@ -627,16 +627,16 @@ As a PM, you'll often build dashboards, documentation sites, or presentation pag
 
 Deploy directly from your repo — perfect for documentation and simple sites.
 
-1. **Create a `docs/` folder** in your repo with your site files
+1. **Put your site files in `site/`** in your repo
 2. **Go to repo Settings** → **Pages**
-3. **Set Source** to "Deploy from a branch" → select `main` → `/docs`
-4. Your site will be at: `https://username.github.io/repo-name/`
+3. **Set Source** to "GitHub Actions"
+4. **Add the workflow** from `.github/workflows/pages.yml` (included in this repo)
+5. Your site will be at: `https://username.github.io/repo-name/`
 
 ```bash
-# Example: Deploy your framework site
-mkdir -p docs
-cp -r site/* docs/
-git add docs && git commit -m "Add site for GitHub Pages"
+# Just commit your site/ changes — the GitHub Action deploys automatically
+git add site/ .github/workflows/pages.yml
+git commit -m "Update site"
 git push
 ```
 

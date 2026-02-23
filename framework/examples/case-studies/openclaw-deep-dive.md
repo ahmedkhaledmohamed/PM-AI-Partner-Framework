@@ -61,36 +61,25 @@ Local Markdown files stored in `~/.openclaw/memory/` containing your preferences
 
 Every 30 minutes (configurable), the Gateway sends the agent a heartbeat prompt. The agent checks `HEARTBEAT.md` for scheduled tasks and takes autonomous action — no user input needed. This is what makes OpenClaw feel "alive": it can monitor your inbox, check prices, send reminders, and execute workflows while you're away.
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  WhatsApp    │     │  Telegram    │     │  Discord     │
-│  Signal      │     │  Slack       │     │  iMessage    │
-└──────┬───────┘     └──────┬───────┘     └──────┬───────┘
-       │                    │                    │
-       └────────────────────┼────────────────────┘
-                            ▼
-                   ┌─────────────────┐
-                   │    GATEWAY      │
-                   │  (Node.js hub)  │
-                   │  WebSocket API  │
-                   └────────┬────────┘
-                            │
-              ┌─────────────┼─────────────┐
-              ▼             ▼             ▼
-      ┌──────────┐  ┌──────────┐  ┌──────────┐
-      │  BRAIN   │  │  HANDS   │  │  MEMORY  │
-      │  (LLM)   │  │ (Shell,  │  │ (Local   │
-      │ Claude/  │  │  Files,  │  │ Markdown │
-      │ GPT/etc) │  │ Browser, │  │  files)  │
-      │          │  │  HTTP)   │  │          │
-      └──────────┘  └──────────┘  └──────────┘
-                            │
-                    ┌───────┴───────┐
-                    │   HEARTBEAT   │
-                    │ (Every 30min) │
-                    │  Autonomous   │
-                    │   actions     │
-                    └───────────────┘
+```mermaid
+graph TD
+    WA["WhatsApp · Signal"] --> GW
+    TG["Telegram · Slack"] --> GW
+    DC["Discord · iMessage"] --> GW
+
+    GW["**GATEWAY**<br/>Node.js hub · WebSocket API"]
+
+    GW --> BR["**BRAIN**<br/>LLM — Claude / GPT / Ollama"]
+    GW --> HA["**HANDS**<br/>Shell · Files · Browser · HTTP"]
+    GW --> ME["**MEMORY**<br/>Local Markdown files"]
+
+    HA --> HB["**HEARTBEAT**<br/>Every 30 min · Autonomous actions"]
+
+    style GW fill:#1e3a5f,stroke:#3b82f6,color:#e0e0e0
+    style BR fill:#3b1f5e,stroke:#a855f7,color:#e0e0e0
+    style HA fill:#1a3a2a,stroke:#22c55e,color:#e0e0e0
+    style ME fill:#3a2a1a,stroke:#f59e0b,color:#e0e0e0
+    style HB fill:#3a1a1a,stroke:#ef4444,color:#e0e0e0
 ```
 
 ---
