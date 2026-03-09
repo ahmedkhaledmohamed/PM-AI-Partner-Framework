@@ -1,33 +1,54 @@
-# Getting Started: Replicate This Setup
+# Getting Started
 
 A step-by-step guide to set up AI-augmented PM workflows on your machine.
 
-**Time required:** ~30-60 minutes
+**Time required:** 30 seconds (plugin) or 30-60 minutes (full framework)
 **Difficulty:** Beginner-friendly
 
 ---
 
-## Quick Start (15 minutes)
+## Quick Install (30 seconds)
 
-Already familiar with the concepts? Here's the fast path:
+Install the plugin with one command — gives you 10 agent skills, 4 workflow commands, and 3 automation hooks:
+
+```bash
+npx pm-ai-partner@latest
+```
+
+The installer will prompt you to choose:
+1. **Runtime** — Claude Code, Cursor, Codex, or all three
+2. **Scope** — Global (all projects) or local (current project only)
+
+Then try: `/pm:thought-partner What should I focus on this quarter?`
+
+**[See all skills, commands, and hooks →](plugin/)**
+
+---
+
+## Full Framework Setup (30-60 minutes)
+
+For the complete methodology with workspace architecture, templates, MCP tools, and case studies:
 
 ```bash
 # 1. Fork and clone
 git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git
 cd PM-AI-Partner-Framework
 
-# 2. Copy templates to your workspace
+# 2. Install the plugin
+npx pm-ai-partner@latest
+
+# 3. Copy workspace templates
 mkdir -p ~/your-workspace/sandbox ~/your-workspace/product-catalog
 cp framework/templates/CLAUDE.md ~/your-workspace/
 cp framework/templates/CLAUDE-sandbox.md ~/your-workspace/sandbox/CLAUDE.md
 cp framework/templates/CLAUDE-product-catalog.md ~/your-workspace/product-catalog/CLAUDE.md
 
-# 3. (Optional) Set up MCP
+# 4. (Optional) Set up MCP
 mkdir -p ~/.cursor
 cp framework/templates/mcp.json ~/.cursor/
 # Edit ~/.cursor/mcp.json with your credentials
 
-# 4. Open in Cursor and start working
+# 5. Open in Cursor and start working
 cursor ~/your-workspace
 ```
 
@@ -436,79 +457,71 @@ In Cursor chat:
 
 ---
 
-## Step 9.5: Install Cursor Skills (Optional)
+## Step 9.5: Install Skills, Commands, and Hooks
 
-Skills are reusable AI behaviors you can invoke with slash commands like `/thought-partner` or `/product-brief`. The framework includes 10 pre-built skills.
+Skills are reusable AI behaviors you can invoke with slash commands. The framework includes 10 agent skills, 4 workflow commands, and 3 automation hooks.
 
-### Why Skills?
+### Option A: Plugin Install (Recommended)
 
-| Benefit | Description |
+```bash
+npx pm-ai-partner@latest
+```
+
+This installs everything — skills, commands, and hooks — for your chosen runtime (Claude Code, Cursor, or Codex).
+
+### Option B: Manual Install
+
+```bash
+# Cursor skills
+mkdir -p ~/.cursor/skills
+cp -r framework/templates/skills/*/ ~/.cursor/skills/
+
+# Claude Code skills
+cp -r framework/templates/claude-code-skills/*/ ~/.claude/skills/
+```
+
+### What You Get
+
+**10 Agent Skills:**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| thought-partner | `/pm:thought-partner` | Brainstorm, explore options, surface assumptions |
+| technical-analyst | `/pm:technical-analyst` | Translate code and systems into PM-friendly insights |
+| writer | `/pm:writer` | Draft briefs, updates, emails — concise and structured |
+| devil-advocate | `/pm:devil-advocate` | Stress-test proposals, anticipate objections |
+| builder | `/pm:builder` | Create tools, scripts, dashboards, prototypes |
+| data-analyst | `/pm:data-analyst` | Write queries, analyze metrics, extract insights |
+| product-brief | `/pm:product-brief` | Structured PRDs and feature specs |
+| meeting-prep | `/pm:meeting-prep` | Talking points, anticipated questions |
+| stakeholder-update | `/pm:stakeholder-update` | Status reports and executive summaries |
+| strategic-clarity | `/pm:strategic-clarity` | Define team identity, boundaries, and charter |
+
+**4 Workflow Commands:**
+
+| Command | What It Does |
 |---------|-------------|
-| **Consistency** | Same behavior every time you invoke a mode |
-| **Speed** | One slash command vs. writing a prompt |
-| **Auto-trigger** | Skills activate based on conversation context |
+| `/pm:plan-week` | Reviews context, sets priorities, flags risks |
+| `/pm:write-brief [feature]` | Guided PRD creation with quality checklist |
+| `/pm:prep-meeting [topic]` | Meeting prep with talking points, Q&A, and role-play |
+| `/pm:audit-codebase [system]` | PM-focused codebase exploration |
 
-### Install Skills
+**3 Automation Hooks:**
 
-```bash
-cd framework/templates/skills
-
-mkdir -p ~/.cursor/skills
-cp -r */ ~/.cursor/skills/
-```
-
-Or install specific skills only:
-```bash
-mkdir -p ~/.cursor/skills
-cp -r thought-partner ~/.cursor/skills/
-cp -r writer ~/.cursor/skills/
-cp -r product-brief ~/.cursor/skills/
-```
-
-### Available Skills
-
-**Agent Modes (6):**
-
-| Skill | Command | Description |
-|-------|---------|-------------|
-| thought-partner | `/thought-partner` | Explore ideas, brainstorm, think through problems |
-| technical-analyst | `/technical-analyst` | Understand systems, code, technical concepts |
-| writer | `/writer` | Draft documents, briefs, communications |
-| devil-advocate | `/devil-advocate` | Challenge ideas, stress-test proposals |
-| builder | `/builder` | Create tools, scripts, prototypes |
-| data-analyst | `/data-analyst` | Query data, analyze metrics |
-
-**Scenarios (3):**
-
-| Skill | Command | Description |
-|-------|---------|-------------|
-| product-brief | `/product-brief` | Write PRDs and feature specs |
-| meeting-prep | `/meeting-prep` | Prepare talking points, anticipate questions |
-| stakeholder-update | `/stakeholder-update` | Write status reports, executive summaries |
-
-**Workflows (1):**
-
-| Skill | Command | Description |
-|-------|---------|-------------|
-| strategic-clarity | `/strategic-clarity` | Guided workflow for team identity |
-
-### Using Skills
-
-**Option 1: Slash commands**
-```
-/thought-partner
-I need to think through our Q2 priorities
-```
-
-**Option 2: Auto-triggering**
-
-Skills activate automatically based on context. Saying "help me brainstorm" triggers `thought-partner`, saying "write a product brief" triggers `product-brief`.
+| Hook | Trigger | What It Does |
+|------|---------|-------------|
+| Quality Gate | Write to `product-catalog/` | Checks doc against quality bar |
+| Draft Status | Write to `sandbox/` | Reminds to add status markers |
+| Commit Reminder | `git commit` | Prompts to capture lessons in CLAUDE.md |
 
 ### Verify Installation
 
-In Cursor, type `/` and you should see your installed skills in the autocomplete.
+Restart your editor and run:
+```
+/pm:thought-partner What should I focus on this quarter?
+```
 
-See [`framework/templates/skills/README.md`](framework/templates/skills/README.md) for full documentation.
+See [`plugin/README.md`](plugin/README.md) for full documentation.
 
 ---
 
@@ -717,4 +730,4 @@ Open an issue on this repo or reach out on [LinkedIn](https://linkedin.com/in/ah
 
 ---
 
-_Last updated: January 2026_
+_Last updated: March 2026_

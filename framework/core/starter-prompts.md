@@ -2,6 +2,31 @@
 
 Copy-paste prompts for common PM scenarios. Customize the bracketed sections for your context.
 
+> **Prerequisite:** Install the plugin first: `npx pm-ai-partner@latest`
+> Skills auto-activate based on context, or invoke them with `/pm:skill-name`.
+
+---
+
+## Workflow Commands
+
+These are multi-step workflows — not single prompts. Just invoke the command and follow along.
+
+```
+/pm:plan-week
+```
+
+```
+/pm:write-brief [feature name]
+```
+
+```
+/pm:prep-meeting [topic or person]
+```
+
+```
+/pm:audit-codebase [system or repo name]
+```
+
 ---
 
 ## Agent Mode Prompts

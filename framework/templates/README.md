@@ -2,7 +2,15 @@
 
 Configuration and context templates for your workspace.
 
-## How to Use
+## Recommended: Install the Plugin
+
+```bash
+npx pm-ai-partner@latest
+```
+
+This installs all 10 skills, 4 commands, and 3 hooks for Claude Code, Cursor, or Codex. If you prefer manual setup, follow the steps below.
+
+## Manual Setup
 
 1. **Copy** these files to your workspace
 2. **Customize** the bracketed sections for your context

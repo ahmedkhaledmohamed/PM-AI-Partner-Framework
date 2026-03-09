@@ -1,5 +1,7 @@
 # Cursor Skills for PM AI Partner Framework
 
+> **Quick install:** `npx pm-ai-partner@latest` — installs all skills, commands, and hooks in one step.
+
 This directory contains Cursor Skills — reusable AI behaviors that can be invoked via slash commands or triggered automatically based on conversation context.
 
 ## What Are Skills?
