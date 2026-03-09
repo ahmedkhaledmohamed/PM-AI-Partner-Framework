@@ -1,7 +1,69 @@
 # PM AI Partner Framework
 
-**Latest Version:** v1.2 (February 2026)  
+**Latest Version:** v1.4.0 (February 2026)  
 **Repo:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
+
+---
+
+## What's New in v1.4.0
+
+### Product Brief Template
+
+Added a ready-to-use product brief template to the `product-brief` skill at `framework/templates/skills/product-brief/product-brief-template.md`. Sections include Problem Statement, Hypothesis, Requirements (P0/P1/P2), Success Metrics, Test Plan, Constraints, and Appendix.
+
+### Skill Correction: Technical Analyst
+
+Rewrote the technical-analyst skill example based on codebase audit findings. The original propagated an incorrect hypothesis ("iOS uses native prompt, Android redirects to Settings"). Corrected version reflects reality: both platforms redirect to Settings, but iOS lands on notification settings (one tap) while Android landed on general app info. Also documents Android's unused second native prompt attempt.
+
+### Updated Files
+
+| File | Change |
+|------|--------|
+| `framework/templates/skills/product-brief/product-brief-template.md` | New — Product Brief template |
+| `framework/templates/skills/technical-analyst/SKILL.md` | Fixed — corrected permission flow example |
+
+---
+
+## What's New in v1.3.0
+
+### Cursor Skills (10 new)
+
+Reusable AI behaviors invoked via slash commands or auto-triggered by conversation context:
+
+| Type | Skills |
+|------|--------|
+| Agent Modes (6) | thought-partner, technical-analyst, writer, devil-advocate, builder, data-analyst |
+| Scenarios (3) | product-brief, meeting-prep, stakeholder-update |
+| Workflows (1) | strategic-clarity |
+
+Each skill includes instructions, examples, and lessons learned from real usage.
+
+### Analysis Pipeline Workflow
+
+New 5-phase workflow from raw data question to deployed presentation:
+
+```
+QUERY → DOCUMENT → PRESENT → GENERATE → DEPLOY
+```
+
+Includes AI prompts, templates, CSS system, PPTX generation pattern, and git worktree strategy.
+
+### Advanced Patterns in Skills
+
+- **data-analyst:** Multi-dimensional breakdown, data caveat identification, CTR analysis, partition filtering
+- **builder:** HTML presentations, PPTX generation, static site deployment, git worktrees, Product Catalog pattern
+- **technical-analyst:** Codebase-to-product-insight, cross-platform comparison, evidence-backed recommendations
+
+### Updated Files
+
+| File | Change |
+|------|--------|
+| `framework/templates/skills/` (12 files) | New — all skill definitions + README |
+| `framework/core/workflows/analysis-pipeline.md` | New — 5-phase workflow |
+| `framework/core/workflows/README.md` | Added analysis-pipeline entry |
+| `CLAUDE.md` | Added slash command references |
+| `getting-started.md` | Added Step 9.5: Install Cursor Skills |
+| `framework/templates/README.md` | Added skills installation section |
 
 ---
 
@@ -153,7 +215,7 @@ Complete example of the Strategic Clarity workflow applied to a real team, showi
 ## Quick Start
 
 1. Fork the repo (click "Fork" on GHE)
-2. Clone: `git clone git@github.com:YOUR_USERNAME/PM-AI-Partner-Framework.git`
+2. Clone: `git clone github.com:YOUR_USERNAME/PM-AI-Partner-Framework.git`
 3. Open in Cursor: `cd pm-ai-partner-framework && cursor .`
 4. Customize `CLAUDE.md` with your context
 5. Start working!
@@ -191,7 +253,7 @@ This is the first public release, restructured for easy adoption:
 Questions, suggestions, or success stories? Reach out:
 
 - **Email:** ahmd.khaled.a.mohamed@gmail.com
-- **LinkedIn:** [linkedin.com/in/ahmedkhaledmohamed](https://linkedin.com/in/ahmedkhaledmohamed)
+- **LinkedIn:** [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
 
 ---
 
