@@ -1,6 +1,6 @@
 # PM AI Partner
 
-**10 AI skills, 4 workflow commands, and 3 automation hooks built for Product Managers.**
+**10 AI skills, 4 workflow commands, 3 automation hooks, and 12 MCP servers built for Product Managers.**
 
 [![npm version](https://img.shields.io/npm/v/pm-ai-partner?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/pm-ai-partner)
 [![GitHub stars](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=for-the-badge&logo=github&color=181717)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
@@ -68,6 +68,39 @@ Hooks fire automatically — no manual invocation needed.
 | **Draft Status** | Write to `sandbox/` | Reminds to add status markers to draft documents |
 | **Commit Reminder** | `git commit` | Prompts to capture lessons learned in CLAUDE.md |
 
+### 12 MCP Servers
+
+Connect your AI assistant to external tools. The installer offers a curated catalog of PM-relevant MCP servers — pick what you need and the config is generated automatically.
+
+**Zero-config (work immediately):**
+
+| Server | What It Does |
+|--------|-------------|
+| **Memory** | Persistent knowledge graph — track decisions across sessions |
+| **Fetch** | Pull web pages as markdown into chat |
+| **Sequential Thinking** | Enhanced step-by-step reasoning for complex problems |
+| **Filesystem** | Read/write local files with directory scoping |
+
+**PM Essentials (one credential each):**
+
+| Server | What It Does | Credential |
+|--------|-------------|------------|
+| **GitHub** | Issues, PRs, code search | `GITHUB_PERSONAL_ACCESS_TOKEN` |
+| **Google Drive** | Team docs, sheets, slides | `GOOGLE_APPLICATION_CREDENTIALS` |
+| **Slack** | Channels, threads, search | `SLACK_BOT_TOKEN` |
+| **Brave Search** | Web search for research | `BRAVE_API_KEY` |
+| **Notion** | Pages, databases, wikis | `OPENAPI_MCP_HEADERS` |
+
+**Data & Analytics (credentials + setup):**
+
+| Server | What It Does | Credential |
+|--------|-------------|------------|
+| **PostgreSQL** | SQL queries against Postgres | Connection string |
+| **SQLite** | Query local SQLite databases | File path |
+| **BigQuery** | Google BigQuery analytics | GCP credentials JSON |
+
+Servers you skip are added as `disabled` with placeholder values — enable them later by adding your credentials to the config file.
+
 ---
 
 ## Install
@@ -81,6 +114,7 @@ npx pm-ai-partner@latest
 The installer prompts you to choose:
 1. **Runtime** — Claude Code, Cursor, Codex, or all
 2. **Scope** — Global (all projects) or local (current project only)
+3. **MCP Servers** — optionally browse and install from a catalog of 12 servers
 
 ### Non-Interactive
 
@@ -96,6 +130,12 @@ npx pm-ai-partner --all --global
 
 # Current project only
 npx pm-ai-partner --claude --local
+
+# Include MCP servers (all zero-config servers)
+npx pm-ai-partner --claude --global --mcp
+
+# Specific MCP servers by ID
+npx pm-ai-partner --claude --global --mcp=memory,fetch,github
 ```
 
 ### Claude Code Plugin (Alternative)
@@ -237,7 +277,7 @@ The **quality gate hook** activates for `product-catalog/` files. The **draft st
 npx pm-ai-partner@latest
 ```
 
-Re-running the installer updates all skills, commands, and hooks.
+Re-running the installer updates all skills, commands, and hooks. MCP server configs are never overwritten — existing servers are preserved.
 
 ---
 
@@ -260,7 +300,7 @@ This plugin is part of the **PM AI Partner Framework** — a complete methodolog
 - **4 detailed workflow patterns** (Strategic Clarity, Codebase Deep-Dive, Tool Building, Analysis Pipeline)
 - **Workspace architecture** (sandbox → product-catalog graduation)
 - **CLAUDE.md templates** for team context
-- **MCP tool configurations** (BigQuery, Google Drive, Text2SQL)
+- **12 MCP server configs** (Memory, GitHub, Slack, BigQuery, and more)
 - **Case studies** with worked examples
 - **Presentations** and demo materials
 

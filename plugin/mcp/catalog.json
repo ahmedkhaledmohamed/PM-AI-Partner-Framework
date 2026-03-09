@@ -1,0 +1,226 @@
+{
+  "servers": [
+    {
+      "id": "memory",
+      "name": "Memory",
+      "package": "@modelcontextprotocol/server-memory",
+      "description": "Persistent knowledge graph for notes and context across sessions",
+      "tier": "zero-config",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {},
+      "credentials": [],
+      "pmUseCase": "Track decisions, maintain context between sessions"
+    },
+    {
+      "id": "fetch",
+      "name": "Fetch",
+      "package": "@modelcontextprotocol/server-fetch",
+      "description": "Fetch web pages and convert to markdown for analysis",
+      "tier": "zero-config",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "env": {},
+      "credentials": [],
+      "pmUseCase": "Pull competitor pages, docs, and articles into chat"
+    },
+    {
+      "id": "sequential-thinking",
+      "name": "Sequential Thinking",
+      "package": "@modelcontextprotocol/server-sequential-thinking",
+      "description": "Enhanced step-by-step reasoning for complex problems",
+      "tier": "zero-config",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {},
+      "credentials": [],
+      "pmUseCase": "Break down complex strategy and prioritization problems"
+    },
+    {
+      "id": "filesystem",
+      "name": "Filesystem",
+      "package": "@modelcontextprotocol/server-filesystem",
+      "description": "Read and write local files with directory access control",
+      "tier": "zero-config",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "_ARG_",
+          "type": "arg",
+          "label": "Allowed directory path",
+          "help": "e.g. /Users/you/Documents or ~/Developer",
+          "default": "."
+        }
+      ],
+      "pmUseCase": "Access local docs, notes, and project files"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "package": "@modelcontextprotocol/server-github",
+      "description": "Access GitHub repos, issues, PRs, and code search",
+      "tier": "pm-essentials",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "GITHUB_PERSONAL_ACCESS_TOKEN",
+          "type": "env",
+          "label": "GitHub personal access token",
+          "help": "Create at https://github.com/settings/tokens"
+        }
+      ],
+      "pmUseCase": "Track issues, review PRs, search code across repos"
+    },
+    {
+      "id": "google-drive",
+      "name": "Google Drive",
+      "package": "@anthropic/google-drive-mcp",
+      "description": "Search and read Google Docs, Sheets, and Slides",
+      "tier": "pm-essentials",
+      "command": "npx",
+      "args": ["-y", "@anthropic/google-drive-mcp"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "GOOGLE_APPLICATION_CREDENTIALS",
+          "type": "env",
+          "label": "Path to Google service account JSON",
+          "help": "Create at https://console.cloud.google.com/iam-admin/serviceaccounts"
+        }
+      ],
+      "pmUseCase": "Pull context from team docs, strategy sheets, meeting notes"
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "package": "@modelcontextprotocol/server-slack",
+      "description": "Read Slack channels, threads, and search messages",
+      "tier": "pm-essentials",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "SLACK_BOT_TOKEN",
+          "type": "env",
+          "label": "Slack bot token (xoxb-...)",
+          "help": "Create at https://api.slack.com/apps"
+        }
+      ],
+      "pmUseCase": "Search team discussions, find decisions, pull meeting notes"
+    },
+    {
+      "id": "brave-search",
+      "name": "Brave Search",
+      "package": "@modelcontextprotocol/server-brave-search",
+      "description": "Web search powered by Brave Search API",
+      "tier": "pm-essentials",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "BRAVE_API_KEY",
+          "type": "env",
+          "label": "Brave Search API key",
+          "help": "Get free key at https://brave.com/search/api/"
+        }
+      ],
+      "pmUseCase": "Research competitors, find industry trends, fact-check claims"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "package": "@notionhq/notion-mcp-server",
+      "description": "Access Notion pages, databases, and workspace content",
+      "tier": "pm-essentials",
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "OPENAPI_MCP_HEADERS",
+          "type": "env",
+          "label": "Notion API headers JSON",
+          "help": "Format: {\"Authorization\": \"Bearer ntn_...\", \"Notion-Version\": \"2022-06-28\"} — get token at https://www.notion.so/my-integrations"
+        }
+      ],
+      "pmUseCase": "Pull from team wikis, roadmap databases, and spec pages"
+    },
+    {
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "package": "@modelcontextprotocol/server-postgres",
+      "description": "Run SQL queries against PostgreSQL databases",
+      "tier": "data-analytics",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "_ARG_",
+          "type": "arg",
+          "label": "PostgreSQL connection string",
+          "help": "e.g. postgresql://user:pass@localhost:5432/mydb"
+        }
+      ],
+      "pmUseCase": "Query product metrics, run ad-hoc analysis, validate hypotheses"
+    },
+    {
+      "id": "sqlite",
+      "name": "SQLite",
+      "package": "@modelcontextprotocol/server-sqlite",
+      "description": "Query and analyze local SQLite databases",
+      "tier": "data-analytics",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "_ARG_",
+          "type": "arg",
+          "label": "Path to SQLite database file",
+          "help": "e.g. ./data/analytics.db"
+        }
+      ],
+      "pmUseCase": "Analyze local datasets, prototype data models"
+    },
+    {
+      "id": "bigquery",
+      "name": "BigQuery",
+      "package": "@anthropic/bigquery-mcp",
+      "description": "Run SQL queries against Google BigQuery datasets",
+      "tier": "data-analytics",
+      "command": "npx",
+      "args": ["-y", "@anthropic/bigquery-mcp"],
+      "env": {},
+      "credentials": [
+        {
+          "key": "GOOGLE_APPLICATION_CREDENTIALS",
+          "type": "env",
+          "label": "Path to GCP service account JSON",
+          "help": "Create at https://console.cloud.google.com/iam-admin/serviceaccounts"
+        }
+      ],
+      "pmUseCase": "Query product analytics, build dashboards, validate with data"
+    }
+  ],
+  "tiers": {
+    "zero-config": {
+      "label": "Zero-config (works immediately)",
+      "description": "No API keys or credentials needed"
+    },
+    "pm-essentials": {
+      "label": "PM Essentials (need one credential each)",
+      "description": "Common PM tools — provide an API key to enable"
+    },
+    "data-analytics": {
+      "label": "Data & Analytics (need credentials + setup)",
+      "description": "Database and analytics tools for metrics-driven PMs"
+    }
+  }
+}

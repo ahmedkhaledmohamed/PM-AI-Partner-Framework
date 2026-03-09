@@ -5,7 +5,7 @@ const path = require("path");
 const readline = require("readline");
 const os = require("os");
 
-const VERSION = "2.0.0";
+const VERSION = "2.1.0";
 const PLUGIN_NAME = "pm-ai-partner";
 
 const BOLD = "\x1b[1m";
@@ -201,6 +201,230 @@ function installCodex(pluginRoot, scope) {
   return base;
 }
 
+// ── MCP Server Support ──────────────────────────────────────────────
+
+function loadCatalog(pluginRoot) {
+  const catalogPath = path.join(pluginRoot, "mcp", "catalog.json");
+  if (!fs.existsSync(catalogPath)) return null;
+  return JSON.parse(fs.readFileSync(catalogPath, "utf8"));
+}
+
+function getMcpConfigPath(runtime, scope) {
+  if (runtime === "claude") {
+    return scope === "global"
+      ? path.join(os.homedir(), ".claude.json")
+      : path.join(process.cwd(), ".mcp.json");
+  }
+  if (runtime === "cursor") {
+    return scope === "global"
+      ? path.join(os.homedir(), ".cursor", "mcp.json")
+      : path.join(process.cwd(), ".cursor", "mcp.json");
+  }
+  return null;
+}
+
+function readMcpConfig(filePath) {
+  if (!fs.existsSync(filePath)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch {
+    return {};
+  }
+}
+
+function writeMcpConfig(filePath, config) {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(config, null, 2) + "\n");
+}
+
+function buildServerEntry(server, credentials) {
+  const entry = {
+    command: server.command,
+    args: [...server.args],
+  };
+
+  const envVars = {};
+  let disabled = false;
+
+  for (const cred of server.credentials || []) {
+    const value = credentials[cred.key];
+
+    if (cred.type === "arg") {
+      if (value && value !== "") {
+        entry.args.push(value);
+      } else if (cred.default) {
+        entry.args.push(cred.default);
+      } else {
+        disabled = true;
+      }
+    } else {
+      if (value && value !== "") {
+        envVars[cred.key] = value;
+      } else {
+        envVars[cred.key] = `YOUR_${cred.key}_HERE`;
+        disabled = true;
+      }
+    }
+  }
+
+  if (Object.keys(envVars).length > 0) entry.env = envVars;
+  if (disabled) entry.disabled = true;
+
+  return entry;
+}
+
+function mergeMcpServers(existing, newServers) {
+  const merged = { ...existing };
+  if (!merged.mcpServers) merged.mcpServers = {};
+
+  for (const [id, entry] of Object.entries(newServers)) {
+    if (!merged.mcpServers[id]) {
+      merged.mcpServers[id] = entry;
+    }
+  }
+
+  return merged;
+}
+
+function printCatalog(catalog) {
+  const tiers = catalog.tiers;
+  const servers = catalog.servers;
+  let idx = 1;
+  const indexMap = {};
+
+  for (const tierId of ["zero-config", "pm-essentials", "data-analytics"]) {
+    const tier = tiers[tierId];
+    const tierServers = servers.filter((s) => s.tier === tierId);
+    if (tierServers.length === 0) continue;
+
+    console.log();
+    console.log(`  ${BOLD}${tier.label}${RESET}`);
+    console.log(`  ${DIM}${tier.description}${RESET}`);
+
+    for (const s of tierServers) {
+      indexMap[idx] = s;
+      const creds = (s.credentials || []).filter((c) => c.type === "env");
+      const credHint =
+        creds.length > 0 ? ` ${DIM}(needs ${creds.map((c) => c.key).join(", ")})${RESET}` : "";
+      console.log(
+        `    ${CYAN}${String(idx).padStart(2)}${RESET}) ${s.name} — ${DIM}${s.pmUseCase}${RESET}${credHint}`
+      );
+      idx++;
+    }
+  }
+
+  return indexMap;
+}
+
+async function promptMcpServers(catalog) {
+  const indexMap = printCatalog(catalog);
+
+  console.log();
+  console.log(`  ${DIM}Enter numbers separated by commas, "all" for everything, or "none" to skip${RESET}`);
+  const answer = await ask(`  ${BOLD}Servers:${RESET} `);
+
+  if (!answer || answer.toLowerCase() === "none" || answer.toLowerCase() === "n") {
+    return [];
+  }
+
+  if (answer.toLowerCase() === "all") {
+    return catalog.servers;
+  }
+
+  const selected = [];
+  for (const part of answer.split(",")) {
+    const num = parseInt(part.trim(), 10);
+    if (indexMap[num]) selected.push(indexMap[num]);
+  }
+  return selected;
+}
+
+async function collectCredentials(servers) {
+  const results = [];
+
+  for (const server of servers) {
+    const creds = {};
+
+    if (!server.credentials || server.credentials.length === 0) {
+      results.push({ server, credentials: creds });
+      continue;
+    }
+
+    const envCreds = server.credentials.filter((c) => c.type === "env");
+    const argCreds = server.credentials.filter((c) => c.type === "arg");
+
+    if (envCreds.length > 0 || argCreds.length > 0) {
+      console.log();
+      console.log(`  ${BOLD}${server.name}${RESET}`);
+    }
+
+    for (const cred of envCreds) {
+      console.log(`  ${DIM}${cred.help}${RESET}`);
+      const value = await ask(`  ${cred.label} ${DIM}(enter to skip):${RESET} `);
+      creds[cred.key] = value;
+    }
+
+    for (const cred of argCreds) {
+      console.log(`  ${DIM}${cred.help}${RESET}`);
+      const defaultHint = cred.default ? ` ${DIM}[${cred.default}]${RESET}` : "";
+      const value = await ask(`  ${cred.label}${defaultHint}: `);
+      creds[cred.key] = value || cred.default || "";
+    }
+
+    results.push({ server, credentials: creds });
+  }
+
+  return results;
+}
+
+async function installMcpServers(catalog, runtimes, scope, mcpServerIds) {
+  let selected;
+
+  if (mcpServerIds) {
+    selected = mcpServerIds === "all"
+      ? catalog.servers
+      : catalog.servers.filter((s) => mcpServerIds.split(",").map((x) => x.trim()).includes(s.id));
+  } else {
+    selected = await promptMcpServers(catalog);
+  }
+
+  if (selected.length === 0) return 0;
+
+  const serversWithCreds = mcpServerIds
+    ? selected.map((s) => ({ server: s, credentials: {} }))
+    : await collectCredentials(selected);
+
+  const newServers = {};
+  for (const { server, credentials } of serversWithCreds) {
+    newServers[server.id] = buildServerEntry(server, credentials);
+  }
+
+  let configsWritten = 0;
+  for (const runtime of runtimes) {
+    const configPath = getMcpConfigPath(runtime, scope);
+    if (!configPath) continue;
+
+    const existing = readMcpConfig(configPath);
+    const merged = mergeMcpServers(existing, newServers);
+    writeMcpConfig(configPath, merged);
+
+    const enabledCount = Object.values(newServers).filter((e) => !e.disabled).length;
+    const disabledCount = Object.values(newServers).filter((e) => e.disabled).length;
+
+    console.log(
+      `  ${GREEN}+${RESET} MCP config — ${DIM}${configPath}${RESET}`
+    );
+    const parts = [];
+    if (enabledCount > 0) parts.push(`${enabledCount} enabled`);
+    if (disabledCount > 0) parts.push(`${disabledCount} disabled (add credentials to enable)`);
+    console.log(`    ${DIM}${parts.join(", ")}${RESET}`);
+    configsWritten++;
+  }
+
+  return configsWritten;
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const nonInteractive =
@@ -211,6 +435,10 @@ async function main() {
   const isGlobal = args.includes("--global") || args.includes("-g");
   const isLocal = args.includes("--local") || args.includes("-l");
   const isUninstall = args.includes("--uninstall");
+  const mcpFlag = args.find((a) => a.startsWith("--mcp"));
+  const mcpServerIds = mcpFlag
+    ? mcpFlag.includes("=") ? mcpFlag.split("=")[1] : "all"
+    : null;
 
   if (isUninstall) {
     console.log(`${YELLOW}Uninstall not yet implemented. Remove the skills manually.${RESET}`);
@@ -316,6 +544,37 @@ async function main() {
           `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
         );
         break;
+    }
+  }
+
+  // ── MCP Server Configuration ───────────────────────────────────────
+
+  const mcpRuntimes = runtimes.filter((r) => r === "claude" || r === "cursor");
+
+  if (mcpRuntimes.length > 0) {
+    const catalog = loadCatalog(pluginRoot);
+
+    if (catalog) {
+      let shouldInstallMcp = false;
+
+      if (mcpServerIds) {
+        shouldInstallMcp = true;
+      } else if (!nonInteractive) {
+        console.log();
+        console.log(
+          `  ${BOLD}MCP Servers${RESET} — connect AI to external tools (GitHub, Slack, databases...)`
+        );
+        const mcpAnswer = await ask(
+          `  ${BOLD}Configure MCP servers? [y/N]:${RESET} `
+        );
+        shouldInstallMcp =
+          mcpAnswer.toLowerCase() === "y" || mcpAnswer.toLowerCase() === "yes";
+      }
+
+      if (shouldInstallMcp) {
+        console.log();
+        await installMcpServers(catalog, mcpRuntimes, scope, mcpServerIds);
+      }
     }
   }
 
