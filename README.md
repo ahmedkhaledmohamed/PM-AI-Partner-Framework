@@ -108,7 +108,7 @@ graph TD
 
 Tell AI which "hat" to wear for your task:
 
-![Agent Modes Diagram](site/images/agent-modes-diagram.png)
+![Agent Skills Diagram](site/images/agent-skills-diagram.svg)
 
 | Mode | When to Use | Try Saying |
 |------|-------------|------------|

@@ -364,7 +364,7 @@ Claude should list all six modes with their purposes. If not, point it at the fr
 
 The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
 
-![Six Agent Modes Diagram](site/images/agent-modes-diagram.png)
+![Ten Agent Skills Diagram](site/images/agent-skills-diagram.svg)
 
 | Mode                  | When to Use                          | How to Invoke                                             |
 | --------------------- | ------------------------------------ | --------------------------------------------------------- |

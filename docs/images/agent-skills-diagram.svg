@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.133  0 0 0 0 0.773  0 0 0 0 0.369  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.024  0 0 0 0 0.714  0 0 0 0 0.831  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.231  0 0 0 0 0.510  0 0 0 0 0.965  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.937  0 0 0 0 0.267  0 0 0 0 0.267  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-teal" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.078  0 0 0 0 0.722  0 0 0 0 0.651  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-gold" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.918  0 0 0 0 0.702  0 0 0 0 0.031  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-orange" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.976  0 0 0 0 0.451  0 0 0 0 0.086  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.925  0 0 0 0 0.282  0 0 0 0 0.600  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-lightblue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.376  0 0 0 0 0.647  0 0 0 0 0.980  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.659  0 0 0 0 0.333  0 0 0 0 0.969  0 0 0 0.35 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#0f0f17"/>
+
+  <!-- Title -->
+  <text x="600" y="46" text-anchor="middle" fill="#f8fafc" font-family="'Space Grotesk', 'SF Pro Display', -apple-system, sans-serif" font-size="28" font-weight="700" letter-spacing="3">TEN AGENT SKILLS FOR AI-PM PARTNERSHIP</text>
+
+  <!-- Main container -->
+  <rect x="40" y="78" width="1120" height="590" rx="16" fill="#1a1a24" stroke="#2d2d3a" stroke-width="1"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="116" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="13" letter-spacing="2.5">HUMAN PRODUCT MANAGER &#x27F7; ARTIFICIAL INTELLIGENCE AGENTS</text>
+
+  <!-- Connector lines from subtitle -->
+  <line x1="600" y1="124" x2="600" y2="142" stroke="#2d2d3a" stroke-width="1"/>
+  <line x1="400" y1="134" x2="400" y2="142" stroke="#2d2d3a" stroke-width="1" opacity="0.5"/>
+  <line x1="800" y1="134" x2="800" y2="142" stroke="#2d2d3a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="138" x2="200" y2="142" stroke="#2d2d3a" stroke-width="1" opacity="0.3"/>
+  <line x1="1000" y1="138" x2="1000" y2="142" stroke="#2d2d3a" stroke-width="1" opacity="0.3"/>
+
+  <!-- Section label: Core Modes -->
+  <text x="75" y="155" fill="#64748b" font-family="'Space Grotesk', sans-serif" font-size="11" letter-spacing="2" font-weight="600">CORE AGENT MODES</text>
+
+  <!-- ==================== ROW 1: Core Agent Modes ==================== -->
+
+  <!-- Card 1: Thought Partner -->
+  <g filter="url(#glow-green)">
+    <rect x="70" y="168" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#22c55e" stroke-width="2"/>
+  </g>
+  <text x="169" y="198" text-anchor="middle" fill="#22c55e" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">THOUGHT PARTNER</text>
+  <text x="169" y="268" text-anchor="middle" font-size="40">&#x1F91D;</text>
+  <text x="169" y="340" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Explores possibilities</text>
+
+  <!-- Card 2: Technical Analyst -->
+  <g filter="url(#glow-cyan)">
+    <rect x="284" y="168" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#06b6d4" stroke-width="2"/>
+  </g>
+  <text x="383" y="198" text-anchor="middle" fill="#06b6d4" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">TECHNICAL ANALYST</text>
+  <text x="383" y="268" text-anchor="middle" font-size="40">&#x1F50D;</text>
+  <text x="383" y="340" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Explores code systematically</text>
+
+  <!-- Card 3: Writer -->
+  <g filter="url(#glow-blue)">
+    <rect x="498" y="168" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#3b82f6" stroke-width="2"/>
+  </g>
+  <text x="597" y="198" text-anchor="middle" fill="#3b82f6" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">WRITER</text>
+  <text x="597" y="268" text-anchor="middle" font-size="40">&#x270D;&#xFE0F;</text>
+  <text x="597" y="340" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Structures clear arguments</text>
+
+  <!-- Card 4: Devil's Advocate -->
+  <g filter="url(#glow-red)">
+    <rect x="712" y="168" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#ef4444" stroke-width="2"/>
+  </g>
+  <text x="811" y="198" text-anchor="middle" fill="#ef4444" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">DEVIL&#x2019;S ADVOCATE</text>
+  <text x="811" y="268" text-anchor="middle" font-size="40">&#x1F608;</text>
+  <text x="811" y="340" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Challenges assumptions</text>
+
+  <!-- Card 5: Builder -->
+  <g filter="url(#glow-teal)">
+    <rect x="926" y="168" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#14b8a6" stroke-width="2"/>
+  </g>
+  <text x="1025" y="198" text-anchor="middle" fill="#14b8a6" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">BUILDER</text>
+  <text x="1025" y="268" text-anchor="middle" font-size="40">&#x1F6E0;&#xFE0F;</text>
+  <text x="1025" y="340" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Creates tools &amp; prototypes</text>
+
+  <!-- Divider -->
+  <line x1="75" y1="393" x2="1125" y2="393" stroke="#2d2d3a" stroke-width="1" opacity="0.5"/>
+
+  <!-- Section label: Scenario Skills -->
+  <text x="75" y="416" fill="#64748b" font-family="'Space Grotesk', sans-serif" font-size="11" letter-spacing="2" font-weight="600">SCENARIO SKILLS</text>
+
+  <!-- ==================== ROW 2: Scenario Skills ==================== -->
+
+  <!-- Card 6: Data Analyst -->
+  <g filter="url(#glow-gold)">
+    <rect x="70" y="428" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#eab308" stroke-width="2"/>
+  </g>
+  <text x="169" y="458" text-anchor="middle" fill="#eab308" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">DATA ANALYST</text>
+  <text x="169" y="528" text-anchor="middle" font-size="40">&#x1F4CA;</text>
+  <text x="169" y="600" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Finds patterns in metrics</text>
+
+  <!-- Card 7: Product Brief -->
+  <g filter="url(#glow-orange)">
+    <rect x="284" y="428" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#f97316" stroke-width="2"/>
+  </g>
+  <text x="383" y="458" text-anchor="middle" fill="#f97316" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">PRODUCT BRIEF</text>
+  <text x="383" y="528" text-anchor="middle" font-size="40">&#x1F4CB;</text>
+  <text x="383" y="600" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Structured PRDs &amp; specs</text>
+
+  <!-- Card 8: Meeting Prep -->
+  <g filter="url(#glow-pink)">
+    <rect x="498" y="428" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#ec4899" stroke-width="2"/>
+  </g>
+  <text x="597" y="458" text-anchor="middle" fill="#ec4899" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">MEETING PREP</text>
+  <text x="597" y="528" text-anchor="middle" font-size="40">&#x1F3AF;</text>
+  <text x="597" y="600" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Talking points &amp; Q&amp;A</text>
+
+  <!-- Card 9: Stakeholder Update -->
+  <g filter="url(#glow-lightblue)">
+    <rect x="712" y="428" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#60a5fa" stroke-width="2"/>
+  </g>
+  <text x="811" y="458" text-anchor="middle" fill="#60a5fa" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" letter-spacing="1.2">STAKEHOLDER UPDATE</text>
+  <text x="811" y="528" text-anchor="middle" font-size="40">&#x1F4E2;</text>
+  <text x="811" y="600" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Status reports &amp; summaries</text>
+
+  <!-- Card 10: Strategic Clarity -->
+  <g filter="url(#glow-purple)">
+    <rect x="926" y="428" width="198" height="205" rx="12" fill="#1e1e2a" stroke="#a855f7" stroke-width="2"/>
+  </g>
+  <text x="1025" y="458" text-anchor="middle" fill="#a855f7" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">STRATEGIC CLARITY</text>
+  <text x="1025" y="528" text-anchor="middle" font-size="40">&#x1F9ED;</text>
+  <text x="1025" y="600" text-anchor="middle" fill="#94a3b8" font-family="'Space Grotesk', sans-serif" font-size="12">Team identity &amp; charter</text>
+
+  <!-- Watermark -->
+  <text x="1160" y="680" text-anchor="end" fill="#2d2d3a" font-family="'Space Grotesk', sans-serif" font-size="10">PM AI Partner v2.0</text>
+</svg>
