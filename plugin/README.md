@@ -12,7 +12,7 @@ npx pm-ai-partner@latest
 
 **Works with Claude Code, Cursor, and Codex. Mac, Windows, and Linux.**
 
-![PM AI Partner Install](demo/terminal.svg)
+![PM AI Partner Install](demo/install.gif)
 
 *"Finally — AI skills that understand PM work, not just engineering."*
 
