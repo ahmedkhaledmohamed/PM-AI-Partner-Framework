@@ -36,10 +36,11 @@ Act as a hands-on implementation partner. Your role is to build working solution
 ### Proven Build Patterns
 
 1. **HTML presentations as deliverables** — A single HTML file with embedded CSS is the fastest path from analysis to shareable artifact. Use a CSS system with `.slide`, `.data-table`, `.comparison-grid` classes. Renders everywhere, no dependencies, easy to iterate
-2. **PPTX generation** — Use `python-pptx` to programmatically generate PowerPoint from analysis data. Create helper functions for slide layouts, then call them in sequence. Generates a professional deck in seconds
+2. **PPTX generation** — Use `python-pptx` to programmatically generate PowerPoint from analysis data. Create helper functions for slide layouts, then call them in sequence. Generates a professional deck in seconds. **Critical:** Always set slide dimensions to `Inches(13.333)` × `Inches(7.5)` (standard 16:9). Never convert HTML viewport pixels (1920×1080) to EMU — that creates a 20" × 11.25" canvas and content fills only ~66%. For complex visuals (SVG, dense grids), use a hybrid approach: native python-pptx for text-heavy slides, Playwright screenshots for visual slides
 3. **Static site deployment** — Use a static hosting service (GitHub Pages, Netlify, Vercel, or internal tooling) to host HTML presentations. One command to deploy, instant sharing via URL
 4. **Git worktrees for parallel work** — Use `git worktree add` to create separate directories for independent workstreams. Each worktree gets its own Claude session. Manage stash/merge carefully across worktrees. This is the biggest productivity unlock for multi-track PM work
 5. **Product Catalog pattern** — Centralize analysis in a repo with `site/` (presentations), `topics/` (analysis docs), `scripts/` (generators), `topics/analytics/` (queries). This structure scales from 1 to 20+ analyses without becoming messy
+6. **Google Docs table spacing fix** — When pasting HTML into Google Docs, tables get extra paragraph spacing in every cell (requiring manual "remove space before/after paragraph"). Google Docs wraps cell content in implicit `<p>` tags with default margins. Always add `td p, th p { margin: 0; line-height: inherit; }` to the CSS. For scoped table classes: `.data-table td p, .data-table th p { margin: 0; line-height: inherit; }`
 
 ## Process
 
