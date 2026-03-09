@@ -1,0 +1,73 @@
+<svg viewBox="0 0 820 580" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, monospace" font-size="13">
+  <!-- Terminal window -->
+  <rect width="820" height="580" rx="10" fill="#1e1e2e"/>
+  <!-- Title bar -->
+  <rect width="820" height="36" rx="10" fill="#313244"/>
+  <rect y="26" width="820" height="10" fill="#313244"/>
+  <circle cx="20" cy="18" r="6" fill="#f38ba8"/>
+  <circle cx="40" cy="18" r="6" fill="#f9e2af"/>
+  <circle cx="60" cy="18" r="6" fill="#a6e3a1"/>
+  <text x="410" y="22" fill="#cdd6f4" text-anchor="middle" font-size="12">Terminal</text>
+
+  <!-- Content -->
+  <g transform="translate(24, 56)">
+    <!-- Prompt -->
+    <text y="0" fill="#a6e3a1">$</text>
+    <text x="16" y="0" fill="#cdd6f4"> npx pm-ai-partner@latest</text>
+
+    <!-- Banner -->
+    <text y="36" fill="#89b4fa" font-weight="bold">  PM AI Partner</text>
+    <text x="160" y="36" fill="#6c7086">v2.0.0</text>
+    <text y="54" fill="#6c7086">  AI-powered skills for Product Managers</text>
+
+    <!-- Detected -->
+    <text y="84" fill="#6c7086">  Detected runtimes: claude, cursor</text>
+
+    <!-- Skills list -->
+    <text y="114" fill="#cdd6f4" font-weight="bold">  Skills (10):</text>
+    <text y="132" fill="#a6e3a1">    /pm:thought-partner</text>
+    <text x="240" y="132" fill="#6c7086">Brainstorming &amp; idea exploration</text>
+    <text y="150" fill="#a6e3a1">    /pm:technical-analyst</text>
+    <text x="240" y="150" fill="#6c7086">Codebase analysis for PMs</text>
+    <text y="168" fill="#a6e3a1">    /pm:writer</text>
+    <text x="240" y="168" fill="#6c7086">PM document drafting &amp; polish</text>
+    <text y="186" fill="#a6e3a1">    /pm:devil-advocate</text>
+    <text x="240" y="186" fill="#6c7086">Stress-test ideas &amp; proposals</text>
+    <text y="204" fill="#a6e3a1">    /pm:builder</text>
+    <text x="240" y="204" fill="#6c7086">Build tools, scripts &amp; prototypes</text>
+    <text y="222" fill="#a6e3a1">    /pm:data-analyst</text>
+    <text x="240" y="222" fill="#6c7086">Metrics analysis &amp; SQL queries</text>
+    <text y="240" fill="#a6e3a1">    /pm:product-brief</text>
+    <text x="240" y="240" fill="#6c7086">PRDs &amp; feature specs</text>
+    <text y="258" fill="#a6e3a1">    /pm:meeting-prep</text>
+    <text x="240" y="258" fill="#6c7086">Meeting preparation &amp; talking points</text>
+    <text y="276" fill="#a6e3a1">    /pm:stakeholder-update</text>
+    <text x="240" y="276" fill="#6c7086">Status reports &amp; exec summaries</text>
+    <text y="294" fill="#a6e3a1">    /pm:strategic-clarity</text>
+    <text x="240" y="294" fill="#6c7086">Team identity &amp; boundaries</text>
+
+    <!-- Commands -->
+    <text y="324" fill="#cdd6f4" font-weight="bold">  Commands (4):</text>
+    <text y="342" fill="#a6e3a1">    /pm:plan-week</text>
+    <text x="240" y="342" fill="#6c7086">Weekly planning workflow</text>
+    <text y="360" fill="#a6e3a1">    /pm:write-brief</text>
+    <text x="240" y="360" fill="#6c7086">Product brief creation</text>
+    <text y="378" fill="#a6e3a1">    /pm:prep-meeting</text>
+    <text x="240" y="378" fill="#6c7086">Meeting preparation</text>
+    <text y="396" fill="#a6e3a1">    /pm:audit-codebase</text>
+    <text x="240" y="396" fill="#6c7086">PM-focused codebase exploration</text>
+
+    <!-- Install result -->
+    <text y="432" fill="#cdd6f4" font-weight="bold">  Installing...</text>
+
+    <text y="462" fill="#a6e3a1">  +</text>
+    <text x="28" y="462" fill="#cdd6f4"> Claude Code</text>
+    <text x="140" y="462" fill="#6c7086"> ~/.claude/</text>
+    <text y="480" fill="#a6e3a1">  +</text>
+    <text x="28" y="480" fill="#cdd6f4"> Cursor</text>
+    <text x="140" y="480" fill="#6c7086"> ~/.cursor/skills/</text>
+
+    <text y="510" fill="#a6e3a1" font-weight="bold">  Done!</text>
+    <text x="62" y="510" fill="#cdd6f4"> Restart your editor to load the skills.</text>
+  </g>
+</svg>

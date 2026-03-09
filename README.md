@@ -1,30 +1,43 @@
 # PM AI Partner Framework
 
-**A ready-to-use template for Product Managers who want to work smarter with AI.**
+**AI-powered skills, workflows, and methodology for Product Managers.**
 
-Fork this repo → Customize → Start using AI as your thinking partner.
+[![npm version](https://img.shields.io/npm/v/pm-ai-partner?style=flat-square&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/pm-ai-partner)
+[![GitHub stars](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=flat-square&logo=github)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
-[![Star this repo](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=social)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
+```bash
+npx pm-ai-partner@latest
+```
+
+10 agent skills · 4 workflow commands · 3 automation hooks · Claude Code, Cursor, and Codex
 
 ![PM AI Partner Framework](site/images/framework-diagram.png)
 
-> **Finding this useful?** ⭐ [Star this repo](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) — it helps others discover it and lets me know it's working!
+> **Finding this useful?** [Star this repo](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) — it helps others discover it and lets me know it's working!
 >
 > **Questions or feedback?** [Quick survey](https://docs.google.com/forms/d/e/1FAIpQLScOSVX0EGYYZpnanXxpwofhcng4BqY7ddFBKaqQhB1PvCkShA/viewform) (2 min) · [Start a discussion](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions) · [Share your experience](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/issues/new?template=success_story.md)
 
 ---
 
-## Demo Video
+## Install the Plugin
 
-<!-- TODO: Add YouTube embed after recording -->
-*Coming soon: A 10-minute walkthrough showing the framework in action.*
+```bash
+npx pm-ai-partner@latest
+```
+
+One command installs 10 AI skills, 4 workflow commands, and 3 automation hooks. Works with Claude Code, Cursor, and Codex.
+
+**[See plugin details, all commands, and usage examples →](plugin/)**
 
 ---
 
-## Quick Start (3 Steps)
+## Or: Fork the Full Framework
+
+For the complete methodology, workspace architecture, and templates:
 
 ### 1. Fork This Repo
-Click "Fork" on GHE (or clone directly).
+Click "Fork" on GitHub (or clone directly).
 
 ### 2. Customize Your Context
 Edit `CLAUDE.md` with your team/domain info:
@@ -126,17 +139,20 @@ Repeatable processes for common PM tasks:
 
 ---
 
-## Cursor Skills (Slash Commands)
+## Skills & Commands
 
-10 reusable AI behaviors you can invoke via `/command` or auto-trigger by context:
+10 agent skills and 4 workflow commands you can invoke via `/command` or auto-trigger by context:
 
 | Type | Skills |
 |------|--------|
 | Agent Modes (6) | `/thought-partner`, `/technical-analyst`, `/writer`, `/devil-advocate`, `/builder`, `/data-analyst` |
 | Scenarios (3) | `/product-brief`, `/meeting-prep`, `/stakeholder-update` |
 | Workflows (1) | `/strategic-clarity` |
+| Commands (4) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase` |
 
-Each skill includes instructions, examples, and lessons learned from real usage. Install from `framework/templates/skills/`.
+Each skill includes instructions, examples, and lessons learned from real usage.
+
+**Quick install:** `npx pm-ai-partner@latest` — or manually from [`plugin/`](plugin/) or [`framework/templates/skills/`](framework/templates/skills/).
 
 ---
 
@@ -144,15 +160,16 @@ Each skill includes instructions, examples, and lessons learned from real usage.
 
 | Need | Go To |
 |------|-------|
+| **Install the plugin** | `npx pm-ai-partner@latest` or [`plugin/`](plugin/) |
 | **Get set up** | [`getting-started.md`](getting-started.md) |
 | Full framework guide | [`framework/core/pm-ai-partner-framework.md`](framework/core/pm-ai-partner-framework.md) |
 | One-page cheat sheet | [`framework/core/quick-reference.md`](framework/core/quick-reference.md) |
 | Copy-paste prompts | [`framework/core/starter-prompts.md`](framework/core/starter-prompts.md) |
 | Config templates | [`framework/templates/`](framework/templates/) |
 | Cursor Skills | [`framework/templates/skills/`](framework/templates/skills/) |
-| Presentations | [`site/presentations/`](site/presentations/) |
-| Case studies | [`framework/examples/case-studies/`](framework/examples/case-studies/) |
+| Case study | [`framework/examples/case-studies/openclaw-deep-dive.md`](framework/examples/case-studies/openclaw-deep-dive.md) |
 | Workflow guides | [`framework/core/workflows/`](framework/core/workflows/) |
+| Presentations | [`site/presentations/`](site/presentations/) |
 | Release notes | [`RELEASE-NOTES.md`](RELEASE-NOTES.md) |
 
 ---
@@ -190,11 +207,19 @@ We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to h
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ahmedkhaledmohamed/PM-AI-Partner-Framework&type=Date)](https://star-history.com/#ahmedkhaledmohamed/PM-AI-Partner-Framework&Date)
+
+---
+
 ## Related
 
+- **Plugin (npm):** [`npx pm-ai-partner@latest`](plugin/) — install skills, commands, and hooks
 - **Framework Website:** [`site/index.html`](site/index.html)
+- **Case Study:** [OpenClaw Deep Dive](framework/examples/case-studies/openclaw-deep-dive.md) — the framework in action
 - **Substack Article:** [PM AI Partner Framework](https://substack.com/home/post/p-184388693)
 
 ---
 
-*Version 1.4.0 · February 2026*
+*Version 2.0.0 · March 2026*

@@ -1,7 +1,71 @@
 # PM AI Partner Framework
 
-**Latest Version:** v1.4.0 (February 2026)  
+**Latest Version:** v2.0.0 (March 2026)  
 **Repo:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
+
+---
+
+## What's New in v2.0.0
+
+### Claude Code Plugin
+
+The framework now ships as a proper Claude Code plugin with one-command installation:
+
+```bash
+npx pm-ai-partner@latest
+```
+
+The `plugin/` directory contains the full plugin structure compliant with the official Claude Code plugin format (`.claude-plugin/plugin.json` manifest).
+
+### Multi-Platform Support
+
+The installer supports Claude Code, Cursor, and Codex with both global and local installation scopes.
+
+### 4 Workflow Commands
+
+New explicit slash commands for recurring PM workflows:
+
+| Command | What It Does |
+|---------|-------------|
+| `/pm:plan-week` | Weekly planning — assess state, set priorities, flag risks |
+| `/pm:write-brief [feature]` | Guided product brief creation with quality checklist |
+| `/pm:prep-meeting [topic]` | Meeting prep with talking points, Q&A, and role-play |
+| `/pm:audit-codebase [system]` | PM-focused codebase exploration — capabilities, gaps, implications |
+
+### 3 Automation Hooks
+
+PM-specific hooks that fire automatically:
+
+| Hook | Trigger | What It Does |
+|------|---------|-------------|
+| Quality Gate | Write to `product-catalog/` | Checks document against quality bar |
+| Draft Status | Write to `sandbox/` | Reminds to add status markers |
+| Commit Reminder | `git commit` | Prompts to capture lessons in CLAUDE.md |
+
+### npm Package
+
+Published as `pm-ai-partner` on npm for one-command installation across platforms.
+
+### Terminal Demo
+
+Added SVG terminal visualization and VHS tape file for generating animated demos.
+
+### Updated Files
+
+| File | Change |
+|------|--------|
+| `plugin/` (26 files) | New — complete Claude Code plugin |
+| `plugin/.claude-plugin/plugin.json` | New — plugin manifest |
+| `plugin/package.json` | New — npm package definition |
+| `plugin/bin/install.js` | New — interactive installer |
+| `plugin/commands/pm/*.md` (4 files) | New — workflow commands |
+| `plugin/hooks/` (4 files) | New — automation hooks |
+| `plugin/skills/` (10 SKILL.md files) | New — migrated skills in plugin format |
+| `plugin/README.md` | New — plugin-focused README |
+| `plugin/PUBLISHING.md` | New — distribution guide |
+| `plugin/demo/terminal.svg` | New — terminal demo SVG |
+| `README.md` | Updated — install command first, badges, star history |
+| `RELEASE-NOTES.md` | Updated — v2.0.0 entry |
 
 ---
 

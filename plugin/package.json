@@ -1,0 +1,38 @@
+{
+  "name": "pm-ai-partner",
+  "version": "2.0.0",
+  "description": "AI-powered skills for Product Managers — 10 agent modes, 4 workflow commands, and 3 automation hooks for Claude Code, Cursor, and Codex.",
+  "author": "Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework"
+  },
+  "homepage": "https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework",
+  "keywords": [
+    "product-manager",
+    "pm",
+    "claude-code",
+    "cursor",
+    "codex",
+    "ai-skills",
+    "agent-skills",
+    "claude-plugin",
+    "productivity",
+    "product-management"
+  ],
+  "bin": {
+    "pm-ai-partner": "./bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "commands/",
+    "hooks/",
+    "settings.json",
+    ".claude-plugin/"
+  ],
+  "engines": {
+    "node": ">=16"
+  }
+}

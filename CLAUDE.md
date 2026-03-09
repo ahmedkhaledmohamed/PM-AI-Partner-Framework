@@ -9,6 +9,12 @@ This is a **template repository** for Product Managers who want to use AI (Claud
 ```
 pm-ai-partner-framework/
 ├── CLAUDE.md              # You are here - root context
+├── plugin/                # Claude Code plugin (npm: pm-ai-partner)
+│   ├── .claude-plugin/    # Plugin manifest
+│   ├── skills/            # 10 agent skills
+│   ├── commands/          # 4 workflow commands
+│   ├── hooks/             # 3 automation hooks
+│   └── bin/               # Interactive installer
 ├── sandbox/               # Your personal drafts & exploration (private)
 ├── product-catalog/       # Polished artifacts for sharing (team/public)
 ├── framework/
