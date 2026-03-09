@@ -343,7 +343,7 @@ Claude should list all six modes with their purposes. If not, point it at the fr
 
 The framework uses six "agent modes" — different AI personalities for different tasks. Invoke them by name:
 
-![Six Agent Modes Diagram](docs/images/agent-modes-diagram.png)
+![Six Agent Modes Diagram](site/images/agent-modes-diagram.png)
 
 | Mode                  | When to Use                          | How to Invoke                                             |
 | --------------------- | ------------------------------------ | --------------------------------------------------------- |
@@ -627,16 +627,15 @@ As a PM, you'll often build dashboards, documentation sites, or presentation pag
 
 Deploy directly from your repo — perfect for documentation and simple sites.
 
-1. **Create a `docs/` folder** in your repo with your site files
+1. **Keep your site files in `site/`** and copy to `docs/` for deployment
 2. **Go to repo Settings** → **Pages**
 3. **Set Source** to "Deploy from a branch" → select `main` → `/docs`
 4. Your site will be at: `https://username.github.io/repo-name/`
 
 ```bash
-# Example: Deploy your framework site
-mkdir -p docs
+# Copy site content to docs/ for GitHub Pages
 cp -r site/* docs/
-git add docs && git commit -m "Add site for GitHub Pages"
+git add docs/ && git commit -m "Update site"
 git push
 ```
 

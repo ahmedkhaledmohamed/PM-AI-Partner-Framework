@@ -14,7 +14,8 @@ pm-ai-partner-framework/
 ├── framework/
 │   ├── core/              # Methodology: agent modes, workflows, philosophy
 │   └── templates/         # Config files to copy into your workspace
-└── docs/                  # GitHub Pages website
+├── site/                  # Site source (presentations, images, index)
+└── docs/                  # GitHub Pages deployment (mirrors site/)
 ```
 
 ## Quick Start
@@ -31,6 +32,10 @@ When working in this repo:
 - **Use** `framework/core/quick-reference.md` as a daily cheat sheet
 - **Copy** prompts from `framework/core/starter-prompts.md`
 - **Follow** workflows in `framework/core/workflows/` for specific scenarios
+
+## Formatting Rules
+
+- **Use Mermaid diagrams rather than ASCII art** — When producing architecture diagrams, flowcharts, sequence diagrams, or any visual in Markdown files, use Mermaid (`\`\`\`mermaid`) format. Mermaid renders natively on GitHub and is easier to maintain than ASCII box drawings.
 
 ## The Core Principle
 
