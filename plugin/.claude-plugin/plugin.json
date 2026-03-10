@@ -1,7 +1,7 @@
 {
   "name": "pm-ai-partner",
   "description": "AI-powered skills for Product Managers — 10 agent modes for thinking, writing, analyzing, building, and decision-making. Turn Claude into your PM thinking partner.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "Ahmed Khaled Mohamed",
     "email": "ahmd.khaled.a.mohamed@gmail.com"
