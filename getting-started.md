@@ -9,7 +9,7 @@ A step-by-step guide to set up AI-augmented PM workflows on your machine.
 
 ## Quick Install (30 seconds)
 
-Install the plugin with one command — gives you 10 agent skills, 4 workflow commands, and 3 automation hooks:
+Install the plugin with one command — gives you 12 agent skills, 6 workflow commands, and 3 automation hooks:
 
 ```bash
 npx pm-ai-partner@latest
@@ -510,7 +510,7 @@ cp -r framework/templates/claude-code-skills/*/ ~/.claude/skills/
 
 ### What You Get
 
-**10 Agent Skills:**
+**12 Agent Skills:**
 
 | Skill | Command | Description |
 |-------|---------|-------------|
@@ -525,7 +525,7 @@ cp -r framework/templates/claude-code-skills/*/ ~/.claude/skills/
 | stakeholder-update | `/pm:stakeholder-update` | Status reports and executive summaries |
 | strategic-clarity | `/pm:strategic-clarity` | Define team identity, boundaries, and charter |
 
-**4 Workflow Commands:**
+**6 Workflow Commands:**
 
 | Command | What It Does |
 |---------|-------------|
@@ -533,6 +533,8 @@ cp -r framework/templates/claude-code-skills/*/ ~/.claude/skills/
 | `/pm:write-brief [feature]` | Guided PRD creation with quality checklist |
 | `/pm:prep-meeting [topic]` | Meeting prep with talking points, Q&A, and role-play |
 | `/pm:audit-codebase [system]` | PM-focused codebase exploration |
+| `/pm:competitor-scan [competitor]` | Competitive analysis with positioning maps |
+| `/pm:metrics-review` | Structured metrics review with action items |
 
 **3 Automation Hooks:**
 
