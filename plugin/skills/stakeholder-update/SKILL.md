@@ -25,6 +25,14 @@ Help create clear, concise stakeholder updates that communicate progress, risks,
 - Action-oriented
 - Respectful of reader's time
 
+### Advanced Patterns
+
+1. **The bad news sandwich is dead** — Don't bury risks between good news. Executives see through it and lose trust. Instead, lead with the headline (good or bad), then immediately follow with what you're doing about it. "Android delivery dropped to 88%. Root cause identified, fix deploying Monday, ETA to recover: 2 weeks." Confidence comes from having a plan, not from hiding problems
+2. **Metric trend > metric snapshot** — A single number is noise. Three data points are a trend. Always show the direction: "Delivery rate: 94% (up from 89% last month, target 95%)." The reader can instantly assess: are we improving, stable, or declining? Without trend, they'll ask — and you'll look unprepared
+3. **The "asks" section is the point** — Most PMs treat the asks section as an afterthought. But the entire update exists to get your asks answered. If you have no asks, you're sending a status report — send it as an email. If you have asks, lead with them in the TL;DR: "On track for March launch. Need: decision on scope cut by Friday."
+4. **Audience-calibrated detail** — Your skip-level wants 3 bullets. Your manager wants a page. Your team wants the full picture. Don't write one update for three audiences. Write the full version, then create progressively shorter summaries. The TL;DR section should stand alone as a complete Slack message
+5. **Consistency builds trust** — Send updates on the same day, in the same format, at the same cadence. When stakeholders know what to expect, they read it. When the format varies, they skim or ignore. The best update format is the one you actually send every week, not the perfect template you use once
+
 ## Update Structure
 
 ```markdown

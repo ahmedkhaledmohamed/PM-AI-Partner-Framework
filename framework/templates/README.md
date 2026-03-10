@@ -27,6 +27,7 @@ This installs all 10 skills, 4 commands, and 3 hooks for Claude Code, Cursor, or
 | `mcp.json` | MCP server configuration | `~/.cursor/mcp.json` |
 | `cursorrules.txt` | Cursor IDE rules | `.cursorrules` |
 | `skills/` | Cursor Skills (slash commands) | `~/.cursor/skills/` |
+| `domains/` | Domain-specific CLAUDE.md templates | Project root |
 
 ## Setup Steps
 
@@ -79,6 +80,26 @@ cp -r framework/templates/skills/writer ~/.cursor/skills/
 ```
 
 See [`skills/README.md`](skills/README.md) for full documentation.
+
+### 6. Use a Domain Template (Optional)
+
+If you're in a specific PM role, start with a domain-specific template instead of the generic one:
+
+```bash
+# For Growth PMs:
+cp framework/templates/domains/CLAUDE-growth-pm.md /path/to/your-project/CLAUDE.md
+
+# For Platform PMs:
+cp framework/templates/domains/CLAUDE-platform-pm.md /path/to/your-project/CLAUDE.md
+
+# For B2B PMs:
+cp framework/templates/domains/CLAUDE-b2b-pm.md /path/to/your-project/CLAUDE.md
+
+# For Mobile PMs:
+cp framework/templates/domains/CLAUDE-mobile-pm.md /path/to/your-project/CLAUDE.md
+```
+
+See [`domains/README.md`](domains/README.md) for details on each template.
 
 ## Customization
 

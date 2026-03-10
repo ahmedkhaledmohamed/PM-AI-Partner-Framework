@@ -1,6 +1,7 @@
 ---
 name: stakeholder-update
 description: Stakeholder communication assistant for status updates, progress reports, and executive summaries. Use when the user needs to write a stakeholder update, status report, progress summary, or any upward communication. Triggers include "stakeholder update", "status update", "progress report", "update leadership", "weekly update", or "executive summary".
+argument-hint: [project or team]
 ---
 
 # Stakeholder Update Skill
@@ -24,6 +25,14 @@ Help create clear, concise stakeholder updates that communicate progress, risks,
 - Action-oriented
 - Respectful of reader's time
 
+### Advanced Patterns
+
+1. **The bad news sandwich is dead** — Don't bury risks between good news. Executives see through it and lose trust. Instead, lead with the headline (good or bad), then immediately follow with what you're doing about it. "Android delivery dropped to 88%. Root cause identified, fix deploying Monday, ETA to recover: 2 weeks." Confidence comes from having a plan, not from hiding problems
+2. **Metric trend > metric snapshot** — A single number is noise. Three data points are a trend. Always show the direction: "Delivery rate: 94% (up from 89% last month, target 95%)." The reader can instantly assess: are we improving, stable, or declining? Without trend, they'll ask — and you'll look unprepared
+3. **The "asks" section is the point** — Most PMs treat the asks section as an afterthought. But the entire update exists to get your asks answered. If you have no asks, you're sending a status report — send it as an email. If you have asks, lead with them in the TL;DR: "On track for March launch. Need: decision on scope cut by Friday."
+4. **Audience-calibrated detail** — Your skip-level wants 3 bullets. Your manager wants a page. Your team wants the full picture. Don't write one update for three audiences. Write the full version, then create progressively shorter summaries. The TL;DR section should stand alone as a complete Slack message
+5. **Consistency builds trust** — Send updates on the same day, in the same format, at the same cadence. When stakeholders know what to expect, they read it. When the format varies, they skim or ignore. The best update format is the one you actually send every week, not the perfect template you use once
+
 ## Update Structure
 
 ```markdown
@@ -32,17 +41,17 @@ Help create clear, concise stakeholder updates that communicate progress, risks,
 ### TL;DR
 One sentence summary. What's the single most important thing to know?
 
-### Status: 🟢 On Track / 🟡 At Risk / 🔴 Off Track
+### Status: On Track / At Risk / Off Track
 
 ### Progress This Period
-- ✅ [Completed item 1]
-- ✅ [Completed item 2]
-- 🔄 [In progress item]
+- [Completed item 1]
+- [Completed item 2]
+- [In progress item]
 
 ### Key Metrics
 | Metric | Target | Actual | Trend |
 |--------|--------|--------|-------|
-| [Metric 1] | X | Y | ↑/↓/→ |
+| [Metric 1] | X | Y | up/down/flat |
 
 ### Risks & Blockers
 | Risk | Impact | Mitigation | Owner |
@@ -59,20 +68,20 @@ One sentence summary. What's the single most important thing to know?
 ## Principles
 
 ### Headline First
-❌ "We had several meetings this week and discussed various topics..."
-✅ "We're on track to launch March 1st. Key risk: Android testing capacity."
+Bad: "We had several meetings this week and discussed various topics..."
+Good: "We're on track to launch March 1st. Key risk: Android testing capacity."
 
 ### Specific Over Vague
-❌ "Good progress on performance"
-✅ "Reduced P99 latency from 450ms to 180ms (-60%)"
+Bad: "Good progress on performance"
+Good: "Reduced P99 latency from 450ms to 180ms (-60%)"
 
 ### Honest About Problems
-❌ "Minor delays expected"
-✅ "Timeline at risk: 2-week slip likely due to API dependency. We need [specific help]."
+Bad: "Minor delays expected"
+Good: "Timeline at risk: 2-week slip likely due to API dependency. We need [specific help]."
 
 ### Clear Asks
-❌ "Would be helpful to have more resources"
-✅ "Requesting: 1 additional Android engineer for 3 weeks, or we slip by 2 weeks"
+Bad: "Would be helpful to have more resources"
+Good: "Requesting: 1 additional Android engineer for 3 weeks, or we slip by 2 weeks"
 
 ## Examples
 
@@ -89,24 +98,24 @@ One sentence summary. What's the single most important thing to know?
 ### TL;DR
 Delivery rate hit 94% (target: 95%). Android token refresh fix deployed, monitoring results.
 
-### Status: 🟡 At Risk
+### Status: At Risk
 
 On track for delivery rate target, but Android reachability work is behind schedule.
 
 ### Progress This Week
 
-- ✅ **Android token refresh fix deployed** — Live for 10% of users, expanding Monday
-- ✅ **iOS delivery optimization** — P99 latency down from 2.1s to 1.4s
-- 🔄 **Rich media support** — Design complete, engineering started (40% done)
-- ⏸️ **Quick reply buttons** — Blocked on iOS 17 API approval
+- **Android token refresh fix deployed** — Live for 10% of users, expanding Monday
+- **iOS delivery optimization** — P99 latency down from 2.1s to 1.4s
+- **Rich media support** — Design complete, engineering started (40% done)
+- **Quick reply buttons** — Blocked on iOS 17 API approval
 
 ### Key Metrics
 
 | Metric | Target | This Week | Last Week | Trend |
 |--------|--------|-----------|-----------|-------|
-| Delivery rate (iOS) | 95% | 96.2% | 95.8% | ↑ |
-| Delivery rate (Android) | 95% | 91.4% | 89.2% | ↑ |
-| P99 latency | <2s | 1.4s | 2.1s | ↑ |
+| Delivery rate (iOS) | 95% | 96.2% | 95.8% | up |
+| Delivery rate (Android) | 95% | 91.4% | 89.2% | up |
+| P99 latency | <2s | 1.4s | 2.1s | up |
 
 ### Risks & Blockers
 
@@ -148,18 +157,18 @@ Adjust anything?
 
 | Initiative | Status | Impact |
 |------------|--------|--------|
-| Android token refresh | ✅ Shipped | +5% delivery rate, +2M reachable users |
-| Push performance optimization | ✅ Shipped | -60% latency (2.1s → 0.8s) |
-| Inbox redesign | ✅ Shipped | +15% inbox open rate |
-| Rich media push | 🟡 70% | Slipped to Q2 (Apple approval delay) |
+| Android token refresh | Shipped | +5% delivery rate, +2M reachable users |
+| Push performance optimization | Shipped | -60% latency (2.1s to 0.8s) |
+| Inbox redesign | Shipped | +15% inbox open rate |
+| Rich media push | 70% | Slipped to Q2 (Apple approval delay) |
 
 ### Key Metrics
 
 | Metric | Q4 2025 | Q1 2026 | Target | Status |
 |--------|---------|---------|--------|--------|
-| Push delivery rate | 89% | 94% | 95% | 🟡 |
-| Message success rate | 10% | 14% | 15% | 🟡 |
-| Team velocity (points/sprint) | 45 | 54 | 50 | 🟢 |
+| Push delivery rate | 89% | 94% | 95% | At Risk |
+| Message success rate | 10% | 14% | 15% | At Risk |
+| Team velocity (points/sprint) | 45 | 54 | 50 | On Track |
 
 ### What Worked
 
@@ -175,7 +184,7 @@ Adjust anything?
 
 ### Q2 Priorities
 
-1. **Close the delivery gap** — 94% → 99% (Android token + FCM reliability)
+1. **Close the delivery gap** — 94% to 99% (Android token + FCM reliability)
 2. **Ship rich media** — Unblock Apple, launch by April
 3. **Reduce support burden** — Self-service tools for partners
 
@@ -199,7 +208,7 @@ Want me to adjust the framing or add more detail anywhere?
 
 **Quick update on [Feature]:**
 
-🟡 **Status:** 1-week delay (new target: Feb 22)
+**Status:** 1-week delay (new target: Feb 22)
 
 **Why:** Discovered edge case in Android 12+ that breaks the happy path. Fix is straightforward but needs testing.
 

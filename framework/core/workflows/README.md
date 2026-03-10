@@ -13,15 +13,13 @@ Specific, step-by-step guides for common PM tasks with AI assistance.
 |----------|-------------|------|
 | [Strategic Clarity](strategic-clarity.md) | New role, team lacks identity | 2-4 weeks |
 | [Codebase Deep-Dive](codebase-deep-dive.md) | Understand what exists | 1-2 weeks |
-| [Tool Building](tool-building.md) | Create prototypes, tools | Hours to days |
+| [Planning Cycle](planning-cycle.md) | Quarterly/sprint planning, prioritization | 1-2 weeks |
+| [Data Investigation](data-investigation.md) | Metric moved unexpectedly, validate assumptions | Hours to days |
+| [PM-Eng Bridge](pm-eng-bridge.md) | Scoping, technical constraints, eng collaboration | Ongoing |
+| [Communication Prep](communication-prep.md) | High-stakes meetings, leadership reviews | 1-3 hours |
 | [Analysis Pipeline](analysis-pipeline.md) | Data question to shareable presentation | Hours to days |
-
----
-
-## Coming Soon
-
-- **Planning Cycle** — Quarterly roadmap workflow
-- **Engineering Questions** — Building PM-Eng knowledge bridge
+| [Tool Building](tool-building.md) | Create prototypes, tools | Hours to days |
+| [Doc Restructuring](doc-restructuring.md) | Confusing, outdated, or scattered docs | 1-3 days |
 
 ---
 

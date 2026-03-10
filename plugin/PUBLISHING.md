@@ -38,10 +38,10 @@ Submit at one of:
 ### What to Include
 
 - **Plugin name:** `pm-ai-partner`
-- **Description:** AI-powered skills for Product Managers — 10 agent modes for thinking, writing, analyzing, building, and decision-making.
+- **Description:** AI-powered skills for Product Managers — 12 agent modes for thinking, writing, analyzing, building, and decision-making.
 - **Repository:** `https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework`
 - **Plugin directory:** `plugin/` (contains `.claude-plugin/plugin.json`)
-- **Version:** 2.0.0
+- **Version:** 3.0.0
 
 Once accepted, users can install via:
 ```
@@ -76,8 +76,8 @@ Reach out via:
 Subject: PM AI Partner — Claude Code plugin built for Product Managers
 
 Key points:
-- **10 PM-specific skills** — not engineering skills repurposed for PMs
-- **4 workflow commands** — plan-week, write-brief, prep-meeting, audit-codebase
+- **12 PM-specific skills** — not engineering skills repurposed for PMs
+- **6 workflow commands** — plan-week, write-brief, prep-meeting, audit-codebase, competitor-scan, metrics-review
 - **3 automation hooks** — quality gate, draft status, commit reminders
 - **One-command install** — `npx pm-ai-partner@latest`
 - **Multi-platform** — Claude Code, Cursor, Codex

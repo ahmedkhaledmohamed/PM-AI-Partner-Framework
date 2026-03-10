@@ -13,7 +13,7 @@ const {
   mergeMcpServers,
 } = require("./mcp-utils");
 
-const VERSION = "2.1.0";
+const VERSION = "3.0.0";
 const PLUGIN_NAME = "pm-ai-partner";
 
 const BOLD = "\x1b[1m";
@@ -35,13 +35,17 @@ const SKILLS = [
   { name: "meeting-prep", desc: "Meeting preparation & talking points" },
   { name: "stakeholder-update", desc: "Status reports & exec summaries" },
   { name: "strategic-clarity", desc: "Team identity & boundaries" },
+  { name: "hypothesis-tester", desc: "Experiment design & A/B test analysis" },
+  { name: "competitor-analyst", desc: "Competitive analysis & positioning" },
 ];
 
 const COMMANDS = [
-  { name: "plan-week", desc: "Weekly planning workflow" },
+  { name: "plan-week", desc: "MCP-aware weekly planning" },
   { name: "write-brief", desc: "Product brief creation" },
   { name: "prep-meeting", desc: "Meeting preparation" },
-  { name: "audit-codebase", desc: "PM-focused codebase exploration" },
+  { name: "audit-codebase", desc: "Auto-detecting codebase exploration" },
+  { name: "competitor-scan", desc: "Competitive landscape analysis" },
+  { name: "metrics-review", desc: "Structured metrics review" },
 ];
 
 function printBanner() {
@@ -56,12 +60,12 @@ function printBanner() {
 }
 
 function printSkillsTable() {
-  console.log(`${BOLD}  Skills (10):${RESET}`);
+  console.log(`${BOLD}  Skills (${SKILLS.length}):${RESET}`);
   for (const s of SKILLS) {
     console.log(`    ${GREEN}/pm:${s.name}${RESET}  ${DIM}${s.desc}${RESET}`);
   }
   console.log();
-  console.log(`${BOLD}  Commands (4):${RESET}`);
+  console.log(`${BOLD}  Commands (${COMMANDS.length}):${RESET}`);
   for (const c of COMMANDS) {
     console.log(`    ${GREEN}/pm:${c.name}${RESET}  ${DIM}${c.desc}${RESET}`);
   }
@@ -155,13 +159,40 @@ function installClaude(pluginRoot, scope) {
     const hooksDest = path.join(base, "hooks");
     fs.mkdirSync(hooksDest, { recursive: true });
 
+    // Copy hook scripts (not hooks.json — we rewrite that)
     const hooksScriptsSrc = path.join(pluginRoot, "hooks");
     for (const f of fs.readdirSync(hooksScriptsSrc)) {
+      if (f === "hooks.json") continue;
       fs.copyFileSync(
         path.join(hooksScriptsSrc, f),
         path.join(hooksDest, f)
       );
     }
+
+    // Rewrite hooks.json with absolute paths to installed scripts
+    const hooksConfig = JSON.parse(fs.readFileSync(hooksSrc, "utf-8"));
+    const rewritePaths = (obj) => {
+      if (typeof obj === "string") return obj;
+      if (Array.isArray(obj)) return obj.map(rewritePaths);
+      if (obj && typeof obj === "object") {
+        const result = {};
+        for (const [k, v] of Object.entries(obj)) {
+          if (k === "command" && typeof v === "string" && v.includes("plugin/hooks/")) {
+            const scriptName = path.basename(v);
+            result[k] = `bash "${path.join(hooksDest, scriptName)}"`;
+          } else {
+            result[k] = rewritePaths(v);
+          }
+        }
+        return result;
+      }
+      return obj;
+    };
+    const rewritten = rewritePaths(hooksConfig);
+    fs.writeFileSync(
+      path.join(hooksDest, "hooks.json"),
+      JSON.stringify(rewritten, null, 2) + "\n"
+    );
   }
 
   return base;
@@ -518,7 +549,7 @@ async function main() {
             `  ${GREEN}+${RESET} Claude Code — ${DIM}${dest}${RESET}`
           );
           console.log(
-            `    ${DIM}Skills: 10 | Commands: /pm:plan-week, /pm:write-brief, /pm:prep-meeting, /pm:audit-codebase | Hooks: 3${RESET}`
+            `    ${DIM}Skills: ${SKILLS.length} | Commands: ${COMMANDS.length} | Hooks: 3${RESET}`
           );
           break;
         case "cursor":
@@ -527,7 +558,7 @@ async function main() {
             `  ${GREEN}+${RESET} Cursor — ${DIM}${dest}${RESET}`
           );
           console.log(
-            `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
+            `    ${DIM}Skills: ${SKILLS.length} (commands and hooks require Claude Code)${RESET}`
           );
           break;
         case "codex":
@@ -536,7 +567,7 @@ async function main() {
             `  ${GREEN}+${RESET} Codex — ${DIM}${dest}${RESET}`
           );
           console.log(
-            `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
+            `    ${DIM}Skills: ${SKILLS.length} (commands and hooks require Claude Code)${RESET}`
           );
           break;
       }

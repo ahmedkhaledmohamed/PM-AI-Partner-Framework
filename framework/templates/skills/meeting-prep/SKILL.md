@@ -1,6 +1,7 @@
 ---
 name: meeting-prep
 description: Meeting preparation assistant for Product Managers. Use when the user needs to prepare for a meeting, create talking points, anticipate questions, or structure a discussion. Triggers include "prepare for meeting", "meeting prep", "talking points", "get ready for", "1:1 prep", or when preparing for any scheduled conversation.
+argument-hint: [meeting topic or attendee]
 ---
 
 # Meeting Prep Skill
@@ -52,6 +53,14 @@ What do you want to achieve in this meeting?
 ### Success Criteria
 How will you know the meeting went well?
 ```
+
+### Advanced Patterns
+
+1. **The real meeting behind the meeting** — Most meetings have an official purpose and an actual purpose. A "project update" is often really "should we still fund this?" A "brainstorm" is often "I already decided but want buy-in." Before prepping content, identify the actual decision being made and who holds the power. Prep for that meeting, not the one on the calendar
+2. **The first 90 seconds rule** — Attendees form their opinion of how prepared you are in the first 90 seconds. If you fumble the opening, you spend the rest recovering credibility. Write your first sentence word-for-word. Practice it. Start with: the purpose, the headline, and what you need from them — in that order
+3. **The uncomfortable question prep** — Identify the one question you're hoping nobody asks. That's the question that will get asked. Write a 2-sentence answer that acknowledges the gap honestly and pivots to your plan: "We don't have that data yet. Here's how we're getting it by [date]." Honesty + plan > deflection
+4. **Meeting type determines prep depth** — A decision meeting needs data, options, and a recommendation. An alignment meeting needs empathy, shared context, and a proposal. An update needs headlines and metrics. Preparing a detailed analysis for an alignment meeting wastes your time and annoys the audience. Match prep to type
+5. **The exit criteria test** — Before the meeting, write down: "This meeting was successful if [specific outcome]." If you can't finish that sentence, you're not ready. Share the exit criteria with attendees in the invite or opening — it focuses the conversation and gives you permission to cut tangents
 
 ## Meeting Type Patterns
 

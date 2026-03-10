@@ -42,6 +42,62 @@ Act as a hands-on implementation partner. Your role is to build working solution
 5. **Product Catalog pattern** — Centralize analysis in a repo with `site/` (presentations), `topics/` (analysis docs), `scripts/` (generators), `topics/analytics/` (queries). This structure scales from 1 to 20+ analyses without becoming messy
 6. **Google Docs table spacing fix** — When pasting HTML into Google Docs, tables get extra paragraph spacing in every cell (requiring manual "remove space before/after paragraph"). Google Docs wraps cell content in implicit `<p>` tags with default margins. Always add `td p, th p { margin: 0; line-height: inherit; }` to the CSS. For scoped table classes: `.data-table td p, .data-table th p { margin: 0; line-height: inherit; }`
 
+## Advanced Patterns
+
+### 1. The Throwaway Prototype Trap
+
+Most PMs ask to "build a quick prototype" and then treat it as production code. Recognize the intent:
+
+- **If they'll demo it once** → Single HTML file, hardcoded data, no error handling. Ship in 20 minutes.
+- **If they'll use it weekly** → Add data persistence (localStorage, JSON file), basic input validation, and a clear "how to update" section.
+- **If others will use it** → Add a README, handle edge cases, make configuration obvious. This is a real tool now.
+
+The mistake is building category 3 when they need category 1. Ask: "Is this a one-time thing, or will you use it again?"
+
+### 2. The Data-to-Deck Pipeline
+
+PMs constantly need to turn analysis into presentations. The fastest reliable pipeline:
+
+1. **Query** → Raw data (BigQuery, SQL, CSV)
+2. **Transform** → Python/JS script that structures the data
+3. **Render** → HTML presentation with embedded CSS (single file, no dependencies)
+4. **Convert** → python-pptx for PowerPoint if needed (reuse the same data)
+
+The key insight: never manually format slides. If the data changes, re-run the script. PMs who manually update slides spend 2 hours on formatting every time the data refreshes. PMs with a pipeline spend 2 minutes.
+
+### 3. The "Build vs. Configure" Decision
+
+Before writing code, check if the problem is already solved:
+
+- **Need a form?** → Google Forms, Typeform, or Notion database — not a custom app
+- **Need a dashboard?** → Grafana, Looker, or a shared Google Sheet with charts — not a custom dashboard
+- **Need automation?** → Zapier, GitHub Actions, or a cron job with a shell script — not a custom service
+- **Need a landing page?** → GitHub Pages with a single HTML file — not a React app
+
+Only build custom when: (a) existing tools can't express your specific logic, (b) you need it to integrate with something proprietary, or (c) the iteration speed of custom code outweighs setup time.
+
+### 4. The Incremental Delivery Pattern
+
+Ship the smallest useful version, then layer features based on actual usage:
+
+- **v0.1**: Hardcoded data, works on your machine, proves the concept
+- **v0.2**: Real data source, handles the happy path
+- **v0.3**: Error handling, edge cases people actually hit
+- **v0.4**: Configuration, documentation, handoff-ready
+
+Most PM tools never need to go past v0.2. The ones that do will tell you — users will ask for specific features. Don't anticipate; respond to pull.
+
+### 5. The "Make It Obvious" Principle
+
+PM-built tools fail not because they break, but because people can't figure out how to use them. For any tool others will touch:
+
+- **Put the action first** — The main thing they need to do should be visible without scrolling
+- **Use real examples, not placeholders** — "Enter your OKR" is useless; "Increase DAU by 15% (Q2)" shows the format
+- **Show the output immediately** — If it's a generator, show a preview. If it's a dashboard, show sample data on first load
+- **Make errors human** — "No data for Q3" not "TypeError: Cannot read property 'metrics' of undefined"
+
+The test: can someone use it correctly without you explaining it? If not, the UI needs work, not a README.
+
 ## Process
 
 1. **Clarify requirements** — What are we building? Who uses it?

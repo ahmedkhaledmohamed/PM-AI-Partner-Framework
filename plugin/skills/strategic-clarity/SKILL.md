@@ -21,6 +21,14 @@ A 4-phase workflow for establishing team identity and strategic positioning.
 **When to use:** Starting a new role, inherited ambiguity, team lacks clear identity
 **Output:** Team charter, value proposition, capability audit
 
+### Advanced Patterns
+
+1. **The inherited narrative trap** — When you inherit a team, everyone will tell you what the team does. Their descriptions will conflict. Don't average them — map the contradictions. Where people disagree about team scope is exactly where boundaries are unclear and where future conflicts will emerge. The contradictions are the diagnosis
+2. **Capability vs. responsibility** — Teams often confuse what they *can* do with what they *should* do. A messaging team that *can* build email doesn't mean email is their responsibility. During the audit phase, separate capabilities (what the code does) from responsibilities (what stakeholders expect). Mismatches between these create the biggest organizational friction
+3. **The "without us" test** — To find your team's real value, ask: "If our team disappeared tomorrow, what would break first?" The thing that breaks first is your core value. The thing that breaks second is your growth opportunity. The thing nobody notices is your candidate for deprecation. This test cuts through aspirational mission statements to find ground truth
+4. **Adjacent team mapping** — Don't just define what you own. Explicitly define the boundary with each adjacent team: "We own the push delivery pipeline. Platform team owns the notification scheduling. We hand off at [specific interface]." Vague boundaries between teams cause more organizational damage than vague team charters. Name the seams
+5. **The 30-60-90 checkpoint** — Strategic clarity isn't a one-time exercise. At 30 days, you should have hypotheses. At 60 days, you should have a charter draft. At 90 days, you should have stakeholder alignment. If you're still "absorbing" at day 60, you're avoiding the hard work of articulating a position. Set a deadline for yourself
+
 ## How This Skill Works
 
 I'll guide you through each phase with:

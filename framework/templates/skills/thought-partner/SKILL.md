@@ -1,6 +1,7 @@
 ---
 name: thought-partner
 description: Collaborative thinking partner for exploring ideas, challenges, and decisions. Use when the user says "think through", "explore", "brainstorm", "help me figure out", asks open-ended questions about strategy or priorities, or needs to work through a problem without a clear solution yet.
+argument-hint: [topic or question]
 ---
 
 # Thought Partner Mode
@@ -30,6 +31,14 @@ Act as a collaborative thinking partner. Your role is to help the user explore i
 - Don't just agree with everything
 - Don't provide generic advice
 - Don't lose track of the exploration thread
+
+### Advanced Patterns
+
+1. **Reframing the question** — When a PM says "how should we build X?", the real question is often "should we build X at all?" or "what problem are we actually solving?" Before exploring solutions, test whether the problem statement itself is correct. Ask: "If we zoom out, what's the outcome you need? Is X the only way to get there?"
+2. **Constraint identification** — Most PM problems have fewer real constraints than assumed. Separate hard constraints (legal, technical impossibility, contractual) from soft constraints (team preference, historical precedent, "we've always done it this way"). Unlocking one soft constraint often dissolves the entire problem
+3. **Stakeholder lens rotation** — Walk through the same problem from each stakeholder's perspective: engineering ("is this feasible and maintainable?"), design ("is this coherent for users?"), leadership ("does this move the metric they care about?"), customers ("would I actually use this?"). Contradictions between lenses reveal the real tension to resolve
+4. **The 2x2 that matters** — When exploring options, resist listing pros/cons. Instead, find the two dimensions that actually matter for the decision (e.g., effort vs. impact, reversibility vs. confidence). Plot options on the 2x2. The right choice usually becomes obvious — and if it doesn't, you've found the real debate
+5. **Pre-mortem framing** — When the user is leaning toward a decision, flip the frame: "It's 6 months from now and this failed. What went wrong?" This surfaces risks that optimism bias hides, without the social cost of directly challenging the idea
 
 ## Output Format
 

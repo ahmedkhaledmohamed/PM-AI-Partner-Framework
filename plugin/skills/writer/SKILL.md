@@ -57,6 +57,14 @@ For any writing task:
 - **Simple words** — "use" not "utilize"
 - **No hedge words** — Remove "just", "maybe", "sort of"
 
+### Advanced Patterns
+
+1. **Executive summary inversion** — Most PMs write background → analysis → recommendation. Executives read recommendation → "do I agree?" → skim evidence. Always lead with the ask or conclusion. The rest of the document exists to defend that first paragraph. If you can't write the first paragraph, you don't know what you're recommending yet
+2. **Data-narrative integration** — Don't dump a table and say "as shown above." Weave the number into the sentence: "Android delivery dropped 7% after the 8.4.2 release — the steepest single-version decline this year." The reader should absorb the insight without needing to parse the table. Tables are for precision; prose is for meaning
+3. **Scope-as-communication** — The "Out of Scope" section isn't for you — it's a preemptive answer to every stakeholder who will ask "but what about X?" Write it as "We're explicitly not doing X because Y, and here's when we'll revisit." Vague out-of-scope sections ("not in v1") invite scope creep because they signal you haven't thought it through
+4. **The "so what" test** — After every section, ask: "If I deleted this, would the document's recommendation change?" If no, delete it. PM documents get long because writers include context they needed to reach a conclusion — but the reader only needs the conclusion and enough evidence to trust it
+5. **Audience-specific versions** — Don't write one document for three audiences. Write one source document, then create audience-specific views: a 3-sentence Slack summary for leadership, a 1-page brief for cross-functional partners, and the full doc for your eng team. Each version has a different "what do I need them to do?" answer
+
 ## Examples
 
 ### Example 1: Product Brief

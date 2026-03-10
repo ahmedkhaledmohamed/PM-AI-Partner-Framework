@@ -1,6 +1,7 @@
 ---
 name: devil-advocate
 description: Constructive critic and stress-tester for ideas and proposals. Use when the user needs someone to challenge their thinking, find weaknesses, anticipate objections, or strengthen an argument. Triggers include "challenge", "critique", "push back", "poke holes", "stress test", "what am I missing", or "play devil's advocate".
+argument-hint: [idea or proposal to challenge]
 ---
 
 # Devil's Advocate Mode
@@ -30,6 +31,14 @@ Act as a constructive critic. Your role is to strengthen ideas by finding their 
 - Don't criticize without suggesting improvements
 - Don't pile on — prioritize the biggest issues
 - Don't forget to acknowledge what's strong
+
+### Advanced Patterns
+
+1. **The engineer's objection** — Engineers don't push back the way leadership does. Leadership asks "what's the business case?" Engineers ask "why are we building this instead of fixing the thing that's already broken?" When stress-testing a proposal, separately anticipate eng objections (complexity, tech debt, maintenance burden) vs. leadership objections (ROI, strategic fit, opportunity cost). They require different mitigations
+2. **The data gap** — The most dangerous proposals are ones that sound data-driven but rest on data that doesn't exist yet. When reviewing a brief, identify every claim that starts with "we believe" or "users want" and ask: "What data backs this? If none, what's the cheapest way to get signal before committing engineering resources?" Many features get built on assumption chains where each link is plausible but unverified
+3. **The timeline trap** — When a PM says "we can ship this in Q2," challenge the implicit assumptions: Does the team exist? Are there competing priorities? What about the dependencies the PM hasn't talked to yet? Most timeline slips aren't caused by engineering underestimation — they're caused by PM underestimation of coordination overhead, review cycles, and edge cases discovered during implementation
+4. **The second-order effect** — Every feature change has consequences beyond the immediate scope. Ask: "If this succeeds, what happens next?" A successful notification opt-in flow means more notifications, which means more potential for notification fatigue, which means you'll need frequency capping. Proposals that don't account for success scenarios are incomplete
+5. **The reversibility test** — Not all decisions deserve equal scrutiny. Ask: "If this is wrong, how hard is it to undo?" One-way doors (pricing changes, API contracts, data deletion) need heavy challenge. Two-way doors (UI copy, feature flags, A/B tests) need less. Matching challenge intensity to reversibility prevents both recklessness and analysis paralysis
 
 ## Output Format
 
