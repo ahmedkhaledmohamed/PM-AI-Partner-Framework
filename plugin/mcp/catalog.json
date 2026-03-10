@@ -140,21 +140,12 @@
     {
       "id": "google-drive",
       "name": "Google Drive",
-      "package": "@anthropic/google-drive-mcp",
-      "description": "Search and read Google Docs, Sheets, and Slides",
+      "package": "@anthropic/gdrive-mcp (remote)",
+      "description": "Search and read Google Docs, Sheets, and Slides via Anthropic's remote server",
       "tier": "pm-essentials",
-      "transport": "stdio",
-      "command": "npx",
-      "args": ["-y", "@anthropic/google-drive-mcp"],
-      "env": {},
-      "credentials": [
-        {
-          "key": "GOOGLE_APPLICATION_CREDENTIALS",
-          "type": "env",
-          "label": "Path to Google service account JSON",
-          "help": "Create at https://console.cloud.google.com/iam-admin/serviceaccounts"
-        }
-      ],
+      "transport": "url",
+      "url": "https://mcp.anthropic.com/gdrive/sse",
+      "credentials": [],
       "pmUseCase": "Pull context from team docs, strategy sheets, meeting notes"
     },
     {
@@ -280,19 +271,19 @@
     {
       "id": "bigquery",
       "name": "BigQuery",
-      "package": "@anthropic/bigquery-mcp",
+      "package": "mcp-server-bigquery",
       "description": "Run SQL queries against Google BigQuery datasets",
       "tier": "data-analytics",
       "transport": "stdio",
-      "command": "npx",
-      "args": ["-y", "@anthropic/bigquery-mcp"],
+      "command": "uvx",
+      "args": ["mcp-server-bigquery"],
       "env": {},
       "credentials": [
         {
           "key": "GOOGLE_APPLICATION_CREDENTIALS",
           "type": "env",
           "label": "Path to GCP service account JSON",
-          "help": "Create at https://console.cloud.google.com/iam-admin/serviceaccounts"
+          "help": "Create at https://console.cloud.google.com/iam-admin/serviceaccounts (requires Python/uvx installed)"
         }
       ],
       "pmUseCase": "Query product analytics, build dashboards, validate with data"

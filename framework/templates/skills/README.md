@@ -39,6 +39,13 @@ Skills are markdown files that define how the AI should behave in specific situa
 |-------|---------|---------|
 | [strategic-clarity](strategic-clarity/SKILL.md) | `/strategic-clarity` | New role onboarding, team identity, establishing boundaries |
 
+### Analysis (2)
+
+| Skill | Command | Use For |
+|-------|---------|---------|
+| [hypothesis-tester](hypothesis-tester/SKILL.md) | `/hypothesis-tester` | Designing A/B tests, calculating sample sizes, interpreting results |
+| [competitor-analyst](competitor-analyst/SKILL.md) | `/competitor-analyst` | Competitive landscape analysis, positioning maps, feature gaps |
+
 ## Installation
 
 ### Option 1: Install All Skills (Recommended)
@@ -60,6 +67,8 @@ cp -r product-brief ~/.cursor/skills/
 cp -r meeting-prep ~/.cursor/skills/
 cp -r stakeholder-update ~/.cursor/skills/
 cp -r strategic-clarity ~/.cursor/skills/
+cp -r hypothesis-tester ~/.cursor/skills/
+cp -r competitor-analyst ~/.cursor/skills/
 ```
 
 Or as a one-liner:

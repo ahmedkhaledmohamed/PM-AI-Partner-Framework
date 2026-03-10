@@ -10,7 +10,7 @@
 npx pm-ai-partner@latest
 ```
 
-10 agent skills · 4 workflow commands · 3 automation hooks · Claude Code, Cursor, and Codex
+12 agent skills · 6 workflow commands · 3 automation hooks · Claude Code, Cursor, and Codex
 
 ![PM AI Partner Framework](site/images/framework-diagram.png)
 
@@ -26,7 +26,7 @@ npx pm-ai-partner@latest
 npx pm-ai-partner@latest
 ```
 
-One command installs 10 AI skills, 4 workflow commands, and 3 automation hooks. Works with Claude Code, Cursor, and Codex.
+One command installs 12 AI skills, 6 workflow commands, and 3 automation hooks. Works with Claude Code, Cursor, and Codex.
 
 **[See plugin details, all commands, and usage examples →](plugin/)**
 
@@ -141,14 +141,15 @@ Repeatable processes for common PM tasks:
 
 ## Skills & Commands
 
-10 agent skills and 4 workflow commands you can invoke via `/command` or auto-trigger by context:
+12 agent skills and 6 workflow commands you can invoke via `/command` or auto-trigger by context:
 
 | Type | Skills |
 |------|--------|
 | Agent Modes (6) | `/thought-partner`, `/technical-analyst`, `/writer`, `/devil-advocate`, `/builder`, `/data-analyst` |
 | Scenarios (3) | `/product-brief`, `/meeting-prep`, `/stakeholder-update` |
 | Workflows (1) | `/strategic-clarity` |
-| Commands (4) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase` |
+| Analysis (2) | `/hypothesis-tester`, `/competitor-analyst` |
+| Commands (6) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase`, `/pm:competitor-scan`, `/pm:metrics-review` |
 
 Each skill includes instructions, examples, and lessons learned from real usage.
 
@@ -222,4 +223,4 @@ We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to h
 
 ---
 
-*Version 2.0.0 · March 2026*
+*Version 3.0.0 · March 2026*

@@ -474,7 +474,7 @@
     <div class="hero-content container">
       <div class="hero-badge">
         <span class="dot"></span>
-        <span>10 skills · 4 commands · 3 hooks</span>
+        <span>12 skills · 6 commands · 3 hooks · 17 MCP servers</span>
       </div>
       <h1>PM AI Partner</h1>
       <p class="hero-subtitle">AI-powered skills, workflows, and methodology for Product Managers. One command to install.</p>
@@ -582,7 +582,7 @@
   <section id="plugin">
     <div class="container">
       <h2>The Plugin</h2>
-      <p class="section-subtitle">One command installs 10 skills, 4 commands, and 3 hooks into your editor.</p>
+      <p class="section-subtitle">One command installs 12 skills, 6 commands, and 3 hooks into your editor.</p>
 
       <div class="code-block" style="text-align: center; font-size: 16px;">
         <span class="highlight">$</span> npx pm-ai-partner@latest
@@ -599,6 +599,8 @@
           <tr><td><code>/pm:write-brief</code></td><td>Guided PRD creation with quality checklist</td></tr>
           <tr><td><code>/pm:prep-meeting</code></td><td>Talking points, anticipated questions, role-play</td></tr>
           <tr><td><code>/pm:audit-codebase</code></td><td>PM-focused code exploration — capabilities, gaps, implications</td></tr>
+          <tr><td><code>/pm:competitor-scan</code></td><td>Competitive analysis with positioning maps and action recommendations</td></tr>
+          <tr><td><code>/pm:metrics-review</code></td><td>Structured metrics review — headlines, deep dives, action items</td></tr>
         </tbody>
       </table>
 
@@ -620,7 +622,7 @@
   <!-- Agent Modes -->
   <section id="agents">
     <div class="container">
-      <h2>10 Agent Skills</h2>
+      <h2>12 Agent Skills</h2>
       <p class="section-subtitle">Different Claude "modes" for different jobs — invoke by name or let them auto-activate.</p>
       
       <img src="images/agent-skills-diagram.svg" alt="Ten Agent Skills for AI-PM Partnership" style="max-width: 900px; width: 100%; margin: 32px auto; display: block; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
@@ -676,6 +678,16 @@
           <h4>Strategic Clarity</h4>
           <p>Define team identity, boundaries, and charter</p>
         </div>
+        <div class="agent-card">
+          <div class="emoji">🧪</div>
+          <h4>Hypothesis Tester</h4>
+          <p>Design experiments, evaluate A/B tests, interpret results</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">🏁</div>
+          <h4>Competitor Analyst</h4>
+          <p>Map landscapes, assess positioning, identify real gaps</p>
+        </div>
       </div>
     </div>
   </section>
@@ -697,47 +709,54 @@
         <div class="workflow-item">
           <div class="workflow-number">2</div>
           <div class="workflow-content">
+            <h4>Planning Cycle</h4>
+            <p>Review → Prioritize → Commit → Communicate for quarterly and sprint planning</p>
+          </div>
+        </div>
+        <div class="workflow-item">
+          <div class="workflow-number">3</div>
+          <div class="workflow-content">
             <h4>Codebase Discovery</h4>
             <p>Map capabilities, find ownership, understand contracts</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">3</div>
+          <div class="workflow-number">4</div>
           <div class="workflow-content">
             <h4>Architecture Analysis</h4>
             <p>Understand systems, propose changes, evaluate tradeoffs</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">4</div>
+          <div class="workflow-number">5</div>
           <div class="workflow-content">
             <h4>Document Production</h4>
             <p>Create PRDs, briefs, stakeholder docs with iteration</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">5</div>
+          <div class="workflow-number">6</div>
           <div class="workflow-content">
             <h4>Tool Building</h4>
             <p>Create scripts, dashboards, HTML artifacts</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">6</div>
+          <div class="workflow-number">7</div>
           <div class="workflow-content">
             <h4>Meeting Preparation</h4>
             <p>Structure agendas, anticipate questions, draft talking points</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">7</div>
+          <div class="workflow-number">8</div>
           <div class="workflow-content">
             <h4>Data Investigation</h4>
             <p>Question → SQL query → analyze results → connect to strategy</p>
           </div>
         </div>
         <div class="workflow-item">
-          <div class="workflow-number">8</div>
+          <div class="workflow-number">9</div>
           <div class="workflow-content">
             <h4>Doc Restructuring</h4>
             <p>Diagnose confusion, separate concerns, add structure, sync references</p>
@@ -867,6 +886,14 @@
           <h4>⚡ Quick Reference</h4>
           <p>One-page cheat sheet</p>
         </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/core/workflows" class="link-card">
+          <h4>🔄 Workflow Guides</h4>
+          <p>9 repeatable workflow patterns</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/templates/skills" class="link-card">
+          <h4>🎯 Cursor Skills</h4>
+          <p>12 slash commands for AI-assisted PM work</p>
+        </a>
         <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" class="link-card">
           <h4>📁 GitHub Repo</h4>
           <p>Full source repository</p>
@@ -878,7 +905,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>PM AI Partner Framework v2.0 · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · March 2026</p>
+      <p>PM AI Partner Framework v3.0 · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · March 2026</p>
     </div>
   </footer>
 

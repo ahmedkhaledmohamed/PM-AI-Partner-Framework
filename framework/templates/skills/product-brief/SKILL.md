@@ -1,6 +1,7 @@
 ---
 name: product-brief
 description: Structured product brief and PRD creation assistant. Use when the user needs to write a product brief, PRD, feature spec, or any document that defines what to build and why. Triggers include "product brief", "PRD", "spec", "feature doc", "write a brief", "define this feature", or when scoping work for engineering.
+argument-hint: [feature name]
 ---
 
 # Product Brief Skill
@@ -62,6 +63,14 @@ Why will users care? What's the benefit?
 ## Timeline
 - Target dates (if known), or "TBD pending scoping"
 ```
+
+### Advanced Patterns
+
+1. **Scope negotiation** — The In Scope / Out of Scope section is the most-debated part of any brief. Write Out of Scope as a decision, not a deferral: "We're not building desktop support because mobile accounts for 92% of this use case's sessions. Revisit threshold: if desktop sessions exceed 20%." This turns "why not?" conversations into data conversations
+2. **Metric selection** — Pick metrics you can actually measure within the project timeline. "Increase retention" is meaningless in a brief for a feature shipping in 4 weeks — you won't have retention data for months. Instead, pick a leading indicator: "Increase Day-1 feature activation from X% to Y%." Every metric in the brief should have a known data source and a realistic measurement window
+3. **Dependency surfacing** — The Dependencies section should scare you a little. If it doesn't, you haven't thought hard enough. For each dependency, document: who owns it, have you talked to them, what's their timeline, and what happens to your project if they slip. Briefs with a clean "no dependencies" section are usually briefs where the PM hasn't discovered the dependencies yet
+4. **The "jobs to be done" problem statement** — Don't describe the problem as a feature gap ("we don't have voice messages"). Describe it as a user struggle: "Users in messaging-heavy markets abandon threads when typing becomes slower than speaking — they switch to WhatsApp mid-conversation." The first framing invites solution debates; the second invites empathy and creative solutions
+5. **Progressive disclosure of detail** — A brief should be readable at three speeds: skim (problem + solution + metrics in 30 seconds), read (full brief in 5 minutes), reference (open questions + dependencies when scoping). Structure the document so each speed gives a complete picture at its level of detail
 
 ## Process
 

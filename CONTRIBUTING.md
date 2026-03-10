@@ -6,79 +6,204 @@ Thank you for your interest in contributing! This framework is built by PMs, for
 
 ## Ways to Contribute
 
-### 1. Share Your Experience
+| Contribution | Effort | Impact |
+|---|---|---|
+| [Add Advanced Patterns to a skill](#improving-an-existing-skill) | Low | High |
+| [Share a success story / case study](#contributing-a-case-study) | Low | High |
+| [Add a new skill](#contributing-a-new-skill) | Medium | High |
+| [Add a workflow](#contributing-a-workflow) | Medium | Medium |
+| [Fix bugs or improve docs](#other-contributions) | Low | Medium |
 
-The most valuable contribution is sharing how you use the framework:
+---
 
-- **Success stories**: Open an issue using the "Success Story" template
-- **Case studies**: Submit a PR adding your case study to `framework/examples/community/`
-- **Tips & tricks**: Share in Discussions what's working for you
+## Improving an Existing Skill
 
-### 2. Report Issues
+**This is the highest-leverage contribution.** Adding Advanced Patterns to existing skills encodes real PM experience into the framework.
 
-Found a problem? Please open an issue:
+### What's an Advanced Pattern?
+
+Advanced Patterns are specific lessons from PM practice — not textbook advice.
+
+**Good pattern:**
+> **The data gap** — Many proposals sound data-driven but rest on data that doesn't exist yet. When reviewing a brief that says "we'll measure X," check: does the instrumentation exist? Is the data flowing? Can you query it today? If not, the metric is aspirational, not measurable. Flag it and propose a proxy metric that's available now.
+
+**Bad pattern (too generic):**
+> **Use data** — Always support your arguments with data and metrics.
+
+The test: would a PM with 5+ years of experience nod and say "yes, I've learned that the hard way"? If it reads like a textbook, it's not specific enough.
+
+### Steps
+
+1. Edit `plugin/skills/<skill-name>/SKILL.md`
+2. Add your pattern to the `### Advanced Patterns` section, numbered sequentially
+3. Copy the updated file to `framework/templates/skills/<skill-name>/SKILL.md`
+4. Submit a PR explaining the pattern and the experience behind it
+
+---
+
+## Contributing a New Skill
+
+### Skill File Structure
+
+Every skill lives in `plugin/skills/<skill-name>/SKILL.md`:
+
+```markdown
+---
+name: skill-name
+description: One sentence explaining when this skill triggers. Include specific trigger words.
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob
+argument-hint: [what the user provides]
+---
+
+# Skill Name Mode
+
+## Instructions
+
+What the AI should do in this mode.
+
+### Behavior
+1. Step-by-step behavior rules (5 items)
+
+### Tone
+- Bullet list of tone guidelines (4 items)
+
+### What NOT to Do
+- Anti-patterns to avoid (4 items)
+
+### Advanced Patterns
+1. **Pattern Name** — Description of a real lesson from PM practice.
+2. **Pattern Name** — Another specific insight from doing the work.
+3. (aim for 5+ patterns)
+
+## Output Format
+How to structure the response.
+
+## Examples
+
+### Example 1: [Scenario]
+**User:** [realistic prompt]
+**Good Response:** [detailed response showing the skill in action]
+
+### Example 2: [Scenario]
+**User:** [realistic prompt]
+**Good Response:** [detailed response]
+```
+
+### Checklist for New Skills
+
+1. **Create the skill file:**
+   ```
+   plugin/skills/your-skill-name/SKILL.md
+   ```
+
+2. **Copy to framework templates:**
+   ```
+   framework/templates/skills/your-skill-name/SKILL.md
+   ```
+
+3. **Update the installer** — Add your skill name to the `SKILLS` array in `plugin/bin/install.js`
+
+4. **Update documentation:**
+   - `plugin/README.md` — Add row to the skills table
+   - `README.md` — Add to the skills summary
+   - `CLAUDE.md` — Add slash command reference
+
+5. **Run tests:**
+   ```bash
+   cd plugin && npm test
+   ```
+
+6. **Submit a PR** with:
+   - Title: `Add [skill-name] skill`
+   - Body: What PM task this covers, why it's distinct from existing skills, and what experience informed the Advanced Patterns
+
+### What Makes a Good Skill Candidate
+
+A skill should cover a **distinct PM activity** not already handled well by existing skills. Ask:
+
+- Does this require a different AI "personality" than existing skills?
+- Can you write 5+ Advanced Patterns from real experience?
+- Would a PM use this at least monthly?
+
+Current skills: thought-partner, technical-analyst, writer, devil-advocate, builder, data-analyst, product-brief, meeting-prep, stakeholder-update, strategic-clarity, hypothesis-tester, competitor-analyst.
+
+---
+
+## Contributing a Workflow
+
+Workflows live in `framework/core/workflows/` and follow a 4-phase structure:
+
+```markdown
+# Workflow Name
+
+## When to Use
+One paragraph describing the trigger scenario.
+
+## Phases
+
+### Phase 1: VERB (e.g., REVIEW, QUESTION, TRANSLATE)
+What to do, AI prompts to use, expected output.
+
+### Phase 2: VERB
+...
+
+### Phase 3: VERB
+...
+
+### Phase 4: VERB
+...
+
+## Output Checklist
+- [ ] Concrete deliverables from each phase
+
+## Common Patterns
+Lessons learned from running this workflow in practice.
+```
+
+See `framework/core/workflows/data-investigation.md` for a strong example.
+
+After creating the file, update `framework/core/workflows/README.md` with the new entry.
+
+---
+
+## Contributing a Case Study
+
+Case studies demonstrate the framework in action. Use the template at `framework/examples/case-studies/TEMPLATE.md`.
+
+Key requirements:
+- Real scenario (anonymized if needed)
+- Show the specific skills and workflows used
+- Include a **Before/After** section — what does this task look like without the framework?
+- Be honest about limitations and what the framework didn't help with
+
+---
+
+## Other Contributions
+
+### Report Issues
 
 - Use the "Bug Report" template
-- Include your environment (Cursor/Claude Code, OS, MCP tools)
+- Include your environment (Claude Code / Cursor / Codex, OS)
 - Describe what happened vs. what you expected
 
-### 3. Suggest Improvements
+### Suggest Features
 
-Have an idea? We'd love to hear it:
+- Open an issue describing the problem you're solving
+- Share alternatives you've considered
 
-- Use the "Feature Request" template
-- Explain the problem you're trying to solve
-- Share any alternatives you've considered
+### Improve Documentation
 
-### 4. Improve Documentation
-
-Documentation improvements are always welcome:
-
-- Fix typos or unclear explanations
-- Add examples for workflows or modes
-- Translate to other languages
-
-### 5. Add Examples
-
-Help others learn by adding examples:
-
-- Domain-specific CLAUDE.md templates (Growth PM, Infra PM, etc.)
-- Workflow walkthroughs
-- Integration guides
+- Fix typos, unclear explanations, or broken links
+- Use Mermaid diagrams instead of ASCII art for visuals
 
 ---
 
-## How to Submit Changes
+## Style Guide
 
-### For Small Changes (typos, small fixes)
-
-1. Fork the repo
-2. Make your changes
-3. Submit a Pull Request
-
-### For Larger Changes
-
-1. Open an issue first to discuss your idea
-2. Wait for feedback before investing significant time
-3. Fork, implement, and submit PR
-
----
-
-## Contribution Guidelines
-
-### Content Guidelines
-
-- **Keep it practical**: Real examples > theoretical explanations
-- **Be specific**: "Here's exactly what I typed" > "You can ask about X"
-- **Respect privacy**: Remove company-specific details unless you have permission
-- **Stay on topic**: This framework is for PM work with AI tools
-
-### Code/File Guidelines
-
-- Follow existing file structure and naming conventions
-- Use markdown for documentation
-- Keep examples self-contained (no external dependencies)
-- Test your changes before submitting
+- **Markdown**: Use Mermaid for diagrams, not ASCII art
+- **Tone**: Direct and practical. No filler. Lead with the insight.
+- **Examples**: Use realistic PM scenarios, not generic placeholders
+- **Skills**: Second person ("You should...") for instructions, third person for patterns
 
 ### Plugin Contributions
 
@@ -104,15 +229,19 @@ The plugin lives in `plugin/` and ships as an npm package (`pm-ai-partner`). Whe
 
 ## Questions?
 
-- **Discussions**: Ask in GitHub Discussions
-- **Direct contact**: ahmd.khaled.a.mohamed@gmail.com
+- **Discussions**: [GitHub Discussions](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions)
+- **Email**: ahmd.khaled.a.mohamed@gmail.com
 
 ---
 
 ## Recognition
 
-Contributors will be recognized in:
-- The repo's README (for significant contributions)
-- Release notes (when their changes ship)
+Contributors are recognized in:
+- The README (for significant contributions)
+- Release notes (when changes ship)
 
-Thank you for helping make AI more accessible to Product Managers everywhere!
+---
+
+## License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.

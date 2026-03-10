@@ -1,7 +1,66 @@
 # PM AI Partner Framework
 
-**Latest Version:** v2.0.0 (March 2026)  
+**Latest Version:** v3.0.0 (March 2026)
 **Repo:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
+
+---
+
+## What's New in v3.0.0
+
+### 2 New Skills
+
+| Skill | What It Does |
+|-------|-------------|
+| **Hypothesis Tester** | Design A/B tests, calculate sample sizes, interpret results honestly, catch novelty effects |
+| **Competitor Analyst** | Map competitive landscapes, identify positioning gaps, apply Ignore/Monitor/Respond/Lead framework |
+
+Both include 5 Advanced Patterns and detailed worked examples.
+
+### 2 New Commands
+
+| Command | What It Does |
+|---------|-------------|
+| `/pm:competitor-scan [competitor]` | Full competitive analysis with positioning maps, feature comparison with insight, and action recommendations |
+| `/pm:metrics-review` | Structured metrics review — headlines, deep dives on movers, segment analysis, action items |
+
+### Smarter Existing Commands
+
+- **`/pm:plan-week`** now pulls context from MCP servers (GitHub PRs/issues, Linear sprint items, Slack requests, Google Drive docs, Memory for last week's plan) to pre-populate your weekly plan
+- **`/pm:audit-codebase`** now auto-detects repo language/framework, generates Mermaid architecture diagrams, maps API surfaces and data models, and integrates with GitHub/Sentry MCP for additional context
+
+### Totals: 12 skills, 6 commands, 3 hooks, 17 MCP servers
+
+---
+
+## What's New in v2.2.0
+
+### Advanced Patterns Across All Skills
+
+Every skill now includes an **Advanced Patterns** section with 5+ experience-encoded patterns — real lessons from PM practice, not textbook frameworks. These patterns are what differentiate this project from generic AI prompting tools.
+
+Examples:
+- **Thought Partner**: "Reframing the question" — catching when a PM is solving the wrong problem
+- **Devil's Advocate**: "The data gap" — proposals that sound data-driven but rest on data that doesn't exist
+- **Writer**: "Executive summary inversion" — leading with the ask, not the background
+- **Product Brief**: "Scope negotiation" — writing Out of Scope sections that actually hold
+- **Meeting Prep**: "The real meeting behind the meeting" — identifying the actual decision being made
+- **Stakeholder Update**: "The bad news sandwich is dead" — leading with honesty + plan
+
+### 9 Complete Workflows (5 new)
+
+All 9 promised workflows are now fully documented with step-by-step phases, AI prompts, and output checklists:
+
+| New Workflow | Phases | When to Use |
+|---|---|---|
+| **Planning Cycle** | REVIEW → PRIORITIZE → COMMIT → COMMUNICATE | Quarterly/sprint planning |
+| **Data Investigation** | QUESTION → QUERY → INTERPRET → RECOMMEND | Metric moved unexpectedly |
+| **PM-Eng Bridge** | TRANSLATE → NEGOTIATE → SPECIFY → VERIFY | Scoping, eng collaboration |
+| **Communication Prep** | CONTEXT → POSITION → ANTICIPATE → REHEARSE | High-stakes meetings |
+| **Doc Restructuring** | AUDIT → DESIGN → MIGRATE → VERIFY | Confusing documentation |
+
+### Cross-Platform Getting Started
+
+The getting-started guide now covers macOS, Linux, and Windows (with WSL2 recommended path).
 
 ---
 

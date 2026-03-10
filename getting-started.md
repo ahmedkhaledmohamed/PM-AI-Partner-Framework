@@ -77,9 +77,34 @@ Then try: "I'm using the PM AI Partner Framework. Help me create a team charter.
 
 Before you start, ensure you have:
 
-- [ ] macOS (this guide is Mac-focused; adapt for Linux/Windows)
+- [ ] **macOS, Linux, or Windows** (platform-specific notes below)
 - [ ] Basic familiarity with terminal/command line
 - [ ] Git installed (`git --version` to check)
+- [ ] Node.js 18+ (`node --version` to check)
+
+### Platform Notes
+
+| Platform | Terminal | Package Manager | Notes |
+|----------|----------|-----------------|-------|
+| **macOS** | Terminal.app or iTerm2 | Homebrew (`brew`) | Primary guide platform |
+| **Linux** | Your distro's terminal | apt/dnf/pacman | All commands work as-is. Replace `~/Applications` paths with your install location |
+| **Windows** | PowerShell or WSL2 | winget/scoop/choco | **Recommended: Use WSL2** for the best experience. Native PowerShell works but some MCP servers assume Unix paths |
+
+#### Windows: WSL2 Setup (Recommended)
+
+If you're on Windows, install WSL2 first for a seamless experience:
+
+```powershell
+# In PowerShell (admin)
+wsl --install
+
+# Then open Ubuntu from Start menu and follow the Linux instructions below
+```
+
+With WSL2, all commands in this guide work exactly as written. If using native Windows/PowerShell, replace:
+- `~/` with `$HOME\` or `%USERPROFILE%\`
+- `mkdir -p` with `New-Item -ItemType Directory -Force`
+- `cp -r` with `Copy-Item -Recurse`
 
 ### Already Have These?
 
@@ -95,8 +120,11 @@ Before you start, ensure you have:
 
 Cursor is VS Code with built-in AI capabilities.
 
-1. **Download Cursor:** https://cursor.sh
-2. **Install** by dragging to Applications
+1. **Download Cursor:** https://cursor.sh (available for macOS, Linux, and Windows)
+2. **Install:**
+   - **macOS:** Drag to Applications
+   - **Linux:** Extract the AppImage or use the `.deb`/`.rpm` package
+   - **Windows:** Run the installer `.exe`
 3. **Open Cursor** and sign in (you can use your GitHub account)
 
 ### Verify Installation
@@ -110,13 +138,13 @@ cursor --version
 ## Step 2: Configure Claude in Cursor
 
 1. Open Cursor
-2. Go to **Settings** (⌘ + ,) → **AI** → **Models**
+2. Go to **Settings** (⌘/Ctrl + ,) → **AI** → **Models**
 3. Ensure **Claude** is selected as the default model
 4. For Opus/Sonnet access, you may need a Cursor Pro subscription or API key
 
 ### Test It
 
-Open any file and press `⌘ + K` to open the AI prompt. Type "Hello" — you should get a response.
+Open any file and press `⌘ + K` (macOS) or `Ctrl + K` (Linux/Windows) to open the AI prompt. Type "Hello" — you should get a response.
 
 ---
 
@@ -459,7 +487,7 @@ In Cursor chat:
 
 ## Step 9.5: Install Skills, Commands, and Hooks
 
-Skills are reusable AI behaviors you can invoke with slash commands. The framework includes 10 agent skills, 4 workflow commands, and 3 automation hooks.
+Skills are reusable AI behaviors you can invoke with slash commands. The framework includes 12 agent skills, 6 workflow commands, and 3 automation hooks.
 
 ### Option A: Plugin Install (Recommended)
 
@@ -514,6 +542,49 @@ cp -r framework/templates/claude-code-skills/*/ ~/.claude/skills/
 | Draft Status | Write to `sandbox/` | Reminds to add status markers |
 | Commit Reminder | `git commit` | Prompts to capture lessons in CLAUDE.md |
 
+### Option B: Manual Install (Cursor)
+
+```bash
+cd framework/templates/skills
+
+mkdir -p ~/.cursor/skills
+cp -r */ ~/.cursor/skills/
+```
+
+### Available Skills
+
+**Agent Modes (6):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| thought-partner | `/thought-partner` | Explore ideas, brainstorm, think through problems |
+| technical-analyst | `/technical-analyst` | Understand systems, code, technical concepts |
+| writer | `/writer` | Draft documents, briefs, communications |
+| devil-advocate | `/devil-advocate` | Challenge ideas, stress-test proposals |
+| builder | `/builder` | Create tools, scripts, prototypes |
+| data-analyst | `/data-analyst` | Query data, analyze metrics |
+
+**Scenarios (3):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| product-brief | `/product-brief` | Write PRDs and feature specs |
+| meeting-prep | `/meeting-prep` | Prepare talking points, anticipate questions |
+| stakeholder-update | `/stakeholder-update` | Write status reports, executive summaries |
+
+**Workflows (1):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| strategic-clarity | `/strategic-clarity` | Guided workflow for team identity |
+
+**Analysis (2):**
+
+| Skill | Command | Description |
+|-------|---------|-------------|
+| hypothesis-tester | `/hypothesis-tester` | Design experiments, evaluate A/B tests |
+| competitor-analyst | `/competitor-analyst` | Competitive analysis and positioning |
+
 ### Verify Installation
 
 Restart your editor and run:
@@ -530,11 +601,11 @@ See [`plugin/README.md`](plugin/README.md) for full documentation.
 For autonomous multi-step tasks:
 
 ```bash
-# Install via npm
-npm install -g @anthropic-ai/claude-cli
+# Install via npm (all platforms)
+npm install -g @anthropic-ai/claude-code
 
-# Or via Homebrew
-brew install claude-cli
+# Or via Homebrew (macOS/Linux)
+brew install claude-code
 
 # Authenticate
 claude auth
