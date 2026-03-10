@@ -4,6 +4,14 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 const os = require("os");
+const {
+  loadCatalog,
+  getMcpConfigPath,
+  readMcpConfig,
+  writeMcpConfig,
+  buildServerEntry,
+  mergeMcpServers,
+} = require("./mcp-utils");
 
 const VERSION = "2.1.0";
 const PLUGIN_NAME = "pm-ai-partner";
@@ -203,90 +211,6 @@ function installCodex(pluginRoot, scope) {
 
 // ── MCP Server Support ──────────────────────────────────────────────
 
-function loadCatalog(pluginRoot) {
-  const catalogPath = path.join(pluginRoot, "mcp", "catalog.json");
-  if (!fs.existsSync(catalogPath)) return null;
-  return JSON.parse(fs.readFileSync(catalogPath, "utf8"));
-}
-
-function getMcpConfigPath(runtime, scope) {
-  if (runtime === "claude") {
-    return scope === "global"
-      ? path.join(os.homedir(), ".claude.json")
-      : path.join(process.cwd(), ".mcp.json");
-  }
-  if (runtime === "cursor") {
-    return scope === "global"
-      ? path.join(os.homedir(), ".cursor", "mcp.json")
-      : path.join(process.cwd(), ".cursor", "mcp.json");
-  }
-  return null;
-}
-
-function readMcpConfig(filePath) {
-  if (!fs.existsSync(filePath)) return {};
-  try {
-    return JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } catch {
-    return {};
-  }
-}
-
-function writeMcpConfig(filePath, config) {
-  const dir = path.dirname(filePath);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(config, null, 2) + "\n");
-}
-
-function buildServerEntry(server, credentials) {
-  const entry = {
-    command: server.command,
-    args: [...server.args],
-  };
-
-  const envVars = {};
-  let disabled = false;
-
-  for (const cred of server.credentials || []) {
-    const value = credentials[cred.key];
-
-    if (cred.type === "arg") {
-      if (value && value !== "") {
-        entry.args.push(value);
-      } else if (cred.default) {
-        entry.args.push(cred.default);
-      } else {
-        disabled = true;
-      }
-    } else {
-      if (value && value !== "") {
-        envVars[cred.key] = value;
-      } else {
-        envVars[cred.key] = `YOUR_${cred.key}_HERE`;
-        disabled = true;
-      }
-    }
-  }
-
-  if (Object.keys(envVars).length > 0) entry.env = envVars;
-  if (disabled) entry.disabled = true;
-
-  return entry;
-}
-
-function mergeMcpServers(existing, newServers) {
-  const merged = { ...existing };
-  if (!merged.mcpServers) merged.mcpServers = {};
-
-  for (const [id, entry] of Object.entries(newServers)) {
-    if (!merged.mcpServers[id]) {
-      merged.mcpServers[id] = entry;
-    }
-  }
-
-  return merged;
-}
-
 function printCatalog(catalog) {
   const tiers = catalog.tiers;
   const servers = catalog.servers;
@@ -304,11 +228,13 @@ function printCatalog(catalog) {
 
     for (const s of tierServers) {
       indexMap[idx] = s;
+      const isRemote = s.transport === "url";
+      const remoteTag = isRemote ? ` ${YELLOW}(remote)${RESET}` : "";
       const creds = (s.credentials || []).filter((c) => c.type === "env");
       const credHint =
         creds.length > 0 ? ` ${DIM}(needs ${creds.map((c) => c.key).join(", ")})${RESET}` : "";
       console.log(
-        `    ${CYAN}${String(idx).padStart(2)}${RESET}) ${s.name} — ${DIM}${s.pmUseCase}${RESET}${credHint}`
+        `    ${CYAN}${String(idx).padStart(2)}${RESET}) ${s.name}${remoteTag} — ${DIM}${s.pmUseCase}${RESET}${credHint}`
       );
       idx++;
     }
@@ -345,6 +271,11 @@ async function collectCredentials(servers) {
 
   for (const server of servers) {
     const creds = {};
+
+    if (server.transport === "url") {
+      results.push({ server, credentials: creds });
+      continue;
+    }
 
     if (!server.credentials || server.credentials.length === 0) {
       results.push({ server, credentials: creds });
@@ -395,13 +326,13 @@ async function installMcpServers(catalog, runtimes, scope, mcpServerIds) {
     ? selected.map((s) => ({ server: s, credentials: {} }))
     : await collectCredentials(selected);
 
-  const newServers = {};
-  for (const { server, credentials } of serversWithCreds) {
-    newServers[server.id] = buildServerEntry(server, credentials);
-  }
-
   let configsWritten = 0;
   for (const runtime of runtimes) {
+    const newServers = {};
+    for (const { server, credentials } of serversWithCreds) {
+      newServers[server.id] = buildServerEntry(server, credentials, runtime);
+    }
+
     const configPath = getMcpConfigPath(runtime, scope);
     if (!configPath) continue;
 
@@ -411,6 +342,7 @@ async function installMcpServers(catalog, runtimes, scope, mcpServerIds) {
 
     const enabledCount = Object.values(newServers).filter((e) => !e.disabled).length;
     const disabledCount = Object.values(newServers).filter((e) => e.disabled).length;
+    const remoteCount = serversWithCreds.filter(({ server }) => server.transport === "url").length;
 
     console.log(
       `  ${GREEN}+${RESET} MCP config — ${DIM}${configPath}${RESET}`
@@ -419,11 +351,53 @@ async function installMcpServers(catalog, runtimes, scope, mcpServerIds) {
     if (enabledCount > 0) parts.push(`${enabledCount} enabled`);
     if (disabledCount > 0) parts.push(`${disabledCount} disabled (add credentials to enable)`);
     console.log(`    ${DIM}${parts.join(", ")}${RESET}`);
+
+    if (remoteCount > 0) {
+      console.log(`    ${DIM}${remoteCount} remote server(s) — authenticate on first use via browser${RESET}`);
+    }
+
     configsWritten++;
   }
 
   return configsWritten;
 }
+
+function listMcpServers(runtimes, scope) {
+  printBanner();
+
+  let found = false;
+  for (const runtime of runtimes) {
+    const configPath = getMcpConfigPath(runtime, scope);
+    if (!configPath) continue;
+
+    const config = readMcpConfig(configPath);
+    const servers = config.mcpServers || {};
+    const names = Object.keys(servers);
+
+    console.log(`  ${BOLD}${runtime}${RESET} — ${DIM}${configPath}${RESET}`);
+
+    if (names.length === 0) {
+      console.log(`    ${DIM}(no MCP servers configured)${RESET}`);
+    } else {
+      for (const name of names) {
+        const entry = servers[name];
+        const isRemote = entry.type === "url" || (entry.url && !entry.command);
+        const transport = isRemote ? `${YELLOW}remote${RESET}` : `${DIM}stdio${RESET}`;
+        const status = entry.disabled ? `${RED}disabled${RESET}` : `${GREEN}enabled${RESET}`;
+        console.log(`    ${name} — ${transport} — ${status}`);
+      }
+      found = true;
+    }
+    console.log();
+  }
+
+  if (!found) {
+    console.log(`  ${DIM}No MCP servers configured. Run npx pm-ai-partner to add some.${RESET}`);
+    console.log();
+  }
+}
+
+// ── Main ────────────────────────────────────────────────────────────
 
 async function main() {
   const args = process.argv.slice(2);
@@ -435,7 +409,9 @@ async function main() {
   const isGlobal = args.includes("--global") || args.includes("-g");
   const isLocal = args.includes("--local") || args.includes("-l");
   const isUninstall = args.includes("--uninstall");
-  const mcpFlag = args.find((a) => a.startsWith("--mcp"));
+  const isMcpOnly = args.includes("--mcp-only");
+  const isMcpList = args.includes("--mcp-list");
+  const mcpFlag = args.find((a) => a.startsWith("--mcp") && a !== "--mcp-only" && a !== "--mcp-list");
   const mcpServerIds = mcpFlag
     ? mcpFlag.includes("=") ? mcpFlag.split("=")[1] : "all"
     : null;
@@ -445,11 +421,26 @@ async function main() {
     process.exit(0);
   }
 
+  // ── --mcp-list: show configured servers and exit ──────────────────
+
+  if (isMcpList) {
+    let runtimes = [];
+    if (args.includes("--all")) runtimes = ["claude", "cursor"];
+    else {
+      if (args.includes("--claude")) runtimes.push("claude");
+      if (args.includes("--cursor")) runtimes.push("cursor");
+    }
+    if (runtimes.length === 0) runtimes = ["claude", "cursor"];
+    const scope = isLocal ? "local" : "global";
+    listMcpServers(runtimes, scope);
+    process.exit(0);
+  }
+
   printBanner();
 
   const pluginRoot = getPluginRoot();
 
-  if (!fs.existsSync(path.join(pluginRoot, "skills"))) {
+  if (!isMcpOnly && !fs.existsSync(path.join(pluginRoot, "skills"))) {
     console.error(`${RED}Error: Could not find plugin skills directory.${RESET}`);
     console.error(`Expected at: ${pluginRoot}/skills/`);
     process.exit(1);
@@ -458,13 +449,14 @@ async function main() {
   let runtimes = [];
   let scope = "";
 
-  if (nonInteractive) {
-    if (args.includes("--all")) runtimes = ["claude", "cursor", "codex"];
+  if (nonInteractive || isMcpOnly) {
+    if (args.includes("--all")) runtimes = isMcpOnly ? ["claude", "cursor"] : ["claude", "cursor", "codex"];
     else {
       if (args.includes("--claude")) runtimes.push("claude");
       if (args.includes("--cursor")) runtimes.push("cursor");
-      if (args.includes("--codex")) runtimes.push("codex");
+      if (!isMcpOnly && args.includes("--codex")) runtimes.push("codex");
     }
+    if (isMcpOnly && runtimes.length === 0) runtimes = ["claude"];
     scope = isLocal ? "local" : "global";
   } else {
     const detected = detectRuntimes();
@@ -510,40 +502,44 @@ async function main() {
     scope = scopeChoice === "2" ? "local" : "global";
   }
 
-  console.log();
-  console.log(`${BOLD}  Installing...${RESET}`);
-  console.log();
+  // ── Install skills/commands/hooks (skip if --mcp-only) ───────────
 
-  for (const runtime of runtimes) {
-    let dest;
-    switch (runtime) {
-      case "claude":
-        dest = installClaude(pluginRoot, scope);
-        console.log(
-          `  ${GREEN}+${RESET} Claude Code — ${DIM}${dest}${RESET}`
-        );
-        console.log(
-          `    ${DIM}Skills: 10 | Commands: /pm:plan-week, /pm:write-brief, /pm:prep-meeting, /pm:audit-codebase | Hooks: 3${RESET}`
-        );
-        break;
-      case "cursor":
-        dest = installCursor(pluginRoot, scope);
-        console.log(
-          `  ${GREEN}+${RESET} Cursor — ${DIM}${dest}${RESET}`
-        );
-        console.log(
-          `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
-        );
-        break;
-      case "codex":
-        dest = installCodex(pluginRoot, scope);
-        console.log(
-          `  ${GREEN}+${RESET} Codex — ${DIM}${dest}${RESET}`
-        );
-        console.log(
-          `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
-        );
-        break;
+  if (!isMcpOnly) {
+    console.log();
+    console.log(`${BOLD}  Installing...${RESET}`);
+    console.log();
+
+    for (const runtime of runtimes) {
+      let dest;
+      switch (runtime) {
+        case "claude":
+          dest = installClaude(pluginRoot, scope);
+          console.log(
+            `  ${GREEN}+${RESET} Claude Code — ${DIM}${dest}${RESET}`
+          );
+          console.log(
+            `    ${DIM}Skills: 10 | Commands: /pm:plan-week, /pm:write-brief, /pm:prep-meeting, /pm:audit-codebase | Hooks: 3${RESET}`
+          );
+          break;
+        case "cursor":
+          dest = installCursor(pluginRoot, scope);
+          console.log(
+            `  ${GREEN}+${RESET} Cursor — ${DIM}${dest}${RESET}`
+          );
+          console.log(
+            `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
+          );
+          break;
+        case "codex":
+          dest = installCodex(pluginRoot, scope);
+          console.log(
+            `  ${GREEN}+${RESET} Codex — ${DIM}${dest}${RESET}`
+          );
+          console.log(
+            `    ${DIM}Skills: 10 (commands and hooks require Claude Code)${RESET}`
+          );
+          break;
+      }
     }
   }
 
@@ -557,12 +553,12 @@ async function main() {
     if (catalog) {
       let shouldInstallMcp = false;
 
-      if (mcpServerIds) {
+      if (isMcpOnly || mcpServerIds) {
         shouldInstallMcp = true;
       } else if (!nonInteractive) {
         console.log();
         console.log(
-          `  ${BOLD}MCP Servers${RESET} — connect AI to external tools (GitHub, Slack, databases...)`
+          `  ${BOLD}MCP Servers${RESET} — connect AI to external tools (GitHub, Slack, Linear, databases...)`
         );
         const mcpAnswer = await ask(
           `  ${BOLD}Configure MCP servers? [y/N]:${RESET} `
@@ -579,13 +575,19 @@ async function main() {
   }
 
   console.log();
-  console.log(`  ${GREEN}${BOLD}Done!${RESET} Restart your editor to load the skills.`);
+  if (isMcpOnly) {
+    console.log(`  ${GREEN}${BOLD}Done!${RESET} MCP servers configured. Restart your editor to connect.`);
+  } else {
+    console.log(`  ${GREEN}${BOLD}Done!${RESET} Restart your editor to load the skills.`);
+  }
   console.log();
 
-  if (runtimes.includes("claude")) {
-    console.log(`  ${BOLD}Verify:${RESET} Run ${CYAN}/pm:thought-partner${RESET} in Claude Code`);
-  } else if (runtimes.includes("cursor")) {
-    console.log(`  ${BOLD}Verify:${RESET} Type ${CYAN}/thought-partner${RESET} in Cursor chat`);
+  if (!isMcpOnly) {
+    if (runtimes.includes("claude")) {
+      console.log(`  ${BOLD}Verify:${RESET} Run ${CYAN}/pm:thought-partner${RESET} in Claude Code`);
+    } else if (runtimes.includes("cursor")) {
+      console.log(`  ${BOLD}Verify:${RESET} Type ${CYAN}/thought-partner${RESET} in Cursor chat`);
+    }
   }
 
   console.log();
