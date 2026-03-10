@@ -474,14 +474,18 @@
     <div class="hero-content container">
       <div class="hero-badge">
         <span class="dot"></span>
-        <span>Personal Operating System</span>
+        <span>10 skills · 4 commands · 3 hooks</span>
       </div>
       <h1>PM AI Partner</h1>
-      <p class="hero-subtitle">A system for structured thinking with LLMs — partnering AI with PMs for depth, speed, and rigor.</p>
-      <div class="hero-tagline">
-        Not about replacing PM work — it's about <em>partnering</em> with AI.
+      <p class="hero-subtitle">AI-powered skills, workflows, and methodology for Product Managers. One command to install.</p>
+      <div class="hero-tagline" style="font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;">
+        npx <em>pm-ai-partner@latest</em>
       </div>
-      <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md" style="display: inline-block; margin-top: 32px; padding: 14px 32px; background: var(--accent-gradient); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(168,85,247,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">🚀 Get Started (30 min setup)</a>
+      <div style="margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://www.npmjs.com/package/pm-ai-partner" style="display: inline-block; padding: 14px 32px; background: var(--accent-gradient); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(168,85,247,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Install Plugin</a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" style="display: inline-block; padding: 14px 32px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.borderColor='var(--accent-purple)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">GitHub Repo</a>
+      </div>
+      <p style="margin-top: 16px; font-size: 13px; color: var(--text-muted);">Works with Claude Code, Cursor, and Codex · MIT Licensed</p>
       <img src="images/framework-diagram.png" alt="PM AI Partner Framework - Four sources of truth converging to reconciliation and decision" style="max-width: 700px; width: 100%; margin-top: 48px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
     </div>
   </header>
@@ -490,9 +494,9 @@
   <nav>
     <a href="#problem">The Problem</a>
     <a href="#philosophy">Philosophy</a>
+    <a href="#plugin">Plugin</a>
     <a href="#agents">Agent Modes</a>
     <a href="#workflows">Workflows</a>
-    <a href="#tools">Tools</a>
     <a href="#principles">Principles</a>
     <a href="#setup">Setup</a>
     <a href="#resources">Resources</a>
@@ -574,44 +578,103 @@
     </div>
   </section>
 
+  <!-- Plugin -->
+  <section id="plugin">
+    <div class="container">
+      <h2>The Plugin</h2>
+      <p class="section-subtitle">One command installs 10 skills, 4 commands, and 3 hooks into your editor.</p>
+
+      <div class="code-block" style="text-align: center; font-size: 16px;">
+        <span class="highlight">$</span> npx pm-ai-partner@latest
+      </div>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Workflow Commands</h3>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Multi-step workflows for recurring PM tasks — not single prompts.</p>
+      <table class="tools-table">
+        <thead>
+          <tr><th>Command</th><th>What It Does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/pm:plan-week</code></td><td>Reviews context, sets priorities, flags risks</td></tr>
+          <tr><td><code>/pm:write-brief</code></td><td>Guided PRD creation with quality checklist</td></tr>
+          <tr><td><code>/pm:prep-meeting</code></td><td>Talking points, anticipated questions, role-play</td></tr>
+          <tr><td><code>/pm:audit-codebase</code></td><td>PM-focused code exploration — capabilities, gaps, implications</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Automation Hooks</h3>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Run in the background — no manual invocation needed.</p>
+      <table class="tools-table">
+        <thead>
+          <tr><th>Hook</th><th>Trigger</th><th>What It Does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Quality Gate</td><td>Write to <code>product-catalog/</code></td><td>Checks doc against quality bar (evidence, clarity, audience)</td></tr>
+          <tr><td>Draft Status</td><td>Write to <code>sandbox/</code></td><td>Reminds to add status markers to drafts</td></tr>
+          <tr><td>Commit Reminder</td><td><code>git commit</code></td><td>Prompts to capture lessons in CLAUDE.md</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- Agent Modes -->
   <section id="agents">
     <div class="container">
-      <h2>Agent Modes</h2>
-      <p class="section-subtitle">Different Claude "personalities" for different jobs — invoke by name.</p>
+      <h2>10 Agent Skills</h2>
+      <p class="section-subtitle">Different Claude "modes" for different jobs — invoke by name or let them auto-activate.</p>
       
-      <img src="images/agent-modes-diagram.png" alt="Six Agent Modes for AI-PM Partnership" style="max-width: 800px; width: 100%; margin: 32px auto; display: block; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+      <img src="images/agent-skills-diagram.svg" alt="Ten Agent Skills for AI-PM Partnership" style="max-width: 900px; width: 100%; margin: 32px auto; display: block; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
       
       <div class="agents-grid">
         <div class="agent-card">
+          <div class="emoji">🤝</div>
+          <h4>Thought Partner</h4>
+          <p>Brainstorm, explore options, surface assumptions</p>
+        </div>
+        <div class="agent-card">
           <div class="emoji">🔍</div>
           <h4>Technical Analyst</h4>
-          <p>Explore code, find patterns, map capabilities</p>
+          <p>Translate code and systems into PM-friendly insights</p>
         </div>
         <div class="agent-card">
           <div class="emoji">✍️</div>
           <h4>Writer</h4>
-          <p>Draft docs, structure arguments, format output</p>
+          <p>Draft briefs, updates, emails — concise and structured</p>
         </div>
         <div class="agent-card">
           <div class="emoji">😈</div>
           <h4>Devil's Advocate</h4>
-          <p>Challenge assumptions, find weak points</p>
+          <p>Stress-test proposals, anticipate objections</p>
         </div>
         <div class="agent-card">
           <div class="emoji">🛠️</div>
           <h4>Builder</h4>
-          <p>Create tools, scripts, automations</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🤝</div>
-          <h4>Thought Partner</h4>
-          <p>Strategic dialogue, decision framing</p>
+          <p>Create tools, scripts, dashboards, prototypes</p>
         </div>
         <div class="agent-card">
           <div class="emoji">📊</div>
           <h4>Data Analyst</h4>
-          <p>Query metrics, find patterns, generate insights</p>
+          <p>Write queries, analyze metrics, extract insights</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">📋</div>
+          <h4>Product Brief</h4>
+          <p>Structured PRDs and feature specs</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">🎯</div>
+          <h4>Meeting Prep</h4>
+          <p>Talking points, anticipated questions</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">📢</div>
+          <h4>Stakeholder Update</h4>
+          <p>Status reports and executive summaries</p>
+        </div>
+        <div class="agent-card">
+          <div class="emoji">🧭</div>
+          <h4>Strategic Clarity</h4>
+          <p>Define team identity, boundaries, and charter</p>
         </div>
       </div>
     </div>
@@ -684,89 +747,6 @@
     </div>
   </section>
 
-  <!-- Tools -->
-  <section id="tools">
-    <div class="container">
-      <h2>Tool Selection</h2>
-      <p class="section-subtitle">Cursor vs Claude CLI — different tools for different jobs.</p>
-      
-      <table class="tools-table">
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Tool</th>
-            <th>Why</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Code exploration</td>
-            <td><span class="tool-badge tool-cursor">Cursor</span></td>
-            <td>Codebase indexing, semantic search</td>
-          </tr>
-          <tr>
-            <td>Doc writing</td>
-            <td><span class="tool-badge tool-cursor">Cursor</span></td>
-            <td>File editing, preview, context</td>
-          </tr>
-          <tr>
-            <td>Strategic thinking</td>
-            <td><span class="tool-badge tool-cli">Claude CLI</span></td>
-            <td>Long conversations, no file overhead</td>
-          </tr>
-          <tr>
-            <td>Multi-step tasks</td>
-            <td><span class="tool-badge tool-cli">Claude CLI</span></td>
-            <td>Agentic mode with git, terminal access</td>
-          </tr>
-          <tr>
-            <td>Quick edits</td>
-            <td><span class="tool-badge tool-cursor">Cursor</span></td>
-            <td>Inline editing, immediate feedback</td>
-          </tr>
-          <tr>
-            <td>Tool building</td>
-            <td><span class="tool-badge tool-cursor">Cursor</span></td>
-            <td>HTML/CSS preview, iteration</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">MCP Tools (Extended Capabilities)</h3>
-      <table class="tools-table">
-        <thead>
-          <tr>
-            <th>Tool</th>
-            <th>Purpose</th>
-            <th>PM Use Case</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>BigQuery / SQL</td>
-            <td>Run SQL queries</td>
-            <td>Metrics, analysis, hypothesis validation</td>
-          </tr>
-          <tr>
-            <td>text2sql</td>
-            <td>Questions → SQL</td>
-            <td>"How many users did X?" → working query</td>
-          </tr>
-          <tr>
-            <td>Google Drive</td>
-            <td>Read team docs</td>
-            <td>Pull context from shared docs/sheets</td>
-          </tr>
-          <tr>
-            <td>Code Search</td>
-            <td>Search all repos</td>
-            <td>Find patterns, usage, ownership</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
   <!-- Principles -->
   <section id="principles">
     <div class="container">
@@ -805,96 +785,44 @@
   <!-- Setup -->
   <section id="setup">
     <div class="container">
-      <h2>My Setup</h2>
-      <p class="section-subtitle">The actual tools and workspace structure I use.</p>
-      
-      <h3 style="margin-bottom: 16px;">Tools</h3>
-      <table class="tools-table">
-        <thead>
-          <tr>
-            <th>Tool</th>
-            <th>Purpose</th>
-            <th>Required?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cursor IDE</td>
-            <td>Primary interface — code exploration, doc writing, iteration</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>Claude in Cursor</td>
-            <td>AI partner for all workflows</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>MCP: BigQuery / SQL</td>
-            <td>Query metrics directly from chat</td>
-            <td>Recommended</td>
-          </tr>
-          <tr>
-            <td>MCP: Google Drive</td>
-            <td>Pull context from team docs</td>
-            <td>Recommended</td>
-          </tr>
-          <tr>
-            <td>MCP: Code Search</td>
-            <td>Search across repos</td>
-            <td>Recommended</td>
-          </tr>
-          <tr>
-            <td>Claude CLI</td>
-            <td>Autonomous multi-step tasks</td>
-            <td>Optional</td>
-          </tr>
-        </tbody>
-      </table>
+      <h2>Get Started</h2>
+      <p class="section-subtitle">Install the plugin or fork the full framework.</p>
 
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Workspace Structure</h3>
-      <div class="code-block">
-        <span class="comment"># Local repos for Cursor indexing</span><br><br>
-        ~/Developer/my-project/<br>
-        ├── backend/          <span class="comment"># Codebase — Cursor indexes for semantic search</span><br>
-        ├── client/           <span class="comment"># Codebase</span><br>
-        ├── documentation/    <span class="comment"># Team docs</span><br>
-        ├── sandbox/          <span class="comment"># My working space (drafts, analysis, planning)</span><br>
-        └── product-catalog/  <span class="comment"># Polished artifacts for team sharing</span>
+      <h3 style="margin-bottom: 16px;">Option 1: Install the Plugin (30 seconds)</h3>
+      <div class="code-block" style="font-size: 15px;">
+        <span class="comment"># One command — installs skills, commands, and hooks</span><br>
+        <span class="highlight">$</span> npx pm-ai-partner@latest<br><br>
+        <span class="comment"># Choose your runtime: Claude Code, Cursor, or Codex</span><br>
+        <span class="comment"># Choose scope: global (all projects) or local (current project)</span>
       </div>
 
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Why Local Repos?</h3>
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Option 2: Fork the Framework (30 minutes)</h3>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">For the full methodology with workspace architecture, templates, and case studies.</p>
+      <div class="code-block" style="font-size: 15px;">
+        <span class="comment"># Fork and clone</span><br>
+        <span class="highlight">$</span> git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git<br><br>
+        <span class="comment"># Customize CLAUDE.md, set up workspace, configure MCP tools</span><br>
+        <span class="comment"># See getting-started.md for the full guide</span>
+      </div>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Supported Platforms</h3>
       <div class="principles-grid">
         <div class="principle-card">
-          <h4>Cursor Indexing</h4>
-          <p>Semantic search across code and docs — ask questions, get relevant results.</p>
+          <h4>Claude Code</h4>
+          <p>Skills install as a Claude Code plugin with manifest, commands, and hooks.</p>
         </div>
         <div class="principle-card">
-          <h4>Direct Editing</h4>
-          <p>AI can create and update files in place, not just suggest changes.</p>
+          <h4>Cursor</h4>
+          <p>Skills install to ~/.cursor/skills/ with slash command support.</p>
         </div>
         <div class="principle-card">
-          <h4>Git Tracking</h4>
-          <p>Version history of AI-assisted work. Rollback when needed.</p>
+          <h4>Codex</h4>
+          <p>Skills install to ~/.codex/skills/ for OpenAI's CLI agent.</p>
         </div>
         <div class="principle-card">
-          <h4>CLAUDE.md Context</h4>
-          <p>Scoped AI guidance per folder — different contexts for different work.</p>
+          <h4>MCP Tools</h4>
+          <p>Extend with BigQuery, Google Drive, Code Search, and more.</p>
         </div>
-      </div>
-
-      <p style="margin-top: 24px; color: var(--text-secondary); font-size: 14px;">
-        You don't <em>need</em> local repos — Code Search MCP can find code remotely. But local checkout enables the full edit-and-version workflow.
-      </p>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">How It Connects</h3>
-      <div class="code-block">
-        <span class="highlight">CURSOR IDE</span><br>
-        ├── Local Workspace (codebase, docs, sandbox, CLAUDE.md)<br>
-        └── MCP Tools (BigQuery, Google Drive, Code Search)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br>
-        <span class="highlight">Claude (AI)</span><br>
-        Sees code + docs + can query data + search repos
       </div>
     </div>
   </section>
@@ -919,25 +847,25 @@
 
       <h3 style="margin-top: 48px; margin-bottom: 16px;">Documentation</h3>
       <div class="links-grid">
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md" class="link-card" style="border-color: var(--accent-cyan);">
+        <a href="https://www.npmjs.com/package/pm-ai-partner" class="link-card" style="border-color: var(--accent-cyan);">
+          <h4>📦 npm Package</h4>
+          <p>npx pm-ai-partner@latest</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/plugin" class="link-card" style="border-color: var(--accent-purple);">
+          <h4>🔌 Plugin Details</h4>
+          <p>All skills, commands, hooks, and usage</p>
+        </a>
+        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md" class="link-card">
           <h4>🚀 Getting Started</h4>
-          <p>Set up on your machine (30-60 min)</p>
+          <p>Full setup guide (30 min)</p>
         </a>
         <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/pm-ai-partner-framework.md" class="link-card">
           <h4>📖 Full Framework</h4>
-          <p>Complete documentation (~800 lines)</p>
+          <p>Complete methodology documentation</p>
         </a>
         <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/quick-reference.md" class="link-card">
           <h4>⚡ Quick Reference</h4>
           <p>One-page cheat sheet</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/core/workflows" class="link-card">
-          <h4>🔄 Workflow Guides</h4>
-          <p>9 repeatable workflow patterns</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/templates/skills" class="link-card">
-          <h4>🎯 Cursor Skills</h4>
-          <p>10 slash commands for AI-assisted PM work</p>
         </a>
         <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" class="link-card">
           <h4>📁 GitHub Repo</h4>
@@ -950,7 +878,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>PM AI Partner Framework · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · February 2026</p>
+      <p>PM AI Partner Framework v2.0 · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · March 2026</p>
     </div>
   </footer>
 

@@ -4,6 +4,16 @@ One-page cheat sheet for daily use.
 
 ---
 
+## Install
+
+```bash
+npx pm-ai-partner@latest
+```
+
+10 skills, 4 commands, 3 hooks. Works with Claude Code, Cursor, and Codex.
+
+---
+
 ## The Principle
 
 > **PM work is reconciling four sources of truth.**  
@@ -22,16 +32,20 @@ One-page cheat sheet for daily use.
 
 ---
 
-## Agent Modes
+## Agent Skills (10)
 
-| Need            | Mode                  | Start With                                                    |
-| --------------- | --------------------- | ------------------------------------------------------------- |
-| Understand code | **Technical Analyst** | "Examine [X] systematically. Build a capability table."       |
-| Write docs      | **Writer**            | "Help me write a [doc type] for [audience]. Key message: [X]" |
-| Test ideas      | **Devil's Advocate**  | "Challenge this. Role-play as a skeptical [person]."          |
-| Build tools     | **Builder**           | "Build [X] with this spec: [requirements]"                    |
-| Explore         | **Thought Partner**   | "Help me explore [space]. What am I not considering?"         |
-| Analyze data    | **Data Analyst**      | "Here's [data]. What patterns? What hypotheses? What next?"   |
+| Need                | Skill                     | Command                    |
+| ------------------- | ------------------------- | -------------------------- |
+| Brainstorm          | **Thought Partner**       | `/pm:thought-partner`      |
+| Understand code     | **Technical Analyst**     | `/pm:technical-analyst`    |
+| Write docs          | **Writer**                | `/pm:writer`               |
+| Test ideas          | **Devil's Advocate**      | `/pm:devil-advocate`       |
+| Build tools         | **Builder**               | `/pm:builder`              |
+| Analyze data        | **Data Analyst**          | `/pm:data-analyst`         |
+| Write PRDs          | **Product Brief**         | `/pm:product-brief`        |
+| Prepare meetings    | **Meeting Prep**          | `/pm:meeting-prep`         |
+| Status reports      | **Stakeholder Update**    | `/pm:stakeholder-update`   |
+| Team identity       | **Strategic Clarity**     | `/pm:strategic-clarity`    |
 
 ---
 
@@ -47,6 +61,27 @@ One-page cheat sheet for daily use.
 | "Engineers keep asking about X" | PM-Eng Bridge       | Engineering Questions doc   |
 | "What does the data show?"      | Data Investigation  | Metrics analysis, insights  |
 | "This doc is confusing"         | Doc Restructuring   | Cleaner doc structure       |
+
+---
+
+## Workflow Commands (4)
+
+| Command | What It Does |
+|---------|-------------|
+| `/pm:plan-week` | Reviews context, sets priorities, flags risks |
+| `/pm:write-brief [feature]` | Guided PRD creation with quality checklist |
+| `/pm:prep-meeting [topic]` | Meeting prep with talking points, Q&A, role-play |
+| `/pm:audit-codebase [system]` | PM-focused codebase exploration |
+
+---
+
+## Automation Hooks (3)
+
+| Hook | Trigger | What It Does |
+|------|---------|-------------|
+| Quality Gate | Write to `product-catalog/` | Checks doc against quality bar |
+| Draft Status | Write to `sandbox/` | Reminds to add status markers |
+| Commit Reminder | `git commit` | Prompts to capture lessons in CLAUDE.md |
 
 ---
 

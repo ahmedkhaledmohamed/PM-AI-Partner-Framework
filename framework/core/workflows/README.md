@@ -2,6 +2,9 @@
 
 Specific, step-by-step guides for common PM tasks with AI assistance.
 
+> **New in v2.0:** The 4 most common workflows are now available as slash commands via the plugin.
+> Install with `npx pm-ai-partner@latest`, then use `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, or `/pm:audit-codebase`.
+
 ---
 
 ## Available Workflows

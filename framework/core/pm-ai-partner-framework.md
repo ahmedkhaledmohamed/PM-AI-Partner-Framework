@@ -4,7 +4,7 @@
 
 **Author:** Ahmed Khaled  
 **Role:** Product Manager  
-**Version:** 1.5 (January 2026)
+**Version:** 2.0 (March 2026)
 
 ---
 
@@ -13,10 +13,11 @@
 This document describes a **personal operating system** for using AI (specifically Claude) as a product management partner. It covers:
 
 1. **The Philosophy** — How human judgment mixes with AI capabilities
-2. **The Workspace Architecture** — Structured knowledge organization
-3. **The Workflow Patterns** — Repeatable processes for common PM tasks
-4. **The Agent Modes** — Different Claude "personalities" for different jobs
-5. **The Tool Selection** — When to use interactive AI vs CLI
+2. **The Plugin** — 10 skills, 4 commands, 3 hooks in one install
+3. **The Workspace Architecture** — Structured knowledge organization
+4. **The Workflow Patterns** — Repeatable processes for common PM tasks
+5. **The Agent Modes** — Different Claude "personalities" for different jobs
+6. **The Tool Selection** — When to use interactive AI vs CLI
 
 This is not about replacing PM work — it's about **augmenting depth, speed, and rigor**.
 
@@ -148,6 +149,63 @@ These sources often **conflict** — which is where PM work gets interesting:
 > **PM work is reconciling four sources of truth. AI helps you explore each source faster and spot conflicts between them. Judgment about what SHOULD happen stays human.**
 
 This isn't "AI writes my docs" — it's "AI helps me think more rigorously by surfacing what I might miss."
+
+---
+
+## Part 1.5: The Plugin
+
+As of v2.0, the framework ships as an installable plugin:
+
+```bash
+npx pm-ai-partner@latest
+```
+
+One command installs 10 agent skills, 4 workflow commands, and 3 automation hooks. The installer supports Claude Code, Cursor, and Codex with both global and local scopes.
+
+### Plugin Architecture
+
+```
+plugin/
+├── .claude-plugin/plugin.json   # Claude Code manifest
+├── skills/                      # 10 agent skills (SKILL.md each)
+├── commands/pm/                 # 4 workflow commands
+├── hooks/                       # 3 automation hooks
+├── bin/install.js               # Interactive installer
+└── package.json                 # npm: pm-ai-partner
+```
+
+### Workflow Commands
+
+Multi-step workflows for recurring PM tasks — not single prompts:
+
+| Command | What It Does |
+|---------|-------------|
+| `/pm:plan-week` | Reviews context, sets priorities, flags risks |
+| `/pm:write-brief [feature]` | Guided PRD creation with quality checklist |
+| `/pm:prep-meeting [topic]` | Meeting prep with talking points, Q&A, and role-play |
+| `/pm:audit-codebase [system]` | PM-focused codebase exploration — capabilities, gaps, implications |
+
+### Automation Hooks
+
+Hooks run automatically — no manual invocation needed:
+
+| Hook | Trigger | What It Does |
+|------|---------|-------------|
+| Quality Gate | Write to `product-catalog/` | Checks doc against quality bar (evidence, clarity, audience) |
+| Draft Status | Write to `sandbox/` | Reminds to add status markers |
+| Commit Reminder | `git commit` | Prompts to capture lessons in CLAUDE.md |
+
+### Multi-Platform Support
+
+The plugin works across three runtimes:
+
+| Runtime | Skills Location | How It Works |
+|---------|----------------|-------------|
+| Claude Code | `.claude/skills/` + `.claude-plugin/` | Plugin manifest + skills + commands + hooks |
+| Cursor | `~/.cursor/skills/` | Skills with slash command support |
+| Codex | `~/.codex/skills/` | Skills for OpenAI's CLI agent |
+
+For the full plugin documentation, see [`plugin/README.md`](../../plugin/README.md).
 
 ---
 
@@ -850,6 +908,7 @@ You don't *need* local repos — Code Search MCP can find code remotely. But loc
 | ------- | ---------- | ---------------------- |
 | 1.0     | 2026-01-12 | Initial public release |
 | 1.5     | 2026-01-23 | Added Problem section, Git as AI Memory, Setup appendix |
+| 2.0     | 2026-03-09 | Plugin architecture, npm package, 4 commands, 3 hooks, multi-platform |
 
 ---
 

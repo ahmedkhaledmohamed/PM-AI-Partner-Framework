@@ -80,6 +80,17 @@ Help others learn by adding examples:
 - Keep examples self-contained (no external dependencies)
 - Test your changes before submitting
 
+### Plugin Contributions
+
+The plugin lives in `plugin/` and ships as an npm package (`pm-ai-partner`). When contributing:
+
+- **New skills** go in `plugin/skills/skill-name/SKILL.md` — include YAML frontmatter with `name`, `description`, and optionally `allowed-tools`
+- **New commands** go in `plugin/commands/pm/command-name.md`
+- **New hooks** are defined in `plugin/hooks/hooks.json` with corresponding shell scripts in `plugin/hooks/`
+- **Installer changes** go in `plugin/bin/install.js`
+- After adding skills, mirror them to `framework/templates/skills/` (Cursor) and `framework/templates/claude-code-skills/` (Claude Code) for users who prefer manual setup
+- Run `npx pm-ai-partner@latest` locally to test the install flow before submitting
+
 ---
 
 ## Community Guidelines
