@@ -39,6 +39,11 @@ When working in this repo:
 - **Copy** prompts from `framework/core/starter-prompts.md`
 - **Follow** workflows in `framework/core/workflows/` for specific scenarios
 
+## What NOT to Commit
+
+- **`plugin/outreach/`** is gitignored — it contains personal outreach drafts, DMs, pitch messages, and contact info. Never commit or push these files. They are local-only.
+- **`framework/demo/SOCIAL-POSTS.md`** and **`framework/demo/FEEDBACK-FORM-TEMPLATE.md`** are also gitignored for the same reason.
+
 ## Formatting Rules
 
 - **Use Mermaid diagrams rather than ASCII art** — When producing architecture diagrams, flowcharts, sequence diagrams, or any visual in Markdown files, use Mermaid (`\`\`\`mermaid`) format. Mermaid renders natively on GitHub and is easier to maintain than ASCII box drawings.
