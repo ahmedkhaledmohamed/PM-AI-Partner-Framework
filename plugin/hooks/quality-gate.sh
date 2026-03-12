@@ -5,6 +5,12 @@
 
 set -euo pipefail
 
+if ! command -v jq &> /dev/null; then
+  echo "⚠ jq not found — skipping quality gate hook (install: brew install jq)" >&2
+  cat > /dev/null  # drain stdin
+  exit 0
+fi
+
 INPUT=$(cat)
 FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_input.file // empty' 2>/dev/null || true)
 
