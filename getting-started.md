@@ -82,6 +82,19 @@ Before you start, ensure you have:
 - [ ] Git installed (`git --version` to check)
 - [ ] Node.js 18+ (`node --version` to check)
 
+### Recommended Tools
+
+These are optional but enable specific features:
+
+| Tool | What It Enables | Install | Check |
+|------|----------------|---------|-------|
+| `jq` | Hook scripts (JSON parsing) | `brew install jq` / `apt install jq` | `jq --version` |
+| `gh` | GitHub MCP server, PR workflows | `brew install gh` / `apt install gh` | `gh --version` |
+| `uvx` | Python-based MCP servers (BigQuery, Git) | `pip install uv` | `uvx --version` |
+| `python3` | Required by uvx | Usually pre-installed on macOS/Linux | `python3 --version` |
+
+The installer will check for these after install and tell you what's missing.
+
 ### Platform Notes
 
 | Platform | Terminal | Package Manager | Notes |

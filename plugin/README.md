@@ -108,6 +108,14 @@ Connect your AI assistant to external tools. The installer offers a curated cata
 | **SQLite** | Query local SQLite databases | File path |
 | **BigQuery** | Google BigQuery analytics | GCP credentials JSON |
 
+**Transport prerequisites:**
+
+| Transport | Servers | What You Need |
+|-----------|---------|--------------|
+| `npx` (stdio) | Most servers | Node.js only (already installed) |
+| `uvx` (stdio) | BigQuery, Git | Python 3.9+ and `uv` (`pip install uv`) |
+| `url` (remote) | Linear, Atlassian, Google Drive | Nothing extra — connects to hosted service |
+
 Servers you skip are added as `disabled` with placeholder values — enable them later by adding your credentials to the config file. Remote servers (Linear, Atlassian) authenticate via browser on first use.
 
 ---

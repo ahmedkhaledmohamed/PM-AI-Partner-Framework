@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 const os = require("os");
+const { execSync } = require("child_process");
 const {
   loadCatalog,
   getMcpConfigPath,
@@ -621,7 +622,31 @@ async function main() {
     }
   }
 
-  console.log();
+  // ── Dependency check ─────────────────────────────────────────────
+  if (!nonInteractive) {
+    const deps = [
+      { cmd: "jq", label: "jq", why: "hooks (JSON parsing)", fix: "brew install jq" },
+      { cmd: "gh", label: "gh", why: "GitHub MCP server & PR workflows", fix: "brew install gh" },
+      { cmd: "python3", label: "python3", why: "uvx-based MCP servers", fix: "brew install python3" },
+      { cmd: "uvx", label: "uvx", why: "BigQuery & Git MCP servers", fix: "pip install uv" },
+    ];
+    const missing = [];
+    for (const dep of deps) {
+      try {
+        execSync(`which ${dep.cmd}`, { stdio: "ignore" });
+      } catch {
+        missing.push(dep);
+      }
+    }
+    if (missing.length > 0) {
+      console.log(`  ${DIM}Optional tools not found:${RESET}`);
+      for (const dep of missing) {
+        console.log(`    ${YELLOW}!${RESET} ${dep.label} — ${dep.why} (${DIM}${dep.fix}${RESET})`);
+      }
+      console.log();
+    }
+  }
+
   console.log(
     `  ${DIM}Full framework & methodology: https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework${RESET}`
   );
