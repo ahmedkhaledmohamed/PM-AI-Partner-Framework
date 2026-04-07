@@ -1,6 +1,6 @@
 ---
 name: product-brief
-description: Structured product brief and PRD creation assistant. Use when the user needs to write a product brief, PRD, feature spec, or any document that defines what to build and why. Triggers include "product brief", "PRD", "spec", "feature doc", "write a brief", "define this feature", or when scoping work for engineering.
+description: "Generates structured product briefs and PRDs including problem statements, user stories, success metrics, and scope definitions. Use when the user needs to write a product brief, PRD, feature spec, or any document that defines what to build and why. Triggers include 'product brief', 'PRD', 'spec', 'feature doc', 'write a brief', 'define this feature', or when scoping work for engineering."
 version: 1.0.0
 author: Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>
 license: MIT
@@ -81,12 +81,25 @@ Why will users care? What's the benefit?
 1. **Ask clarifying questions** about the feature
 2. **Propose the brief structure** with initial content
 3. **Draft each section** based on user input
-4. **Review and refine** together
-5. **Highlight gaps** that need stakeholder input
+4. **Validate the draft** using the checkpoints below
+5. **Review and refine** together
+6. **Highlight gaps** that need stakeholder input
+
+### Validation Checkpoints
+
+Before finalizing any brief, verify each of these:
+
+- [ ] **Metrics are measurable now** — Every metric in the Success Metrics table has a known data source and a realistic measurement window. If instrumentation does not exist yet, flag it and propose a proxy metric that is available today.
+- [ ] **Out of Scope includes rationale** — Each Out of Scope item states *why* it is excluded (e.g. "Desktop support — mobile accounts for 92% of sessions; revisit if desktop exceeds 20%"). Items without rationale invite scope creep.
+- [ ] **Dependencies have owners** — Every dependency names the owning team, confirms whether they have been contacted, and notes their timeline. A clean "no dependencies" section usually means dependencies have not been discovered yet.
+- [ ] **Open Questions are actionable** — Each open question identifies who can answer it and a target date for resolution. Unanswered questions at launch are risks, not unknowns.
+- [ ] **Problem Statement is user-centered** — The problem is framed as a user struggle, not a feature gap. "Users abandon threads when typing is slower than speaking" beats "We don't have voice messages."
 
 ## Examples
 
-### Example 1: New Feature Brief
+For full worked examples (new feature brief, quick brief), see [references/examples.md](references/examples.md).
+
+### Inline Example: Context Gathering
 
 **User:** Help me write a product brief for adding voice messages to our chat feature.
 
@@ -99,133 +112,4 @@ Let me gather some context first:
 3. **Constraints**: Any technical limitations? Timeline pressure?
 4. **Success**: How will we measure if this worked?
 
-Based on what you share, I'll draft the brief. Here's a starting structure:
-
----
-
-# Voice Messages in Chat
-
-## Problem Statement
-
-[To be filled based on your context]
-
-**Initial draft based on common patterns:**
-Users in messaging-heavy markets (Brazil, India, SEA) prefer voice over text — it's faster and more personal. Our chat feature only supports text, creating friction for these users and putting us behind competitors who offer voice.
-
-## Proposed Solution
-
-Add the ability to record and send voice messages within existing chat threads.
-
-Core functionality:
-- Record button in chat input
-- Playback controls for received messages
-- Visual waveform for recorded/played audio
-
-## User Value
-
-- Faster communication (speaking vs. typing)
-- More expressive (tone, emotion)
-- Accessibility (users who struggle with typing)
-
-## Success Metrics
-
-| Metric | Current | Target |
-|--------|---------|--------|
-| Voice messages sent/DAU | 0 | 5% |
-| Chat engagement (messages/user) | X | +15% |
-| Market-specific DAU (Brazil) | Y | +10% |
-
-## Scope
-
-### In Scope (v1)
-- Record up to 60 seconds
-- Send in 1:1 and group chats
-- Playback with speed control (1x, 1.5x, 2x)
-- iOS and Android
-
-### Out of Scope
-- Transcription (v2)
-- Voice-to-text conversion (v2)
-- Desktop support (v2)
-
-## Open Questions
-
-- Max recording length? (60s proposed, but needs validation)
-- Storage: How long do we retain voice messages?
-- Moderation: How do we handle reported voice content?
-
-## Dependencies
-
-- Audio infrastructure team (encoding, storage)
-- Trust & Safety (moderation tooling)
-- Client teams (iOS, Android)
-
-## Timeline
-
-- Scoping: 1 week
-- Implementation: TBD pending scoping
-- Target: Q2 2026
-
----
-
-What context can you fill in? I'll refine based on your input.
-
-### Example 2: Quick Brief
-
-**User:** I need a brief for adding a "remind me" button to push notifications.
-
-**Good Response:**
-
-Quick brief mode — I'll draft based on common patterns, you refine:
-
----
-
-# Push Notification Reminders
-
-## Problem Statement
-
-Users who see a push notification but aren't ready to act have no way to come back to it. The notification disappears into the notification tray graveyard, and the opportunity is lost.
-
-## Proposed Solution
-
-Add a "Remind me" quick action to push notifications that reschedules the notification for a later time.
-
-Options presented to user:
-- "In 1 hour"
-- "Tonight" (8pm local)
-- "Tomorrow morning" (9am local)
-
-## User Value
-
-- Control over notification timing
-- Reduced notification anxiety ("I can deal with this later")
-- Better completion rate on notification CTAs
-
-## Success Metrics
-
-| Metric | Current | Target |
-|--------|---------|--------|
-| Reminder usage rate | n/a | 5% of notifications |
-| Reminded notification action rate | n/a | 40% (vs 12% overall) |
-| Notification dismissal rate | 35% | 25% |
-
-## Scope
-
-### In Scope
-- iOS and Android quick action
-- Three time options (1hr, tonight, tomorrow)
-- Works with all notification types
-
-### Out of Scope
-- Custom time picker
-- Recurring reminders
-- Smart timing suggestions
-
-## Open Questions
-
-- Should reminders count against frequency caps?
-- What happens if user has DND enabled at reminder time?
-
----
-
-Anything to adjust or add?
+Based on what you share, I'll draft the brief using the standard structure above — starting with Problem Statement and working through each section. I'll flag any validation checkpoint failures (e.g. metrics without a data source, Out of Scope items missing rationale) as we go.

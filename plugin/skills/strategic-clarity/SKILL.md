@@ -1,6 +1,6 @@
 ---
 name: strategic-clarity
-description: Guided workflow for establishing team identity, boundaries, and strategic clarity. Use when starting a new role, inheriting ambiguity, when a team lacks clear identity, or when you need to define "what we own" vs "what we don't". Triggers include "strategic clarity", "team identity", "new role", "inherited ambiguity", "what does my team own", or "define our boundaries".
+description: "Guided workflow for establishing team identity, boundaries, and strategic clarity. Generates team charter documents, creates ownership matrices, maps stakeholder boundaries, and produces capability audit reports. Use when starting a new role, inheriting ambiguity, when a team lacks clear identity, or when you need to define 'what we own' vs 'what we don't'. Triggers include 'strategic clarity', 'team identity', 'new role', 'inherited ambiguity', 'what does my team own', or 'define our boundaries'."
 version: 1.0.0
 author: Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>
 license: MIT
@@ -33,15 +33,9 @@ A 4-phase workflow for establishing team identity and strategic positioning.
 4. **Adjacent team mapping** — Don't just define what you own. Explicitly define the boundary with each adjacent team: "We own the push delivery pipeline. Platform team owns the notification scheduling. We hand off at [specific interface]." Vague boundaries between teams cause more organizational damage than vague team charters. Name the seams
 5. **The 30-60-90 checkpoint** — Strategic clarity isn't a one-time exercise. At 30 days, you should have hypotheses. At 60 days, you should have a charter draft. At 90 days, you should have stakeholder alignment. If you're still "absorbing" at day 60, you're avoiding the hard work of articulating a position. Set a deadline for yourself
 
-## How This Skill Works
+## Quick Start
 
-I'll guide you through each phase with:
-1. **Questions** to gather context
-2. **Activities** to complete
-3. **AI-assisted prompts** for each deliverable
-4. **Checklists** to track progress
-
-Tell me which phase you're in (or starting fresh), and I'll help you through it.
+Tell me your situation and phase (`absorb`, `audit`, `articulate`, or `align`) and I'll walk you through it — or say "starting fresh" to begin at Phase 1.
 
 ---
 
@@ -56,19 +50,27 @@ Understand what exists before forming opinions.
 - Study handover notes
 - Review historical decisions
 
-### AI Assistance
+### AI Assistance — Example Output
 
-**Prompt: Synthesize Context**
-Share your notes and I'll help you:
-1. Identify key themes
-2. Surface tensions or contradictions
-3. List what's still unclear
+When you share your notes, here is the kind of synthesis you will receive:
 
-**Prompt: Question Generation**
-Based on your context, I'll suggest:
-- Questions you should be asking
-- Who to talk to for answers
-- What documents to read next
+```markdown
+## Context Synthesis: Notifications Team (Week 1)
+
+### Key Themes
+1. **Ownership confusion** — Three teams touch push notifications; no single owner for delivery reliability
+2. **Legacy migration** — Half the codebase is on the old gateway; migration stalled 6 months ago
+3. **Metric mismatch** — PM tracks "notifications sent"; engineering tracks "delivery success rate"
+
+### Contradictions Found
+- Design says your team owns in-app messaging; backend says Platform does
+- Manager expects email within scope; tech lead says it was explicitly removed last quarter
+
+### Still Unclear
+- Who approved the scope change for email? (Ask: @director-eng or check Q3 planning doc)
+- What SLA does the old gateway actually meet? (Check: `monitoring/push-gateway-sla.md`)
+- Is the mobile SDK integration your team's job or Mobile Platform's? (Ask: @mobile-pm)
+```
 
 ### Phase 1 Checklist
 - [ ] Reading notes captured
@@ -88,22 +90,21 @@ Understand what actually exists vs. what's claimed.
 - Identify gaps
 - Compare reality to documentation
 
-### AI Assistance
+### AI Assistance — Example Output
 
-**Prompt: Capability Mapping**
-Share your team's claimed responsibilities and I'll help build an audit template:
-- Capability name
-- Status (exists/partial/missing)
-- Evidence (code files/patterns)
-- Gap description
-- Impact assessment
+Share your team's claimed responsibilities and you will receive a filled audit:
 
-**Prompt: Codebase Exploration**
-Point me at code or systems and I'll help you understand:
-- What product capability it represents
-- The business logic encoded
-- Use cases supported
-- What's notably missing
+```markdown
+# Capability Audit: Notifications Team
+
+| Capability | Status | Evidence | Gap | Impact |
+|------------|--------|----------|-----|--------|
+| Push delivery (iOS) | Exists | `services/push/apns-gateway.ts` | — | — |
+| Push delivery (Android) | Exists | `services/push/fcm-gateway.ts` | — | — |
+| In-app notification center | Partial | `components/NotificationList.tsx` | No read/unread state sync | Users see stale badges |
+| Webhook dispatch | Partial | `services/webhooks/dispatch.ts` | No retry logic; fire-and-forget | Partners miss ~8% of events |
+| Notification analytics | Missing | — | No delivery tracking pipeline | Cannot measure SLA compliance |
+```
 
 ### Phase 2 Checklist
 - [ ] Capability audit document created
@@ -135,27 +136,44 @@ Define and document team identity clearly.
 - Create value proposition
 - Build communication frameworks
 
-### AI Assistance
+### AI Assistance — Example Output
 
-**Prompt: Mission Drafting**
-Share what you actually own vs. don't own, and I'll help draft:
-- Clear mission statement
-- Distinction from adjacent teams
-- Concrete, not vague language
+Share what you own vs. don't own and you will receive a draft like:
 
-**Prompt: Charter Structure**
-I'll help structure a one-page team charter:
-- What we're accountable for
-- What we explicitly don't own
-- How we create value
-- Key metrics we move
+```markdown
+# Notifications Team Charter
 
-**Prompt: Value Narrative**
-I'll help create communication frameworks:
-- One-sentence pitch
-- "Without us, [consequence]" statements
-- Boundary explanations for adjacent teams
-- Leadership-friendly framing
+## Mission
+We ensure every user-facing notification (push, in-app, webhook) is delivered reliably and on time, so product teams can reach users without building delivery infrastructure.
+
+## We Own
+- Push notification delivery pipeline (iOS APNs, Android FCM)
+- In-app notification center UI and API
+- Webhook dispatch for third-party integrations
+- Delivery reliability SLAs (99.5% within 30 s)
+
+## We Don't Own
+- Notification content/copy — owned by each product team
+- Email delivery — owned by Comms Platform
+- Notification scheduling/orchestration — owned by Platform team
+- Mobile SDK integration — owned by Mobile Platform
+
+## Value Proposition
+Without us: Product teams build one-off delivery hacks; delivery rate drops below 90%; no unified notification UX.
+With us: Single reliable pipeline handling 4M+ daily notifications with <30 s p95 latency.
+
+## Key Metrics
+- Delivery success rate (target: 99.5%)
+- p95 delivery latency (target: <30 s)
+- Notification opt-out rate (monitor, not own)
+
+## Boundaries
+| Area | Us | Them |
+|------|----|----- |
+| Push delivery | Gateway → device | Platform: scheduling; Product: content |
+| In-app notifications | Render + store | Mobile Platform: SDK surface |
+| Webhooks | Dispatch + retry | Partner Eng: endpoint registration |
+```
 
 ### Phase 3 Checklist
 - [ ] Team charter drafted
@@ -206,17 +224,23 @@ Validate and socialize the work.
 - Gather feedback
 - Iterate based on input
 
-### AI Assistance
+### AI Assistance — Example Output
 
-**Prompt: Stakeholder Role-Play**
-Tell me who you're presenting to and their likely concerns — I'll role-play as them to help you prepare for pushback.
+Tell me who you are presenting to and I will role-play their pushback:
 
-**Prompt: Presentation Polish**
-Share your draft charter and I'll help:
-- Sharpen the language
-- Anticipate objections
-- Add evidence for claims
-- Make it memorable
+```
+You: "I'm presenting to VP Engineering. She cares about headcount efficiency and will push
+back on us not owning email."
+
+[Role-play as VP Engineering]:
+"I see you've carved email out. That means I need a separate team for email delivery — that's
+two teams doing similar plumbing. Convince me the split is worth the headcount."
+
+Preparation notes:
+- Lead with data: push volume (4M/day) vs email volume (200K/day) — different scaling profiles
+- Emphasize: push requires real-time SLA; email is batch-tolerant — different operational models
+- Offer: "We'll own the shared notification routing layer so Comms Platform doesn't rebuild it"
+```
 
 ### Phase 4 Checklist
 - [ ] Manager alignment achieved
@@ -248,13 +272,3 @@ By the end of this workflow, you should be able to:
 - [ ] Have peer PMs understand what you own
 - [ ] Feed gap inventory into roadmap planning
 
----
-
-## Getting Started
-
-Tell me:
-1. **What's your situation?** (New role? Inherited team? Identity crisis?)
-2. **What phase are you in?** (Or starting fresh?)
-3. **What do you have so far?** (Notes? Docs? Nothing?)
-
-I'll guide you through the appropriate phase.
