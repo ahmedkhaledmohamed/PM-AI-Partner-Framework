@@ -20,6 +20,9 @@ Specific, step-by-step guides for common PM tasks with AI assistance.
 | [Analysis Pipeline](analysis-pipeline.md) | Data question to shareable presentation | Hours to days |
 | [Tool Building](tool-building.md) | Create prototypes, tools | Hours to days |
 | [Doc Restructuring](doc-restructuring.md) | Confusing, outdated, or scattered docs | 1-3 days |
+| [Documenting AI Work](documenting-ai-work.md) | Capturing PM thinking for PRs | 15-30 min |
+| [Model Routing](model-routing.md) | Choosing the right model per task | Reference |
+| [Deep Research](deep-research.md) | Multi-source research with verification | 1-4 hours |
 
 ---
 
