@@ -9,7 +9,7 @@ A step-by-step guide to set up AI-augmented PM workflows on your machine.
 
 ## Quick Install (30 seconds)
 
-Install the plugin with one command — gives you 12 agent skills, 6 workflow commands, and 3 automation hooks:
+Install the plugin with one command — gives you 13 agent skills, 7 workflow commands, and 4 automation hooks:
 
 ```bash
 npx pm-ai-partner@latest
@@ -500,7 +500,7 @@ In Cursor chat:
 
 ## Step 9.5: Install Skills, Commands, and Hooks
 
-Skills are reusable AI behaviors you can invoke with slash commands. The framework includes 12 agent skills, 6 workflow commands, and 3 automation hooks.
+Skills are reusable AI behaviors you can invoke with slash commands. The framework includes 13 agent skills, 7 workflow commands, and 4 automation hooks.
 
 ### Option A: Plugin Install (Recommended)
 

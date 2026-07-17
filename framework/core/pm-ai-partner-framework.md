@@ -160,16 +160,16 @@ As of v2.0, the framework ships as an installable plugin:
 npx pm-ai-partner@latest
 ```
 
-One command installs 10 agent skills, 4 workflow commands, and 3 automation hooks. The installer supports Claude Code, Cursor, and Codex with both global and local scopes.
+One command installs 13 agent skills, 7 workflow commands, and 4 automation hooks. The installer supports Claude Code, Cursor, and Codex with both global and local scopes.
 
 ### Plugin Architecture
 
 ```
 plugin/
 ├── .claude-plugin/plugin.json   # Claude Code manifest
-├── skills/                      # 10 agent skills (SKILL.md each)
-├── commands/pm/                 # 4 workflow commands
-├── hooks/                       # 3 automation hooks
+├── skills/                      # 13 agent skills (SKILL.md each)
+├── commands/pm/                 # 7 workflow commands
+├── hooks/                       # 4 automation hooks
 ├── bin/install.js               # Interactive installer
 └── package.json                 # npm: pm-ai-partner
 ```

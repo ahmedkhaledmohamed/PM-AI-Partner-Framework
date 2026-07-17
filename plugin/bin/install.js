@@ -14,7 +14,7 @@ const {
   mergeMcpServers,
 } = require("./mcp-utils");
 
-const VERSION = "3.0.0";
+const VERSION = "3.1.0";
 const PLUGIN_NAME = "pm-ai-partner";
 
 const BOLD = "\x1b[1m";
@@ -38,6 +38,7 @@ const SKILLS = [
   { name: "strategic-clarity", desc: "Team identity & boundaries" },
   { name: "hypothesis-tester", desc: "Experiment design & A/B test analysis" },
   { name: "competitor-analyst", desc: "Competitive analysis & positioning" },
+  { name: "thinking-trail", desc: "Document PM thinking & contribution" },
 ];
 
 const COMMANDS = [
@@ -47,6 +48,7 @@ const COMMANDS = [
   { name: "audit-codebase", desc: "Auto-detecting codebase exploration" },
   { name: "competitor-scan", desc: "Competitive landscape analysis" },
   { name: "metrics-review", desc: "Structured metrics review" },
+  { name: "thinking-trail", desc: "Generate thinking trail for current branch" },
 ];
 
 function printBanner() {

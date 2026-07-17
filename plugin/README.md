@@ -1,6 +1,6 @@
 # PM AI Partner
 
-**12 AI skills, 6 workflow commands, 3 automation hooks, and 17 MCP servers built for Product Managers.**
+**13 AI skills, 7 workflow commands, 4 automation hooks, and 17 MCP servers built for Product Managers.**
 
 [![npm version](https://img.shields.io/npm/v/pm-ai-partner?style=for-the-badge&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/pm-ai-partner)
 [![GitHub stars](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=for-the-badge&logo=github&color=181717)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
@@ -30,7 +30,7 @@ PM AI Partner gives Claude the context to be useful for PM tasks:
 
 ## What You Get
 
-### 12 Agent Skills
+### 13 Agent Skills
 
 Tell Claude which "hat" to wear. Skills auto-activate based on context or invoke them explicitly.
 
@@ -48,8 +48,9 @@ Tell Claude which "hat" to wear. Skills auto-activate based on context or invoke
 | **Strategic Clarity** | `/pm:strategic-clarity` | Define team identity, boundaries, and charter |
 | **Hypothesis Tester** | `/pm:hypothesis-tester` | Design experiments, evaluate A/B tests, interpret results |
 | **Competitor Analyst** | `/pm:competitor-analyst` | Competitive analysis, positioning maps, feature gap assessment |
+| **Thinking Trail** | `/pm:thinking-trail` | Document PM thinking and contribution for PRs |
 
-### 6 Workflow Commands
+### 7 Workflow Commands
 
 Multi-step workflows for recurring PM tasks.
 
@@ -61,8 +62,9 @@ Multi-step workflows for recurring PM tasks.
 | `/pm:audit-codebase [system]` | Codebase exploration with auto-detection, Mermaid diagrams, capability mapping |
 | `/pm:competitor-scan [competitor]` | Competitive analysis — positioning maps, feature gaps, response framework |
 | `/pm:metrics-review` | Structured metrics review — what moved, why, and what to do |
+| `/pm:thinking-trail [branch]` | Generate thinking trail — extract prompts, synthesize contribution record |
 
-### 3 Automation Hooks
+### 4 Automation Hooks
 
 Hooks fire automatically — no manual invocation needed.
 
@@ -71,6 +73,7 @@ Hooks fire automatically — no manual invocation needed.
 | **Quality Gate** | Write to `product-catalog/` | Checks document against quality bar (evidence, clarity, audience) |
 | **Draft Status** | Write to `sandbox/` | Reminds to add status markers to draft documents |
 | **Commit Reminder** | `git commit` | Prompts to capture lessons learned in CLAUDE.md |
+| **Thinking Trail** | `gh pr create` | Reminds to capture thinking trail before creating PR |
 
 ### 17 MCP Servers
 
@@ -320,7 +323,7 @@ See [CONTRIBUTING.md](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framew
 
 This plugin is part of the **PM AI Partner Framework** — a complete methodology for using AI as a structured PM thinking partner. The framework includes:
 
-- **9 detailed workflow patterns** (Strategic Clarity, Planning Cycle, Codebase Deep-Dive, Tool Building, Communication Prep, PM-Eng Bridge, Data Investigation, Doc Restructuring, Analysis Pipeline)
+- **12 detailed workflow patterns** (Strategic Clarity, Planning Cycle, Codebase Deep-Dive, Tool Building, Communication Prep, PM-Eng Bridge, Data Investigation, Doc Restructuring, Analysis Pipeline, Documenting AI Work, Model Routing, Deep Research)
 - **Workspace architecture** (sandbox → product-catalog graduation)
 - **CLAUDE.md templates** for team context
 - **17 MCP server configs** (Memory, GitHub, Linear, Atlassian, Slack, BigQuery, and more)

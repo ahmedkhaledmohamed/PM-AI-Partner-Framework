@@ -5,6 +5,35 @@
 
 ---
 
+## What's New in v3.1.0
+
+### Thinking Trail (Headline Feature)
+
+Automated workflow that captures your prompts and thinking as documentation of your intellectual contribution when creating PRs.
+
+| Component | What It Does |
+|-----------|-------------|
+| **Hook** (`thinking-trail.sh`) | Fires before `gh pr create` — reminds to generate a thinking trail |
+| **Skill** (`/thinking-trail`) | Extract prompts → synthesize → write to `.thinking/<branch>.md` → stage |
+| **Command** (`/pm:thinking-trail`) | Manual trigger for the same workflow |
+| **Script** (`thinking-trail.py`) | Scans Claude Code session files for user prompts on the current branch |
+
+Output structure: Problem Framing → Approach → Key Decisions → Pivots → Outcome, with raw prompts in a collapsible section.
+
+### 3 New Workflow Guides
+
+| Workflow | When to Use |
+|----------|-------------|
+| **Documenting AI Work** | Capturing PM thinking before PRs, building contribution records |
+| **Model Routing** | Choosing the right model (Fable/Opus/Sonnet/Haiku) per task type |
+| **Deep Research** | Multi-source web research with adversarial verification |
+
+### Totals
+
+13 skills · 7 commands · 4 hooks · 17 MCP servers · 12 workflow guides
+
+---
+
 ## What's New in v3.0.0
 
 ### 2 New Skills

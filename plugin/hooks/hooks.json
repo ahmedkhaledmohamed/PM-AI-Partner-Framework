@@ -25,6 +25,11 @@
             "type": "command",
             "command": "bash plugin/hooks/pre-commit-reminder.sh",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash plugin/hooks/thinking-trail.sh",
+            "timeout": 5
           }
         ]
       }

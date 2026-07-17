@@ -10,7 +10,7 @@
 npx pm-ai-partner@latest
 ```
 
-12 agent skills · 6 workflow commands · 3 automation hooks · Claude Code, Cursor, and Codex
+13 agent skills · 7 workflow commands · 4 automation hooks · Claude Code, Cursor, and Codex
 
 ![PM AI Partner Framework](site/images/framework-diagram.png)
 
@@ -26,7 +26,7 @@ npx pm-ai-partner@latest
 npx pm-ai-partner@latest
 ```
 
-One command installs 12 AI skills, 6 workflow commands, and 3 automation hooks. Works with Claude Code, Cursor, and Codex.
+One command installs 13 AI skills, 7 workflow commands, and 4 automation hooks. Works with Claude Code, Cursor, and Codex.
 
 **[See plugin details, all commands, and usage examples →](plugin/)**
 
@@ -121,7 +121,7 @@ Tell AI which "hat" to wear for your task:
 
 ---
 
-## Nine Workflow Patterns
+## Twelve Workflow Patterns
 
 Repeatable processes for common PM tasks:
 
@@ -136,12 +136,15 @@ Repeatable processes for common PM tasks:
 | 7 | Data Investigation | Metrics analysis |
 | 8 | Doc Restructuring | Fixing confusing docs |
 | 9 | Analysis Pipeline | Data question → shareable presentation |
+| 10 | Documenting AI Work | Capturing PM thinking for PRs |
+| 11 | Model Routing | Choosing the right model per task |
+| 12 | Deep Research | Multi-source research with verification |
 
 ---
 
 ## Skills & Commands
 
-12 agent skills and 6 workflow commands you can invoke via `/command` or auto-trigger by context:
+13 agent skills and 7 workflow commands you can invoke via `/command` or auto-trigger by context:
 
 | Type | Skills |
 |------|--------|
@@ -149,7 +152,8 @@ Repeatable processes for common PM tasks:
 | Scenarios (3) | `/product-brief`, `/meeting-prep`, `/stakeholder-update` |
 | Workflows (1) | `/strategic-clarity` |
 | Analysis (2) | `/hypothesis-tester`, `/competitor-analyst` |
-| Commands (6) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase`, `/pm:competitor-scan`, `/pm:metrics-review` |
+| Accountability (1) | `/thinking-trail` |
+| Commands (7) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase`, `/pm:competitor-scan`, `/pm:metrics-review`, `/pm:thinking-trail` |
 
 Each skill includes instructions, examples, and lessons learned from real usage.
 
@@ -223,4 +227,4 @@ We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to h
 
 ---
 
-*Version 3.0.0 · March 2026*
+*Version 3.1.0 · July 2026*
