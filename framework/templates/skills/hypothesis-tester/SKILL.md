@@ -54,62 +54,7 @@ Structure experiment work as:
 
 ## Examples
 
-### Example 1: Experiment Design
-
-**User:** We want to test whether adding a "remind me" button to push notifications improves engagement.
-
-**Good Response:**
-
-Let me help you design this properly.
-
-**Hypothesis**
-
-> Users who see a "Remind me" action on push notifications will have a higher notification action rate than users without it, because re-scheduling gives users control over timing rather than forcing an immediate decision.
-
-**Falsifiable prediction:** Treatment group notification action rate > Control group by ≥3 percentage points within 14 days.
-
-**Design**
-
-| Element | Detail |
-|---------|--------|
-| **Type** | A/B test, user-level randomization |
-| **Treatment** | Push notifications include "Remind me" quick action (1hr / Tonight / Tomorrow) |
-| **Control** | Current notifications (no remind action) |
-| **Split** | 50/50 |
-| **Duration** | 14 days minimum (to capture novelty decay) |
-| **Targeting** | All users on iOS 16+ and Android 13+ (quick actions require these OS versions) |
-
-**Metrics**
-
-| Type | Metric | Current | Target |
-|------|--------|---------|--------|
-| **Primary** | Notification action rate (any positive action) | 12% | 15% (+3pp) |
-| **Secondary** | Reminded notification action rate | n/a | 40% |
-| **Secondary** | Notification dismissal rate | 35% | ≤35% |
-| **Guardrail** | App open rate | 45% | ≥43% (no more than 2pp drop) |
-| **Guardrail** | Notification opt-out rate | 2.1% | ≤2.3% |
-
-**Sample Size**
-
-To detect a 3pp lift (12% → 15%) at 95% confidence and 80% power:
-- ~4,800 users per group
-- With current daily notification volume (~200K users), we reach significance in ~3 days
-- But run for 14 days anyway to check for novelty decay
-
-**Pre-commitment**
-
-- **Ship if:** Primary metric ≥ +2pp AND all guardrails hold after 14 days
-- **Don't ship if:** Primary metric < +1pp OR any guardrail breached
-- **Extend if:** Primary metric +1-2pp (borderline) — run for 28 days to confirm
-
-**Risks to watch:**
-- Novelty effect: Check day-over-day treatment delta. If it's 8pp in week 1 and 1pp in week 2, the effect is decaying
-- Cannibalization: "Remind me" might replace immediate actions rather than adding new ones. Check if the remind-then-act rate is truly incremental
-- OS version bias: Treatment only works on newer OS versions. Ensure control group has the same OS filter
-
-Want me to draft the experiment spec for engineering?
-
-### Example 2: Results Interpretation
+### Example 1: Results Interpretation
 
 **User:** Our A/B test on the new onboarding flow is done. Treatment group had 38.7% D7 retention vs. 34.2% for control. Should we ship?
 

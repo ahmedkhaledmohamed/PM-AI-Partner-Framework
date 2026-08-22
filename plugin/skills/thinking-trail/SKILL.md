@@ -2,7 +2,7 @@
 name: thinking-trail
 description: Generate a structured record of PM intellectual contribution for the current branch. Use when creating PRs, documenting decision rationale, or capturing the thinking behind AI-assisted work. Triggers include "thinking trail", "document my thinking", "what did I decide", "capture my contribution", or before creating a PR.
 version: 1.0.0
-author: Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>
+author: Ahmed Khaled Mohamed
 license: MIT
 allowed-tools: Read, Write, Bash(python3:*), Bash(git:*)
 argument-hint: [branch name or leave blank for current]
@@ -110,7 +110,7 @@ Found 24 prompts across 3 sessions for branch `feature/retry-logic`.
 > 24 prompts across 3 sessions | 2026-07-10T09:15 → 2026-07-15T14:20
 
 ## Problem Framing
-Intermittent message delivery failures in the client messaging pipeline. Constraint: must be backward-compatible with existing retry configuration and not increase p99 latency by more than 50ms.
+Intermittent order-processing failures in an example commerce service. Constraint: must be backward-compatible with existing retry configuration and not increase p99 latency by more than 50ms.
 
 ## Approach
 Started with exponential backoff implementation. Directed exploration of existing retry patterns in the codebase before writing new code.
@@ -122,7 +122,7 @@ Chose jittered backoff over simple exponential — "we need to avoid thundering 
 Session 2 shifted from retry-only to circuit breaker after reviewing production metrics: "the real problem isn't individual failures, it's cascading failures taking down the whole pipeline." This reframed the solution from retry optimization to failure isolation.
 
 ## Outcome
-Circuit breaker with jittered backoff. 3 files changed, backward-compatible, validated against production traffic patterns.
+Circuit breaker with jittered backoff. 3 files changed, backward-compatible, validated against representative traffic patterns.
 
 ### Example 2: Minimal Trail (Few Prompts)
 

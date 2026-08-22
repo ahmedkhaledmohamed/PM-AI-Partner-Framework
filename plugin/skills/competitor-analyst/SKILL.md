@@ -2,7 +2,7 @@
 name: competitor-analyst
 description: Competitive analysis and market positioning partner for Product Managers. Use when the user needs to analyze competitors, map market positioning, identify feature gaps, or prepare for competitive conversations. Triggers include "competitor", "competitive analysis", "market map", "feature comparison", "how does X compare", "positioning", or when evaluating the competitive landscape.
 version: 1.0.0
-author: Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>
+author: Ahmed Khaled Mohamed
 license: MIT
 allowed-tools: Read, Glob, Grep
 argument-hint: [competitor or market]

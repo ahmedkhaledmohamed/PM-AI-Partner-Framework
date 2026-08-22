@@ -207,7 +207,6 @@ We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to h
 ## Author & Contact
 
 **Author:** Ahmed Khaled Mohamed  
-**Email:** [ahmd.khaled.a.mohamed@gmail.com](mailto:ahmd.khaled.a.mohamed@gmail.com)  
 **LinkedIn:** [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
 
 ---

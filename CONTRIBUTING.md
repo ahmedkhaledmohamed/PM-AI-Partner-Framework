@@ -230,7 +230,7 @@ The plugin lives in `plugin/` and ships as an npm package (`pm-ai-partner`). Whe
 ## Questions?
 
 - **Discussions**: [GitHub Discussions](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions)
-- **Email**: ahmd.khaled.a.mohamed@gmail.com
+- **Issues**: [GitHub Issues](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/issues)
 
 ---
 

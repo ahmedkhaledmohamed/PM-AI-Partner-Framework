@@ -339,7 +339,7 @@ This plugin is part of the **PM AI Partner Framework** — a complete methodolog
 **Ahmed Khaled Mohamed**
 - [GitHub](https://github.com/ahmedkhaledmohamed)
 - [LinkedIn](https://linkedin.com/in/ahmedkhaledmohamed)
-- [Email](mailto:ahmd.khaled.a.mohamed@gmail.com)
+- [GitHub Discussions](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions)
 
 ---
 

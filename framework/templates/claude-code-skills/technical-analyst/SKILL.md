@@ -37,8 +37,8 @@ Act as a technical translator for a Product Manager. Your role is to make techni
 
 1. **Codebase-to-product-insight** — Read implementation code to extract findings that data alone can't reveal. A function call tells you what *actually* happens, not what docs claim. This is highest-value PM technical work
 2. **Cross-platform comparison** — Trace the same user-facing feature through both iOS and Android code. Implementation divergence is common and often invisible to product teams. Same UI, different OS API calls, different user outcomes
-3. **Evidence-backed recommendations** — The most compelling arguments combine code evidence with data evidence. "The code calls Settings redirect instead of native prompt" + "CTR is 2.1x lower" is stronger than either alone
-4. **Follow the action handler** — When analyzing a UI flow, find what happens on the positive button tap. That single function call often reveals the entire story (native prompt vs settings redirect vs API call)
+3. **Evidence-backed recommendations** — The most compelling arguments combine code evidence with data evidence. "The code adds an extra checkout redirect" + "completion drops after that step" is stronger than either alone
+4. **Follow the action handler** — When analyzing a UI flow, find what happens on the positive button tap. That single function call often reveals the entire story (inline action vs external redirect vs API call)
 
 ## Output Format
 
@@ -107,54 +107,3 @@ Key components:
 **Questions for engineering:**
 - What's our current push delivery rate by platform?
 - How do we handle users who have push disabled?
-
-### Example 3: Codebase Investigation for Product Decision
-
-**User:** Our Android opt-in flows have lower conversion than iOS. Can you figure out why from the code?
-
-**Good Response:**
-
-Let me trace the user flow through both platforms.
-
-**One-sentence summary:** Android contextual opt-in flows redirect users to the OS Settings app instead of showing a native permission prompt — this is a fundamentally different (and worse) UX than iOS.
-
-**How it works — iOS:**
-
-The iOS code calls `requestAuthorization` when the user taps "Enable":
-```swift
-UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-    // System shows native popup: "Allow Notifications?"
-    // User taps Allow → done in 1 tap
-}
-```
-
-**How it works — Android:**
-
-Most Android contextual flows share a single permission handler that does this:
-```kotlin
-val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-intent.data = Uri.parse("package:${context.packageName}")
-context.startActivity(intent)
-// User leaves app → navigates Settings → finds Notifications → toggles on
-// Minimum 4 taps, app context lost
-```
-
-Only the Onboarding flow uses the native API:
-```kotlin
-requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-// System shows native popup: "Allow notifications?"
-// User taps Allow → done in 1 tap
-```
-
-**Product implications:**
-- iOS: 1 tap, stays in app, ~50% CTR on contextual education flow
-- Android: 4+ taps, leaves app, ~24% CTR on same flow
-- The gap isn't user willingness (Android users DO tap "Enable") — it's completion friction after the tap
-- Onboarding is the only Android flow with a native prompt, and it has the highest conversion
-
-**Questions for engineering:**
-- Why do contextual flows use Settings redirect instead of native prompt? Is it a legacy decision or intentional?
-- Can we switch contextual flows to use `requestPermissionLauncher` without re-triggering Android's "don't ask again" behavior?
-- What happens if the user previously denied the native prompt — does Android block future prompts?
-
-**Recommendation:** Switch Android contextual opt-in flows from Settings redirect to native OS prompt. This is likely a 1-file change in the shared permission handler with potential for 2x CTR improvement based on the iOS vs Android data.
