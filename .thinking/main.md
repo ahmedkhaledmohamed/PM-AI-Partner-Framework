@@ -10,7 +10,7 @@ After making one non-showcase repository private, Ahmed chose to keep Khalil and
 
 ## Key Decisions
 
-PM-AI-Partner-Framework remains public. Intentional authorship and portfolio links stay, while personal email addresses, repository-specific local permissions, machine metadata, and examples derived from Client Messaging work are removed.
+PM-AI-Partner-Framework remains public. Intentional authorship and portfolio links stay, while personal email addresses, repository-specific local permissions, machine metadata, and workplace-specific examples are removed.
 
 ## Pivot
 
