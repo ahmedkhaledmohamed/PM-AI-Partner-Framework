@@ -165,7 +165,7 @@ Added a ready-to-use product brief template to the `product-brief` skill at `fra
 
 ### Skill Correction: Technical Analyst
 
-Rewrote the technical-analyst skill example based on codebase audit findings. The original propagated an incorrect hypothesis ("iOS uses native prompt, Android redirects to Settings"). Corrected version reflects reality: both platforms redirect to Settings, but iOS lands on notification settings (one tap) while Android landed on general app info. Also documents Android's unused second native prompt attempt.
+Rewrote the technical-analyst skill example to demonstrate validating an analytical hypothesis against implementation code before making a product recommendation.
 
 ### Updated Files
 
@@ -366,7 +366,7 @@ Complete example of the Strategic Clarity workflow applied to a real team, showi
 
 ## Quick Start
 
-1. Fork the repo (click "Fork" on GHE)
+1. Fork the repo on GitHub
 2. Clone: `git clone github.com:YOUR_USERNAME/PM-AI-Partner-Framework.git`
 3. Open in Cursor: `cd pm-ai-partner-framework && cursor .`
 4. Customize `CLAUDE.md` with your context
@@ -404,7 +404,7 @@ This is the first public release, restructured for easy adoption:
 
 Questions, suggestions, or success stories? Reach out:
 
-- **Email:** ahmd.khaled.a.mohamed@gmail.com
+- **Discussions:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions
 - **LinkedIn:** [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
 
 ---

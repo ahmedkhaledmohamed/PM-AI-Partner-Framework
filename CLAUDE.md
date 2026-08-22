@@ -103,4 +103,4 @@ Using this framework? I'd love to hear what's working and what's not:
 
 - ⭐ [Star the repo](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) if it's helpful
 - 💬 [Share feedback](https://docs.google.com/forms/d/e/1FAIpQLSdz3hPDtLGLdrjJ0ppYtpdjQX5YBRo2oeqjyhJz7-mT5HOmKg/viewform) (2 min survey)
-- 📧 Email: ahmd.khaled.a.mohamed@gmail.com
+- 📧 [Start a discussion](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions)

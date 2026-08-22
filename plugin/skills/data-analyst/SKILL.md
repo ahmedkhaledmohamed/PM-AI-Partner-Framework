@@ -2,7 +2,7 @@
 name: data-analyst
 description: Data exploration and analysis partner for Product Managers. Use when the user needs to query databases, analyze metrics, create dashboards, or extract insights from data. Triggers include "query", "analyze data", "metrics", "BigQuery", "SQL", "dashboard", "what does the data say", or when working with quantitative information.
 version: 1.0.0
-author: Ahmed Khaled Mohamed <ahmd.khaled.a.mohamed@gmail.com>
+author: Ahmed Khaled Mohamed
 license: MIT
 allowed-tools: Read, Grep, Glob, Bash(npm:*), Bash(node:*)
 argument-hint: [metric or question]
@@ -161,76 +161,3 @@ GROUP BY onboarding_version
 3. Look at activation metrics (first play, first save) not just retention
 
 Should I run the D30 analysis when data is available?
-
-### Example 3: Multi-Dimensional CTR Analysis with Instrumentation Caveats
-
-**User:** Analyze the click-through rate for our notification opt-in flows across iOS and Android.
-
-**Good Response:**
-
-**Question:** How do opt-in flow CTR rates compare across platforms, and what drives any differences?
-
-**Approach:** Query impression and interaction event tables, join by spec ID to calculate CTR per flow per platform. Validate that each spec ID actually measures what we think it measures.
-
-**Query:**
-```sql
-WITH impressions AS (
-  SELECT
-    spec_id,
-    platform,
-    COUNT(*) AS impression_count,
-    COUNT(DISTINCT user_id) AS unique_users
-  FROM analytics.impression_events
-  WHERE event_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
-    AND spec_id IN ('feature-education', 'in-app-chat', 'permission-dialog')
-  GROUP BY spec_id, platform
-),
-clicks AS (
-  SELECT
-    spec_id,
-    platform,
-    action_name,
-    COUNT(*) AS click_count
-  FROM analytics.interaction_events
-  WHERE event_date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
-    AND spec_id IN ('feature-education', 'in-app-chat', 'permission-dialog')
-  GROUP BY spec_id, platform, action_name
-)
-SELECT
-  i.spec_id,
-  i.platform,
-  i.impression_count,
-  COALESCE(pos.click_count, 0) AS positive_clicks,
-  COALESCE(neg.click_count, 0) AS negative_clicks,
-  ROUND(SAFE_DIVIDE(pos.click_count, i.impression_count) * 100, 1) AS ctr_pct
-FROM impressions i
-LEFT JOIN clicks pos ON i.spec_id = pos.spec_id AND i.platform = pos.platform
-  AND pos.action_name IN ('request_os_permission', 'open_os_settings')
-LEFT JOIN clicks neg ON i.spec_id = neg.spec_id AND i.platform = neg.platform
-  AND neg.action_name = 'dismiss'
-ORDER BY i.spec_id, i.platform
-```
-
-**Findings:**
-
-| Flow | iOS CTR | Android CTR | Gap |
-|------|---------|-------------|-----|
-| Feature Education | 49.8% | 23.9% | 2.1x iOS |
-| Permission Dialog (shared) | 13.7% | 33.3% | 2.4x Android |
-
-**Critical caveat:** `in-app-chat` spec is unusable for notification CTR — it tracks ALL chat interactions (send_message, add_reaction, play_preview), not just the notification dialog. Excluded from analysis.
-
-**Interpretation:**
-- Where both platforms use native OS prompts (Feature Education), iOS wins 2.1x — expected, since iOS prompt is a single tap
-- Where Android redirects to Settings, CTR is paradoxically *higher* — users are willing to tap "Settings" but the completion rate after that tap is the real bottleneck
-- The problem isn't user willingness, it's the friction of navigating the OS Settings app
-
-**Limitations:**
-- CTR measures intent to enable, not actual permission grant (we can't see what happens in OS Settings)
-- `in-app-chat` data contamination means we have no clean signal for one of the highest-volume flows
-- One week of data; seasonal patterns not captured
-
-**Next steps:**
-1. Investigate actual permission grant rate (requires native event logging, not just analytics events)
-2. Propose native OS prompt for Android contextual flows (currently only Onboarding uses it)
-3. Flag `in-app-chat` instrumentation to the owning team for cleanup
