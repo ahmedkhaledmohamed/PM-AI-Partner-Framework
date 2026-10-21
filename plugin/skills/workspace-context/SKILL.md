@@ -13,6 +13,8 @@ Parse the focus and requested output before reading background. Reading workspac
 - For a new focus, identify the goal, completion condition and relevant repository/source route. A known-file change can start with that file and its applicable instructions.
 - For continuation, read the named task's existing working document or handoff and branch/review record. Recover decisions and remaining work without reconstructing unrelated history.
 
+Discovering a linked repository or source does not authorize changing it. Keep the selected task scope through repository switches and continuation.
+
 Resolve the current directory, real repository root and branch/worktree. Symlinks and nested checkouts can cross instruction boundaries. Read applicable instructions before working in another repository; changing directory does not necessarily reload the runtime's original instructions.
 
 Use a maintained WORKSPACE.md or README and any available workspace map to select a route. These are project conventions, not universally automatic instruction files. When a path is missing or stale, check an existing source map before widening a search. Do not recursively inventory all projects or turn a legacy README into a background briefing.

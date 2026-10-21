@@ -44,7 +44,7 @@ flowchart LR
     Verify --> Proposal
 ```
 
-Follow the target environment's authorization rules. Reading, drafting, external writes, publication, pushes, merges and releases can require different approvals. Preserve approvals already granted for the exact work. Complete authorized preparation before asking the user to approve a concrete next action.
+Follow the target environment's authorization rules. Reading, drafting, external writes, publication, pushes, merges and releases can require different approvals. Preserve approvals already granted for the exact work. Discovering a linked source does not authorize changing its repository. Prepare the complete diff and any required contribution record together before an exact-diff checkpoint; a plan approval does not approve a later diff. Complete authorized preparation before asking the user to approve a concrete next action.
 
 Verify the thing the reader will use: changed behavior, complete table placement, clickable links, filter/sort semantics or actual layout as appropriate. Broaden verification only for a concrete risk or required gate. Tool success responses and row counts alone are insufficient.
 

@@ -2,7 +2,7 @@
 
 ## Goal and completion condition
 
-State the requested result and how the owner will recognize completion.
+State the requested result, authorized change scope and how the owner will recognize completion. Keep explicit exclusions when they prevent likely scope drift.
 
 ## Evidence and decisions
 
