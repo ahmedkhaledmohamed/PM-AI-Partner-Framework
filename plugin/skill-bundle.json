@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 2,
+  "edition": "workspace-model-v2-unreleased",
+  "source": {
+    "repository": "ahmedkhaledmohamed/agent-skills",
+    "contentSnapshotSha256": "2cc18c5794e9268e72d22e1a34299b8834978b22cb9c855bf04b2ddbd48a2ab2",
+    "note": "Content-pinned, reviewed export. This does not claim the source is released or public; the bundle needs no remote access."
+  },
+  "presets": {
+    "starter": [
+      "workspace-context",
+      "thought-partner",
+      "writer"
+    ],
+    "product": [
+      "workspace-context",
+      "work-execution",
+      "artifact-reconciliation",
+      "thought-partner",
+      "technical-analyst",
+      "writer",
+      "devil-advocate",
+      "builder",
+      "data-analyst",
+      "product-brief",
+      "meeting-prep",
+      "stakeholder-update",
+      "strategic-clarity",
+      "planning-workflow",
+      "portfolio-reconciliation",
+      "document-collaboration",
+      "competitor-analyst",
+      "hypothesis-tester",
+      "thinking-trail"
+    ],
+    "evidence": [
+      "workspace-context",
+      "technical-analyst",
+      "data-analyst",
+      "evidence-backed-specs"
+    ]
+  },
+  "skills": [
+    {
+      "name": "artifact-reconciliation",
+      "description": "Reconcile related documents, spreadsheets, structured records and published views while preserving manual decisions and assigning each fact a maintained source.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/artifact-reconciliation/SKILL.md",
+          "sha256": "e623a1eab1f267bb25c313d553f4820522a1c02c024a55139efbbda6380cbe8d"
+        }
+      ]
+    },
+    {
+      "name": "builder",
+      "description": "Build a small tool, script, dashboard, or prototype when the user requests working software.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/builder/SKILL.md",
+          "sha256": "6cf166ba64070b1594c92b69f85a01d4d1fac975facd144544dc38db8c232901"
+        }
+      ]
+    },
+    {
+      "name": "competitor-analyst",
+      "description": "Research a competitive landscape or response to a competitor move, using current sources and the customer job to distinguish meaningful differences from feature parity.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/competitor-analyst/SKILL.md",
+          "sha256": "bc057f9643db0b02925ff47d7b8ebe00adad4a7bbac644f56c23a6e58ba3f639"
+        }
+      ]
+    },
+    {
+      "name": "data-analyst",
+      "description": "Investigate product metrics, cohorts, or experiment results using reproducible queries and explicit measurement definitions.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/data-analyst/SKILL.md",
+          "sha256": "687c9dbf5ee47bbec49ea686de80e91edabf93b243a0f80fcc4582f0b5c8d301"
+        }
+      ]
+    },
+    {
+      "name": "devil-advocate",
+      "description": "Critically review a product idea, proposal, or argument for consequential weaknesses and ways to resolve them.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/devil-advocate/SKILL.md",
+          "sha256": "106fd71e9f4c402ad75675547f7d2b70ea5d494c6acbd6eeef4455672a61df3c"
+        }
+      ]
+    },
+    {
+      "name": "document-collaboration",
+      "description": "Convert documents or incorporate collaborator edits with verified account routing and preservation of the original source.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/document-collaboration/SKILL.md",
+          "sha256": "6ebd9036b57f021cf4f072a6f65f4af2ea7c004d17fbeb868fd7a49fcd03783a"
+        }
+      ]
+    },
+    {
+      "name": "evidence-backed-specs",
+      "description": "Build and maintain traceable specifications for a team's owned software, APIs, data products, or other source-backed systems; answer questions and assess new expectations against them.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/evidence-backed-specs/examples/bundle.json",
+          "sha256": "79c8c4a05d26a9465d95e43b34f0d5ed0d8fff04fb280af75bbf96198f67f643"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/architecture.md",
+          "sha256": "d6fb57d12f1e2d57018d4825d83c4a1c951513d0b9f2f80d2dcd269a62754a2c"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/artifact-model.md",
+          "sha256": "611cc891ceaaa00465272e5258826c686bcf9b13f3c9c62057ae8ee512000d5e"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/change-loop.md",
+          "sha256": "8574f1d373f3e108feb33afe2ba111abcd0393e1068dc6266ca884116a173417"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/evaluation.md",
+          "sha256": "50336ffd7ae42092b130023f2f86c76633ed7c013c1ed4ac2a0cdbbb81d80cec"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/operating-model.md",
+          "sha256": "0120fc5558be4771162853fa55fd8d48a86c10e3e6bfad79e7b74ea2ba83a18a"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/porting-guide.md",
+          "sha256": "96714a623ca62350466103d3db271fcc9033f2c50c0d0190aaab5bb56ceec4b2"
+        },
+        {
+          "path": "skills/evidence-backed-specs/references/record.schema.json",
+          "sha256": "381702614e42e56f450602ced85543bd23714781dc589638acc9f43336498d02"
+        },
+        {
+          "path": "skills/evidence-backed-specs/scripts/validate_bundle.py",
+          "sha256": "25f5f4cd42a749531e479fbdfcc70738d6ecca78b7c654f8c219170c3c2c4ef4"
+        },
+        {
+          "path": "skills/evidence-backed-specs/SKILL.md",
+          "sha256": "09ac4524f7377ce8478063f8d01976f8d8e30fb7cb38e80b56ecb914ae9627c4"
+        }
+      ]
+    },
+    {
+      "name": "hypothesis-tester",
+      "description": "Form a testable product hypothesis, plan an experiment or interpret results for a decision using explicit assumptions, measurement definitions and uncertainty.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/hypothesis-tester/SKILL.md",
+          "sha256": "02ad71c6543b0a7cf29ead291069e1653da0b7881bc25e69f9d3477320256df8"
+        }
+      ]
+    },
+    {
+      "name": "meeting-prep",
+      "description": "Prepare a focused meeting agenda, talking points, or decision brief using the provided context and available relevant sources.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/meeting-prep/SKILL.md",
+          "sha256": "1d21f7f4eab6fc3858e454b3503c4c335f6a2fbc8945305e760a962aa7fac0bf"
+        }
+      ]
+    },
+    {
+      "name": "planning-workflow",
+      "description": "Route planning, scope, completion criteria, dependency, and capacity requests to available organization-approved workflows.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/planning-workflow/SKILL.md",
+          "sha256": "d1a090e411044d184cb45c006d28bcaaeab6ff68f10e8d6ef932cf986df9d5fc"
+        }
+      ]
+    },
+    {
+      "name": "portfolio-reconciliation",
+      "description": "Reconcile a complete scoped product work inventory across planning cycles, delivery records, and capability themes.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/portfolio-reconciliation/SKILL.md",
+          "sha256": "3b866cda04d372a66c2f8c24dd05eb0b38650bb5073ff504b1a497cdab256bea"
+        }
+      ]
+    },
+    {
+      "name": "product-brief",
+      "description": "Draft or revise a product brief, PRD, or feature specification defining the problem, intended outcome, and scope.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/product-brief/SKILL.md",
+          "sha256": "618e3c1c9fd05ac9669caa5d51572fdd9f8556d457537fc01ea68130183b82c7"
+        }
+      ]
+    },
+    {
+      "name": "stakeholder-update",
+      "description": "Draft a status update or executive summary from current delivery evidence, including progress, risks, and decisions needed.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/stakeholder-update/SKILL.md",
+          "sha256": "8ce6bc30d30c3c49aa2dc5e9cce549b8a2cc377763b2ddd7cf982826a3b9abdc"
+        }
+      ]
+    },
+    {
+      "name": "strategic-clarity",
+      "description": "Clarify a team's mandate, responsibility boundaries, and strategic choices when ownership or direction is ambiguous.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/strategic-clarity/SKILL.md",
+          "sha256": "a67a5ba87cb2fe91ba5ce8d5e4a365585670b0eb9ba599f2aaa8aa4c8814b474"
+        }
+      ]
+    },
+    {
+      "name": "technical-analyst",
+      "description": "Explain or investigate system behavior and product capabilities using current code, contracts, and documentation.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/technical-analyst/SKILL.md",
+          "sha256": "a74833f10f30ea000da94d57f99c71e10d746b47fbfc56c14ad8c236321991c2"
+        }
+      ]
+    },
+    {
+      "name": "thinking-trail",
+      "description": "Prepare a sanitized contribution record of material human decisions and AI-assisted work when requested or required by the target repository's review policy.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/thinking-trail/SKILL.md",
+          "sha256": "a505b96e8dbd293a8df60ad251e16166c988ea9e557e797e68997e8c4abc9bd1"
+        }
+      ]
+    },
+    {
+      "name": "thought-partner",
+      "description": "Explore an unresolved product question, strategy choice, or problem framing collaboratively.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/thought-partner/SKILL.md",
+          "sha256": "16aaff0e74e32ddfe0b9702075ae117ce3d8eb37b0aa0261b9d25db45773ec56"
+        }
+      ]
+    },
+    {
+      "name": "work-execution",
+      "description": "Carry an approved multi-step task through bounded implementation, verification and handoff while preserving decisions and action-specific authority.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/work-execution/SKILL.md",
+          "sha256": "d9671fd74a015a1372d44f078bb63c91f024eb336aafedd6ff874fd763a1fe7b"
+        }
+      ]
+    },
+    {
+      "name": "workspace-context",
+      "description": "Select relevant context for workspace startup, a new focus or continuation of a named task. Use for requests to read workspace context; skip broad orientation for known-file edits.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/workspace-context/SKILL.md",
+          "sha256": "13cc8b4b71d06548fe3ee3036a9ee8010f7db91ebb9e9788276ced229f2961a4"
+        }
+      ]
+    },
+    {
+      "name": "writer",
+      "description": "Draft or revise PM prose, narratives, and communications. Use for writing quality; follow any supplied document template or specialist workflow.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/writer/SKILL.md",
+          "sha256": "7970735a65125e40a792af5250b479e4b3750640345441a73a052c4e75e0a640"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "path": "workspace-template/AGENTS.md",
+      "sha256": "7b8504abf4a775603bd93a56921cf12ed73b2964d1bd3abb048d523b2500818f"
+    },
+    {
+      "path": "workspace-template/archive/README.md",
+      "sha256": "f2272772ec5529e2abaf8227cb93fc524140914e8059eab140822f028548a578"
+    },
+    {
+      "path": "workspace-template/CLAUDE.md",
+      "sha256": "414fdc31d1555bff2dbc880d3b31362d01c107ddd10bf248239e9254b8cc249e"
+    },
+    {
+      "path": "workspace-template/gitignore.template",
+      "sha256": "1acd63ab8a0afaf6c414ecefe133792deeb374ca62f52c69500984c13af7f1bd"
+    },
+    {
+      "path": "workspace-template/published/README.md",
+      "sha256": "8605204e7a7ddcdd306645b7096aa664abe1e9977216bb57be20f51efb4850ed"
+    },
+    {
+      "path": "workspace-template/working/README.md",
+      "sha256": "4abe36beccc88a01d196d41d2912bccf820f2cbff61c485eba0bdfe5e50b078c"
+    },
+    {
+      "path": "workspace-template/working/task.md",
+      "sha256": "e1ad38b4133be5378f563a999beebe55ac7576b3db94b46a379b9cfa54e3bcaa"
+    },
+    {
+      "path": "workspace-template/workspace.json",
+      "sha256": "4741ccf47630662853e63498117007d796746d6cba7591e00863bdcc1659ee86"
+    },
+    {
+      "path": "workspace-template/WORKSPACE.md",
+      "sha256": "f6f2dfba32dae1f362942686bbd376fa285a8981d305522cc6e384e356dbb862"
+    }
+  ]
+}

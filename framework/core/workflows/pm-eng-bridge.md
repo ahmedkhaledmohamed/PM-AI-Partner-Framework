@@ -308,4 +308,4 @@ Help me verify:
 
 ---
 
-_Related: [Technical Analyst Skill](../../templates/skills/technical-analyst/SKILL.md) | [Product Brief Skill](../../templates/skills/product-brief/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Technical Analyst Skill](../../../plugin/skills/technical-analyst/SKILL.md) | [Product Brief Skill](../../../plugin/skills/product-brief/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_

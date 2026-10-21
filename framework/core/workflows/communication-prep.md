@@ -307,4 +307,4 @@ Help me:
 
 ---
 
-_Related: [Meeting Prep Skill](../../templates/skills/meeting-prep/SKILL.md) | [Devil's Advocate Skill](../../templates/skills/devil-advocate/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Meeting Prep Skill](../../../plugin/skills/meeting-prep/SKILL.md) | [Devil's Advocate Skill](../../../plugin/skills/devil-advocate/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_

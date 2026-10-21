@@ -331,4 +331,4 @@ Help me write a one-page summary for [audience] covering:
 
 ---
 
-_Related: [Data Analyst Skill](../../templates/skills/data-analyst/SKILL.md) | [Analysis Pipeline Workflow](./analysis-pipeline.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Data Analyst Skill](../../../plugin/skills/data-analyst/SKILL.md) | [Analysis Pipeline Workflow](./analysis-pipeline.md) | [Full Framework](../pm-ai-partner-framework.md)_

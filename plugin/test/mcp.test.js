@@ -98,9 +98,9 @@ describe("buildServerEntry", () => {
         { key: "_ARG_REPOSITORY_", type: "arg", argPosition: 2, label: "Repo path", default: "." },
       ],
     };
-    const creds = { _ARG_REPOSITORY_: "/home/user/my-repo" };
+    const creds = { _ARG_REPOSITORY_: "/example/my-repo" };
     const result = buildServerEntry(server, creds, "claude");
-    assert.deepStrictEqual(result.args, ["mcp-server-git", "--repository", "/home/user/my-repo"]);
+    assert.deepStrictEqual(result.args, ["mcp-server-git", "--repository", "/example/my-repo"]);
   });
 
   it("builds a remote URL server for Claude Code", () => {

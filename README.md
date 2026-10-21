@@ -1,229 +1,74 @@
 # PM AI Partner Framework
 
-**AI-powered skills, workflows, and methodology for Product Managers.**
+A portable workspace and set of workflows for doing product work with an AI agent: frame a question, inspect relevant evidence, make a decision, produce a usable artifact and continue reliably in another session.
 
-[![npm version](https://img.shields.io/npm/v/pm-ai-partner?style=flat-square&logo=npm&logoColor=white&color=CB3837)](https://www.npmjs.com/package/pm-ai-partner)
-[![GitHub stars](https://img.shields.io/github/stars/ahmedkhaledmohamed/PM-AI-Partner-Framework?style=flat-square&logo=github)](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework)
-[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+**Workspace model v2 is a source preview.** The published npm package has not been updated by this change. Use the checked-out source commands below to try the new workspace flow.
 
-```bash
-npx pm-ai-partner@latest
+## Start with a small local workspace
+
+Requires Node.js 18+ for the validation suite and an independently installed agent if you want to launch one. No package install, connector, database or API key is needed to create and inspect the workspace.
+
+```sh
+git clone https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework.git
+cd PM-AI-Partner-Framework
+node plugin/bin/workspace.js init ../my-product --runtime codex
 ```
 
-13 agent skills · 7 workflow commands · 4 automation hooks · Claude Code, Cursor, and Codex
+Inspect the preview, then apply the same selection:
 
-![PM AI Partner Framework](site/images/framework-diagram.png)
-
-> **Finding this useful?** [Star this repo](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework) — it helps others discover it and lets me know it's working!
->
-> **Questions or feedback?** [Quick survey](https://docs.google.com/forms/d/e/1FAIpQLScOSVX0EGYYZpnanXxpwofhcng4BqY7ddFBKaqQhB1PvCkShA/viewform) (2 min) · [Start a discussion](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/discussions) · [Share your experience](https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/issues/new?template=success_story.md)
-
----
-
-## Install the Plugin
-
-```bash
-npx pm-ai-partner@latest
+```sh
+node plugin/bin/workspace.js init ../my-product --runtime codex --apply
+node plugin/bin/workspace.js doctor ../my-product
+node plugin/bin/workspace.js start ../my-product --focus "Review a product request and identify what needs a decision"
 ```
 
-One command installs 13 AI skills, 7 workflow commands, and 4 automation hooks. Works with Claude Code, Cursor, and Codex.
+`start` also previews by default. Add `--apply` to launch Codex or Claude. Cursor setup produces a workspace and a prompt to use in the editor; automatic Cursor launch is not configured.
 
-**[See plugin details, all commands, and usage examples →](plugin/)**
+The initializer refuses differing existing files, installs a small local skill set, and leaves global settings, hooks, accounts and connectors alone. No agent or service is started by `init` or `doctor`. Source locations initially remain unconfigured; diagnostic warnings make that explicit.
 
----
+## How the pieces fit
 
-## Or: Fork the Full Framework
+| Piece | Purpose | Maintained source |
+| --- | --- | --- |
+| Instructions | Stable behavior and authorization boundaries | AGENTS.md; compatibility files point to it |
+| Source map | Select relevant context for the task | WORKSPACE.md and local source configuration |
+| Task document | Goal, evidence, accepted decisions and handoff | Existing working document; create another only when needed |
+| Skills | Reusable workflow instructions loaded when relevant | Selected directories from the reviewed bundle |
+| Reader artifacts | Approved output with useful source links | Maintained sources with derived views where useful |
 
-For the complete methodology, workspace architecture, and templates:
+The core principle is to reconcile sources with different authority: requests, approved intent, inspected implementation, rollout evidence and measurements. Human judgment decides the action. Code is optional when the question does not concern implementation. [Read the operating model](framework/core/workspace-operating-model.md).
 
-### 1. Fork This Repo
-Click "Fork" on GitHub (or clone directly).
+## Choose skills deliberately
 
-### 2. Customize Your Context
-Edit `CLAUDE.md` with your team/domain info:
-```markdown
-# My Workspace
-**My Role**: Product Manager
-**Domain**: [Your area]
-**Focus**: [Current priorities]
+- **starter:** task context, thought partnership and writing.
+- **product:** planning, analysis, briefs, reconciliation, execution and collaboration.
+- **evidence:** source-backed specifications and their supporting references/scripts.
+
+Select a preset before applying, or pass `--skills name,name`. Run `node plugin/bin/workspace.js skills` for the actual bundle. The default is a small local selection; a large global installation is not required.
+
+The bundle includes reviewed portable imports and framework-owned specialist skills. [File hashes and provenance](plugin/skill-bundle.json) make it usable without access to the source skill repository. Third-party plugins and private workspace content are not bundled.
+
+## Where to go next
+
+| Need | Reference |
+| --- | --- |
+| Setup, commands and runtime boundaries | [Getting started](getting-started.md) |
+| Understand the workspace lifecycle | [Operating model](framework/core/workspace-operating-model.md) |
+| Adopt v2 without losing an existing setup | [Migration](framework/core/workspace-migration.md) |
+| See a complete fictional task | [Worked example](framework/examples/workspace-task.md) |
+| Research, planning, analysis and publication | [Workflow guides](framework/core/workflows/README.md) |
+| Templates and source configuration | [Workspace templates](framework/templates/README.md) |
+| Skill export and updates | [Distribution](framework/core/skill-distribution.md) |
+| Older standalone skill installer and plugin | [Plugin compatibility](plugin/README.md) |
+
+Private information belongs in authorized private systems. A folder called sandbox or working is not an access control. Examples in the workspace model are fictional; connect your own sources without copying them into this public repository.
+
+## Validate and contribute
+
+```sh
+cd plugin
+npm test
+npm run check:bundle
 ```
 
-### 3. Start Working
-Open in Cursor → Use AI as your thinking partner:
-- Draft ideas in `sandbox/`
-- Polish and share from `product-catalog/`
-
----
-
-## What's Included
-
-```
-pm-ai-partner-framework/
-├── CLAUDE.md                 # Main AI context (customize this!)
-├── sandbox/                  # Your personal drafts & exploration
-│   ├── CLAUDE.md            # Pre-configured for rough work
-│   └── _examples/           # Example files to learn from
-├── product-catalog/          # Polished work ready to share
-│   ├── CLAUDE.md            # Pre-configured for quality output
-│   └── _examples/           # Example polished docs
-├── framework/                # Framework documentation
-│   ├── core/                # Agent modes, workflows, philosophy
-│   │   ├── pm-ai-partner-framework.md   # Full guide
-│   │   ├── quick-reference.md           # Cheat sheet
-│   │   ├── starter-prompts.md           # Copy-paste prompts
-│   │   └── workflows/                   # Repeatable patterns
-│   ├── templates/           # Config templates (CLAUDE.md, mcp.json)
-│   ├── demo/                # Demo scripts & materials
-│   └── examples/            # Case studies
-├── getting-started.md        # Detailed setup guide
-└── site/                     # Visual landing page
-```
-
----
-
-## The Core Idea
-
-> **PM work is reconciling four sources of truth. AI helps you explore each faster. Judgment stays human.**
-
-```mermaid
-graph TD
-    CODE["**CODE**<br/>Technical<br/><i>What CAN happen?</i>"] --> R
-    DOCS["**DOCS**<br/>Contextual<br/><i>What's expected?</i>"] --> R
-    DATA["**DATA**<br/>Empirical<br/><i>What IS happening?</i>"] --> R
-    JUDGMENT["**JUDGMENT**<br/>Human<br/><i>What SHOULD happen?</i>"] --> R
-
-    R["**RECONCILIATION**<br/>(AI + Human)"] --> D["**DECISION**"]
-
-    style CODE fill:#1e3a5f,stroke:#3b82f6,color:#f8fafc
-    style DOCS fill:#1a3a2a,stroke:#22c55e,color:#f8fafc
-    style DATA fill:#3a2a1a,stroke:#f59e0b,color:#f8fafc
-    style JUDGMENT fill:#3b1f5e,stroke:#a855f7,color:#f8fafc
-    style R fill:#1a1a2e,stroke:#6366f1,color:#f8fafc
-    style D fill:#1a2e1a,stroke:#22c55e,color:#f8fafc
-```
-
----
-
-## Six Agent Modes
-
-Tell AI which "hat" to wear for your task:
-
-![Agent Skills Diagram](site/images/agent-skills-diagram.svg)
-
-| Mode | When to Use | Try Saying |
-|------|-------------|------------|
-| **Thought Partner** | Brainstorming, exploring options | "Help me think through this problem..." |
-| **Technical Analyst** | Understanding systems, code | "Explain how [X] works..." |
-| **Writer** | Creating documents | "Help me write a [brief/strategy/email]..." |
-| **Devil's Advocate** | Stress-testing ideas | "Challenge this proposal..." |
-| **Builder** | Creating tools, scripts | "Build me a simple [X]..." |
-| **Data Analyst** | Analyzing metrics | "What patterns do you see in this data?" |
-
----
-
-## Twelve Workflow Patterns
-
-Repeatable processes for common PM tasks:
-
-| # | Pattern | When to Use |
-|---|---------|-------------|
-| 1 | Strategic Clarity | New role, team needs definition |
-| 2 | Planning Cycle | Quarterly/sprint planning |
-| 3 | Codebase Discovery | Understanding what actually exists |
-| 4 | Tool Building | Creating internal tools |
-| 5 | Communication Prep | Presentations, dev talks |
-| 6 | PM-Eng Bridge | Translating code ↔ product |
-| 7 | Data Investigation | Metrics analysis |
-| 8 | Doc Restructuring | Fixing confusing docs |
-| 9 | Analysis Pipeline | Data question → shareable presentation |
-| 10 | Documenting AI Work | Capturing PM thinking for PRs |
-| 11 | Model Routing | Choosing the right model per task |
-| 12 | Deep Research | Multi-source research with verification |
-
----
-
-## Skills & Commands
-
-13 agent skills and 7 workflow commands you can invoke via `/command` or auto-trigger by context:
-
-| Type | Skills |
-|------|--------|
-| Agent Modes (6) | `/thought-partner`, `/technical-analyst`, `/writer`, `/devil-advocate`, `/builder`, `/data-analyst` |
-| Scenarios (3) | `/product-brief`, `/meeting-prep`, `/stakeholder-update` |
-| Workflows (1) | `/strategic-clarity` |
-| Analysis (2) | `/hypothesis-tester`, `/competitor-analyst` |
-| Accountability (1) | `/thinking-trail` |
-| Commands (7) | `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, `/pm:audit-codebase`, `/pm:competitor-scan`, `/pm:metrics-review`, `/pm:thinking-trail` |
-
-Each skill includes instructions, examples, and lessons learned from real usage.
-
-**Quick install:** `npx pm-ai-partner@latest` — or manually from [`plugin/`](plugin/) or [`framework/templates/skills/`](framework/templates/skills/).
-
----
-
-## Key Resources
-
-| Need | Go To |
-|------|-------|
-| **Install the plugin** | `npx pm-ai-partner@latest` or [`plugin/`](plugin/) |
-| **Get set up** | [`getting-started.md`](getting-started.md) |
-| Full framework guide | [`framework/core/pm-ai-partner-framework.md`](framework/core/pm-ai-partner-framework.md) |
-| One-page cheat sheet | [`framework/core/quick-reference.md`](framework/core/quick-reference.md) |
-| Copy-paste prompts | [`framework/core/starter-prompts.md`](framework/core/starter-prompts.md) |
-| Config templates | [`framework/templates/`](framework/templates/) |
-| Cursor Skills | [`framework/templates/skills/`](framework/templates/skills/) |
-| Case study | [`framework/examples/case-studies/openclaw-deep-dive.md`](framework/examples/case-studies/openclaw-deep-dive.md) |
-| Workflow guides | [`framework/core/workflows/`](framework/core/workflows/) |
-| Presentations | [`site/presentations/`](site/presentations/) |
-| Release notes | [`RELEASE-NOTES.md`](RELEASE-NOTES.md) |
-
----
-
-## Customization Guide
-
-### Essential (Do First)
-1. Edit `CLAUDE.md` with your context
-2. Review `sandbox/_examples/` and `product-catalog/_examples/`
-3. Delete example files when you understand the pattern
-
-### Optional (Power Users)
-- Copy templates from `framework/templates/` as needed
-- Set up MCP tools (see `getting-started.md`)
-- Customize `.cursorrules` for your preferences
-
----
-
-## Contributing
-
-We welcome contributions! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to help:
-
-- Share your success stories
-- Report issues or suggest features
-- Add examples and case studies
-- Improve documentation
-
----
-
-## Author & Contact
-
-**Author:** Ahmed Khaled Mohamed  
-**LinkedIn:** [Ahmed Khaled](https://linkedin.com/in/ahmedkhaledmohamed)
-
----
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=ahmedkhaledmohamed/PM-AI-Partner-Framework&type=Date)](https://star-history.com/#ahmedkhaledmohamed/PM-AI-Partner-Framework&Date)
-
----
-
-## Related
-
-- **Plugin (npm):** [`npx pm-ai-partner@latest`](plugin/) — install skills, commands, and hooks
-- **Framework Website:** [`site/index.html`](site/index.html)
-- **Case Study:** [OpenClaw Deep Dive](framework/examples/case-studies/openclaw-deep-dive.md) — the framework in action
-- **Substack Article:** [PM AI Partner Framework](https://substack.com/home/post/p-184388693)
-
----
-
-*Version 3.1.0 · July 2026*
+The tests use temporary local projects and do not run a model or configure real accounts. See [contributing](CONTRIBUTING.md) for source ownership and review expectations. A source update does not publish a package, change repository visibility or authorize a merge.

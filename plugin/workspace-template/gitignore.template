@@ -1,0 +1,11 @@
+.local/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p8
+node_modules/
+.venv/
+__pycache__/
+.DS_Store

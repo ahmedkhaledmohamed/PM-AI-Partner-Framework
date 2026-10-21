@@ -379,4 +379,4 @@ What's missing?
 
 ---
 
-_Related: [Competitor Analyst Skill](../../templates/skills/competitor-analyst/SKILL.md) | [Technical Analyst Skill](../../templates/skills/technical-analyst/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Competitor Analyst Skill](../../../plugin/skills/competitor-analyst/SKILL.md) | [Technical Analyst Skill](../../../plugin/skills/technical-analyst/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_

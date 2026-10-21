@@ -1,38 +1,20 @@
-# Workflow Templates
+# Product workflow guides
 
-Specific, step-by-step guides for common PM tasks with AI assistance.
+Start with the [workspace operating model](../workspace-operating-model.md) for task context, source authority and continuation. Choose only the workflow relevant to the request. The guides offer structure; they do not require every phase for a small edit or grant external-action authority.
 
-> **New in v2.0:** The 4 most common workflows are now available as slash commands via the plugin.
-> Install with `npx pm-ai-partner@latest`, then use `/pm:plan-week`, `/pm:write-brief`, `/pm:prep-meeting`, or `/pm:audit-codebase`.
+| Task | Guide |
+| --- | --- |
+| Establish mandate and boundaries | [Strategic clarity](strategic-clarity.md) |
+| Review requests, unfinished work and capacity | [Planning cycle](planning-cycle.md) |
+| Understand inspected implementation | [Codebase discovery](codebase-deep-dive.md) |
+| Investigate measurements and uncertainty | [Data investigation](data-investigation.md) |
+| Connect product intent and engineering scope | [PM–engineering collaboration](pm-eng-bridge.md) |
+| Prepare a reader-facing discussion | [Communication preparation](communication-prep.md) |
+| Turn analysis into a reproducible artifact | [Analysis pipeline](analysis-pipeline.md) |
+| Build a scoped tool | [Tool building](tool-building.md) |
+| Consolidate confusing documents | [Document restructuring](doc-restructuring.md) |
+| Record material contribution safely | [Contribution records](documenting-ai-work.md) |
+| Choose a model using current evidence | [Model selection](model-routing.md) |
+| Research across sources | [Deep research](deep-research.md) |
 
----
-
-## Available Workflows
-
-| Workflow | When to Use | Time |
-|----------|-------------|------|
-| [Strategic Clarity](strategic-clarity.md) | New role, team lacks identity | 2-4 weeks |
-| [Codebase Deep-Dive](codebase-deep-dive.md) | Understand what exists | 1-2 weeks |
-| [Planning Cycle](planning-cycle.md) | Quarterly/sprint planning, prioritization | 1-2 weeks |
-| [Data Investigation](data-investigation.md) | Metric moved unexpectedly, validate assumptions | Hours to days |
-| [PM-Eng Bridge](pm-eng-bridge.md) | Scoping, technical constraints, eng collaboration | Ongoing |
-| [Communication Prep](communication-prep.md) | High-stakes meetings, leadership reviews | 1-3 hours |
-| [Analysis Pipeline](analysis-pipeline.md) | Data question to shareable presentation | Hours to days |
-| [Tool Building](tool-building.md) | Create prototypes, tools | Hours to days |
-| [Doc Restructuring](doc-restructuring.md) | Confusing, outdated, or scattered docs | 1-3 days |
-| [Documenting AI Work](documenting-ai-work.md) | Capturing PM thinking for PRs | 15-30 min |
-| [Model Routing](model-routing.md) | Choosing the right model per task | Reference |
-| [Deep Research](deep-research.md) | Multi-source research with verification | 1-4 hours |
-
----
-
-## Using These Templates
-
-1. **Identify your situation** — Match to a workflow
-2. **Follow the phases** — Don't skip steps
-3. **Use the prompts** — Copy and customize
-4. **Produce the outputs** — Documents listed at end
-
----
-
-_Back to: [Framework Overview](../pm-ai-partner-framework.md) | [Quick Reference](../quick-reference.md)_
+Keep material decisions and a concise handoff in the existing working document. Use the [reviewed skills](../../../plugin/skills/) for task procedures and [migration guidance](../workspace-migration.md) for older setups. Runtime-specific commands and hooks are optional; not every editor provides the same interface.
