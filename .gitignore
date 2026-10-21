@@ -3,3 +3,14 @@ framework/demo/FEEDBACK-FORM-TEMPLATE.md
 plugin/outreach/
 scripts/
 .DS_Store
+
+.local/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p8
+node_modules/
+.venv/
+__pycache__/

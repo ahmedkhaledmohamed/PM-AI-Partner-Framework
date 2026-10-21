@@ -25,21 +25,7 @@ const YELLOW = "\x1b[33m";
 const RED = "\x1b[31m";
 const RESET = "\x1b[0m";
 
-const SKILLS = [
-  { name: "thought-partner", desc: "Brainstorming & idea exploration" },
-  { name: "technical-analyst", desc: "Codebase analysis for PMs" },
-  { name: "writer", desc: "PM document drafting & polish" },
-  { name: "devil-advocate", desc: "Stress-test ideas & proposals" },
-  { name: "builder", desc: "Build tools, scripts & prototypes" },
-  { name: "data-analyst", desc: "Metrics analysis & SQL queries" },
-  { name: "product-brief", desc: "PRDs & feature specs" },
-  { name: "meeting-prep", desc: "Meeting preparation & talking points" },
-  { name: "stakeholder-update", desc: "Status reports & exec summaries" },
-  { name: "strategic-clarity", desc: "Team identity & boundaries" },
-  { name: "hypothesis-tester", desc: "Experiment design & A/B test analysis" },
-  { name: "competitor-analyst", desc: "Competitive analysis & positioning" },
-  { name: "thinking-trail", desc: "Document PM thinking & contribution" },
-];
+const SKILLS = require("../skill-bundle.json").skills.map(({ name, description }) => ({ name, desc: description }));
 
 const COMMANDS = [
   { name: "plan-week", desc: "MCP-aware weekly planning" },
@@ -88,6 +74,19 @@ function ask(question) {
   });
 }
 
+function writeNewOrIdentical(dest, contents) {
+  const data = Buffer.isBuffer(contents) ? contents : Buffer.from(contents);
+  if (fs.existsSync(dest)) {
+    if (fs.statSync(dest).isFile() && fs.readFileSync(dest).equals(data)) return;
+    throw new Error(`Existing file differs; review manually: ${dest}`);
+  }
+  fs.writeFileSync(dest, data, { flag: "wx" });
+}
+
+function copyNewOrIdentical(src, dest) {
+  writeNewOrIdentical(dest, fs.readFileSync(src));
+}
+
 function copyDirRecursive(src, dest) {
   if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
 
@@ -97,7 +96,7 @@ function copyDirRecursive(src, dest) {
     if (entry.isDirectory()) {
       copyDirRecursive(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      copyNewOrIdentical(srcPath, destPath);
     }
   }
 }
@@ -150,7 +149,7 @@ function installClaude(pluginRoot, scope) {
   const commandsSrc = path.join(pluginRoot, "commands", "pm");
   if (fs.existsSync(commandsSrc)) {
     for (const cmd of fs.readdirSync(commandsSrc)) {
-      fs.copyFileSync(
+      copyNewOrIdentical(
         path.join(commandsSrc, cmd),
         path.join(commandsDest, cmd)
       );
@@ -166,7 +165,7 @@ function installClaude(pluginRoot, scope) {
     const hooksScriptsSrc = path.join(pluginRoot, "hooks");
     for (const f of fs.readdirSync(hooksScriptsSrc)) {
       if (f === "hooks.json") continue;
-      fs.copyFileSync(
+      copyNewOrIdentical(
         path.join(hooksScriptsSrc, f),
         path.join(hooksDest, f)
       );
@@ -192,7 +191,7 @@ function installClaude(pluginRoot, scope) {
       return obj;
     };
     const rewritten = rewritePaths(hooksConfig);
-    fs.writeFileSync(
+    writeNewOrIdentical(
       path.join(hooksDest, "hooks.json"),
       JSON.stringify(rewritten, null, 2) + "\n"
     );
@@ -655,7 +654,12 @@ async function main() {
   console.log();
 }
 
-main().catch((err) => {
-  console.error(`${RED}Error: ${err.message}${RESET}`);
-  process.exit(1);
-});
+if (["init", "doctor", "start", "skills"].includes(process.argv[2])) {
+  try { process.exitCode = require("./workspace").main(process.argv.slice(2)); }
+  catch (error) { console.error(error.message); process.exitCode = 2; }
+} else {
+  main().catch((err) => {
+    console.error(`${RED}Error: ${err.message}${RESET}`);
+    process.exitCode = 1;
+  });
+}

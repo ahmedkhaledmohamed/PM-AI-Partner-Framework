@@ -1,0 +1,45 @@
+{
+  "scope": {
+    "sourceUnitIds": ["SRC-001"],
+    "featureIds": ["FEAT-001"],
+    "assessedNeedIds": ["NEED-001"]
+  },
+  "records": [
+    {
+      "kind": "sourceUnit", "id": "SRC-001", "sourceKind": "api", "locator": "repo://example@v1/api/create",
+      "inclusion": "inScope", "ownerStatus": "confirmed", "ownerEvidence": [{"locator": "repo://example@v1/owners", "version": "v1", "retrievedAt": "2026-01-01T12:00:00Z", "method": "owner declaration"}],
+      "baselineVersion": "v1", "accessStatus": "available"
+    },
+    {
+      "kind": "sourceReview", "id": "REVIEW-001", "unitId": "SRC-001", "reviewedVersion": "v1",
+      "reviewDepth": "partialPath", "disposition": "Create response inspected; error variants remain.",
+      "inspected": ["api/create"], "remaining": ["error variants"], "reviewer": "example reviewer", "reviewedAt": "2026-01-01"
+    },
+    {
+      "kind": "feature", "id": "FEAT-001", "title": "Create a resource", "scopeStatus": "candidate",
+      "sourceUnitIds": ["SRC-001"], "relatedRequirementIds": ["REQ-001"], "relatedNeedIds": ["NEED-001"],
+      "coverageLimitations": ["Other clients have not been inventoried."]
+    },
+    {
+      "kind": "observation", "id": "OBS-001", "statement": "The handler returns an identifier on the inspected success path.",
+      "scope": "API v1, inspected path", "evidence": [{"locator": "repo://example@v1/api/create", "version": "v1", "retrievedAt": "2026-01-01T12:00:00Z", "method": "code inspection"}],
+      "verification": "Handler inspected; runtime unverified.", "limitations": ["Other responses unreviewed."], "relatedRequirementIds": ["REQ-001"]
+    },
+    {
+      "kind": "requirement", "id": "REQ-001", "status": "proposed", "statement": "A successful create request shall return a stable identifier.",
+      "scope": "API v1", "owner": "example product owner", "source": {"locator": "decision://example-draft", "version": "draft-1", "retrievedAt": "2026-01-01T12:00:00Z", "method": "document review"},
+      "acceptanceCriteria": ["A successful response contains a nonempty identifier."], "verification": "Contract review and test", "relatedObservationIds": ["OBS-001"]
+    },
+    {
+      "kind": "need", "id": "NEED-001", "status": "idea", "owner": "example stakeholder",
+      "source": {"locator": "request://example-1", "version": "1", "retrievedAt": "2026-01-01T12:00:00Z", "method": "request review"},
+      "scope": "API v1", "desiredOutcome": "Clients can create resources reliably.", "successMeasure": "To be agreed."
+    },
+    {
+      "kind": "gap", "id": "GAP-001", "needId": "NEED-001", "classification": "specificationGap",
+      "relatedRequirementIds": ["REQ-001"], "relatedObservationIds": ["OBS-001"], "evidenceFor": [], "evidenceAgainst": [],
+      "uncertainty": ["Requirement approval and error behavior are unknown."], "decisionOwner": "example product owner",
+      "nextVerification": "Agree acceptance conditions and inspect error paths.", "decisionStatus": "open"
+    }
+  ]
+}

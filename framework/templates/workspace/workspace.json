@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 2,
+  "name": "Product workspace",
+  "runtime": "codex",
+  "sources": [
+    {"kind": "decisions", "location": null, "authority": "Accepted scope and human decisions"},
+    {"kind": "tracker", "location": null, "authority": "Current delivery tracking state"},
+    {"kind": "intent", "location": null, "authority": "Approved product intent"},
+    {"kind": "implementation", "location": null, "authority": "Inspected code and contracts"},
+    {"kind": "measurement", "location": null, "authority": "Primary data with definitions and dates"}
+  ]
+}

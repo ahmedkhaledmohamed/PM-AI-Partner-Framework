@@ -1,9 +1,20 @@
 # PM AI Partner Framework
 
-**Latest Version:** v3.0.0 (March 2026)
+**Published package baseline:** v3.1.0. Workspace model v2 below is unreleased.
 **Repo:** https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework
 
 ---
+
+## Unreleased: workspace model v2
+
+- Task-focused source routing, concise instructions and existing-document handoffs.
+- Small local skill presets, a self-contained hashed bundle and one maintained template source.
+- Preview-first setup, read-only local diagnostics and explicit launch previews.
+- Sanitized contribution records; no automatic transcript publishing or credential-store synthesis.
+- Consolidated legacy skill templates, migration guidance and a complete fictional task.
+- Tracked outreach removed from the proposed tree; historical disclosure is not erased.
+
+This source update does not publish a package, change visibility or update existing installations. Earlier release descriptions below are historical and may describe behavior deliberately replaced by the new workflow.
 
 ## What's New in v3.1.0
 

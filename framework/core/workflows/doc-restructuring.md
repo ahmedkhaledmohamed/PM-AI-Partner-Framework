@@ -307,4 +307,4 @@ Restructuring is a one-time fix. Without maintenance, docs decay again within 3-
 
 ---
 
-_Related: [Writer Skill](../../templates/skills/writer/SKILL.md) | [Strategic Clarity Workflow](./strategic-clarity.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Writer Skill](../../../plugin/skills/writer/SKILL.md) | [Strategic Clarity Workflow](./strategic-clarity.md) | [Full Framework](../pm-ai-partner-framework.md)_

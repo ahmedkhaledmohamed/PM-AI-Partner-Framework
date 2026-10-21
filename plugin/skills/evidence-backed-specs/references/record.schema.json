@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Portable evidence-backed specification record",
+  "description": "Illustrative validation contract for one JSON Lines record. Adapt fields to local policy without merging distinct evidence layers.",
+  "oneOf": [
+    {"$ref": "#/$defs/sourceUnit"},
+    {"$ref": "#/$defs/sourceReview"},
+    {"$ref": "#/$defs/observation"},
+    {"$ref": "#/$defs/requirement"},
+    {"$ref": "#/$defs/need"},
+    {"$ref": "#/$defs/gap"},
+    {"$ref": "#/$defs/changeReview"},
+    {"$ref": "#/$defs/feature"},
+    {"$ref": "#/$defs/deliverable"},
+    {"$ref": "#/$defs/sourceAssessment"},
+    {"$ref": "#/$defs/verificationEvidence"}
+  ],
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locator", "version", "retrievedAt", "method"],
+      "properties": {
+        "locator": {"$ref": "#/$defs/text"},
+        "version": {"$ref": "#/$defs/text"},
+        "retrievedAt": {"type": "string", "format": "date-time"},
+        "method": {"$ref": "#/$defs/text"},
+        "limitations": {"type": "string"}
+      }
+    },
+    "sourceUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "sourceKind", "locator", "inclusion", "ownerStatus", "ownerEvidence", "baselineVersion", "accessStatus"],
+      "properties": {
+        "kind": {"const": "sourceUnit"},
+        "id": {"$ref": "#/$defs/text"},
+        "sourceKind": {"enum": ["code", "api", "dataset", "model", "configuration", "productSurface", "document", "other"]},
+        "locator": {"$ref": "#/$defs/text"},
+        "inclusion": {"enum": ["inScope", "adjacent", "candidate", "excluded", "retired"]},
+        "ownerStatus": {"enum": ["confirmed", "disputed", "unknown"]},
+        "ownerEvidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "baselineVersion": {"$ref": "#/$defs/text"},
+        "accessStatus": {"enum": ["available", "partial", "inaccessible"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "sourceReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "unitId", "reviewedVersion", "reviewDepth", "disposition", "inspected", "remaining", "reviewer", "reviewedAt"],
+      "properties": {
+        "kind": {"const": "sourceReview"},
+        "id": {"$ref": "#/$defs/text"},
+        "unitId": {"$ref": "#/$defs/text"},
+        "reviewedVersion": {"$ref": "#/$defs/text"},
+        "reviewDepth": {"enum": ["typeOnly", "partialPath", "fullScopedPath"]},
+        "disposition": {"$ref": "#/$defs/text"},
+        "inspected": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "remaining": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "reviewer": {"$ref": "#/$defs/text"},
+        "reviewedAt": {"type": "string", "format": "date"}
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "statement", "scope", "evidence", "verification", "limitations", "relatedRequirementIds"],
+      "properties": {
+        "kind": {"const": "observation"},
+        "id": {"$ref": "#/$defs/text"},
+        "statement": {"$ref": "#/$defs/text"},
+        "scope": {"$ref": "#/$defs/text"},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "verification": {"$ref": "#/$defs/text"},
+        "limitations": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedRequirementIds": {"type": "array", "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "status", "statement", "scope", "owner", "source", "acceptanceCriteria", "verification", "relatedObservationIds"],
+      "properties": {
+        "kind": {"const": "requirement"},
+        "id": {"$ref": "#/$defs/text"},
+        "status": {"enum": ["proposed", "approved", "unresolved", "superseded"]},
+        "statement": {"$ref": "#/$defs/text"},
+        "scope": {"$ref": "#/$defs/text"},
+        "owner": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/evidence"},
+        "approvedBy": {"$ref": "#/$defs/text"},
+        "approvedAt": {"type": "string", "format": "date"},
+        "acceptanceCriteria": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "verification": {"$ref": "#/$defs/text"},
+        "relatedObservationIds": {"type": "array", "items": {"$ref": "#/$defs/text"}}
+      },
+      "if": {"properties": {"status": {"const": "approved"}}},
+      "then": {"required": ["approvedBy", "approvedAt"]}
+    },
+    "need": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "status", "owner", "source", "scope", "desiredOutcome", "successMeasure"],
+      "properties": {
+        "kind": {"const": "need"},
+        "id": {"$ref": "#/$defs/text"},
+        "status": {"enum": ["idea", "proposed", "approvedGoal", "superseded", "unresolved"]},
+        "owner": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/evidence"},
+        "scope": {"$ref": "#/$defs/text"},
+        "desiredOutcome": {"$ref": "#/$defs/text"},
+        "successMeasure": {"$ref": "#/$defs/text"}
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "needId", "classification", "relatedRequirementIds", "relatedObservationIds", "evidenceFor", "evidenceAgainst", "uncertainty", "decisionOwner", "nextVerification", "decisionStatus"],
+      "properties": {
+        "kind": {"const": "gap"},
+        "id": {"$ref": "#/$defs/text"},
+        "needId": {"$ref": "#/$defs/text"},
+        "classification": {"enum": ["approvedRequirementConflict", "candidateDevelopmentGap", "specificationGap", "evidenceGap", "expectedVariation", "unverified"]},
+        "relatedRequirementIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedObservationIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "evidenceFor": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "evidenceAgainst": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "uncertainty": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "decisionOwner": {"$ref": "#/$defs/text"},
+        "nextVerification": {"$ref": "#/$defs/text"},
+        "decisionStatus": {"enum": ["open", "accepted", "rejected", "superseded"]}
+      }
+    },
+    "feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "title", "scopeStatus", "sourceUnitIds", "relatedRequirementIds", "relatedNeedIds", "coverageLimitations"],
+      "properties": {
+        "kind": {"const": "feature"},
+        "id": {"$ref": "#/$defs/text"},
+        "title": {"$ref": "#/$defs/text"},
+        "scopeStatus": {"enum": ["confirmed", "candidate", "adjacent", "disputed", "retired"]},
+        "sourceUnitIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedRequirementIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedNeedIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "coverageLimitations": {"type": "array", "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "deliverable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "title", "period", "trackingStatus", "source", "candidateFeatureIds", "relatedRequirementIds", "deliveryStatus"],
+      "properties": {
+        "kind": {"const": "deliverable"},
+        "id": {"$ref": "#/$defs/text"},
+        "title": {"$ref": "#/$defs/text"},
+        "period": {"$ref": "#/$defs/text"},
+        "trackingStatus": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/evidence"},
+        "candidateFeatureIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedRequirementIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "deliveryStatus": {"enum": ["confirmed", "unverified", "notDelivered", "notApplicable"]},
+        "notes": {"type": "string"}
+      }
+    },
+    "sourceAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "source", "authorityStatus", "reviewedSections", "disposition", "relatedNeedIds", "relatedRequirementIds", "reviewedAt"],
+      "properties": {
+        "kind": {"const": "sourceAssessment"},
+        "id": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/evidence"},
+        "authorityStatus": {"enum": ["approved", "proposed", "historical", "conflicting", "unknown"]},
+        "reviewedSections": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "disposition": {"$ref": "#/$defs/text"},
+        "relatedNeedIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "relatedRequirementIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "reviewedAt": {"type": "string", "format": "date"}
+      }
+    },
+    "verificationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "claimId", "stage", "evidence", "limitations"],
+      "properties": {
+        "kind": {"const": "verificationEvidence"},
+        "id": {"$ref": "#/$defs/text"},
+        "claimId": {"$ref": "#/$defs/text"},
+        "stage": {"enum": ["implementation", "enablement", "execution", "measurement", "outcome"]},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "limitations": {"type": "array", "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "changeReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id", "unitId", "beforeVersion", "afterVersion", "changedPaths", "classification", "affectedRecordIds", "evidence", "reviewer", "reviewedAt", "baselineAction"],
+      "properties": {
+        "kind": {"const": "changeReview"},
+        "id": {"$ref": "#/$defs/text"},
+        "unitId": {"$ref": "#/$defs/text"},
+        "beforeVersion": {"$ref": "#/$defs/text"},
+        "afterVersion": {"$ref": "#/$defs/text"},
+        "changedPaths": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "classification": {"type": "array", "minItems": 1, "items": {"enum": ["observationCorrection", "approvedRequirementConflict", "proposedRequirementChange", "expectedVariation", "ownershipCorrection", "noMaterialSpecChange", "unresolved"]}},
+        "affectedRecordIds": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "reviewer": {"$ref": "#/$defs/text"},
+        "reviewedAt": {"type": "string", "format": "date"},
+        "baselineAction": {"enum": ["advance", "hold"]}
+      }
+    }
+  }
+}

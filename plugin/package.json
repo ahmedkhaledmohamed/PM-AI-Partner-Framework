@@ -1,7 +1,7 @@
 {
   "name": "pm-ai-partner",
   "version": "3.1.0",
-  "description": "AI-powered skills for Product Managers — 13 agent modes, 7 workflow commands, 4 automation hooks, and 17 MCP servers for Claude Code, Cursor, and Codex.",
+  "description": "Product workflows and a task-focused workspace with reviewed skill bundles and local-first setup.",
   "author": "Ahmed Khaled Mohamed",
   "license": "MIT",
   "repository": {
@@ -24,10 +24,12 @@
     "mcp-servers"
   ],
   "scripts": {
-    "test": "node --test test/mcp.test.js"
+    "test": "node --test test/*.test.js",
+    "check:bundle": "node bin/build-workspace-bundle.js --check"
   },
   "bin": {
-    "pm-ai-partner": "./bin/install.js"
+    "pm-ai-partner": "./bin/install.js",
+    "pm-workspace": "./bin/workspace.js"
   },
   "files": [
     "bin/",
@@ -36,7 +38,9 @@
     "hooks/",
     "mcp/",
     "settings.json",
-    ".claude-plugin/"
+    ".claude-plugin/",
+    "workspace-template/",
+    "skill-bundle.json"
   ],
   "engines": {
     "node": ">=16"

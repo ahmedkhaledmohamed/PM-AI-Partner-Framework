@@ -376,4 +376,4 @@ This enables 3-4 parallel analysis tracks without branch conflicts.
 
 ---
 
-_Related: [Data Analyst Skill](../../templates/skills/data-analyst/SKILL.md) | [Builder Skill](../../templates/skills/builder/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_
+_Related: [Data Analyst Skill](../../../plugin/skills/data-analyst/SKILL.md) | [Builder Skill](../../../plugin/skills/builder/SKILL.md) | [Full Framework](../pm-ai-partner-framework.md)_

@@ -54,7 +54,7 @@
           "key": "_ARG_",
           "type": "arg",
           "label": "Allowed directory path",
-          "help": "e.g. /Users/you/Documents or ~/Developer",
+          "help": "e.g. /path/to/Documents or ~/Developer",
           "default": "."
         }
       ],
