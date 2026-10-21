@@ -29,7 +29,7 @@ Edit WORKSPACE.md and the source locations in workspace.json. Decide which recor
 
 Specify the applicable review and authorization rules in AGENTS.md. Keep private mappings and credentials in authorized private storage such as an ignored .local directory or an approved connector, not in public templates. A workspace folder name does not make it private.
 
-`doctor` reports unconfigured sources, missing files and local modifications. It reads local configuration and files only. It also warns about same-named user-level skills without reading their contents or changing them. It does not authenticate, contact a tracker, verify live accounts or determine whether a fact is current. Modified templates are expected after customization; preserve them and compare future changes manually.
+`doctor` reports the launch directory, candidate entry files, source roles and verification limits, unconfigured sources, missing files and local modifications. Candidate files are not a claim that the runtime loaded them. It reads local configuration and files only. It also warns about same-named user-level skills without reading their contents or changing them. It does not authenticate, contact a tracker, verify live accounts or determine whether a fact is current. Modified templates are expected after customization; preserve them and compare future changes manually.
 
 ## 4. Start a task
 
@@ -59,3 +59,13 @@ node plugin/bin/build-workspace-bundle.js --check
 ```
 
 Tests cover dry-run, all three skill layouts, repeated setup, preserved user edits, symlink conflicts, missing files, prompt arguments and bundled references. They do not certify live editor integrations, real credentials, deployed systems or business outcomes.
+
+## Review an update without overwriting customizations
+
+```sh
+node plugin/bin/workspace.js compare /path/to/existing-workspace
+```
+
+The JSON report includes installed baseline text (when available), local text, proposed bundled text and a local-to-bundle review patch for each managed file. It classifies unchanged, local-only, upstream-only and conflicting changes. New installations record the original public template/skill text alongside its hash in `.workspace-install.json`; older installations retain hash-only comparison, with missing original text labelled explicitly.
+
+The command never applies updates or changes installation metadata. Local-only files and conflicts need deliberate merging; a proposed patch can remove local customizations and is not automatically safe to apply. Keep the report private because it includes local text. Changes to runtime or skill selection remain explicit migrations. After review, update only agreed files and preserve the existing installation baseline for later comparison; do not manually mark merged local policy as an upstream template.

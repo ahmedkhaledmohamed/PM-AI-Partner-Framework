@@ -1,7 +1,7 @@
 framework/demo/SOCIAL-POSTS.md
 framework/demo/FEEDBACK-FORM-TEMPLATE.md
 plugin/outreach/
-scripts/
+/scripts/
 .DS_Store
 
 .local/

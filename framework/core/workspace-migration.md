@@ -18,12 +18,12 @@ Workspace model v2 is an unreleased operating-model update. It does not rename o
 
 1. Preserve the existing checkout and local instructions. Start from current upstream in an isolated worktree when changing a repository.
 2. Preview the initializer against a new temporary project. Inspect the proposed instructions and selected skills before applying them.
-3. Choose the relevant changes for the existing workspace. The initializer refuses differing files; compare and merge manually rather than deleting your customizations.
+3. Choose the relevant changes for the existing workspace. The initializer refuses differing files; run `node plugin/bin/workspace.js compare <directory>` and merge deliberately rather than deleting your customizations. The report includes installed/local/proposed text and a review patch; it never applies an update.
 4. Identify the current decision record, tracker, intent, implementation and measurement sources. Record their actual roles; do not migrate confidential evidence into a public template.
 5. Add a handoff section to the current substantial task document. Test one real startup and continuation before expanding the setup.
 6. Review older skills, hooks and connectors for duplication and applicability. Do not remove safeguards or enable global automation as a cleanup side effect.
 
-Legacy template skill directories now point to the maintained bundle. Copy a complete selected skill directory, including references/scripts, when migrating an existing installation. The v2 local CLI does not update or uninstall existing global skills. Its diagnostic reports local modifications without repairing them.
+Legacy template skill directories now point to the maintained bundle. Copy a complete selected skill directory, including references/scripts, when migrating an existing installation. The v2 local CLI does not update or uninstall existing global skills. Its diagnostic reports launch context, source roles and local modifications without repairing them or claiming actual runtime discovery. Comparison supports hash-only legacy installations, but original text is unavailable when it was not recorded.
 
 ## Legacy installer and integrations
 

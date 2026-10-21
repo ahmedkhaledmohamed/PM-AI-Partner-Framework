@@ -1,0 +1,22 @@
+name: Validate workspace source
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  offline-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.13'
+      - run: node --test plugin/test/*.test.js
+      - run: node plugin/bin/build-workspace-bundle.js --check
+      - run: node plugin/bin/build-site.js --check
+      - run: python3 plugin/skills/evidence-backed-specs/scripts/validate_bundle.py plugin/skills/evidence-backed-specs/examples/bundle.json

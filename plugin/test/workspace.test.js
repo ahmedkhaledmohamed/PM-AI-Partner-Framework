@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const os = require("node:os");
 const { spawnSync } = require("node:child_process");
-const { init, doctor, launch } = require("../bin/workspace");
+const { init, doctor, compare, launch, sha } = require("../bin/workspace");
 
 function fixture(t) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pm-workspace-"));
@@ -126,4 +126,82 @@ test("npm package includes every file required by its bundle manifest", { skip: 
     assert.ok(packed.has(file.path), `Missing from package: ${file.path}`);
   }
   for (const file of ["bin/workspace.js", "skill-bundle.json"]) assert.ok(packed.has(file));
+});
+
+
+test("compare preserves local customization and emits an applicable review patch", (t) => {
+  const root = fixture(t);
+  init(root, { apply: true });
+  const agent = path.join(root, "AGENTS.md");
+  const original = fs.readFileSync(agent, "utf8");
+  const local = original + "\nLocal policy remains authoritative.\n";
+  fs.writeFileSync(agent, local);
+  const result = compare(root);
+  const entry = result.files.find((f) => f.name === "AGENTS.md");
+  assert.equal(entry.status, "local-only");
+  assert.equal(entry.base, original);
+  assert.equal(entry.local, local);
+  assert.equal(entry.proposed, original);
+  assert.equal(result.applied, false);
+  assert.equal(fs.readFileSync(agent, "utf8"), local);
+  const applied = spawnSync("git", ["apply", "--check", "-"], { cwd: root, input: entry.patch, encoding: "utf8" });
+  assert.equal(applied.status, 0, applied.stderr);
+});
+
+test("compare separates upstream-only changes from conflicting local changes", (t) => {
+  const root = fixture(t);
+  init(root, { apply: true });
+  const metadata = path.join(root, ".workspace-install.json");
+  const installed = JSON.parse(fs.readFileSync(metadata));
+  const original = "Previous bundled instructions.\n";
+  installed.files["AGENTS.md"] = sha(Buffer.from(original));
+  installed.baseline["AGENTS.md"] = original;
+  fs.writeFileSync(metadata, JSON.stringify(installed));
+  const agent = path.join(root, "AGENTS.md");
+  fs.writeFileSync(agent, original);
+  assert.equal(compare(root).files.find((f) => f.name === "AGENTS.md").status, "upstream-only");
+  fs.writeFileSync(agent, "Local replacement.\n");
+  assert.equal(compare(root).files.find((f) => f.name === "AGENTS.md").status, "conflict");
+  assert.equal(fs.readFileSync(agent, "utf8"), "Local replacement.\n");
+  fs.unlinkSync(agent);
+  assert.equal(compare(root).files.find((f) => f.name === "AGENTS.md").local, null);
+  assert.equal(fs.existsSync(agent), false);
+});
+
+test("compare handles hash-only legacy installs and refuses unsafe baseline metadata", (t) => {
+  const root = fixture(t);
+  init(root, { apply: true });
+  const metadata = path.join(root, ".workspace-install.json");
+  const installed = JSON.parse(fs.readFileSync(metadata));
+  const baseline = installed.baseline;
+  delete installed.baseline;
+  fs.writeFileSync(metadata, JSON.stringify(installed));
+  assert.equal(compare(root).files.find((f) => f.name === "AGENTS.md").baseAvailable, false);
+  installed.baseline = { ...baseline, "AGENTS.md": "Tampered baseline" };
+  fs.writeFileSync(metadata, JSON.stringify(installed));
+  assert.throws(() => compare(root), /baseline does not match/);
+  installed.baseline = baseline;
+  installed.files["../outside"] = "invalid";
+  fs.writeFileSync(metadata, JSON.stringify(installed));
+  assert.throws(() => compare(root), /relative workspace path/);
+});
+
+test("doctor reports source verification and instruction-discovery limits", (t) => {
+  const root = fixture(t);
+  init(root, { apply: true });
+  const result = doctor(root);
+  assert.equal(result.launchDirectory, root);
+  assert.deepEqual(result.instructionCandidates, ["AGENTS.md"]);
+  assert.ok(result.discovery.includes("not inspected"));
+  assert.ok(result.sources.every((source) => source.configured === false && source.verification === "not checked"));
+});
+
+test("compare rejects mutation flags without changing local files", (t) => {
+  const root = fixture(t);
+  init(root, { apply: true });
+  const cli = path.join(__dirname, "../bin/workspace.js");
+  const before = fs.readFileSync(path.join(root, "AGENTS.md"));
+  const result = spawnSync(process.execPath, [cli, "compare", root, "--apply"], { encoding: "utf8" });
+  assert.equal(result.status, 2);
+  assert.deepEqual(fs.readFileSync(path.join(root, "AGENTS.md")), before);
 });
