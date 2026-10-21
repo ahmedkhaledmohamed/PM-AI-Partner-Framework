@@ -1,10 +1,30 @@
 # PM AI Partner Framework
 
-A portable workspace and set of workflows for doing product work with an AI agent: frame a question, inspect relevant evidence, make a decision, produce a usable artifact and continue reliably in another session.
+A practical guide and optional starter workspace for product managers working with AI agents.
+
+Start with one product question. Identify the relevant requests, approved intent, implementation, rollout and measurements, then produce a decision brief that makes the evidence, uncertainty and proposed next action reviewable. Use the sources your question requires; code and analytics access are optional.
+
+## Who this helps
+
+Use the framework if you need a method and examples for organizing evidence and carrying a product task across sessions. If you already have a working agent setup, adopt the relevant practices without replacing your workspace or installing the bundle.
+
+Read the [operating model](framework/core/workspace-operating-model.md), then follow the [fictional saved-search task](framework/examples/workspace-task.md). Try a real question in your authorized workspace. A useful brief states the decision, distinguishes observations from proposals, links its evidence, identifies unknowns and names the next action for human review.
+
+The framework's usefulness to other PMs has not yet been established through an observed pilot. Local software checks verify narrower implementation properties. The next investment decision is an [evaluation with three PMs](framework/core/usefulness-pilot.md); feature expansion is paused while that evidence is gathered.
+
+## Repository responsibilities
+
+| Location | Maintains |
+| --- | --- |
+| This framework | Method, worked examples, starter workspace and a selected reviewed skill snapshot |
+| Separate `agent-skills` collection | Reusable workflow instructions; imported changes reach this framework through reviewed exports |
+| Your authorized workspace and systems | Actual tasks, private source mappings, integrations, evidence and decisions |
+
+The framework works without access to the skill source collection. Maintain reusable instructions there rather than creating another version here; see [distribution and maintenance](framework/core/skill-distribution.md).
 
 **Workspace model v2 is a source preview.** The published npm package has not been updated by this change. Use the checked-out source commands below to try the new workspace flow.
 
-## Start with a small local workspace
+## Optional: start with a small local workspace
 
 Requires Node.js 18+ for the validation suite and an independently installed agent if you want to launch one. No package install, connector, database or API key is needed to create and inspect the workspace.
 
