@@ -4,6 +4,8 @@ Use a feature branch and reviewed pull request. Follow the repository owner's ap
 
 ## Change the maintained source
 
+The current priority is to evaluate whether PMs can use the method to produce a reviewable decision brief and return to it for another task. Follow the [usefulness pilot](framework/core/usefulness-pilot.md). Until that review, pause feature expansion, new generic personas and additional installation infrastructure. Fix concrete defects and improve instructions or examples where observed friction justifies the change. Existing proposals remain separate review decisions; this policy neither merges nor withdraws them.
+
 | Change | Source | Verification |
 | --- | --- | --- |
 | Workspace behavior and source authority | `framework/core/workspace-operating-model.md` | Check consistency with templates, commands and a representative task |
