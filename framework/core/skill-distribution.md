@@ -10,6 +10,8 @@ The starter preset selects context, thought partnership and writing. The product
 
 ## Export procedure
 
+Keep setup distribution distinct from information storage. The framework's recipe and preserved package archive recreate a reviewed runtime/skill baseline. Machine-local source bindings, credentials and private content stay in local stores or connected services. An owner's optional private backup is independent of the framework and is not required to use its bundled skills. Recipes do not replace separately maintained private policy overlays or native runtime/plugin setup.
+
 1. Review the selected source skills and their references for portability, source rights, private details and dependencies. Do not export an installed directory wholesale.
 2. Use an explicitly selected local source checkout:
 

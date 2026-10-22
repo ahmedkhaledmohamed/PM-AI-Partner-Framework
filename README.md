@@ -22,6 +22,8 @@ The framework's usefulness to other PMs has not yet been established through an 
 
 The framework works without access to the skill source collection. Maintain reusable instructions there rather than creating another version here; see [distribution and maintenance](framework/core/skill-distribution.md).
 
+Reproduce setup separately from information storage. A setup recipe records the runtime, selected skills and exact bundle hash. Actual source locations remain in local bindings; documents, work details, datasets and account state stay on the machine or in connected services. Optional private backups are independent of the framework.
+
 **Workspace model v2 is a source preview.** The published npm package has not been updated by this change. Use the checked-out source commands below to try the new workspace flow.
 
 ## Optional: start with a small local workspace
@@ -73,6 +75,7 @@ The bundle includes reviewed portable imports and framework-owned specialist ski
 | Need | Reference |
 | --- | --- |
 | Setup, commands and runtime boundaries | [Getting started](getting-started.md) |
+| Recreate a baseline setup on another machine | [Recipe and standalone package procedure](getting-started.md#6-reproduce-the-setup-on-another-machine) |
 | Understand the workspace lifecycle | [Operating model](framework/core/workspace-operating-model.md) |
 | Adopt v2 without losing an existing setup | [Migration](framework/core/workspace-migration.md) |
 | See a complete fictional task | [Worked example](framework/examples/workspace-task.md) |
