@@ -146,3 +146,49 @@ test("an offline package recreates a recipe without Git metadata or skill-source
   const check = spawnSync(process.execPath, [cli, "doctor", destination], { cwd: base, encoding: "utf8" });
   assert.equal(check.status, 0, check.stderr);
 });
+
+test("acceptance CLI previews and rejects existing-workspace arguments without mutation", () => {
+  const cli = path.join(__dirname, "../bin/workspace.js");
+  const preview = spawnSync(process.execPath, [cli, "test-portability"], { encoding: "utf8" });
+  assert.equal(preview.status, 0, preview.stderr);
+  const report = JSON.parse(preview.stdout);
+  assert.equal(report.applied, false);
+  assert.equal(report.root, undefined);
+  const invalid = spawnSync(process.execPath, [cli, "test-portability", os.homedir(), "--apply"], { encoding: "utf8" });
+  assert.equal(invalid.status, 2);
+  assert.match(invalid.stderr, /never takes an existing workspace/);
+});
+
+test("acceptance command retains an independently usable package, recipe and inspectable report", { skip: process.platform === "win32" }, (t) => {
+  const { testPortability } = require("../bin/portability");
+  const report = testPortability({ runtime: "codex", preset: "evidence", apply: true });
+  if (report.root) t.after(() => fs.rmSync(report.root, { recursive: true, force: true }));
+  assert.equal(report.status, "pass", report.error);
+  assert.equal(report.checks.length, 5);
+  assert.ok(report.checks.every((c) => c.status === "pass"));
+  assert.ok(report.managedFilesCompared > 0);
+  assert.equal(JSON.parse(fs.readFileSync(report.report)).status, "pass");
+  assert.ok(fs.existsSync(path.join(report.root, "INSPECT.md")));
+  assert.ok(fs.existsSync(path.join(report.restored, ".agents/skills/evidence-backed-specs/scripts/validate_bundle.py")));
+  assert.equal(fs.existsSync(path.join(report.restored, ".local")), false);
+  assert.equal(fs.existsSync(path.join(report.root, "package/.git")), false);
+  assert.deepEqual(fs.readdirSync(path.join(report.root, "isolated-home")), []);
+  const packed = spawnSync(process.execPath, [path.join(report.root, "package/bin/install.js"), "test-portability", "--runtime", "cursor"], { encoding: "utf8" });
+  assert.equal(packed.status, 0, packed.stderr);
+  assert.equal(JSON.parse(packed.stdout).runtime, "cursor");
+});
+
+test("acceptance command reports a missing local prerequisite as failure and keeps diagnostics", { skip: process.platform === "win32" }, (t) => {
+  const cli = path.join(__dirname, "../bin/workspace.js");
+  const env = { ...process.env, PATH: "" };
+  delete env.npm_execpath;
+  const result = spawnSync(process.execPath, [cli, "test-portability", "--apply"], { env, encoding: "utf8" });
+  assert.equal(result.status, 1, result.stderr);
+  const report = JSON.parse(result.stdout);
+  t.after(() => fs.rmSync(report.root, { recursive: true, force: true }));
+  assert.equal(report.status, "fail");
+  assert.equal(report.checks[0].status, "fail");
+  assert.match(report.error, /npm/);
+  assert.equal(JSON.parse(fs.readFileSync(report.report)).status, "fail");
+  assert.equal(fs.existsSync(path.join(report.root, "restored")), false);
+});

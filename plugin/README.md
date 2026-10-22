@@ -16,6 +16,8 @@ Initialization previews by default, preflights conflicts, installs only selected
 
 ## Recreate setup from a standalone package
 
+For a local acceptance check, preview `node plugin/bin/workspace.js test-portability`, then add `--apply` to create an isolated temporary test and retain its report and restored workspace. See [local recreation testing](../getting-started.md#7-test-recreation-locally) for options and the manual fresh-session checks. An automated pass covers the synthetic baseline; accounts and the full environment remain separate checks.
+
 From a source checkout, use `node plugin/bin/workspace.js recipe /path/to/workspace --output setup-recipe.json --apply` to export a reviewed baseline selection. Preserve its matching source checkout or locally packed archive and checksum. No package release is implied, and the existing package version alone does not identify this source preview.
 
 After unpacking the exact archive, run these from its parent directory:

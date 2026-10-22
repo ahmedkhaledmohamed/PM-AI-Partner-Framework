@@ -259,8 +259,9 @@ function launch(target, options = {}) {
 
 function main(argv = process.argv.slice(2)) {
   const [command, ...rest] = argv;
+  if (command === "test-portability") return require("./portability").main(rest);
   if (!command || command === "--help" || command === "help") {
-    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
+    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\npm-workspace test-portability [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--apply]\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
     return 0;
   }
   const options = {};
