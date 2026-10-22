@@ -301,7 +301,7 @@
   "templates": [
     {
       "path": "workspace-template/AGENTS.md",
-      "sha256": "7b8504abf4a775603bd93a56921cf12ed73b2964d1bd3abb048d523b2500818f"
+      "sha256": "10895894a43568265e3e4dc16ea1254e92801241af3d28806eec83ee46486b88"
     },
     {
       "path": "workspace-template/archive/README.md",
@@ -333,7 +333,7 @@
     },
     {
       "path": "workspace-template/WORKSPACE.md",
-      "sha256": "f6f2dfba32dae1f362942686bbd376fa285a8981d305522cc6e384e356dbb862"
+      "sha256": "1b61bcabb5802af5424d66e36b07d730393a295a8b71763e101435b07e6eb813"
     }
   ]
 }

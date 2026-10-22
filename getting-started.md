@@ -25,7 +25,20 @@ Created content includes AGENTS.md, a compatibility CLAUDE.md, WORKSPACE.md, wor
 
 ## 3. Set your sources and policy
 
-Edit WORKSPACE.md and the source locations in workspace.json. Decide which record owns human scope decisions, which tracker owns delivery status, which documents describe approved intent, and where implementation and measurements can be verified. For work without code or analytics, leave those routes explicitly unavailable rather than inventing evidence.
+Edit WORKSPACE.md for source-selection guidance. workspace.json declares source roles; store actual source locations in the ignored .local/sources.json or the approved connector configuration. Decide which record owns human scope decisions, which tracker owns delivery status, which documents describe approved intent, and where implementation and measurements can be verified. For work without code or analytics, leave those routes explicitly unavailable rather than inventing evidence.
+
+For an initial local binding, create a JSON file on the destination machine:
+
+```json
+{
+  "schemaVersion": 1,
+  "sources": [
+    {"kind": "decisions", "location": "/local/path/to/existing/records", "authority": "Accepted decisions"}
+  ]
+}
+```
+
+Supply `--bindings /local/path/source-bindings.json` during init, with the same selection used in the preview and apply. Only location metadata is written to .local/sources.json, with private file permissions. Source content is never read or imported by setup. You may edit that local file later; it is excluded from the managed/public baseline and recipe. URL credentials and query parameters are refused; use the approved connector for authentication. Empty bindings are valid until a task needs a source. Existing non-empty workspace.json source locations remain readable for compatibility but should not be shared as a setup recipe.
 
 Specify the applicable review and authorization rules in AGENTS.md. Keep private mappings and credentials in authorized private storage such as an ignored .local directory or an approved connector, not in public templates. A workspace folder name does not make it private.
 
@@ -50,6 +63,41 @@ node plugin/bin/workspace.js start ../my-product --task working/task.md
 ```
 
 This starts a new task-context prompt when applied; it does not select a native chat history or reconstruct unrelated sessions. Use your runtime's own session-resume UI/command when you want that history. A handoff preserves decisions and next actions but does not grant new approval.
+
+## 6. Reproduce the setup on another machine
+
+Export a baseline setup recipe from the workspace:
+
+```sh
+node plugin/bin/workspace.js recipe ../my-product --output setup-recipe.json
+node plugin/bin/workspace.js recipe ../my-product --output setup-recipe.json --apply
+```
+
+The recipe records only schema, bundle fingerprint, runtime and selected skills. It does not contain local bindings, private content, task history, credentials, home settings, plugins or hooks. Local scaffold/instruction edits are excluded with a warning. A changed managed skill blocks export because the clean bundle cannot reproduce it; review that workflow in its maintained source first. The recipe describes the reviewed baseline, not a backup of every local customization.
+
+Preserve the exact reviewed framework source checkout or a self-contained package archive alongside the recipe. To create an archive locally from that checkout:
+
+```sh
+cd plugin
+npm pack --ignore-scripts --offline --registry=https://registry.npmjs.org/
+```
+
+This creates a local archive without publishing it. Record its checksum and source revision. The package version is still the unreleased source preview's existing version, so a filename/version alone does not identify its contents. Do not replace the preserved archive with npm latest and expect the same bundle.
+
+On the destination, install the appropriate Node and agent runtime, unpack that exact archive and place the exported recipe beside it. Create your own local bindings file as in step 3, then preview and apply:
+
+```sh
+node package/bin/workspace.js init ./my-workspace --recipe ./setup-recipe.json --bindings ./local-bindings.json
+node package/bin/workspace.js init ./my-workspace --recipe ./setup-recipe.json --bindings ./local-bindings.json --apply
+node package/bin/workspace.js doctor ./my-workspace
+node package/bin/workspace.js start ./my-workspace --focus "Review a product question. Done when the next decision and evidence are clear."
+```
+
+Omit --bindings from both init commands if sources are not yet configured. The archive contains selected skill resources; it does not require Git metadata, access to the skill-source repository, or a Personal/work-content checkout. A recipe/bundle mismatch is refused instead of silently selecting newer instructions. Start previews; add --apply to launch Codex or Claude, or use the displayed prompt manually in Cursor.
+
+Authenticate the intended accounts and install any additional plugins or private policy overlays separately. Private information remains in its existing local stores or connected services; moving to another machine may require reconnecting those sources, not packaging their contents. Optional private backups remain an independent choice.
+
+Verify one actual task and fresh-session continuation on the destination before calling the environment ready. Files, a recipe round trip and local diagnostics do not prove runtime discovery, live account access, connector behavior or equivalence with every plugin in a previous environment.
 
 ## Verify the framework itself
 

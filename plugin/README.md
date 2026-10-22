@@ -10,9 +10,26 @@ node plugin/bin/install.js init ../my-product --runtime codex --apply
 node plugin/bin/install.js doctor ../my-product
 ```
 
-`install.js` dispatches init, doctor, start and skills to the workspace CLI. `workspace.js` is the same direct interface. The proposed package also declares a pm-workspace executable for a later release; the currently published package is not changed by this source update.
+`install.js` dispatches init, recipe, doctor, start and skills to the workspace CLI. `workspace.js` is the same direct interface. The proposed package also declares a pm-workspace executable for a later release; the currently published package is not changed by this source update.
 
 Initialization previews by default, preflights conflicts, installs only selected local skills, and changes no global hooks, accounts or MCP settings. Codex, Claude and Cursor skill layouts are supported; automatic launch is available only for independently installed Codex/Claude executables. Cursor launch remains manual.
+
+## Recreate setup from a standalone package
+
+From a source checkout, use `node plugin/bin/workspace.js recipe /path/to/workspace --output setup-recipe.json --apply` to export a reviewed baseline selection. Preserve its matching source checkout or locally packed archive and checksum. No package release is implied, and the existing package version alone does not identify this source preview.
+
+After unpacking the exact archive, run these from its parent directory:
+
+```sh
+node package/bin/workspace.js init ./my-workspace --recipe ./setup-recipe.json
+node package/bin/workspace.js init ./my-workspace --recipe ./setup-recipe.json --apply
+node package/bin/workspace.js doctor ./my-workspace
+node package/bin/workspace.js start ./my-workspace --focus "Your task and completion condition"
+```
+
+The package has its own reviewed skill snapshot and needs no private skill-source or content repository. Recipes pin the bundle hash, runtime and selected skills. They exclude private content, task history, local bindings, home configuration and local instruction edits; managed skill changes require source review before export. Extra plugins, credentials and policy overlays are configured separately on the destination.
+
+Optional --bindings accepts a local JSON file with schemaVersion 1 and sources containing kind, location and optional authority. Use declared source kinds from workspace.json. Pass the same binding option to preview and apply. Only pointers go into the ignored .local/sources.json with private permissions; the source content is not read or copied. Configure connector authentication separately. Start remains a preview until --apply, and Cursor launch remains manual.
 
 ## Skill selection and provenance
 

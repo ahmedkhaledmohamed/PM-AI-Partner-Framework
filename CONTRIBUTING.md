@@ -10,7 +10,7 @@ The current priority is to evaluate whether PMs can use the method to produce a 
 | --- | --- | --- |
 | Workspace behavior and source authority | `framework/core/workspace-operating-model.md` | Check consistency with templates, commands and a representative task |
 | Scaffold instructions or structure | `framework/templates/workspace/` | Regenerate package copy; run bundle and workspace checks |
-| Initialization, diagnostic or launch | `plugin/bin/workspace.js` | Test meaningful success and failure paths in temporary projects |
+| Initialization, diagnostics, recipe export or launch | `plugin/bin/workspace.js` | Test round trips and meaningful failure paths in temporary projects; exclude private bindings/content from recipes |
 | Portable imported skill | Reviewed source collection, then explicit export | Read full skill/references; compare export hashes and outcomes |
 | Framework-owned specialist skill | `plugin/skills/` | Keep trigger precise, references useful and boundaries explicit; regenerate manifest |
 | Workflow guide | `framework/core/workflows/` | State actual inputs, decision, output and stopping condition |

@@ -46,17 +46,57 @@ function bundle() {
 
 function runtimeDir(runtime) {
   const dirs = { codex: ".agents/skills", claude: ".claude/skills", cursor: ".cursor/skills" };
-  if (!dirs[runtime]) throw new Error("Runtime must be codex, claude or cursor");
+  if (typeof runtime !== "string" || !Object.prototype.hasOwnProperty.call(dirs, runtime)) throw new Error("Runtime must be codex, claude or cursor");
   return dirs[runtime];
+}
+
+function fingerprint(data = bundle()) { return sha(JSON.stringify(data)); }
+
+function readRecipe(file, data) {
+  const recipe = readJson(file);
+  if (!recipe || typeof recipe !== "object" || Array.isArray(recipe)) throw new Error("Invalid setup recipe");
+  const keys = ["schemaVersion", "kind", "bundleSha256", "runtime", "skills"];
+  if (Object.keys(recipe).some((key) => !keys.includes(key)) || recipe.schemaVersion !== 1 || recipe.kind !== "pm-workspace-setup"
+      || !Array.isArray(recipe.skills) || !recipe.skills.length || recipe.skills.some((name) => typeof name !== "string")) {
+    throw new Error("Invalid setup recipe; source bindings, content and account configuration do not belong here");
+  }
+  runtimeDir(recipe.runtime);
+  if (recipe.bundleSha256 !== fingerprint(data)) throw new Error("Recipe needs the exact framework bundle used to export it; preserve that source checkout or package archive");
+  return recipe;
+}
+
+function readBindings(file) {
+  const data = readJson(file);
+  if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("Invalid local bindings");
+  if (data.schemaVersion !== 1 || !Array.isArray(data.sources) || Object.keys(data).some((key) => !["schemaVersion", "sources"].includes(key))) {
+    throw new Error("Local bindings need schemaVersion 1 and source locations only");
+  }
+  const seen = new Set();
+  for (const source of data.sources) {
+    if (!source || Object.keys(source).some((key) => !["kind", "location", "authority"].includes(key))
+        || typeof source.kind !== "string" || !source.kind || typeof source.location !== "string" || !source.location
+        || (source.authority !== undefined && typeof source.authority !== "string") || seen.has(source.kind)) {
+      throw new Error("Invalid or duplicate local source binding");
+    }
+    seen.add(source.kind);
+    if (source.location.includes("://")) {
+      let url;
+      try { url = new URL(source.location); } catch { throw new Error("Invalid local source URL"); }
+      if (url.username || url.password || url.search || url.hash) throw new Error("Keep credentials and URL parameters in the approved connector, outside source bindings");
+    }
+  }
+  return data;
 }
 
 function planInit(target, options = {}) {
   const root = targetRoot(target);
   const data = bundle();
-  const runtime = options.runtime || "codex";
+  if (options.recipe && ["runtime", "preset", "skills"].some((key) => options[key])) throw new Error("A recipe fixes runtime and skill selection; do not combine selection overrides");
+  const recipe = options.recipe ? readRecipe(options.recipe, data) : null;
+  const runtime = recipe ? recipe.runtime : options.runtime || "codex";
   const skillDir = runtimeDir(runtime);
   const preset = options.preset || "starter";
-  const names = options.skills ? options.skills.split(",").map((s) => s.trim()).filter(Boolean) : data.presets[preset];
+  const names = recipe ? recipe.skills : options.skills ? options.skills.split(",").map((s) => s.trim()).filter(Boolean) : data.presets[preset];
   if (!names || !names.length) throw new Error("Choose a valid preset or at least one bundled skill");
   const selected = [...new Set(names)].map((name) => {
     const entry = data.skills.find((s) => s.name === name);
@@ -80,11 +120,17 @@ function planInit(target, options = {}) {
     for (const file of skill.files) add(file.path, file.path.replace(/^skills\//, skillDir + "/"), file.sha256);
   }
   const installed = {
-    schemaVersion: 2, edition: data.edition, runtime,
+    schemaVersion: 2, edition: data.edition, bundleSha256: fingerprint(data), runtime,
     skills: selected.map((s) => s.name),
     files: Object.fromEntries([...files].map(([name, contents]) => [name, sha(contents)])),
   };
   files.set(".workspace-install.json", Buffer.from(JSON.stringify(installed, null, 2) + "\n"));
+  // Machine-local pointers are not part of the managed/public setup manifest.
+  if (options.bindings) {
+    const bindings = readBindings(options.bindings);
+    if (bindings.sources.some((source) => !config.sources.some((role) => role.kind === source.kind))) throw new Error("Binding kind is not declared in workspace.json");
+    files.set(".local/sources.json", Buffer.from(JSON.stringify(bindings, null, 2) + "\n"));
+  }
   const operations = [...files].map(([name, content]) => {
     const file = inside(root, name);
     const exists = fs.existsSync(file);
@@ -106,8 +152,8 @@ function init(target, options = {}) {
     for (const op of plan.operations) {
       if (op.action !== "create") continue;
       inside(plan.root, op.name);
-      fs.mkdirSync(path.dirname(op.file), { recursive: true });
-      fs.writeFileSync(op.file, op.content, { flag: "wx" });
+      fs.mkdirSync(path.dirname(op.file), { recursive: true, mode: op.name.startsWith(".local/") ? 0o700 : 0o755 });
+      fs.writeFileSync(op.file, op.content, { flag: "wx", mode: op.name.startsWith(".local/") ? 0o600 : 0o644 });
       created.push(op.file);
     }
   } catch (error) {
@@ -148,11 +194,46 @@ function doctor(target) {
   for (const name of installed.skills.filter((name) => /^[a-z0-9-]+$/.test(name))) {
     if (globalDirs.some((directory) => fs.existsSync(path.join(directory, name, "SKILL.md")))) warnings.push(`A user-level skill has the same name; compare runtime discovery: ${name}`);
   }
+  let bindings = { sources: [] };
+  const bindingFile = inside(root, ".local/sources.json");
+  if (fs.existsSync(bindingFile)) bindings = readBindings(bindingFile);
   for (const source of config.sources) {
     if (!source || typeof source.kind !== "string") errors.push("Malformed source entry");
-    else if (!source.location) warnings.push(`Source not configured: ${source.kind}`);
+    else if (!source.location && !bindings.sources.some((entry) => entry.kind === source.kind)) warnings.push(`Source not configured: ${source.kind}`);
   }
   return { root, runtime: config.runtime, skills: installed.skills, errors, warnings, note: "Local file/configuration checks only. No connector, account, model, service or dataset was contacted." };
+}
+
+function exportRecipe(target, options = {}) {
+  const root = targetRoot(target);
+  const installed = readJson(inside(root, ".workspace-install.json"));
+  if (installed.schemaVersion !== 2 || !Array.isArray(installed.skills) || !installed.files || typeof installed.files !== "object") throw new Error("Invalid installation metadata");
+  if (readJson(inside(root, "workspace.json")).runtime !== installed.runtime) throw new Error("Workspace runtime differs from the installed layout; resolve migration before exporting");
+  const plan = planInit(root, { runtime: installed.runtime, skills: installed.skills.join(",") });
+  if (installed.bundleSha256 && installed.bundleSha256 !== fingerprint()) throw new Error("Use the framework bundle that created this workspace before exporting its recipe");
+  let localTemplates = false;
+  const dir = runtimeDir(installed.runtime) + "/";
+  for (const op of plan.operations.filter((entry) => entry.name !== ".workspace-install.json")) {
+    const baseline = installed.files[op.name];
+    if (baseline !== sha(op.content)) throw new Error("Installed setup baseline differs from this bundle; inspect the original package before exporting");
+    if (op.name.startsWith(dir) && op.action !== "unchanged") throw new Error("A managed skill is missing or customized; review it in its maintained source before exporting a reproducible recipe");
+    if (!op.name.startsWith(dir) && op.action !== "unchanged") localTemplates = true;
+  }
+  const recipe = { schemaVersion: 1, kind: "pm-workspace-setup", bundleSha256: fingerprint(), runtime: installed.runtime, skills: plan.skills };
+  const report = { recipe, applied: false, exclusions: ["Local source bindings", "Private content and task history", "Credentials and accounts", "Home configuration, plugins and hooks", "Unmanaged files and additional local skills"],
+    warnings: localTemplates ? ["Local instruction/scaffold changes are excluded; the recipe recreates the reviewed bundle baseline."] : [] };
+  if (options.output) {
+    const output = inside(root, options.output);
+    const content = JSON.stringify(recipe, null, 2) + "\n";
+    if (fs.existsSync(output) && (!fs.statSync(output).isFile() || fs.readFileSync(output, "utf8") !== content)) return { ...report, error: "Recipe output differs; nothing was written" };
+    if (options.apply && !fs.existsSync(output)) {
+      fs.mkdirSync(path.dirname(output), { recursive: true });
+      fs.writeFileSync(output, content, { flag: "wx" });
+    }
+    return { ...report, output: options.output, applied: Boolean(options.apply) };
+  }
+  if (options.apply) throw new Error("Choose a relative --output for an applied recipe export");
+  return report;
 }
 
 function launch(target, options = {}) {
@@ -179,7 +260,7 @@ function launch(target, options = {}) {
 function main(argv = process.argv.slice(2)) {
   const [command, ...rest] = argv;
   if (!command || command === "--help" || command === "help") {
-    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--apply]\npm-workspace doctor <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\nPreview is the default. No global settings, hooks or connectors are installed.");
+    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
     return 0;
   }
   const options = {};
@@ -187,7 +268,7 @@ function main(argv = process.argv.slice(2)) {
   for (let i = 0; i < rest.length; i++) {
     const arg = rest[i];
     if (arg === "--apply") options.apply = true;
-    else if (["--runtime", "--preset", "--skills", "--focus", "--task"].includes(arg)) {
+    else if (["--runtime", "--preset", "--skills", "--recipe", "--bindings", "--output", "--focus", "--task"].includes(arg)) {
       if (!rest[i + 1] || rest[i + 1].startsWith("--")) throw new Error("Option needs a value");
       options[arg.slice(2)] = rest[++i];
     } else if (!arg.startsWith("-") && target === undefined) target = arg;
@@ -199,16 +280,19 @@ function main(argv = process.argv.slice(2)) {
     console.log(JSON.stringify({ presets: data.presets, skills: data.skills.map(({ name, description }) => ({ name, description })) }, null, 2));
     return 0;
   }
-  if (!target || !["init", "doctor", "start"].includes(command)) throw new Error("Choose init, doctor or start and a project directory");
+  if (!target || !["init", "doctor", "start", "recipe"].includes(command)) throw new Error("Choose init, recipe, doctor or start and a project directory");
+  if (options.output && command !== "recipe") throw new Error("Recipe output belongs to recipe");
+  if (["recipe", "bindings"].some((key) => options[key]) && command !== "init") throw new Error("Recipe input and local bindings belong to init");
+  if (command === "recipe" && Object.keys(options).some((key) => !["output", "apply"].includes(key))) throw new Error("recipe accepts only output and apply options");
   if (command === "init" && (options.focus || options.task)) throw new Error("Focus and task options belong to start");
   if (command === "doctor" && Object.keys(options).length) throw new Error("doctor is read-only and accepts no setup or launch options");
   if (command !== "init" && ["runtime", "preset", "skills"].some((key) => options[key])) throw new Error("Runtime and skill selection belong to init; review workspace migration explicitly");
-  const report = command === "init" ? init(target, options) : command === "doctor" ? doctor(target) : launch(target, options);
+  const report = command === "init" ? init(target, options) : command === "recipe" ? exportRecipe(target, options) : command === "doctor" ? doctor(target) : launch(target, options);
   console.log(JSON.stringify(report, null, 2));
   return report.error || (report.errors && report.errors.length) ? 1 : report.exitCode || 0;
 }
 
-module.exports = { inside, planInit, init, doctor, launch, main, sha };
+module.exports = { inside, planInit, init, doctor, launch, exportRecipe, fingerprint, main, sha };
 if (require.main === module) {
   try { process.exitCode = main(); }
   catch (error) { console.error(error.message); process.exitCode = 2; }
