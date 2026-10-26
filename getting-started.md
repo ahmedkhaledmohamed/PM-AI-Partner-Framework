@@ -99,6 +99,29 @@ Authenticate the intended accounts and install any additional plugins or private
 
 Verify one actual task and fresh-session continuation on the destination before calling the environment ready. Files, a recipe round trip and local diagnostics do not prove runtime discovery, live account access, connector behavior or equivalence with every plugin in a previous environment.
 
+## 7. Test recreation locally
+
+You can test the packaged baseline on your current machine before using a second machine. From a reviewed source checkout, preview and run:
+
+```sh
+node plugin/bin/workspace.js test-portability --runtime codex --preset starter
+node plugin/bin/workspace.js test-portability --runtime codex --preset starter --apply
+```
+
+The same subcommand is available through the package entry point (`pm-workspace test-portability`, or `pm-ai-partner test-portability`). It also runs from an extracted archive with `node package/bin/workspace.js test-portability`. Use `--runtime claude` or `--runtime cursor` for another layout, and `--preset evidence` or `--skills name,name` for another bundled selection. Node, npm and tar must be available locally. No dependencies are installed, and npm runs offline with lifecycle scripts disabled and the public registry explicitly selected.
+
+Preview writes nothing. Apply creates a new temporary directory; the command never accepts an existing workspace path. It packs the local framework, records the archive checksum, extracts it without Git metadata, creates a synthetic source workspace, exports a recipe and restores through the extracted CLI. It compares every managed file, checks synthetic private content and local bindings stay excluded, and runs local diagnostics. Child processes use a separate test home and configuration paths. This is configuration isolation, not an operating-system sandbox or network firewall.
+
+The JSON result includes `status`, individual `checks`, `archiveSha256`, `restored` and `report`. Exit status is 0 for a successful preview or baseline check, 1 for a failed applied check, and 2 for invalid arguments or setup errors. Missing prerequisites fail the applied check and retain diagnostics rather than being reported as a pass. Expected unconfigured-source warnings are listed separately. Temporary files are retained until you remove the generated test directory.
+
+Open the generated `INSPECT.md` for the manual steps:
+
+1. Open the reported `restored` directory in a fresh session of your chosen agent. Submit the supplied fictional task prompt. Check that the selected skill comes from this restored workspace and inspect the saved handoff.
+2. Open another fresh session in that directory. Submit the supplied continuation prompt and check that the agent uses the handoff to identify the next action.
+3. Remove only the generated test directory when finished, or retain the archive, recipe and checksum for another-machine verification.
+
+An automated pass verifies this synthetic baseline recreation. It does not export your current workspace, run an agent, validate live sources or prove that every part of your existing environment is portable. The manual agent sessions may inherit your machine's global instructions, plugins and sign-ins. Test those separately with authorized sources, and use a clean user account or second machine to uncover dependencies hidden by this machine's setup. No npm release is implied by running the command.
+
 ## Verify the framework itself
 
 ```sh
