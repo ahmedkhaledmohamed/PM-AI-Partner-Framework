@@ -31,3 +31,11 @@ Maintain workspace templates in `framework/templates/workspace/`; `plugin/worksp
 The existing framework package declares MIT licensing. Do not infer rights to third-party plugins or export their resources. A private source repository does not need to become public for a reviewed framework bundle to work. The skill collection's own license and visibility are separate owner decisions.
 
 Package publication is not part of a source update. Verify package contents in a temporary pack before a separately approved release. Do not fetch framework updates or synchronize private workspaces automatically.
+
+## Behavioral evidence and dependency review
+
+The source collection maintains `catalog.json` for runtime targets/dependency groups and `evals/cases.json` for fictional behavioral cases. Review the selected skill's actual requirements before exporting. The framework bundles workflow instructions and their required resources, not external evaluation frameworks, private traces or every optional integration.
+
+Run selected cases against the source skill and the exported copy when a change affects behavior; use the same inputs and record runtime/model/skill versions, actions, semantic reviewer findings and unverified cases. Definition validation and synthetic evaluator unit tests do not prove an agent followed a skill. Do not run a model or export traces automatically during bundling. See the source collection's `evals/README.md` and `PORTING.md` for the recorded-run format and lesson-placement procedure.
+
+Keep a changing task fact in its working document, a personal policy in local instructions, a repository convention in its repository, and a general repeatable procedure in its skill. A demonstrated failure can justify a behavioral case; it does not automatically justify another global rule. Propose and review the smallest correction rather than synchronizing installed directories or rewriting global configuration.

@@ -654,7 +654,7 @@ async function main() {
   console.log();
 }
 
-if (["init", "recipe", "doctor", "start", "skills", "test-portability"].includes(process.argv[2])) {
+if (["init", "recipe", "doctor", "compare", "start", "skills", "test-portability"].includes(process.argv[2])) {
   try { process.exitCode = require("./workspace").main(process.argv.slice(2)); }
   catch (error) { console.error(error.message); process.exitCode = 2; }
 } else {

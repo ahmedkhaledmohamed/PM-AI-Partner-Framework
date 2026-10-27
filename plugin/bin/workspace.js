@@ -123,6 +123,7 @@ function planInit(target, options = {}) {
     schemaVersion: 2, edition: data.edition, bundleSha256: fingerprint(data), runtime,
     skills: selected.map((s) => s.name),
     files: Object.fromEntries([...files].map(([name, contents]) => [name, sha(contents)])),
+    baseline: Object.fromEntries([...files].map(([name, contents]) => [name, contents.toString("utf8")])),
   };
   files.set(".workspace-install.json", Buffer.from(JSON.stringify(installed, null, 2) + "\n"));
   // Machine-local pointers are not part of the managed/public setup manifest.
@@ -163,6 +164,57 @@ function init(target, options = {}) {
   return { ...report, applied: true };
 }
 
+function installation(root) {
+  const config = readJson(inside(root, "workspace.json"));
+  const installed = readJson(inside(root, ".workspace-install.json"));
+  if (config.schemaVersion !== 2 || installed.schemaVersion !== 2) throw new Error("Unsupported workspace schema");
+  if (!Array.isArray(config.sources) || !Array.isArray(installed.skills) || !installed.skills.length ||
+      !installed.files || typeof installed.files !== "object" || Array.isArray(installed.files) ||
+      installed.skills.some((name) => typeof name !== "string" || !/^[a-z0-9-]+$/.test(name))) {
+    throw new Error("Malformed workspace metadata");
+  }
+  runtimeDir(config.runtime);
+  if (config.runtime !== installed.runtime) throw new Error("Runtime differs from the installed skill layout; review migration manually");
+  return { config, installed };
+}
+
+// A review patch from local text to bundled text, not an automatic merge.
+function reviewPatch(name, local, proposed) {
+  if (local === proposed) return "";
+  const lines = (value) => value === null ? [] : value.match(/[^\n]*\n|[^\n]+$/g) || [];
+  const before = lines(local), after = lines(proposed);
+  const render = (line, prefix) => prefix + line + (line.endsWith("\n") ? "" : "\n\\ No newline at end of file\n");
+  return `--- ${local === null ? "/dev/null" : "a/" + name}\n+++ ${proposed === null ? "/dev/null" : "b/" + name}\n` +
+    `@@ -${before.length ? 1 : 0},${before.length} +${after.length ? 1 : 0},${after.length} @@\n` +
+    before.map((line) => render(line, "-")).join("") + after.map((line) => render(line, "+")).join("");
+}
+
+function compare(target) {
+  const root = targetRoot(target);
+  const { config, installed } = installation(root);
+  const proposed = planInit(root, { runtime: config.runtime, skills: installed.skills.join(",") });
+  const next = new Map(proposed.operations.filter((op) => op.name !== ".workspace-install.json").map((op) => [op.name, op.content.toString("utf8")]));
+  const files = [];
+  for (const name of [...new Set([...Object.keys(installed.files), ...next.keys()])].sort()) {
+    const file = inside(root, name);
+    const local = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+    const upstream = next.has(name) ? next.get(name) : null;
+    const baseHash = installed.files[name] || null;
+    const base = installed.baseline && Object.hasOwn(installed.baseline, name) ? installed.baseline[name] : null;
+    if (base !== null && (typeof base !== "string" || sha(Buffer.from(base)) !== baseHash)) throw new Error("Installed baseline does not match its recorded hash");
+    const hash = (value) => value === null ? null : sha(Buffer.from(value));
+    let status;
+    if (local === upstream) status = "unchanged";
+    else if (!baseHash) status = local === null ? "new-upstream" : "conflict";
+    else if (hash(upstream) === baseHash) status = "local-only";
+    else if (hash(local) === baseHash) status = "upstream-only";
+    else status = "conflict";
+    files.push({ name, status, baseAvailable: base !== null, base, local, proposed: upstream, patch: reviewPatch(name, local, upstream) });
+  }
+  return { root, runtime: config.runtime, files, applied: false,
+    note: "Read-only three-way review. Local-only files and conflicts need deliberate merging; patches show local-to-bundle differences, not safe automatic updates. Older installs may have hashes without original text. Output can contain private local customizations; keep it private." };
+}
+
 function doctor(target) {
   const root = targetRoot(target);
   const errors = [];
@@ -172,13 +224,10 @@ function doctor(target) {
     catch { errors.push(`Missing or unsafe file: ${name}`); }
   }
   if (errors.length) return { root, errors, warnings };
-  const config = readJson(inside(root, "workspace.json"));
-  const installed = readJson(inside(root, ".workspace-install.json"));
-  if (config.schemaVersion !== 2 || installed.schemaVersion !== 2) errors.push("Unsupported workspace schema");
-  if (!Array.isArray(config.sources) || !Array.isArray(installed.skills) || typeof installed.files !== "object" || !installed.files) errors.push("Malformed workspace metadata");
+  let config, installed;
+  try { ({ config, installed } = installation(root)); }
+  catch (error) { return { root, errors: [error.message], warnings }; }
   const dir = runtimeDir(config.runtime);
-  if (config.runtime !== installed.runtime) errors.push("Runtime differs from the installed skill layout; review migration manually");
-  if (errors.length) return { root, errors, warnings };
   for (const [name, expected] of Object.entries(installed.files)) {
     try {
       const file = inside(root, name);
@@ -201,7 +250,13 @@ function doctor(target) {
     if (!source || typeof source.kind !== "string") errors.push("Malformed source entry");
     else if (!source.location && !bindings.sources.some((entry) => entry.kind === source.kind)) warnings.push(`Source not configured: ${source.kind}`);
   }
-  return { root, runtime: config.runtime, skills: installed.skills, errors, warnings, note: "Local file/configuration checks only. No connector, account, model, service or dataset was contacted." };
+  return { root, runtime: config.runtime, skills: installed.skills, errors, warnings,
+    launchDirectory: root,
+    instructionCandidates: config.runtime === "claude" ? ["CLAUDE.md", "AGENTS.md"] : ["AGENTS.md"],
+    discovery: "Candidate entry files only; the runtime's actual instruction chain and plugin skills were not inspected.",
+    sources: config.sources.filter((source) => source && typeof source.kind === "string")
+      .map((source) => ({ kind: source.kind, authority: source.authority || null, configured: Boolean(source.location || bindings.sources.some((entry) => entry.kind === source.kind)), verification: "not checked" })),
+    note: "Local file/configuration checks only. No connector, account, model, service or dataset was contacted." };
 }
 
 function exportRecipe(target, options = {}) {
@@ -261,7 +316,7 @@ function main(argv = process.argv.slice(2)) {
   const [command, ...rest] = argv;
   if (command === "test-portability") return require("./portability").main(rest);
   if (!command || command === "--help" || command === "help") {
-    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\npm-workspace test-portability [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--apply]\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
+    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace compare <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\npm-workspace test-portability [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--apply]\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
     return 0;
   }
   const options = {};
@@ -281,19 +336,19 @@ function main(argv = process.argv.slice(2)) {
     console.log(JSON.stringify({ presets: data.presets, skills: data.skills.map(({ name, description }) => ({ name, description })) }, null, 2));
     return 0;
   }
-  if (!target || !["init", "doctor", "start", "recipe"].includes(command)) throw new Error("Choose init, recipe, doctor or start and a project directory");
+  if (!target || !["init", "doctor", "compare", "start", "recipe"].includes(command)) throw new Error("Choose init, recipe, doctor, compare or start and a project directory");
   if (options.output && command !== "recipe") throw new Error("Recipe output belongs to recipe");
   if (["recipe", "bindings"].some((key) => options[key]) && command !== "init") throw new Error("Recipe input and local bindings belong to init");
   if (command === "recipe" && Object.keys(options).some((key) => !["output", "apply"].includes(key))) throw new Error("recipe accepts only output and apply options");
   if (command === "init" && (options.focus || options.task)) throw new Error("Focus and task options belong to start");
-  if (command === "doctor" && Object.keys(options).length) throw new Error("doctor is read-only and accepts no setup or launch options");
+  if (["doctor", "compare"].includes(command) && Object.keys(options).length) throw new Error(`${command} is read-only and accepts no setup or launch options`);
   if (command !== "init" && ["runtime", "preset", "skills"].some((key) => options[key])) throw new Error("Runtime and skill selection belong to init; review workspace migration explicitly");
-  const report = command === "init" ? init(target, options) : command === "recipe" ? exportRecipe(target, options) : command === "doctor" ? doctor(target) : launch(target, options);
+  const report = command === "init" ? init(target, options) : command === "recipe" ? exportRecipe(target, options) : command === "doctor" ? doctor(target) : command === "compare" ? compare(target) : launch(target, options);
   console.log(JSON.stringify(report, null, 2));
   return report.error || (report.errors && report.errors.length) ? 1 : report.exitCode || 0;
 }
 
-module.exports = { inside, planInit, init, doctor, launch, exportRecipe, fingerprint, main, sha };
+module.exports = { inside, planInit, init, doctor, compare, launch, exportRecipe, fingerprint, main, sha };
 if (require.main === module) {
   try { process.exitCode = main(); }
   catch (error) { console.error(error.message); process.exitCode = 2; }

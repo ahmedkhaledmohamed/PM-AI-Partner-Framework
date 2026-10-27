@@ -57,6 +57,7 @@ test("bindings and private content stay local and never enter the recipe or rest
   assert.equal(fs.existsSync(path.join(restored, "working/private-task.md")), false);
   assert.deepEqual(fs.readFileSync(path.join(privateFolder, "records.txt")), before);
   assert.equal(doctor(source).warnings.filter((s) => s.startsWith("Source not configured:")).length, 4);
+  assert.equal(doctor(source).sources.find((s) => s.kind === "decisions").configured, true);
   // Local configuration is editable without modifying the managed/public baseline.
   fs.writeFileSync(path.join(source, "AGENTS.md"), fs.readFileSync(path.join(restored, "AGENTS.md")));
   json(path.join(source, ".local/sources.json"), { schemaVersion: 1, sources: [] });
