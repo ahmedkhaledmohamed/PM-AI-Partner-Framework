@@ -60,6 +60,18 @@ The initializer refuses differing existing files, installs a small local skill s
 
 The core principle is to reconcile sources with different authority: requests, approved intent, inspected implementation, rollout evidence and measurements. Human judgment decides the action. Code is optional when the question does not concern implementation. [Read the operating model](framework/core/workspace-operating-model.md).
 
+## Start from the recurring job
+
+| Job | Reviewable result | Example |
+| --- | --- | --- |
+| Investigate a claim | Finding, inspected scope, evidence and uncertainty | [Saved-search investigation](framework/examples/workspace-task.md) |
+| Turn requests into scope | Current behavior, proposed change and owner decision | [Conflicting planning records](framework/examples/scope-reconciliation.md) |
+| Reconcile artifacts | Maintained source for each fact and preserved manual decisions | [Scope reconciliation](framework/examples/scope-reconciliation.md) |
+| Explain a measurement | Reproducible definition, bounded finding and decision implication | [Measurement brief](framework/examples/measurement-brief.md) |
+| Continue substantial work | Recovered decision, current evidence and next authorized action | Handoffs in each worked example |
+
+Skills support these jobs. A user does not need to select a persona before describing the work.
+
 ## Choose skills deliberately
 
 - **starter:** task context, thought partnership and writing.
@@ -77,6 +89,7 @@ The bundle includes reviewed portable imports and framework-owned specialist ski
 | Setup, commands and runtime boundaries | [Getting started](getting-started.md) |
 | Recreate a baseline setup on another machine | [Recipe and standalone package procedure](getting-started.md#6-reproduce-the-setup-on-another-machine) |
 | Understand the workspace lifecycle | [Operating model](framework/core/workspace-operating-model.md) |
+| Compare installed, local and proposed files | `node plugin/bin/workspace.js compare /path/to/workspace` (read-only) |
 | Adopt v2 without losing an existing setup | [Migration](framework/core/workspace-migration.md) |
 | See a complete fictional task | [Worked example](framework/examples/workspace-task.md) |
 | Research, planning, analysis and publication | [Workflow guides](framework/core/workflows/README.md) |
@@ -94,4 +107,4 @@ npm test
 npm run check:bundle
 ```
 
-The tests use temporary local projects and do not run a model or configure real accounts. See [contributing](CONTRIBUTING.md) for source ownership and review expectations. A source update does not publish a package, change repository visibility or authorize a merge.
+CI runs these checks in a clean checkout, including package-content coverage and the evidence validator. The tests use temporary local projects and do not run a model or configure real accounts. See [contributing](CONTRIBUTING.md) for source ownership and review expectations. A source update does not publish a package, change repository visibility or authorize a merge.

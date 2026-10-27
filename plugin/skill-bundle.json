@@ -3,7 +3,7 @@
   "edition": "workspace-model-v2-unreleased",
   "source": {
     "repository": "ahmedkhaledmohamed/agent-skills",
-    "contentSnapshotSha256": "2cc18c5794e9268e72d22e1a34299b8834978b22cb9c855bf04b2ddbd48a2ab2",
+    "contentSnapshotSha256": "c8705e40ca55c064a156230ff069eb8f499bf652fa13d8fc1f31bb37ccbcdd65",
     "note": "Content-pinned, reviewed export. This does not claim the source is released or public; the bundle needs no remote access."
   },
   "presets": {
@@ -271,7 +271,7 @@
       "files": [
         {
           "path": "skills/work-execution/SKILL.md",
-          "sha256": "d9671fd74a015a1372d44f078bb63c91f024eb336aafedd6ff874fd763a1fe7b"
+          "sha256": "7d3d8d2fd051afbeb7ade06b406dc2cf0e20892e85b70d04a466dafad79f0eaa"
         }
       ]
     },
@@ -282,7 +282,7 @@
       "files": [
         {
           "path": "skills/workspace-context/SKILL.md",
-          "sha256": "13cc8b4b71d06548fe3ee3036a9ee8010f7db91ebb9e9788276ced229f2961a4"
+          "sha256": "16dc64a39132d0b1e7100c59d4e88bdca760618b2fae2231239a3695822855c3"
         }
       ]
     },
@@ -301,7 +301,7 @@
   "templates": [
     {
       "path": "workspace-template/AGENTS.md",
-      "sha256": "10895894a43568265e3e4dc16ea1254e92801241af3d28806eec83ee46486b88"
+      "sha256": "3878e63242d04a7e30d943222515f97cef0904324084b2070ccccb945ec7feeb"
     },
     {
       "path": "workspace-template/archive/README.md",
@@ -325,7 +325,7 @@
     },
     {
       "path": "workspace-template/working/task.md",
-      "sha256": "e1ad38b4133be5378f563a999beebe55ac7576b3db94b46a379b9cfa54e3bcaa"
+      "sha256": "f7119560ff167a18a73067754dbb384e966e822d428dfe09436c83ff6a7e9d70"
     },
     {
       "path": "workspace-template/workspace.json",

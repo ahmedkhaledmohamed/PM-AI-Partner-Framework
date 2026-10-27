@@ -6,17 +6,17 @@
   <title>PM AI Partner Framework</title>
   <!-- Open Graph -->
   <meta property="og:title" content="PM AI Partner Framework">
-  <meta property="og:description" content="12 agent skills, 6 workflow commands, 3 hooks, and 17 MCP server configs for Product Managers. One install: npx pm-ai-partner@latest">
+  <meta property="og:description" content="A task-focused product workspace: relevant evidence, human decisions, usable artifacts and reliable continuation. Workspace model v2 is an unreleased source preview.">
   <meta property="og:image" content="https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/images/framework-diagram.png">
   <meta property="og:url" content="https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/">
   <meta property="og:type" content="website">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PM AI Partner Framework">
-  <meta name="twitter:description" content="12 agent skills, 6 workflow commands, 3 hooks for Product Managers. npx pm-ai-partner@latest">
+  <meta name="twitter:description" content="A task-focused product workspace: relevant evidence, human decisions, usable artifacts and reliable continuation. Workspace model v2 is an unreleased source preview.">
   <meta name="twitter:image" content="https://ahmedkhaledmohamed.github.io/PM-AI-Partner-Framework/images/framework-diagram.png">
   <!-- SEO -->
-  <meta name="description" content="Open-source Claude Code plugin with 12 PM-specific agent skills, 6 workflow commands, and 3 automation hooks. Works with Claude Code, Cursor, and Codex.">
+  <meta name="description" content="A task-focused product workspace: relevant evidence, human decisions, usable artifacts and reliable continuation. Workspace model v2 is an unreleased source preview.">
   <!-- Favicon: Purple/Blue gradient brain icon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23a855f7'/%3E%3Cstop offset='50%25' stop-color='%233b82f6'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='12' fill='white'%3EAI%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -481,449 +481,67 @@
   </style>
 </head>
 <body>
-<aside style="padding:1rem;border-bottom:1px solid currentColor"><strong>Workspace model v2 — source preview.</strong> A task-focused local workspace with selected skills, preserved decisions and reviewable handoffs. <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md">Setup and migration</a>. The published npm package is unchanged.</aside>
-
-  <!-- Hero -->
-  <header class="hero">
-    <div class="hero-content container">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        <span>12 skills · 6 commands · 3 hooks · 17 MCP servers</span>
-      </div>
-      <h1>PM AI Partner</h1>
-      <p class="hero-subtitle">AI-powered skills, workflows, and methodology for Product Managers. One command to install.</p>
-      <div class="hero-tagline" style="font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;">
-        npx <em>pm-ai-partner@latest</em>
-      </div>
-      <div style="margin-top: 24px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://www.npmjs.com/package/pm-ai-partner" style="display: inline-block; padding: 14px 32px; background: var(--accent-gradient); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(168,85,247,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">Install Plugin</a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" style="display: inline-block; padding: 14px 32px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.borderColor='var(--accent-purple)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)';">GitHub Repo</a>
-      </div>
-      <p style="margin-top: 16px; font-size: 13px; color: var(--text-muted);">Works with Claude Code, Cursor, and Codex · MIT Licensed</p>
-      <img src="images/framework-diagram.png" alt="PM AI Partner Framework - Four sources of truth converging to reconciliation and decision" style="max-width: 700px; width: 100%; margin-top: 48px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
-    </div>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="#problem">The Problem</a>
-    <a href="#philosophy">Philosophy</a>
-    <a href="#plugin">Plugin</a>
-    <a href="#agents">Agent Modes</a>
-    <a href="#workflows">Workflows</a>
-    <a href="#principles">Principles</a>
-    <a href="#setup">Setup</a>
-    <a href="#resources">Resources</a>
-  </nav>
-
-  <!-- The Problem -->
-  <section id="problem">
-    <div class="container">
-      <h2>The Problem</h2>
-      <p class="section-subtitle">Platform PMs face a unique challenge: the truth lives in code, but strategy lives in docs.</p>
-      
-      <div class="principles-grid" style="margin-bottom: 32px;">
-        <div class="principle-card">
-          <h4>What Goes Wrong</h4>
-          <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); font-size: 14px; line-height: 1.8;">
-            <li>Inherited teams with unclear identity</li>
-            <li>Strategy claims capabilities that don't exist</li>
-            <li>Same questions asked repeatedly</li>
-            <li>Codebase understanding takes months</li>
-            <li>Docs compete with operations</li>
-          </ul>
-        </div>
-        <div class="principle-card">
-          <h4>Traditional Approaches</h4>
-          <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8;">
-            Read docs → Form opinions → Write more docs → Hope you didn't miss something → Iterate slowly → Context lives in people's heads
-          </p>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <span class="comment">// The Opportunity: AI changes what's possible</span><br><br>
-        <span class="highlight">Without System</span> → AI writes generic docs, context lost, ad-hoc prompting<br>
-        <span class="highlight">With System</span>    → AI explores you decide, knowledge compounds, repeatable workflows
-      </div>
-    </div>
-  </section>
-
-  <!-- Four Sources of Truth -->
-  <section id="philosophy">
-    <div class="container">
-      <h2>Four Sources of Truth</h2>
-      <p class="section-subtitle">PM work is about reconciling different sources — AI helps explore, humans decide.</p>
-      
-      <div class="sources-grid">
-        <div class="source-card">
-          <div class="source-icon">💻</div>
-          <h3>Code</h3>
-          <div class="question">"What CAN happen?"</div>
-          <p>APIs, contracts, implementations, patterns</p>
-        </div>
-        <div class="source-card">
-          <div class="source-icon">📄</div>
-          <h3>Docs</h3>
-          <div class="question">"What's EXPECTED?"</div>
-          <p>Strategy, RFCs, handovers, context</p>
-        </div>
-        <div class="source-card">
-          <div class="source-icon">📊</div>
-          <h3>Data</h3>
-          <div class="question">"What IS happening?"</div>
-          <p>Metrics, analytics, A/B tests, research</p>
-        </div>
-        <div class="source-card">
-          <div class="source-icon">🧠</div>
-          <h3>Judgment</h3>
-          <div class="question">"What SHOULD happen?"</div>
-          <p>Intuition, values, experience, priorities</p>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <span class="comment">// Where conflicts happen — the interesting part</span><br><br>
-        <span class="highlight">Code ≠ Docs</span>    → "We claim to do X but code shows Y"<br>
-        <span class="highlight">Data ≠ Docs</span>    → "Strategy says X matters, metrics show Y"<br>
-        <span class="highlight">Code ≠ Data</span>    → "Feature exists but isn't being used"<br>
-        <span class="highlight">Judgment ≠ Data</span> → "I think X, but data shows Y"
-      </div>
-    </div>
-  </section>
-
-  <!-- Plugin -->
-  <section id="plugin">
-    <div class="container">
-      <h2>The Plugin</h2>
-      <p class="section-subtitle">One command installs 12 skills, 6 commands, and 3 hooks into your editor.</p>
-
-      <div class="code-block" style="text-align: center; font-size: 16px;">
-        <span class="highlight">$</span> npx pm-ai-partner@latest
-      </div>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Workflow Commands</h3>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Multi-step workflows for recurring PM tasks — not single prompts.</p>
-      <table class="tools-table">
-        <thead>
-          <tr><th>Command</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><code>/pm:plan-week</code></td><td>Reviews context, sets priorities, flags risks</td></tr>
-          <tr><td><code>/pm:write-brief</code></td><td>Guided PRD creation with quality checklist</td></tr>
-          <tr><td><code>/pm:prep-meeting</code></td><td>Talking points, anticipated questions, role-play</td></tr>
-          <tr><td><code>/pm:audit-codebase</code></td><td>PM-focused code exploration — capabilities, gaps, implications</td></tr>
-          <tr><td><code>/pm:competitor-scan</code></td><td>Competitive analysis with positioning maps and action recommendations</td></tr>
-          <tr><td><code>/pm:metrics-review</code></td><td>Structured metrics review — headlines, deep dives, action items</td></tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Automation Hooks</h3>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Run in the background — no manual invocation needed.</p>
-      <table class="tools-table">
-        <thead>
-          <tr><th>Hook</th><th>Trigger</th><th>What It Does</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Quality Gate</td><td>Write to <code>product-catalog/</code></td><td>Checks doc against quality bar (evidence, clarity, audience)</td></tr>
-          <tr><td>Draft Status</td><td>Write to <code>sandbox/</code></td><td>Reminds to add status markers to drafts</td></tr>
-          <tr><td>Commit Reminder</td><td><code>git commit</code></td><td>Prompts to capture lessons in CLAUDE.md</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Agent Modes -->
-  <section id="agents">
-    <div class="container">
-      <h2>12 Agent Skills</h2>
-      <p class="section-subtitle">Different Claude "modes" for different jobs — invoke by name or let them auto-activate.</p>
-      
-      <img src="images/agent-skills-diagram.svg" alt="Ten Agent Skills for AI-PM Partnership" style="max-width: 900px; width: 100%; margin: 32px auto; display: block; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
-      
-      <div class="agents-grid">
-        <div class="agent-card">
-          <div class="emoji">🤝</div>
-          <h4>Thought Partner</h4>
-          <p>Brainstorm, explore options, surface assumptions</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🔍</div>
-          <h4>Technical Analyst</h4>
-          <p>Translate code and systems into PM-friendly insights</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">✍️</div>
-          <h4>Writer</h4>
-          <p>Draft briefs, updates, emails — concise and structured</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">😈</div>
-          <h4>Devil's Advocate</h4>
-          <p>Stress-test proposals, anticipate objections</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🛠️</div>
-          <h4>Builder</h4>
-          <p>Create tools, scripts, dashboards, prototypes</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">📊</div>
-          <h4>Data Analyst</h4>
-          <p>Write queries, analyze metrics, extract insights</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">📋</div>
-          <h4>Product Brief</h4>
-          <p>Structured PRDs and feature specs</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🎯</div>
-          <h4>Meeting Prep</h4>
-          <p>Talking points, anticipated questions</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">📢</div>
-          <h4>Stakeholder Update</h4>
-          <p>Status reports and executive summaries</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🧭</div>
-          <h4>Strategic Clarity</h4>
-          <p>Define team identity, boundaries, and charter</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🧪</div>
-          <h4>Hypothesis Tester</h4>
-          <p>Design experiments, evaluate A/B tests, interpret results</p>
-        </div>
-        <div class="agent-card">
-          <div class="emoji">🏁</div>
-          <h4>Competitor Analyst</h4>
-          <p>Map landscapes, assess positioning, identify real gaps</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Workflow Patterns -->
-  <section id="workflows">
-    <div class="container">
-      <h2>Workflow Patterns</h2>
-      <p class="section-subtitle">Repeatable processes for common PM tasks.</p>
-      
-      <div class="workflow-list">
-        <div class="workflow-item">
-          <div class="workflow-number">1</div>
-          <div class="workflow-content">
-            <h4>Strategic Clarity</h4>
-            <p>Define charter, value proposition, and improvement hypotheses</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">2</div>
-          <div class="workflow-content">
-            <h4>Planning Cycle</h4>
-            <p>Review → Prioritize → Commit → Communicate for quarterly and sprint planning</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">3</div>
-          <div class="workflow-content">
-            <h4>Codebase Discovery</h4>
-            <p>Map capabilities, find ownership, understand contracts</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">4</div>
-          <div class="workflow-content">
-            <h4>Architecture Analysis</h4>
-            <p>Understand systems, propose changes, evaluate tradeoffs</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">5</div>
-          <div class="workflow-content">
-            <h4>Document Production</h4>
-            <p>Create PRDs, briefs, stakeholder docs with iteration</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">6</div>
-          <div class="workflow-content">
-            <h4>Tool Building</h4>
-            <p>Create scripts, dashboards, HTML artifacts</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">7</div>
-          <div class="workflow-content">
-            <h4>Meeting Preparation</h4>
-            <p>Structure agendas, anticipate questions, draft talking points</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">8</div>
-          <div class="workflow-content">
-            <h4>Data Investigation</h4>
-            <p>Question → SQL query → analyze results → connect to strategy</p>
-          </div>
-        </div>
-        <div class="workflow-item">
-          <div class="workflow-number">9</div>
-          <div class="workflow-content">
-            <h4>Doc Restructuring</h4>
-            <p>Diagnose confusion, separate concerns, add structure, sync references</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Principles -->
-  <section id="principles">
-    <div class="container">
-      <h2>Core Principles</h2>
-      <p class="section-subtitle">What makes this framework work.</p>
-      
-      <div class="principles-grid">
-        <div class="principle-card">
-          <h4>Human Judgment is Final</h4>
-          <p>AI explores and proposes; humans decide and prioritize. Never delegate decisions that require context or values.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Structured Knowledge Beats Chat</h4>
-          <p>Persistent documents compound value. Every conversation should produce or update an artifact.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Context is Everything</h4>
-          <p>Well-organized workspace context makes AI 10x more useful. Invest in structure upfront.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Explicit Agent Modes</h4>
-          <p>Telling AI what role to play produces better output than generic requests.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Git as AI Memory</h4>
-          <p>Your repo is persistent; chat disappears. Commit after each AI session. Diffs show what changed; branches let you experiment.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Review the Diff</h4>
-          <p>Before sharing AI-assisted work, look at what actually changed. The diff is your ownership tool.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Setup -->
-  <section id="setup">
-    <div class="container">
-      <h2>Get Started</h2>
-      <p class="section-subtitle">Install the plugin or fork the full framework.</p>
-
-      <h3 style="margin-bottom: 16px;">Option 1: Install the Plugin (30 seconds)</h3>
-      <div class="code-block" style="font-size: 15px;">
-        <span class="comment"># One command — installs skills, commands, and hooks</span><br>
-        <span class="highlight">$</span> npx pm-ai-partner@latest<br><br>
-        <span class="comment"># Choose your runtime: Claude Code, Cursor, or Codex</span><br>
-        <span class="comment"># Choose scope: global (all projects) or local (current project)</span>
-      </div>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Option 2: Fork the Framework (30 minutes)</h3>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">For the full methodology with workspace architecture, templates, and case studies.</p>
-      <div class="code-block" style="font-size: 15px;">
-        <span class="comment"># Fork and clone</span><br>
-        <span class="highlight">$</span> git clone git@github.com:YOUR-USERNAME/PM-AI-Partner-Framework.git<br><br>
-        <span class="comment"># Customize CLAUDE.md, set up workspace, configure MCP tools</span><br>
-        <span class="comment"># See getting-started.md for the full guide</span>
-      </div>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Supported Platforms</h3>
-      <div class="principles-grid">
-        <div class="principle-card">
-          <h4>Claude Code</h4>
-          <p>Skills install as a Claude Code plugin with manifest, commands, and hooks.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Cursor</h4>
-          <p>Skills install to ~/.cursor/skills/ with slash command support.</p>
-        </div>
-        <div class="principle-card">
-          <h4>Codex</h4>
-          <p>Skills install to ~/.codex/skills/ for OpenAI's CLI agent.</p>
-        </div>
-        <div class="principle-card">
-          <h4>MCP Tools</h4>
-          <p>Extend with BigQuery, Google Drive, Code Search, and more.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Resources -->
-  <section id="resources">
-    <div class="container">
-      <h2>Resources</h2>
-      <p class="section-subtitle">Documentation and related materials.</p>
-      
-      <h3 style="margin-bottom: 16px;">Presentations</h3>
-      <div class="links-grid">
-        <a href="presentations/pm-ai-partner-framework.html" class="link-card" style="border-color: var(--accent-purple); background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(59,130,246,0.1) 100%);">
-          <h4>🎤 Framework Overview</h4>
-          <p>15-slide deck — agent modes, workflows, real examples</p>
-        </a>
-        <a href="presentations/openclaw-deep-dive.html" class="link-card" style="border-color: var(--accent-cyan); background: linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(59,130,246,0.1) 100%);">
-          <h4>🔍 OpenClaw Deep Dive</h4>
-          <p>Case study — 220K-star repo analyzed with the framework</p>
-        </a>
-      </div>
-
-      <h3 style="margin-top: 48px; margin-bottom: 16px;">Documentation</h3>
-      <div class="links-grid">
-        <a href="https://www.npmjs.com/package/pm-ai-partner" class="link-card" style="border-color: var(--accent-cyan);">
-          <h4>📦 npm Package</h4>
-          <p>npx pm-ai-partner@latest</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/plugin" class="link-card" style="border-color: var(--accent-purple);">
-          <h4>🔌 Plugin Details</h4>
-          <p>All skills, commands, hooks, and usage</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md" class="link-card">
-          <h4>🚀 Getting Started</h4>
-          <p>Full setup guide (30 min)</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/pm-ai-partner-framework.md" class="link-card">
-          <h4>📖 Full Framework</h4>
-          <p>Complete methodology documentation</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/quick-reference.md" class="link-card">
-          <h4>⚡ Quick Reference</h4>
-          <p>One-page cheat sheet</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/core/workflows" class="link-card">
-          <h4>🔄 Workflow Guides</h4>
-          <p>9 repeatable workflow patterns</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/tree/main/framework/templates/skills" class="link-card">
-          <h4>🎯 Cursor Skills</h4>
-          <p>12 slash commands for AI-assisted PM work</p>
-        </a>
-        <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework" class="link-card">
-          <h4>📁 GitHub Repo</h4>
-          <p>Full source repository</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>PM AI Partner Framework v3.0 · By <a href="https://github.com/ahmedkhaledmohamed">Ahmed Khaled</a> · March 2026</p>
-    </div>
-  </footer>
-
-<script data-goatcounter="https://ahmedkhaledmohamed.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<header class="hero"><div class="hero-content container">
+  <div class="hero-badge"><span class="dot"></span><span>Workspace model v2 · Unreleased source preview</span></div>
+  <h1>PM AI Partner Framework</h1>
+  <p class="hero-subtitle">Move from a product question to an evidence-supported decision and usable result. Preserve context and control across sessions.</p>
+  <p><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md">Set up a local workspace</a> · <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/workspace-migration.md">Review an existing setup</a></p>
+  <p style="margin-top:24px;color:var(--text-secondary)">The published npm package has not been updated by this source preview. Codex and Claude have launch previews; Cursor launch is manual.</p>
+</div></header>
+<nav aria-label="Page sections">
+  <a href="#jobs">Recurring jobs</a><a href="#sources">Sources</a><a href="#setup">Setup</a><a href="#updates">Updates</a><a href="#examples">Examples</a>
+</nav>
+<main>
+<section id="jobs"><div class="container">
+  <h2>Start with the job</h2>
+  <p class="section-subtitle">Describe the result you need. Skills support the work; selecting a persona is optional.</p>
+  <table class="tools-table"><thead><tr><th>Job</th><th>Reviewable result</th></tr></thead><tbody>
+    <tr><td>Investigate a claim</td><td>A finding with evidence, inspected scope and uncertainty</td></tr>
+    <tr><td>Turn requests into scope</td><td>Current behavior, proposed change and the decision needed</td></tr>
+    <tr><td>Reconcile artifacts</td><td>A maintained source for each fact and preserved reviewer decisions</td></tr>
+    <tr><td>Explain a measurement</td><td>A reproducible definition and a qualified decision implication</td></tr>
+    <tr><td>Continue substantial work</td><td>Recovered decisions, current sources and the next authorized action</td></tr>
+  </tbody></table>
+</div></section>
+<section id="sources"><div class="container">
+  <h2>Give sources their actual authority</h2>
+  <p class="section-subtitle">Requests, accepted intent, inspected implementation, rollout and measured impact answer different questions. Code is optional when implementation is not the question.</p>
+  <div class="principles-grid">
+    <div class="principle-card"><h3>Relevant context</h3><p>Keep stable instructions short. Read the selected route and task handoff instead of loading all history.</p></div>
+    <div class="principle-card"><h3>Human decisions</h3><p>A request is not a commitment. A linked repository is not authorization to change it.</p></div>
+    <div class="principle-card"><h3>Verified artifacts</h3><p>Check the result the reader will use. A successful tool response is not proof of correct content or layout.</p></div>
+  </div>
+  <p><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/workspace-operating-model.md">Read the operating model</a></p>
+</div></section>
+<section id="setup"><div class="container">
+  <h2>Preview before applying</h2>
+  <p class="section-subtitle">From a framework source checkout, create a small local workspace with the starter selection.</p>
+  <pre class="code-block"><code>node plugin/bin/workspace.js init ../my-product --runtime codex
+node plugin/bin/workspace.js init ../my-product --runtime codex --apply
+node plugin/bin/workspace.js doctor ../my-product
+node plugin/bin/workspace.js start ../my-product --focus "Review a product request"</code></pre>
+  <p>Initialization and diagnostics do not call a model, start services, configure connectors or edit global settings. Add <code>--apply</code> to a launch preview only when you want to start the independently installed agent.</p>
+  <p>Choose the starter, product or evidence selection, or named skills. Required references and scripts travel with the reviewed bundle. Private sources and accounts stay in the target environment.</p>
+  <p><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/getting-started.md">Setup and runtime boundaries</a> · <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/plugin/README.md">Older plugin installation</a></p>
+</div></section>
+<section id="updates"><div class="container">
+  <h2>Review changes without losing local policy</h2>
+  <pre class="code-block"><code>node plugin/bin/workspace.js compare /path/to/workspace</code></pre>
+  <p>The read-only report separates local edits, upstream changes and conflicts, with installed/local/proposed text and review patches. It never applies updates. Reports can contain private local text and should remain private.</p>
+  <p>Diagnostics report candidate instructions and source configuration; they do not certify the runtime's actual discovery, authentication or current business facts.</p>
+  <p><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/core/skill-distribution.md">Skill ownership and reviewed exports</a> · <a href="https://github.com/ahmedkhaledmohamed/agent-skills">Portable skill collection and behavioral cases</a></p>
+</div></section>
+<section id="examples"><div class="container">
+  <h2>Follow a complete task</h2>
+  <p class="section-subtitle">Independently fictional walkthroughs show an initial interpretation, correction, reviewable result and next-session handoff. They are examples, not measured agent results.</p>
+  <ul>
+    <li><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/examples/workspace-task.md">Investigate personal saved searches and proposed team sharing</a></li>
+    <li><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/examples/scope-reconciliation.md">Reconcile a request, planning decision and completed ticket</a></li>
+    <li><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/framework/examples/measurement-brief.md">Correct mismatched populations in a measurement brief</a></li>
+  </ul>
+  <p><a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework/blob/main/CONTRIBUTING.md">Contribute a reviewed improvement</a></p>
+</div></section>
+</main>
+<footer><div class="container"><p>PM AI Partner Framework · <a href="https://github.com/ahmedkhaledmohamed/PM-AI-Partner-Framework">Source and review</a></p></div></footer>
 </body>
 </html>

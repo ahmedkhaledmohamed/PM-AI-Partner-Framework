@@ -13,6 +13,7 @@ The current priority is to evaluate whether PMs can use the method to produce a 
 | Initialization, diagnostics, recipe export or launch | `plugin/bin/workspace.js` | Test round trips and meaningful failure paths in temporary projects; exclude private bindings/content from recipes |
 | Portable imported skill | Reviewed source collection, then explicit export | Read full skill/references; compare export hashes and outcomes |
 | Framework-owned specialist skill | `plugin/skills/` | Keep trigger precise, references useful and boundaries explicit; regenerate manifest |
+| Website messaging | `site/index.html`; derive `docs/index.html` with `node plugin/bin/build-site.js` | Run the site check and inspect changed reader content |
 | Workflow guide | `framework/core/workflows/` | State actual inputs, decision, output and stopping condition |
 
 The retired skill-template directories are navigation only. Do not manually maintain another copy there. See [skill distribution](framework/core/skill-distribution.md) for the explicit local export procedure.
@@ -28,6 +29,8 @@ Use fictional examples that do not reproduce private work under changed names. D
 ```sh
 node --test plugin/test/*.test.js
 node plugin/bin/build-workspace-bundle.js --check
+node plugin/bin/build-site.js --check
+python3 plugin/skills/evidence-backed-specs/scripts/validate_bundle.py plugin/skills/evidence-backed-specs/examples/bundle.json
 ```
 
 Also verify affected Markdown links and publication content. A clean pattern check does not prove safe disclosure; review binaries, history and repository surfaces before any visibility change. Do not include private findings in a public review comment.

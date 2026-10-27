@@ -38,3 +38,9 @@ The task document owns evidence and unresolved questions. The planning record ow
 - Next action: engineering reviews the proposed sharing behavior and checks the missing paths before estimating work.
 
 The agent can finish this research stage with those explicit review items. It should not keep expanding the inventory or claim that a missing path is a confirmed gap across the whole product.
+
+## Session correction and continuation
+
+This is a fictional walkthrough, not a successful runtime evaluation. In the first pass an agent equates the existing personal saved-query handler with team sharing. The owner clarifies that the request concerns sharing between members. The revised result separates personal reuse from proposed team sharing, preserves the accepted discovery-only decision, and retains rollout uncertainty.
+
+Before the review handoff, check all three independently reviewable outcomes, their evidence and disposition. In the next session, start with the handoff above and verify mutable sources. The next authorized action is engineering review of the proposed behavior, not implementation, publication or a change to a linked repository.
