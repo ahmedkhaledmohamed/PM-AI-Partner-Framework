@@ -6,7 +6,7 @@ The portable skill collection owns reusable workflow instructions. The framework
 
 `plugin/skill-bundle.json` lists every bundled skill file and hash, identifies portable imports versus framework-owned skills, and records a content snapshot hash for the imports. A content snapshot does not claim a remote commit was released or public. Users can run the framework without access to the skill source repository.
 
-The starter preset selects context, thought partnership and writing. The product preset adds the principal evidence, planning, reconciliation and execution workflows. The evidence preset includes source-backed specifications and their references/scripts. Cursor-specific helpers, evaluation-framework adapters and other optional domain extensions remain in the separate collection.
+The starter preset selects context, thought partnership and writing. The product preset adds the principal evidence, planning, reconciliation and execution workflows. The evidence preset includes source-backed specifications and their references/scripts. The optional investigations preset selects shared research intake and installs its collaboration records; the default product selection does not enable that profile. Cursor-specific helpers, evaluation-framework adapters and other optional domain extensions remain in the separate collection.
 
 ## Export procedure
 

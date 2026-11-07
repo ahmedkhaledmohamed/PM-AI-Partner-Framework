@@ -109,9 +109,28 @@ function planInit(target, options = {}) {
     if (sha(input) !== expected) throw new Error("Bundled file does not match its reviewed hash");
     files.set(destination, input);
   }
+  const investigationProfile = selected.some((skill) => skill.name === "shared-investigations");
+  const profilePrefix = "profiles/investigations/";
   for (const file of data.templates) {
     const relative = file.path.replace(/^workspace-template\//, "");
+    if (relative.startsWith("profiles/")) continue;
     add(file.path, relative === "gitignore.template" ? ".gitignore" : relative, file.sha256);
+  }
+  if (investigationProfile) {
+    for (const file of data.templates) {
+      const relative = file.path.replace(/^workspace-template\//, "");
+      if (!relative.startsWith(profilePrefix)) continue;
+      const destination = relative.slice(profilePrefix.length);
+      const fragment = destination.match(/^(AGENTS|WORKSPACE)\.append\.md$/);
+      add(file.path, destination, file.sha256);
+      if (fragment) {
+        const target = fragment[1] + ".md";
+        files.set(target, Buffer.concat([files.get(target), Buffer.from("\n"), files.get(destination)]));
+        files.delete(destination);
+      } else if (destination === "scripts/investigations.cjs") {
+        files.set(destination, Buffer.from(files.get(destination).toString().replace("__SKILL_DIRECTORY__", skillDir)));
+      }
+    }
   }
   const config = JSON.parse(files.get("workspace.json").toString());
   config.runtime = runtime;
@@ -316,7 +335,7 @@ function main(argv = process.argv.slice(2)) {
   const [command, ...rest] = argv;
   if (command === "test-portability") return require("./portability").main(rest);
   if (!command || command === "--help" || command === "help") {
-    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace compare <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\npm-workspace test-portability [--runtime codex|claude|cursor] [--preset starter|product|evidence] [--skills name,name] [--apply]\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
+    console.log("pm-workspace init <directory> [--runtime codex|claude|cursor] [--preset starter|product|evidence|investigations] [--skills name,name] [--recipe file] [--bindings local-file] [--apply]\npm-workspace recipe <directory> [--output relative-file] [--apply]\npm-workspace doctor <directory>\npm-workspace compare <directory>\npm-workspace start <directory> [--focus text] [--task relative-file] [--apply]\npm-workspace skills\npm-workspace test-portability [--runtime codex|claude|cursor] [--preset starter|product|evidence|investigations] [--skills name,name] [--apply]\nPreview is the default. Recipes contain setup selection only; no private content, bindings, global settings, hooks or connectors are copied.");
     return 0;
   }
   const options = {};
