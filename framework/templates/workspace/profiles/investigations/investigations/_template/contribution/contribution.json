@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "replace-contribution-id",
+  "investigationId": "replace-investigation-id",
+  "contributor": "Replace with contributor name",
+  "kind": "finding",
+  "summary": "README.md",
+  "sourceIds": [],
+  "sourceRevisions": {},
+  "newArtifactSourceIds": []
+}

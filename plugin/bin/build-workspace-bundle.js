@@ -7,7 +7,7 @@ const path = require("node:path");
 const { sha } = require("./workspace");
 const PACKAGE = path.resolve(__dirname, "..");
 const REPO = path.resolve(PACKAGE, "..");
-const IMPORTS = ["workspace-context", "work-execution", "artifact-reconciliation", "thought-partner", "technical-analyst", "writer", "devil-advocate", "builder", "data-analyst", "product-brief", "meeting-prep", "stakeholder-update", "strategic-clarity", "planning-workflow", "portfolio-reconciliation", "evidence-backed-specs", "document-collaboration", "competitor-analyst", "hypothesis-tester", "thinking-trail"];
+const IMPORTS = ["workspace-context", "work-execution", "artifact-reconciliation", "thought-partner", "technical-analyst", "writer", "devil-advocate", "builder", "data-analyst", "product-brief", "meeting-prep", "stakeholder-update", "strategic-clarity", "planning-workflow", "portfolio-reconciliation", "evidence-backed-specs", "document-collaboration", "competitor-analyst", "hypothesis-tester", "thinking-trail", "shared-investigations"];
 
 function files(root) {
   const found = [];
@@ -45,7 +45,7 @@ function manifest() {
     schemaVersion: 2,
     edition: "workspace-model-v2-unreleased",
     source: { repository: "ahmedkhaledmohamed/agent-skills", contentSnapshotSha256: sha(JSON.stringify(importedFiles)), note: "Content-pinned, reviewed export. This does not claim the source is released or public; the bundle needs no remote access." },
-    presets: { starter: ["workspace-context", "thought-partner", "writer"], product: IMPORTS.filter((name) => name !== "evidence-backed-specs"), evidence: ["workspace-context", "technical-analyst", "data-analyst", "evidence-backed-specs"] },
+    presets: { starter: ["workspace-context", "thought-partner", "writer"], product: IMPORTS.filter((name) => !["evidence-backed-specs", "shared-investigations"].includes(name)), evidence: ["workspace-context", "technical-analyst", "data-analyst", "evidence-backed-specs"], investigations: ["workspace-context", "shared-investigations", "writer"] },
     skills, templates,
   };
 }

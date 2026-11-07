@@ -10,7 +10,7 @@ Use the framework if you need a method and examples for organizing evidence and 
 
 Read the [operating model](framework/core/workspace-operating-model.md), then follow the [fictional saved-search task](framework/examples/workspace-task.md). Try a real question in your authorized workspace. A useful brief states the decision, distinguishes observations from proposals, links its evidence, identifies unknowns and names the next action for human review.
 
-The framework's usefulness to other PMs has not yet been established through an observed pilot. Local software checks verify narrower implementation properties. The next investment decision is an [evaluation with three PMs](framework/core/usefulness-pilot.md); feature expansion is paused while that evidence is gathered.
+The framework's usefulness to other PMs has not yet been established through an observed pilot. Local software checks verify narrower implementation properties. The next investment decision is an [evaluation with three PMs](framework/core/usefulness-pilot.md); further feature expansion is paused while that evidence is gathered. The optional shared-investigation profile below is a scoped addition; its team usefulness remains unverified.
 
 ## Repository responsibilities
 
@@ -77,6 +77,7 @@ Skills support these jobs. A user does not need to select a persona before descr
 - **starter:** task context, thought partnership and writing.
 - **product:** planning, analysis, briefs, reconciliation, execution and collaboration.
 - **evidence:** source-backed specifications and their supporting references/scripts.
+- **investigations:** shared research records, attributed contributions and maintained-evidence references. See [setup and team process](framework/core/workflows/shared-investigations.md).
 
 Select a preset before applying, or pass `--skills name,name`. Run `node plugin/bin/workspace.js skills` for the actual bundle. The default is a small local selection; a large global installation is not required.
 

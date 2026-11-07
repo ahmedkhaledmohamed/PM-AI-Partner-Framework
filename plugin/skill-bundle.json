@@ -3,7 +3,7 @@
   "edition": "workspace-model-v2-unreleased",
   "source": {
     "repository": "ahmedkhaledmohamed/agent-skills",
-    "contentSnapshotSha256": "62171ca0fa2ba3ee821c2f479ec65c6d6a03da0efd5e4b7373d1aab1a702f537",
+    "contentSnapshotSha256": "ecab42d75796ce00d1d0b2a69be891eed72ae239e6b90dc6a9c7b4d45d8058b8",
     "note": "Content-pinned, reviewed export. This does not claim the source is released or public; the bundle needs no remote access."
   },
   "presets": {
@@ -38,6 +38,11 @@
       "technical-analyst",
       "data-analyst",
       "evidence-backed-specs"
+    ],
+    "investigations": [
+      "workspace-context",
+      "shared-investigations",
+      "writer"
     ]
   },
   "skills": [
@@ -210,6 +215,25 @@
       ]
     },
     {
+      "name": "shared-investigations",
+      "description": "Find, contribute to or reconcile a shared investigation with attributed findings and links to maintained evidence. Use for collaborative research intake and handoffs.",
+      "origin": "reviewed-agent-skills-export",
+      "files": [
+        {
+          "path": "skills/shared-investigations/references/records.md",
+          "sha256": "e4f2d8c446e21026f0db9993610d1a8fb0379b8593bcbdb08f84e8d6e9a56773"
+        },
+        {
+          "path": "skills/shared-investigations/scripts/investigations.cjs",
+          "sha256": "4803586e9ab9a754f08a889ce43bcb5b7d25daca4cd4bf0d41e52afe4ffe967c"
+        },
+        {
+          "path": "skills/shared-investigations/SKILL.md",
+          "sha256": "56a51fe6b670351515abd6a74173935e6778a2d7caa4b2644a554b6612e507ad"
+        }
+      ]
+    },
+    {
       "name": "stakeholder-update",
       "description": "Draft a status update or executive summary from current delivery evidence, including progress, risks, and decisions needed.",
       "origin": "reviewed-agent-skills-export",
@@ -314,6 +338,38 @@
     {
       "path": "workspace-template/gitignore.template",
       "sha256": "1acd63ab8a0afaf6c414ecefe133792deeb374ca62f52c69500984c13af7f1bd"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/AGENTS.append.md",
+      "sha256": "df6d5679dd8fd148d8ccc0fdc8fed52ebe44ef2b89ed3c589dbbff341c4712ad"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/INVESTIGATIONS.md",
+      "sha256": "f7c62e3b3c01406dd34d620183e936a63ca534ed40d33e231e2072f0a412a55b"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/investigations/_template/contribution/contribution.json",
+      "sha256": "f6a9d3c897f792219474fff58ff6f0e5f342e67f42599a03a85c8512e2107db0"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/investigations/_template/contribution/README.md",
+      "sha256": "d279cae5f04cc50cb8a25d7b716a75ff4d1d21a238717933dd3c6cbda52a2d6f"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/investigations/_template/README.md",
+      "sha256": "437170df9b5b1b6e54e406ed566d32231b6582bf9668860735d540079d01f9d9"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/investigations/registry.json",
+      "sha256": "546f84efca075232aee27be8cefa4a8d5328b46318d1b85ce345278b55d54102"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/scripts/investigations.cjs",
+      "sha256": "7a96fadd21fedca6bd2d4fd1d7a5b6f2ea57340225305000c19a9205139cd4df"
+    },
+    {
+      "path": "workspace-template/profiles/investigations/WORKSPACE.append.md",
+      "sha256": "9d69bc05dc58b9f3358246a289146c6589db6d87c86f71f9dbe4f350adf50897"
     },
     {
       "path": "workspace-template/published/README.md",

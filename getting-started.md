@@ -140,3 +140,7 @@ node plugin/bin/workspace.js compare /path/to/existing-workspace
 The JSON report includes installed baseline text (when available), local text, proposed bundled text and a local-to-bundle review patch for each managed file. It classifies unchanged, local-only, upstream-only and conflicting changes. New installations record the original public template/skill text alongside its hash in `.workspace-install.json`; older installations retain hash-only comparison, with missing original text labelled explicitly.
 
 The command never applies updates or changes installation metadata. Local-only files and conflicts need deliberate merging; a proposed patch can remove local customizations and is not automatically safe to apply. Keep the report private because it includes local text. Changes to runtime or skill selection remain explicit migrations. After review, update only agreed files and preserve the existing installation baseline for later comparison; do not manually mark merged local policy as an upstream template.
+
+## Optional shared investigations
+
+For a team registry, investigation records, evidence references and attributed contribution workflow, use the source-preview `--preset investigations`. Follow [setup and adoption](framework/core/workflows/shared-investigations.md), including the existing-environment merge boundary and required team review checks. The preset does not copy research, configure accounts or publish a package.
